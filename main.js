@@ -1744,6 +1744,40 @@ function defer(observableFactory) {
   });
 }
 
+// node_modules/rxjs/dist/esm/internal/observable/forkJoin.js
+function forkJoin(...args) {
+  const resultSelector = popResultSelector(args);
+  const { args: sources, keys } = argsArgArrayOrObject(args);
+  const result = new Observable((subscriber) => {
+    const { length } = sources;
+    if (!length) {
+      subscriber.complete();
+      return;
+    }
+    const values = new Array(length);
+    let remainingCompletions = length;
+    let remainingEmissions = length;
+    for (let sourceIndex = 0; sourceIndex < length; sourceIndex++) {
+      let hasValue = false;
+      innerFrom(sources[sourceIndex]).subscribe(createOperatorSubscriber(subscriber, (value) => {
+        if (!hasValue) {
+          hasValue = true;
+          remainingEmissions--;
+        }
+        values[sourceIndex] = value;
+      }, () => remainingCompletions--, void 0, () => {
+        if (!remainingCompletions || !hasValue) {
+          if (!remainingEmissions) {
+            subscriber.next(keys ? createObject(keys, values) : values);
+          }
+          subscriber.complete();
+        }
+      }));
+    }
+  });
+  return resultSelector ? result.pipe(mapOneOrManyArgs(resultSelector)) : result;
+}
+
 // node_modules/rxjs/dist/esm/internal/operators/filter.js
 function filter(predicate, thisArg) {
   return operate((source, subscriber) => {
@@ -34732,1199 +34766,6797 @@ function provideRouterInitializer() {
   }];
 }
 
+// node_modules/@angular/forms/fesm2022/forms.mjs
+var BaseControlValueAccessor = class _BaseControlValueAccessor {
+  _renderer;
+  _elementRef;
+  onChange = (_) => {
+  };
+  onTouched = () => {
+  };
+  constructor(_renderer, _elementRef) {
+    this._renderer = _renderer;
+    this._elementRef = _elementRef;
+  }
+  setProperty(key, value) {
+    this._renderer.setProperty(this._elementRef.nativeElement, key, value);
+  }
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+  setDisabledState(isDisabled) {
+    this.setProperty("disabled", isDisabled);
+  }
+  static \u0275fac = function BaseControlValueAccessor_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _BaseControlValueAccessor)(\u0275\u0275directiveInject(Renderer2), \u0275\u0275directiveInject(ElementRef));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _BaseControlValueAccessor
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BaseControlValueAccessor, [{
+    type: Directive
+  }], () => [{
+    type: Renderer2
+  }, {
+    type: ElementRef
+  }], null);
+})();
+var BuiltInControlValueAccessor = class _BuiltInControlValueAccessor extends BaseControlValueAccessor {
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275BuiltInControlValueAccessor_BaseFactory;
+    return function BuiltInControlValueAccessor_Factory(__ngFactoryType__) {
+      return (\u0275BuiltInControlValueAccessor_BaseFactory || (\u0275BuiltInControlValueAccessor_BaseFactory = \u0275\u0275getInheritedFactory(_BuiltInControlValueAccessor)))(__ngFactoryType__ || _BuiltInControlValueAccessor);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _BuiltInControlValueAccessor,
+    features: [\u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BuiltInControlValueAccessor, [{
+    type: Directive
+  }], null, null);
+})();
+var NG_VALUE_ACCESSOR = new InjectionToken(typeof ngDevMode !== "undefined" && ngDevMode ? "NgValueAccessor" : "");
+var CHECKBOX_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => CheckboxControlValueAccessor),
+  multi: true
+};
+var CheckboxControlValueAccessor = class _CheckboxControlValueAccessor extends BuiltInControlValueAccessor {
+  writeValue(value) {
+    this.setProperty("checked", value);
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275CheckboxControlValueAccessor_BaseFactory;
+    return function CheckboxControlValueAccessor_Factory(__ngFactoryType__) {
+      return (\u0275CheckboxControlValueAccessor_BaseFactory || (\u0275CheckboxControlValueAccessor_BaseFactory = \u0275\u0275getInheritedFactory(_CheckboxControlValueAccessor)))(__ngFactoryType__ || _CheckboxControlValueAccessor);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _CheckboxControlValueAccessor,
+    selectors: [["input", "type", "checkbox", "formControlName", ""], ["input", "type", "checkbox", "formControl", ""], ["input", "type", "checkbox", "ngModel", ""]],
+    hostBindings: function CheckboxControlValueAccessor_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("change", function CheckboxControlValueAccessor_change_HostBindingHandler($event) {
+          return ctx.onChange($event.target.checked);
+        })("blur", function CheckboxControlValueAccessor_blur_HostBindingHandler() {
+          return ctx.onTouched();
+        });
+      }
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([CHECKBOX_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CheckboxControlValueAccessor, [{
+    type: Directive,
+    args: [{
+      selector: "input[type=checkbox][formControlName],input[type=checkbox][formControl],input[type=checkbox][ngModel]",
+      host: {
+        "(change)": "onChange($any($event.target).checked)",
+        "(blur)": "onTouched()"
+      },
+      providers: [CHECKBOX_VALUE_ACCESSOR],
+      standalone: false
+    }]
+  }], null, null);
+})();
+var DEFAULT_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => DefaultValueAccessor),
+  multi: true
+};
+function _isAndroid() {
+  const userAgent = getDOM() ? getDOM().getUserAgent() : "";
+  return /android (\d+)/.test(userAgent.toLowerCase());
+}
+var COMPOSITION_BUFFER_MODE = new InjectionToken(typeof ngDevMode !== "undefined" && ngDevMode ? "CompositionEventMode" : "");
+var DefaultValueAccessor = class _DefaultValueAccessor extends BaseControlValueAccessor {
+  _compositionMode;
+  _composing = false;
+  constructor(renderer, elementRef, _compositionMode) {
+    super(renderer, elementRef);
+    this._compositionMode = _compositionMode;
+    if (this._compositionMode == null) {
+      this._compositionMode = !_isAndroid();
+    }
+  }
+  writeValue(value) {
+    const normalizedValue = value == null ? "" : value;
+    this.setProperty("value", normalizedValue);
+  }
+  _handleInput(value) {
+    if (!this._compositionMode || this._compositionMode && !this._composing) {
+      this.onChange(value);
+    }
+  }
+  _compositionStart() {
+    this._composing = true;
+  }
+  _compositionEnd(value) {
+    this._composing = false;
+    this._compositionMode && this.onChange(value);
+  }
+  static \u0275fac = function DefaultValueAccessor_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _DefaultValueAccessor)(\u0275\u0275directiveInject(Renderer2), \u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(COMPOSITION_BUFFER_MODE, 8));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _DefaultValueAccessor,
+    selectors: [["input", "formControlName", "", 3, "type", "checkbox"], ["textarea", "formControlName", ""], ["input", "formControl", "", 3, "type", "checkbox"], ["textarea", "formControl", ""], ["input", "ngModel", "", 3, "type", "checkbox"], ["textarea", "ngModel", ""], ["", "ngDefaultControl", ""]],
+    hostBindings: function DefaultValueAccessor_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("input", function DefaultValueAccessor_input_HostBindingHandler($event) {
+          return ctx._handleInput($event.target.value);
+        })("blur", function DefaultValueAccessor_blur_HostBindingHandler() {
+          return ctx.onTouched();
+        })("compositionstart", function DefaultValueAccessor_compositionstart_HostBindingHandler() {
+          return ctx._compositionStart();
+        })("compositionend", function DefaultValueAccessor_compositionend_HostBindingHandler($event) {
+          return ctx._compositionEnd($event.target.value);
+        });
+      }
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([DEFAULT_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DefaultValueAccessor, [{
+    type: Directive,
+    args: [{
+      selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]",
+      host: {
+        "(input)": "_handleInput($any($event.target).value)",
+        "(blur)": "onTouched()",
+        "(compositionstart)": "_compositionStart()",
+        "(compositionend)": "_compositionEnd($any($event.target).value)"
+      },
+      providers: [DEFAULT_VALUE_ACCESSOR],
+      standalone: false
+    }]
+  }], () => [{
+    type: Renderer2
+  }, {
+    type: ElementRef
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [COMPOSITION_BUFFER_MODE]
+    }]
+  }], null);
+})();
+function isEmptyInputValue(value) {
+  return value == null || lengthOrSize(value) === 0;
+}
+function lengthOrSize(value) {
+  if (value == null) {
+    return null;
+  } else if (Array.isArray(value) || typeof value === "string") {
+    return value.length;
+  } else if (value instanceof Set) {
+    return value.size;
+  }
+  return null;
+}
+var NG_VALIDATORS = new InjectionToken(typeof ngDevMode !== "undefined" && ngDevMode ? "NgValidators" : "");
+var NG_ASYNC_VALIDATORS = new InjectionToken(typeof ngDevMode !== "undefined" && ngDevMode ? "NgAsyncValidators" : "");
+var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+var Validators = class {
+  static min(min) {
+    return minValidator(min);
+  }
+  static max(max) {
+    return maxValidator(max);
+  }
+  static required(control) {
+    return requiredValidator(control);
+  }
+  static requiredTrue(control) {
+    return requiredTrueValidator(control);
+  }
+  static email(control) {
+    return emailValidator(control);
+  }
+  static minLength(minLength) {
+    return minLengthValidator(minLength);
+  }
+  static maxLength(maxLength) {
+    return maxLengthValidator(maxLength);
+  }
+  static pattern(pattern) {
+    return patternValidator(pattern);
+  }
+  static nullValidator(control) {
+    return nullValidator();
+  }
+  static compose(validators) {
+    return compose(validators);
+  }
+  static composeAsync(validators) {
+    return composeAsync(validators);
+  }
+};
+function minValidator(min) {
+  return (control) => {
+    if (control.value == null || min == null) {
+      return null;
+    }
+    const value = parseFloat(control.value);
+    return !isNaN(value) && value < min ? {
+      "min": {
+        "min": min,
+        "actual": control.value
+      }
+    } : null;
+  };
+}
+function maxValidator(max) {
+  return (control) => {
+    if (control.value == null || max == null) {
+      return null;
+    }
+    const value = parseFloat(control.value);
+    return !isNaN(value) && value > max ? {
+      "max": {
+        "max": max,
+        "actual": control.value
+      }
+    } : null;
+  };
+}
+function requiredValidator(control) {
+  return isEmptyInputValue(control.value) ? {
+    "required": true
+  } : null;
+}
+function requiredTrueValidator(control) {
+  return control.value === true ? null : {
+    "required": true
+  };
+}
+function emailValidator(control) {
+  if (isEmptyInputValue(control.value)) {
+    return null;
+  }
+  return EMAIL_REGEXP.test(control.value) ? null : {
+    "email": true
+  };
+}
+function minLengthValidator(minLength) {
+  return (control) => {
+    const length = control.value?.length ?? lengthOrSize(control.value);
+    if (length === null || length === 0) {
+      return null;
+    }
+    return length < minLength ? {
+      "minlength": {
+        "requiredLength": minLength,
+        "actualLength": length
+      }
+    } : null;
+  };
+}
+function maxLengthValidator(maxLength) {
+  return (control) => {
+    const length = control.value?.length ?? lengthOrSize(control.value);
+    if (length !== null && length > maxLength) {
+      return {
+        "maxlength": {
+          "requiredLength": maxLength,
+          "actualLength": length
+        }
+      };
+    }
+    return null;
+  };
+}
+function patternValidator(pattern) {
+  if (!pattern) return nullValidator;
+  let regex;
+  let regexStr;
+  if (typeof pattern === "string") {
+    regexStr = "";
+    if (pattern.charAt(0) !== "^") regexStr += "^";
+    regexStr += pattern;
+    if (pattern.charAt(pattern.length - 1) !== "$") regexStr += "$";
+    regex = new RegExp(regexStr);
+  } else {
+    regexStr = pattern.toString();
+    regex = pattern;
+  }
+  return (control) => {
+    if (isEmptyInputValue(control.value)) {
+      return null;
+    }
+    const value = control.value;
+    return regex.test(value) ? null : {
+      "pattern": {
+        "requiredPattern": regexStr,
+        "actualValue": value
+      }
+    };
+  };
+}
+function nullValidator(control) {
+  return null;
+}
+function isPresent(o) {
+  return o != null;
+}
+function toObservable(value) {
+  const obs = isPromise2(value) ? from(value) : value;
+  if ((typeof ngDevMode === "undefined" || ngDevMode) && !isSubscribable(obs)) {
+    let errorMessage = `Expected async validator to return Promise or Observable.`;
+    if (typeof value === "object") {
+      errorMessage += " Are you using a synchronous validator where an async validator is expected?";
+    }
+    throw new RuntimeError(-1101, errorMessage);
+  }
+  return obs;
+}
+function mergeErrors(arrayOfErrors) {
+  let res = {};
+  arrayOfErrors.forEach((errors) => {
+    res = errors != null ? __spreadValues(__spreadValues({}, res), errors) : res;
+  });
+  return Object.keys(res).length === 0 ? null : res;
+}
+function executeValidators(control, validators) {
+  return validators.map((validator) => validator(control));
+}
+function isValidatorFn(validator) {
+  return !validator.validate;
+}
+function normalizeValidators(validators) {
+  return validators.map((validator) => {
+    return isValidatorFn(validator) ? validator : (c) => validator.validate(c);
+  });
+}
+function compose(validators) {
+  if (!validators) return null;
+  const presentValidators = validators.filter(isPresent);
+  if (presentValidators.length == 0) return null;
+  return function(control) {
+    return mergeErrors(executeValidators(control, presentValidators));
+  };
+}
+function composeValidators(validators) {
+  return validators != null ? compose(normalizeValidators(validators)) : null;
+}
+function composeAsync(validators) {
+  if (!validators) return null;
+  const presentValidators = validators.filter(isPresent);
+  if (presentValidators.length == 0) return null;
+  return function(control) {
+    const observables = executeValidators(control, presentValidators).map(toObservable);
+    return forkJoin(observables).pipe(map(mergeErrors));
+  };
+}
+function composeAsyncValidators(validators) {
+  return validators != null ? composeAsync(normalizeValidators(validators)) : null;
+}
+function mergeValidators(controlValidators, dirValidator) {
+  if (controlValidators === null) return [dirValidator];
+  return Array.isArray(controlValidators) ? [...controlValidators, dirValidator] : [controlValidators, dirValidator];
+}
+function getControlValidators(control) {
+  return control._rawValidators;
+}
+function getControlAsyncValidators(control) {
+  return control._rawAsyncValidators;
+}
+function makeValidatorsArray(validators) {
+  if (!validators) return [];
+  return Array.isArray(validators) ? validators : [validators];
+}
+function hasValidator(validators, validator) {
+  return Array.isArray(validators) ? validators.includes(validator) : validators === validator;
+}
+function addValidators(validators, currentValidators) {
+  const current = makeValidatorsArray(currentValidators);
+  const validatorsToAdd = makeValidatorsArray(validators);
+  validatorsToAdd.forEach((v) => {
+    if (!hasValidator(current, v)) {
+      current.push(v);
+    }
+  });
+  return current;
+}
+function removeValidators(validators, currentValidators) {
+  return makeValidatorsArray(currentValidators).filter((v) => !hasValidator(validators, v));
+}
+var AbstractControlDirective = class {
+  get value() {
+    return this.control ? this.control.value : null;
+  }
+  get valid() {
+    return this.control ? this.control.valid : null;
+  }
+  get invalid() {
+    return this.control ? this.control.invalid : null;
+  }
+  get pending() {
+    return this.control ? this.control.pending : null;
+  }
+  get disabled() {
+    return this.control ? this.control.disabled : null;
+  }
+  get enabled() {
+    return this.control ? this.control.enabled : null;
+  }
+  get errors() {
+    return this.control ? this.control.errors : null;
+  }
+  get pristine() {
+    return this.control ? this.control.pristine : null;
+  }
+  get dirty() {
+    return this.control ? this.control.dirty : null;
+  }
+  get touched() {
+    return this.control ? this.control.touched : null;
+  }
+  get status() {
+    return this.control ? this.control.status : null;
+  }
+  get untouched() {
+    return this.control ? this.control.untouched : null;
+  }
+  get statusChanges() {
+    return this.control ? this.control.statusChanges : null;
+  }
+  get valueChanges() {
+    return this.control ? this.control.valueChanges : null;
+  }
+  get path() {
+    return null;
+  }
+  _composedValidatorFn;
+  _composedAsyncValidatorFn;
+  _rawValidators = [];
+  _rawAsyncValidators = [];
+  _setValidators(validators) {
+    this._rawValidators = validators || [];
+    this._composedValidatorFn = composeValidators(this._rawValidators);
+  }
+  _setAsyncValidators(validators) {
+    this._rawAsyncValidators = validators || [];
+    this._composedAsyncValidatorFn = composeAsyncValidators(this._rawAsyncValidators);
+  }
+  get validator() {
+    return this._composedValidatorFn || null;
+  }
+  get asyncValidator() {
+    return this._composedAsyncValidatorFn || null;
+  }
+  _onDestroyCallbacks = [];
+  _registerOnDestroy(fn) {
+    this._onDestroyCallbacks.push(fn);
+  }
+  _invokeOnDestroyCallbacks() {
+    this._onDestroyCallbacks.forEach((fn) => fn());
+    this._onDestroyCallbacks = [];
+  }
+  reset(value = void 0) {
+    this.control?.reset(value);
+  }
+  hasError(errorCode, path) {
+    return this.control ? this.control.hasError(errorCode, path) : false;
+  }
+  getError(errorCode, path) {
+    return this.control ? this.control.getError(errorCode, path) : null;
+  }
+};
+var ControlContainer = class extends AbstractControlDirective {
+  name;
+  get formDirective() {
+    return null;
+  }
+  get path() {
+    return null;
+  }
+};
+var NgControl = class extends AbstractControlDirective {
+  _parent = null;
+  name = null;
+  valueAccessor = null;
+};
+var AbstractControlStatus = class {
+  _cd;
+  constructor(cd) {
+    this._cd = cd;
+  }
+  get isTouched() {
+    this._cd?.control?._touched?.();
+    return !!this._cd?.control?.touched;
+  }
+  get isUntouched() {
+    return !!this._cd?.control?.untouched;
+  }
+  get isPristine() {
+    this._cd?.control?._pristine?.();
+    return !!this._cd?.control?.pristine;
+  }
+  get isDirty() {
+    return !!this._cd?.control?.dirty;
+  }
+  get isValid() {
+    this._cd?.control?._status?.();
+    return !!this._cd?.control?.valid;
+  }
+  get isInvalid() {
+    return !!this._cd?.control?.invalid;
+  }
+  get isPending() {
+    return !!this._cd?.control?.pending;
+  }
+  get isSubmitted() {
+    this._cd?._submitted?.();
+    return !!this._cd?.submitted;
+  }
+};
+var ngControlStatusHost = {
+  "[class.ng-untouched]": "isUntouched",
+  "[class.ng-touched]": "isTouched",
+  "[class.ng-pristine]": "isPristine",
+  "[class.ng-dirty]": "isDirty",
+  "[class.ng-valid]": "isValid",
+  "[class.ng-invalid]": "isInvalid",
+  "[class.ng-pending]": "isPending"
+};
+var NgControlStatus = class _NgControlStatus extends AbstractControlStatus {
+  constructor(cd) {
+    super(cd);
+  }
+  static \u0275fac = function NgControlStatus_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NgControlStatus)(\u0275\u0275directiveInject(NgControl, 2));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _NgControlStatus,
+    selectors: [["", "formControlName", ""], ["", "ngModel", ""], ["", "formControl", ""]],
+    hostVars: 14,
+    hostBindings: function NgControlStatus_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("ng-untouched", ctx.isUntouched)("ng-touched", ctx.isTouched)("ng-pristine", ctx.isPristine)("ng-dirty", ctx.isDirty)("ng-valid", ctx.isValid)("ng-invalid", ctx.isInvalid)("ng-pending", ctx.isPending);
+      }
+    },
+    standalone: false,
+    features: [\u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgControlStatus, [{
+    type: Directive,
+    args: [{
+      selector: "[formControlName],[ngModel],[formControl]",
+      host: ngControlStatusHost,
+      standalone: false
+    }]
+  }], () => [{
+    type: NgControl,
+    decorators: [{
+      type: Self
+    }]
+  }], null);
+})();
+var NgControlStatusGroup = class _NgControlStatusGroup extends AbstractControlStatus {
+  constructor(cd) {
+    super(cd);
+  }
+  static \u0275fac = function NgControlStatusGroup_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NgControlStatusGroup)(\u0275\u0275directiveInject(ControlContainer, 10));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _NgControlStatusGroup,
+    selectors: [["", "formGroupName", ""], ["", "formArrayName", ""], ["", "ngModelGroup", ""], ["", "formGroup", ""], ["", "formArray", ""], ["form", 3, "ngNoForm", ""], ["", "ngForm", ""]],
+    hostVars: 16,
+    hostBindings: function NgControlStatusGroup_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("ng-untouched", ctx.isUntouched)("ng-touched", ctx.isTouched)("ng-pristine", ctx.isPristine)("ng-dirty", ctx.isDirty)("ng-valid", ctx.isValid)("ng-invalid", ctx.isInvalid)("ng-pending", ctx.isPending)("ng-submitted", ctx.isSubmitted);
+      }
+    },
+    standalone: false,
+    features: [\u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgControlStatusGroup, [{
+    type: Directive,
+    args: [{
+      selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],[formArray],form:not([ngNoForm]),[ngForm]",
+      host: __spreadProps(__spreadValues({}, ngControlStatusHost), {
+        "[class.ng-submitted]": "isSubmitted"
+      }),
+      standalone: false
+    }]
+  }], () => [{
+    type: ControlContainer,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }]
+  }], null);
+})();
+var formControlNameExample = `
+  <div [formGroup]="myGroup">
+    <input formControlName="firstName">
+  </div>
+
+  In your class:
+
+  this.myGroup = new FormGroup({
+      firstName: new FormControl()
+  });`;
+var formGroupNameExample = `
+  <div [formGroup]="myGroup">
+      <div formGroupName="person">
+        <input formControlName="firstName">
+      </div>
+  </div>
+
+  In your class:
+
+  this.myGroup = new FormGroup({
+      person: new FormGroup({ firstName: new FormControl() })
+  });`;
+var formArrayNameExample = `
+  <div [formGroup]="myGroup">
+    <div formArrayName="cities">
+      <div *ngFor="let city of cityArray.controls; index as i">
+        <input [formControlName]="i">
+      </div>
+    </div>
+  </div>
+
+  In your class:
+
+  this.cityArray = new FormArray([new FormControl('SF')]);
+  this.myGroup = new FormGroup({
+    cities: this.cityArray
+  });`;
+var ngModelGroupExample = `
+  <form>
+      <div ngModelGroup="person">
+        <input [(ngModel)]="person.name" name="firstName">
+      </div>
+  </form>`;
+var ngModelWithFormGroupExample = `
+  <div [formGroup]="myGroup">
+      <input formControlName="firstName">
+      <input [(ngModel)]="showMoreControls" [ngModelOptions]="{standalone: true}">
+  </div>
+`;
+var VERSION2 = /* @__PURE__ */ new Version("21.2.7");
+function controlParentException(nameOrIndex) {
+  return new RuntimeError(1050, `formControlName must be used with a parent formGroup or formArray directive. You'll want to add a formGroup/formArray
+      directive and pass it an existing FormGroup/FormArray instance (you can create one in your class).
+
+      ${describeFormControl(nameOrIndex)}
+
+    Example:
+
+    ${formControlNameExample}`);
+}
+function describeFormControl(nameOrIndex) {
+  if (nameOrIndex == null || nameOrIndex === "") {
+    return "";
+  }
+  const valueType = typeof nameOrIndex === "string" ? "name" : "index";
+  return `Affected Form Control ${valueType}: "${nameOrIndex}"`;
+}
+function ngModelGroupException() {
+  return new RuntimeError(1051, `formControlName cannot be used with an ngModelGroup parent. It is only compatible with parents
+      that also have a "form" prefix: formGroupName, formArrayName, or formGroup.
+
+      Option 1:  Update the parent to be formGroupName (reactive form strategy)
+
+      ${formGroupNameExample}
+
+      Option 2: Use ngModel instead of formControlName (template-driven strategy)
+
+      ${ngModelGroupExample}`);
+}
+function missingFormException() {
+  return new RuntimeError(1052, `formGroup expects a FormGroup instance. Please pass one in.
+
+      Example:
+
+      ${formControlNameExample}`);
+}
+function groupParentException() {
+  return new RuntimeError(1053, `formGroupName must be used with a parent formGroup directive.  You'll want to add a formGroup
+    directive and pass it an existing FormGroup instance (you can create one in your class).
+
+    Example:
+
+    ${formGroupNameExample}`);
+}
+function arrayParentException() {
+  return new RuntimeError(1054, `formArrayName must be used with a parent formGroup directive.  You'll want to add a formGroup
+      directive and pass it an existing FormGroup instance (you can create one in your class).
+
+      Example:
+
+      ${formArrayNameExample}`);
+}
+var disabledAttrWarning = `
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the \`disabled\` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+`;
+var asyncValidatorsDroppedWithOptsWarning = `
+  It looks like you're constructing using a FormControl with both an options argument and an
+  async validators argument. Mixing these arguments will cause your async validators to be dropped.
+  You should either put all your validators in the options object, or in separate validators
+  arguments. For example:
+
+  // Using validators arguments
+  fc = new FormControl(42, Validators.required, myAsyncValidator);
+
+  // Using AbstractControlOptions
+  fc = new FormControl(42, {validators: Validators.required, asyncValidators: myAV});
+
+  // Do NOT mix them: async validators will be dropped!
+  fc = new FormControl(42, {validators: Validators.required}, /* Oops! */ myAsyncValidator);
+`;
+function ngModelWarning(directiveName) {
+  const versionSubDomain = VERSION2.major !== "0" ? `v${VERSION2.major}.` : "";
+  return `
+  It looks like you're using ngModel on the same form field as ${directiveName}.
+  Support for using the ngModel input property and ngModelChange event with
+  reactive form directives has been deprecated in Angular v6 and will be removed
+  in a future version of Angular.
+
+  For more information on this, see our API docs here:
+  https://${versionSubDomain}angular.dev/api/forms/${directiveName === "formControl" ? "FormControlDirective" : "FormControlName"}
+  `;
+}
+function describeKey(isFormGroup, key) {
+  return isFormGroup ? `with name: '${key}'` : `at index: ${key}`;
+}
+function noControlsError(isFormGroup) {
+  return `
+    There are no form controls registered with this ${isFormGroup ? "group" : "array"} yet. If you're using ngModel,
+    you may want to check next tick (e.g. use setTimeout).
+  `;
+}
+function missingControlError(isFormGroup, key) {
+  return `Cannot find form control ${describeKey(isFormGroup, key)}`;
+}
+function missingControlValueError(isFormGroup, key) {
+  return `Must supply a value for form control ${describeKey(isFormGroup, key)}`;
+}
+var VALID = "VALID";
+var INVALID = "INVALID";
+var PENDING = "PENDING";
+var DISABLED = "DISABLED";
+var ControlEvent = class {
+};
+var ValueChangeEvent = class extends ControlEvent {
+  value;
+  source;
+  constructor(value, source) {
+    super();
+    this.value = value;
+    this.source = source;
+  }
+};
+var PristineChangeEvent = class extends ControlEvent {
+  pristine;
+  source;
+  constructor(pristine, source) {
+    super();
+    this.pristine = pristine;
+    this.source = source;
+  }
+};
+var TouchedChangeEvent = class extends ControlEvent {
+  touched;
+  source;
+  constructor(touched, source) {
+    super();
+    this.touched = touched;
+    this.source = source;
+  }
+};
+var StatusChangeEvent = class extends ControlEvent {
+  status;
+  source;
+  constructor(status, source) {
+    super();
+    this.status = status;
+    this.source = source;
+  }
+};
+var FormSubmittedEvent = class extends ControlEvent {
+  source;
+  constructor(source) {
+    super();
+    this.source = source;
+  }
+};
+var FormResetEvent = class extends ControlEvent {
+  source;
+  constructor(source) {
+    super();
+    this.source = source;
+  }
+};
+function pickValidators(validatorOrOpts) {
+  return (isOptionsObj(validatorOrOpts) ? validatorOrOpts.validators : validatorOrOpts) || null;
+}
+function coerceToValidator(validator) {
+  return Array.isArray(validator) ? composeValidators(validator) : validator || null;
+}
+function pickAsyncValidators(asyncValidator, validatorOrOpts) {
+  if (typeof ngDevMode === "undefined" || ngDevMode) {
+    if (isOptionsObj(validatorOrOpts) && asyncValidator) {
+      console.warn(asyncValidatorsDroppedWithOptsWarning);
+    }
+  }
+  return (isOptionsObj(validatorOrOpts) ? validatorOrOpts.asyncValidators : asyncValidator) || null;
+}
+function coerceToAsyncValidator(asyncValidator) {
+  return Array.isArray(asyncValidator) ? composeAsyncValidators(asyncValidator) : asyncValidator || null;
+}
+function isOptionsObj(validatorOrOpts) {
+  return validatorOrOpts != null && !Array.isArray(validatorOrOpts) && typeof validatorOrOpts === "object";
+}
+function assertControlPresent(parent, isGroup, key) {
+  const controls = parent.controls;
+  const collection = isGroup ? Object.keys(controls) : controls;
+  if (!collection.length) {
+    throw new RuntimeError(1e3, typeof ngDevMode === "undefined" || ngDevMode ? noControlsError(isGroup) : "");
+  }
+  if (!controls[key]) {
+    throw new RuntimeError(1001, typeof ngDevMode === "undefined" || ngDevMode ? missingControlError(isGroup, key) : "");
+  }
+}
+function assertAllValuesPresent(control, isGroup, value) {
+  control._forEachChild((_, key) => {
+    if (value[key] === void 0) {
+      throw new RuntimeError(1002, typeof ngDevMode === "undefined" || ngDevMode ? missingControlValueError(isGroup, key) : "");
+    }
+  });
+}
+var AbstractControl = class {
+  _pendingDirty = false;
+  _hasOwnPendingAsyncValidator = null;
+  _pendingTouched = false;
+  _onCollectionChange = () => {
+  };
+  _updateOn;
+  _parent = null;
+  _asyncValidationSubscription;
+  _composedValidatorFn;
+  _composedAsyncValidatorFn;
+  _rawValidators;
+  _rawAsyncValidators;
+  value;
+  constructor(validators, asyncValidators) {
+    this._assignValidators(validators);
+    this._assignAsyncValidators(asyncValidators);
+  }
+  get validator() {
+    return this._composedValidatorFn;
+  }
+  set validator(validatorFn) {
+    this._rawValidators = this._composedValidatorFn = validatorFn;
+  }
+  get asyncValidator() {
+    return this._composedAsyncValidatorFn;
+  }
+  set asyncValidator(asyncValidatorFn) {
+    this._rawAsyncValidators = this._composedAsyncValidatorFn = asyncValidatorFn;
+  }
+  get parent() {
+    return this._parent;
+  }
+  get status() {
+    return untracked2(this.statusReactive);
+  }
+  set status(v) {
+    untracked2(() => this.statusReactive.set(v));
+  }
+  _status = computed(() => this.statusReactive(), ...ngDevMode ? [{
+    debugName: "_status"
+  }] : []);
+  statusReactive = signal(void 0, ...ngDevMode ? [{
+    debugName: "statusReactive"
+  }] : []);
+  get valid() {
+    return this.status === VALID;
+  }
+  get invalid() {
+    return this.status === INVALID;
+  }
+  get pending() {
+    return this.status === PENDING;
+  }
+  get disabled() {
+    return this.status === DISABLED;
+  }
+  get enabled() {
+    return this.status !== DISABLED;
+  }
+  errors;
+  get pristine() {
+    return untracked2(this.pristineReactive);
+  }
+  set pristine(v) {
+    untracked2(() => this.pristineReactive.set(v));
+  }
+  _pristine = computed(() => this.pristineReactive(), ...ngDevMode ? [{
+    debugName: "_pristine"
+  }] : []);
+  pristineReactive = signal(true, ...ngDevMode ? [{
+    debugName: "pristineReactive"
+  }] : []);
+  get dirty() {
+    return !this.pristine;
+  }
+  get touched() {
+    return untracked2(this.touchedReactive);
+  }
+  set touched(v) {
+    untracked2(() => this.touchedReactive.set(v));
+  }
+  _touched = computed(() => this.touchedReactive(), ...ngDevMode ? [{
+    debugName: "_touched"
+  }] : []);
+  touchedReactive = signal(false, ...ngDevMode ? [{
+    debugName: "touchedReactive"
+  }] : []);
+  get untouched() {
+    return !this.touched;
+  }
+  _events = new Subject();
+  events = this._events.asObservable();
+  valueChanges;
+  statusChanges;
+  get updateOn() {
+    return this._updateOn ? this._updateOn : this.parent ? this.parent.updateOn : "change";
+  }
+  setValidators(validators) {
+    this._assignValidators(validators);
+  }
+  setAsyncValidators(validators) {
+    this._assignAsyncValidators(validators);
+  }
+  addValidators(validators) {
+    this.setValidators(addValidators(validators, this._rawValidators));
+  }
+  addAsyncValidators(validators) {
+    this.setAsyncValidators(addValidators(validators, this._rawAsyncValidators));
+  }
+  removeValidators(validators) {
+    this.setValidators(removeValidators(validators, this._rawValidators));
+  }
+  removeAsyncValidators(validators) {
+    this.setAsyncValidators(removeValidators(validators, this._rawAsyncValidators));
+  }
+  hasValidator(validator) {
+    return hasValidator(this._rawValidators, validator);
+  }
+  hasAsyncValidator(validator) {
+    return hasValidator(this._rawAsyncValidators, validator);
+  }
+  clearValidators() {
+    this.validator = null;
+  }
+  clearAsyncValidators() {
+    this.asyncValidator = null;
+  }
+  markAsTouched(opts = {}) {
+    const changed = this.touched === false;
+    this.touched = true;
+    const sourceControl = opts.sourceControl ?? this;
+    if (!opts.onlySelf) {
+      this._parent?.markAsTouched(__spreadProps(__spreadValues({}, opts), {
+        sourceControl
+      }));
+    }
+    if (changed && opts.emitEvent !== false) {
+      this._events.next(new TouchedChangeEvent(true, sourceControl));
+    }
+  }
+  markAllAsDirty(opts = {}) {
+    this.markAsDirty({
+      onlySelf: true,
+      emitEvent: opts.emitEvent,
+      sourceControl: this
+    });
+    this._forEachChild((control) => control.markAllAsDirty(opts));
+  }
+  markAllAsTouched(opts = {}) {
+    this.markAsTouched({
+      onlySelf: true,
+      emitEvent: opts.emitEvent,
+      sourceControl: this
+    });
+    this._forEachChild((control) => control.markAllAsTouched(opts));
+  }
+  markAsUntouched(opts = {}) {
+    const changed = this.touched === true;
+    this.touched = false;
+    this._pendingTouched = false;
+    const sourceControl = opts.sourceControl ?? this;
+    this._forEachChild((control) => {
+      control.markAsUntouched({
+        onlySelf: true,
+        emitEvent: opts.emitEvent,
+        sourceControl
+      });
+    });
+    if (!opts.onlySelf) {
+      this._parent?._updateTouched(opts, sourceControl);
+    }
+    if (changed && opts.emitEvent !== false) {
+      this._events.next(new TouchedChangeEvent(false, sourceControl));
+    }
+  }
+  markAsDirty(opts = {}) {
+    const changed = this.pristine === true;
+    this.pristine = false;
+    const sourceControl = opts.sourceControl ?? this;
+    if (!opts.onlySelf) {
+      this._parent?.markAsDirty(__spreadProps(__spreadValues({}, opts), {
+        sourceControl
+      }));
+    }
+    if (changed && opts.emitEvent !== false) {
+      this._events.next(new PristineChangeEvent(false, sourceControl));
+    }
+  }
+  markAsPristine(opts = {}) {
+    const changed = this.pristine === false;
+    this.pristine = true;
+    this._pendingDirty = false;
+    const sourceControl = opts.sourceControl ?? this;
+    this._forEachChild((control) => {
+      control.markAsPristine({
+        onlySelf: true,
+        emitEvent: opts.emitEvent
+      });
+    });
+    if (!opts.onlySelf) {
+      this._parent?._updatePristine(opts, sourceControl);
+    }
+    if (changed && opts.emitEvent !== false) {
+      this._events.next(new PristineChangeEvent(true, sourceControl));
+    }
+  }
+  markAsPending(opts = {}) {
+    this.status = PENDING;
+    const sourceControl = opts.sourceControl ?? this;
+    if (opts.emitEvent !== false) {
+      this._events.next(new StatusChangeEvent(this.status, sourceControl));
+      this.statusChanges.emit(this.status);
+    }
+    if (!opts.onlySelf) {
+      this._parent?.markAsPending(__spreadProps(__spreadValues({}, opts), {
+        sourceControl
+      }));
+    }
+  }
+  disable(opts = {}) {
+    const skipPristineCheck = this._parentMarkedDirty(opts.onlySelf);
+    this.status = DISABLED;
+    this.errors = null;
+    this._forEachChild((control) => {
+      control.disable(__spreadProps(__spreadValues({}, opts), {
+        onlySelf: true
+      }));
+    });
+    this._updateValue();
+    const sourceControl = opts.sourceControl ?? this;
+    if (opts.emitEvent !== false) {
+      this._events.next(new ValueChangeEvent(this.value, sourceControl));
+      this._events.next(new StatusChangeEvent(this.status, sourceControl));
+      this.valueChanges.emit(this.value);
+      this.statusChanges.emit(this.status);
+    }
+    this._updateAncestors(__spreadProps(__spreadValues({}, opts), {
+      skipPristineCheck
+    }), this);
+    this._onDisabledChange.forEach((changeFn) => changeFn(true));
+  }
+  enable(opts = {}) {
+    const skipPristineCheck = this._parentMarkedDirty(opts.onlySelf);
+    this.status = VALID;
+    this._forEachChild((control) => {
+      control.enable(__spreadProps(__spreadValues({}, opts), {
+        onlySelf: true
+      }));
+    });
+    this.updateValueAndValidity({
+      onlySelf: true,
+      emitEvent: opts.emitEvent
+    });
+    this._updateAncestors(__spreadProps(__spreadValues({}, opts), {
+      skipPristineCheck
+    }), this);
+    this._onDisabledChange.forEach((changeFn) => changeFn(false));
+  }
+  _updateAncestors(opts, sourceControl) {
+    if (!opts.onlySelf) {
+      this._parent?.updateValueAndValidity(opts);
+      if (!opts.skipPristineCheck) {
+        this._parent?._updatePristine({}, sourceControl);
+      }
+      this._parent?._updateTouched({}, sourceControl);
+    }
+  }
+  setParent(parent) {
+    this._parent = parent;
+  }
+  getRawValue() {
+    return this.value;
+  }
+  updateValueAndValidity(opts = {}) {
+    this._setInitialStatus();
+    this._updateValue();
+    if (this.enabled) {
+      const shouldHaveEmitted = this._cancelExistingSubscription();
+      this.errors = this._runValidator();
+      this.status = this._calculateStatus();
+      if (this.status === VALID || this.status === PENDING) {
+        this._runAsyncValidator(shouldHaveEmitted, opts.emitEvent);
+      }
+    }
+    const sourceControl = opts.sourceControl ?? this;
+    if (opts.emitEvent !== false) {
+      this._events.next(new ValueChangeEvent(this.value, sourceControl));
+      this._events.next(new StatusChangeEvent(this.status, sourceControl));
+      this.valueChanges.emit(this.value);
+      this.statusChanges.emit(this.status);
+    }
+    if (!opts.onlySelf) {
+      this._parent?.updateValueAndValidity(__spreadProps(__spreadValues({}, opts), {
+        sourceControl
+      }));
+    }
+  }
+  _updateTreeValidity(opts = {
+    emitEvent: true
+  }) {
+    this._forEachChild((ctrl) => ctrl._updateTreeValidity(opts));
+    this.updateValueAndValidity({
+      onlySelf: true,
+      emitEvent: opts.emitEvent
+    });
+  }
+  _setInitialStatus() {
+    this.status = this._allControlsDisabled() ? DISABLED : VALID;
+  }
+  _runValidator() {
+    return this.validator ? this.validator(this) : null;
+  }
+  _runAsyncValidator(shouldHaveEmitted, emitEvent) {
+    if (this.asyncValidator) {
+      this.status = PENDING;
+      this._hasOwnPendingAsyncValidator = {
+        emitEvent: emitEvent !== false,
+        shouldHaveEmitted: shouldHaveEmitted !== false
+      };
+      const obs = toObservable(this.asyncValidator(this));
+      this._asyncValidationSubscription = obs.subscribe((errors) => {
+        this._hasOwnPendingAsyncValidator = null;
+        this.setErrors(errors, {
+          emitEvent,
+          shouldHaveEmitted
+        });
+      });
+    }
+  }
+  _cancelExistingSubscription() {
+    if (this._asyncValidationSubscription) {
+      this._asyncValidationSubscription.unsubscribe();
+      const shouldHaveEmitted = (this._hasOwnPendingAsyncValidator?.emitEvent || this._hasOwnPendingAsyncValidator?.shouldHaveEmitted) ?? false;
+      this._hasOwnPendingAsyncValidator = null;
+      return shouldHaveEmitted;
+    }
+    return false;
+  }
+  setErrors(errors, opts = {}) {
+    this.errors = errors;
+    this._updateControlsErrors(opts.emitEvent !== false, this, opts.shouldHaveEmitted);
+  }
+  get(path) {
+    let currPath = path;
+    if (currPath == null) return null;
+    if (!Array.isArray(currPath)) currPath = currPath.split(".");
+    if (currPath.length === 0) return null;
+    return currPath.reduce((control, name) => control && control._find(name), this);
+  }
+  getError(errorCode, path) {
+    const control = path ? this.get(path) : this;
+    return control?.errors ? control.errors[errorCode] : null;
+  }
+  hasError(errorCode, path) {
+    return !!this.getError(errorCode, path);
+  }
+  get root() {
+    let x = this;
+    while (x._parent) {
+      x = x._parent;
+    }
+    return x;
+  }
+  _updateControlsErrors(emitEvent, changedControl, shouldHaveEmitted) {
+    this.status = this._calculateStatus();
+    if (emitEvent) {
+      this.statusChanges.emit(this.status);
+    }
+    if (emitEvent || shouldHaveEmitted) {
+      this._events.next(new StatusChangeEvent(this.status, changedControl));
+    }
+    if (this._parent) {
+      this._parent._updateControlsErrors(emitEvent, changedControl, shouldHaveEmitted);
+    }
+  }
+  _initObservables() {
+    this.valueChanges = new EventEmitter();
+    this.statusChanges = new EventEmitter();
+  }
+  _calculateStatus() {
+    if (this._allControlsDisabled()) return DISABLED;
+    if (this.errors) return INVALID;
+    if (this._hasOwnPendingAsyncValidator || this._anyControlsHaveStatus(PENDING)) return PENDING;
+    if (this._anyControlsHaveStatus(INVALID)) return INVALID;
+    return VALID;
+  }
+  _anyControlsHaveStatus(status) {
+    return this._anyControls((control) => control.status === status);
+  }
+  _anyControlsDirty() {
+    return this._anyControls((control) => control.dirty);
+  }
+  _anyControlsTouched() {
+    return this._anyControls((control) => control.touched);
+  }
+  _updatePristine(opts, changedControl) {
+    const newPristine = !this._anyControlsDirty();
+    const changed = this.pristine !== newPristine;
+    this.pristine = newPristine;
+    if (!opts.onlySelf) {
+      this._parent?._updatePristine(opts, changedControl);
+    }
+    if (changed) {
+      this._events.next(new PristineChangeEvent(this.pristine, changedControl));
+    }
+  }
+  _updateTouched(opts = {}, changedControl) {
+    this.touched = this._anyControlsTouched();
+    this._events.next(new TouchedChangeEvent(this.touched, changedControl));
+    if (!opts.onlySelf) {
+      this._parent?._updateTouched(opts, changedControl);
+    }
+  }
+  _onDisabledChange = [];
+  _registerOnCollectionChange(fn) {
+    this._onCollectionChange = fn;
+  }
+  _setUpdateStrategy(opts) {
+    if (isOptionsObj(opts) && opts.updateOn != null) {
+      this._updateOn = opts.updateOn;
+    }
+  }
+  _parentMarkedDirty(onlySelf) {
+    return !onlySelf && !!this._parent?.dirty && !this._parent._anyControlsDirty();
+  }
+  _find(name) {
+    return null;
+  }
+  _assignValidators(validators) {
+    this._rawValidators = Array.isArray(validators) ? validators.slice() : validators;
+    this._composedValidatorFn = coerceToValidator(this._rawValidators);
+  }
+  _assignAsyncValidators(validators) {
+    this._rawAsyncValidators = Array.isArray(validators) ? validators.slice() : validators;
+    this._composedAsyncValidatorFn = coerceToAsyncValidator(this._rawAsyncValidators);
+  }
+};
+var FormGroup = class extends AbstractControl {
+  constructor(controls, validatorOrOpts, asyncValidator) {
+    super(pickValidators(validatorOrOpts), pickAsyncValidators(asyncValidator, validatorOrOpts));
+    (typeof ngDevMode === "undefined" || ngDevMode) && validateFormGroupControls(controls);
+    this.controls = controls;
+    this._initObservables();
+    this._setUpdateStrategy(validatorOrOpts);
+    this._setUpControls();
+    this.updateValueAndValidity({
+      onlySelf: true,
+      emitEvent: !!this.asyncValidator
+    });
+  }
+  controls;
+  registerControl(name, control) {
+    if (this.controls[name]) return this.controls[name];
+    this.controls[name] = control;
+    control.setParent(this);
+    control._registerOnCollectionChange(this._onCollectionChange);
+    return control;
+  }
+  addControl(name, control, options = {}) {
+    this.registerControl(name, control);
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+    this._onCollectionChange();
+  }
+  removeControl(name, options = {}) {
+    if (this.controls[name]) this.controls[name]._registerOnCollectionChange(() => {
+    });
+    delete this.controls[name];
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+    this._onCollectionChange();
+  }
+  setControl(name, control, options = {}) {
+    if (this.controls[name]) this.controls[name]._registerOnCollectionChange(() => {
+    });
+    delete this.controls[name];
+    if (control) this.registerControl(name, control);
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+    this._onCollectionChange();
+  }
+  contains(controlName) {
+    return this.controls.hasOwnProperty(controlName) && this.controls[controlName].enabled;
+  }
+  setValue(value, options = {}) {
+    assertAllValuesPresent(this, true, value);
+    Object.keys(value).forEach((name) => {
+      assertControlPresent(this, true, name);
+      this.controls[name].setValue(value[name], {
+        onlySelf: true,
+        emitEvent: options.emitEvent
+      });
+    });
+    this.updateValueAndValidity(options);
+  }
+  patchValue(value, options = {}) {
+    if (value == null) return;
+    Object.keys(value).forEach((name) => {
+      const control = this.controls[name];
+      if (control) {
+        control.patchValue(value[name], {
+          onlySelf: true,
+          emitEvent: options.emitEvent
+        });
+      }
+    });
+    this.updateValueAndValidity(options);
+  }
+  reset(value = {}, options = {}) {
+    this._forEachChild((control, name) => {
+      control.reset(value ? value[name] : null, __spreadProps(__spreadValues({}, options), {
+        onlySelf: true
+      }));
+    });
+    this._updatePristine(options, this);
+    this._updateTouched(options, this);
+    this.updateValueAndValidity(options);
+    if (options?.emitEvent !== false) {
+      this._events.next(new FormResetEvent(this));
+    }
+  }
+  getRawValue() {
+    return this._reduceChildren({}, (acc, control, name) => {
+      acc[name] = control.getRawValue();
+      return acc;
+    });
+  }
+  _syncPendingControls() {
+    let subtreeUpdated = this._reduceChildren(false, (updated, child) => {
+      return child._syncPendingControls() ? true : updated;
+    });
+    if (subtreeUpdated) this.updateValueAndValidity({
+      onlySelf: true
+    });
+    return subtreeUpdated;
+  }
+  _forEachChild(cb) {
+    Object.keys(this.controls).forEach((key) => {
+      const control = this.controls[key];
+      control && cb(control, key);
+    });
+  }
+  _setUpControls() {
+    this._forEachChild((control) => {
+      control.setParent(this);
+      control._registerOnCollectionChange(this._onCollectionChange);
+    });
+  }
+  _updateValue() {
+    this.value = this._reduceValue();
+  }
+  _anyControls(condition) {
+    for (const [controlName, control] of Object.entries(this.controls)) {
+      if (this.contains(controlName) && condition(control)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  _reduceValue() {
+    let acc = {};
+    return this._reduceChildren(acc, (acc2, control, name) => {
+      if (control.enabled || this.disabled) {
+        acc2[name] = control.value;
+      }
+      return acc2;
+    });
+  }
+  _reduceChildren(initValue, fn) {
+    let res = initValue;
+    this._forEachChild((control, name) => {
+      res = fn(res, control, name);
+    });
+    return res;
+  }
+  _allControlsDisabled() {
+    for (const controlName of Object.keys(this.controls)) {
+      if (this.controls[controlName].enabled) {
+        return false;
+      }
+    }
+    return Object.keys(this.controls).length > 0 || this.disabled;
+  }
+  _find(name) {
+    return this.controls.hasOwnProperty(name) ? this.controls[name] : null;
+  }
+};
+function validateFormGroupControls(controls) {
+  const invalidKeys = Object.keys(controls).filter((key) => key.includes("."));
+  if (invalidKeys.length > 0) {
+    console.warn(`FormGroup keys cannot include \`.\`, please replace the keys for: ${invalidKeys.join(",")}.`);
+  }
+}
+var FormRecord = class extends FormGroup {
+};
+var CALL_SET_DISABLED_STATE = new InjectionToken(typeof ngDevMode === "undefined" || ngDevMode ? "CallSetDisabledState" : "", {
+  factory: () => setDisabledStateDefault
+});
+var setDisabledStateDefault = "always";
+function controlPath(name, parent) {
+  return [...parent.path, name];
+}
+function setUpControl(control, dir, callSetDisabledState = setDisabledStateDefault) {
+  if (typeof ngDevMode === "undefined" || ngDevMode) {
+    if (!control) _throwError(dir, "Cannot find control with");
+    if (!dir.valueAccessor) _throwMissingValueAccessorError(dir);
+  }
+  setUpValidators(control, dir);
+  dir.valueAccessor.writeValue(control.value);
+  if (control.disabled || callSetDisabledState === "always") {
+    dir.valueAccessor.setDisabledState?.(control.disabled);
+  }
+  setUpViewChangePipeline(control, dir);
+  setUpModelChangePipeline(control, dir);
+  setUpBlurPipeline(control, dir);
+  setUpDisabledChangeHandler(control, dir);
+}
+function cleanUpControl(control, dir, validateControlPresenceOnChange = true) {
+  const noop4 = () => {
+    if (validateControlPresenceOnChange && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      _noControlError(dir);
+    }
+  };
+  dir?.valueAccessor?.registerOnChange(noop4);
+  dir?.valueAccessor?.registerOnTouched(noop4);
+  cleanUpValidators(control, dir);
+  if (control) {
+    dir._invokeOnDestroyCallbacks();
+    control._registerOnCollectionChange(() => {
+    });
+  }
+}
+function registerOnValidatorChange(validators, onChange) {
+  validators.forEach((validator) => {
+    if (validator.registerOnValidatorChange) validator.registerOnValidatorChange(onChange);
+  });
+}
+function setUpDisabledChangeHandler(control, dir) {
+  if (dir.valueAccessor.setDisabledState) {
+    const onDisabledChange = (isDisabled) => {
+      dir.valueAccessor.setDisabledState(isDisabled);
+    };
+    control.registerOnDisabledChange(onDisabledChange);
+    dir._registerOnDestroy(() => {
+      control._unregisterOnDisabledChange(onDisabledChange);
+    });
+  }
+}
+function setUpValidators(control, dir) {
+  const validators = getControlValidators(control);
+  if (dir.validator !== null) {
+    control.setValidators(mergeValidators(validators, dir.validator));
+  } else if (typeof validators === "function") {
+    control.setValidators([validators]);
+  }
+  const asyncValidators = getControlAsyncValidators(control);
+  if (dir.asyncValidator !== null) {
+    control.setAsyncValidators(mergeValidators(asyncValidators, dir.asyncValidator));
+  } else if (typeof asyncValidators === "function") {
+    control.setAsyncValidators([asyncValidators]);
+  }
+  const onValidatorChange = () => control.updateValueAndValidity();
+  registerOnValidatorChange(dir._rawValidators, onValidatorChange);
+  registerOnValidatorChange(dir._rawAsyncValidators, onValidatorChange);
+}
+function cleanUpValidators(control, dir) {
+  let isControlUpdated = false;
+  if (control !== null) {
+    if (dir.validator !== null) {
+      const validators = getControlValidators(control);
+      if (Array.isArray(validators) && validators.length > 0) {
+        const updatedValidators = validators.filter((validator) => validator !== dir.validator);
+        if (updatedValidators.length !== validators.length) {
+          isControlUpdated = true;
+          control.setValidators(updatedValidators);
+        }
+      }
+    }
+    if (dir.asyncValidator !== null) {
+      const asyncValidators = getControlAsyncValidators(control);
+      if (Array.isArray(asyncValidators) && asyncValidators.length > 0) {
+        const updatedAsyncValidators = asyncValidators.filter((asyncValidator) => asyncValidator !== dir.asyncValidator);
+        if (updatedAsyncValidators.length !== asyncValidators.length) {
+          isControlUpdated = true;
+          control.setAsyncValidators(updatedAsyncValidators);
+        }
+      }
+    }
+  }
+  const noop4 = () => {
+  };
+  registerOnValidatorChange(dir._rawValidators, noop4);
+  registerOnValidatorChange(dir._rawAsyncValidators, noop4);
+  return isControlUpdated;
+}
+function setUpViewChangePipeline(control, dir) {
+  dir.valueAccessor.registerOnChange((newValue) => {
+    control._pendingValue = newValue;
+    control._pendingChange = true;
+    control._pendingDirty = true;
+    if (control.updateOn === "change") updateControl(control, dir);
+  });
+}
+function setUpBlurPipeline(control, dir) {
+  dir.valueAccessor.registerOnTouched(() => {
+    control._pendingTouched = true;
+    if (control.updateOn === "blur" && control._pendingChange) updateControl(control, dir);
+    if (control.updateOn !== "submit") control.markAsTouched();
+  });
+}
+function updateControl(control, dir) {
+  if (control._pendingDirty) control.markAsDirty();
+  control.setValue(control._pendingValue, {
+    emitModelToViewChange: false
+  });
+  dir.viewToModelUpdate(control._pendingValue);
+  control._pendingChange = false;
+}
+function setUpModelChangePipeline(control, dir) {
+  const onChange = (newValue, emitModelEvent) => {
+    dir.valueAccessor.writeValue(newValue);
+    if (emitModelEvent) dir.viewToModelUpdate(newValue);
+  };
+  control.registerOnChange(onChange);
+  dir._registerOnDestroy(() => {
+    control._unregisterOnChange(onChange);
+  });
+}
+function setUpFormContainer(control, dir) {
+  if (control == null && (typeof ngDevMode === "undefined" || ngDevMode)) _throwError(dir, "Cannot find control with");
+  setUpValidators(control, dir);
+}
+function cleanUpFormContainer(control, dir) {
+  return cleanUpValidators(control, dir);
+}
+function _noControlError(dir) {
+  return _throwError(dir, "There is no FormControl instance attached to form control element with");
+}
+function _throwError(dir, message) {
+  const messageEnd = _describeControlLocation(dir);
+  throw new Error(`${message} ${messageEnd}`);
+}
+function _describeControlLocation(dir) {
+  const path = dir.path;
+  if (path && path.length > 1) return `path: '${path.join(" -> ")}'`;
+  if (path?.[0]) return `name: '${path}'`;
+  return "unspecified name attribute";
+}
+function _throwMissingValueAccessorError(dir) {
+  const loc = _describeControlLocation(dir);
+  throw new RuntimeError(-1203, `No value accessor for form control ${loc}.`);
+}
+function _throwInvalidValueAccessorError(dir) {
+  const loc = _describeControlLocation(dir);
+  throw new RuntimeError(1200, `Value accessor was not provided as an array for form control with ${loc}. Check that the \`NG_VALUE_ACCESSOR\` token is configured as a \`multi: true\` provider.`);
+}
+function isPropertyUpdated(changes, viewModel) {
+  if (!changes.hasOwnProperty("model")) return false;
+  const change = changes["model"];
+  if (change.isFirstChange()) return true;
+  return !Object.is(viewModel, change.currentValue);
+}
+function isBuiltInAccessor(valueAccessor) {
+  return Object.getPrototypeOf(valueAccessor.constructor) === BuiltInControlValueAccessor;
+}
+function syncPendingControls(form, directives) {
+  form._syncPendingControls();
+  directives.forEach((dir) => {
+    const control = dir.control;
+    if (control.updateOn === "submit" && control._pendingChange) {
+      dir.viewToModelUpdate(control._pendingValue);
+      control._pendingChange = false;
+    }
+  });
+}
+function selectValueAccessor(dir, valueAccessors) {
+  if (!valueAccessors) return null;
+  if (!Array.isArray(valueAccessors) && (typeof ngDevMode === "undefined" || ngDevMode)) _throwInvalidValueAccessorError(dir);
+  let defaultAccessor = void 0;
+  let builtinAccessor = void 0;
+  let customAccessor = void 0;
+  valueAccessors.forEach((v) => {
+    if (v.constructor === DefaultValueAccessor) {
+      defaultAccessor = v;
+    } else if (isBuiltInAccessor(v)) {
+      if (builtinAccessor && (typeof ngDevMode === "undefined" || ngDevMode)) _throwError(dir, "More than one built-in value accessor matches form control with");
+      builtinAccessor = v;
+    } else {
+      if (customAccessor && (typeof ngDevMode === "undefined" || ngDevMode)) _throwError(dir, "More than one custom value accessor matches form control with");
+      customAccessor = v;
+    }
+  });
+  if (customAccessor) return customAccessor;
+  if (builtinAccessor) return builtinAccessor;
+  if (defaultAccessor) return defaultAccessor;
+  if (typeof ngDevMode === "undefined" || ngDevMode) {
+    _throwError(dir, "No valid value accessor for form control with");
+  }
+  return null;
+}
+function removeListItem$1(list, el) {
+  const index = list.indexOf(el);
+  if (index > -1) list.splice(index, 1);
+}
+function _ngModelWarning(name, type, instance, warningConfig) {
+  if (warningConfig === "never") return;
+  if ((warningConfig === null || warningConfig === "once") && !type._ngModelWarningSentOnce || warningConfig === "always" && !instance._ngModelWarningSent) {
+    console.warn(ngModelWarning(name));
+    type._ngModelWarningSentOnce = true;
+    instance._ngModelWarningSent = true;
+  }
+}
+var formDirectiveProvider$2 = {
+  provide: ControlContainer,
+  useExisting: forwardRef(() => NgForm)
+};
+var resolvedPromise$1 = (() => Promise.resolve())();
+var NgForm = class _NgForm extends ControlContainer {
+  callSetDisabledState;
+  get submitted() {
+    return untracked2(this.submittedReactive);
+  }
+  _submitted = computed(() => this.submittedReactive(), ...ngDevMode ? [{
+    debugName: "_submitted"
+  }] : []);
+  submittedReactive = signal(false, ...ngDevMode ? [{
+    debugName: "submittedReactive"
+  }] : []);
+  _directives = /* @__PURE__ */ new Set();
+  form;
+  ngSubmit = new EventEmitter();
+  options;
+  constructor(validators, asyncValidators, callSetDisabledState) {
+    super();
+    this.callSetDisabledState = callSetDisabledState;
+    this.form = new FormGroup({}, composeValidators(validators), composeAsyncValidators(asyncValidators));
+  }
+  ngAfterViewInit() {
+    this._setUpdateStrategy();
+  }
+  get formDirective() {
+    return this;
+  }
+  get control() {
+    return this.form;
+  }
+  get path() {
+    return [];
+  }
+  get controls() {
+    return this.form.controls;
+  }
+  addControl(dir) {
+    resolvedPromise$1.then(() => {
+      const container = this._findContainer(dir.path);
+      dir.control = container.registerControl(dir.name, dir.control);
+      setUpControl(dir.control, dir, this.callSetDisabledState);
+      dir.control.updateValueAndValidity({
+        emitEvent: false
+      });
+      this._directives.add(dir);
+    });
+  }
+  getControl(dir) {
+    return this.form.get(dir.path);
+  }
+  removeControl(dir) {
+    resolvedPromise$1.then(() => {
+      const container = this._findContainer(dir.path);
+      container?.removeControl(dir.name);
+      this._directives.delete(dir);
+    });
+  }
+  addFormGroup(dir) {
+    resolvedPromise$1.then(() => {
+      const container = this._findContainer(dir.path);
+      const group = new FormGroup({});
+      setUpFormContainer(group, dir);
+      container.registerControl(dir.name, group);
+      group.updateValueAndValidity({
+        emitEvent: false
+      });
+    });
+  }
+  removeFormGroup(dir) {
+    resolvedPromise$1.then(() => {
+      const container = this._findContainer(dir.path);
+      container?.removeControl?.(dir.name);
+    });
+  }
+  getFormGroup(dir) {
+    return this.form.get(dir.path);
+  }
+  updateModel(dir, value) {
+    resolvedPromise$1.then(() => {
+      const ctrl = this.form.get(dir.path);
+      ctrl.setValue(value);
+    });
+  }
+  setValue(value) {
+    this.control.setValue(value);
+  }
+  onSubmit($event) {
+    this.submittedReactive.set(true);
+    syncPendingControls(this.form, this._directives);
+    this.ngSubmit.emit($event);
+    this.form._events.next(new FormSubmittedEvent(this.control));
+    return $event?.target?.method === "dialog";
+  }
+  onReset() {
+    this.resetForm();
+  }
+  resetForm(value = void 0) {
+    this.form.reset(value);
+    this.submittedReactive.set(false);
+  }
+  _setUpdateStrategy() {
+    if (this.options && this.options.updateOn != null) {
+      this.form._updateOn = this.options.updateOn;
+    }
+  }
+  _findContainer(path) {
+    path.pop();
+    return path.length ? this.form.get(path) : this.form;
+  }
+  static \u0275fac = function NgForm_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NgForm)(\u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10), \u0275\u0275directiveInject(CALL_SET_DISABLED_STATE, 8));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _NgForm,
+    selectors: [["form", 3, "ngNoForm", "", 3, "formGroup", "", 3, "formArray", ""], ["ng-form"], ["", "ngForm", ""]],
+    hostBindings: function NgForm_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("submit", function NgForm_submit_HostBindingHandler($event) {
+          return ctx.onSubmit($event);
+        })("reset", function NgForm_reset_HostBindingHandler() {
+          return ctx.onReset();
+        });
+      }
+    },
+    inputs: {
+      options: [0, "ngFormOptions", "options"]
+    },
+    outputs: {
+      ngSubmit: "ngSubmit"
+    },
+    exportAs: ["ngForm"],
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([formDirectiveProvider$2]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgForm, [{
+    type: Directive,
+    args: [{
+      selector: "form:not([ngNoForm]):not([formGroup]):not([formArray]),ng-form,[ngForm]",
+      providers: [formDirectiveProvider$2],
+      host: {
+        "(submit)": "onSubmit($event)",
+        "(reset)": "onReset()"
+      },
+      outputs: ["ngSubmit"],
+      exportAs: "ngForm",
+      standalone: false
+    }]
+  }], () => [{
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [CALL_SET_DISABLED_STATE]
+    }]
+  }], {
+    options: [{
+      type: Input,
+      args: ["ngFormOptions"]
+    }]
+  });
+})();
+function removeListItem(list, el) {
+  const index = list.indexOf(el);
+  if (index > -1) list.splice(index, 1);
+}
+function isFormControlState(formState) {
+  return typeof formState === "object" && formState !== null && Object.keys(formState).length === 2 && "value" in formState && "disabled" in formState;
+}
+var FormControl = class FormControl2 extends AbstractControl {
+  defaultValue = null;
+  _onChange = [];
+  _pendingValue;
+  _pendingChange = false;
+  constructor(formState = null, validatorOrOpts, asyncValidator) {
+    super(pickValidators(validatorOrOpts), pickAsyncValidators(asyncValidator, validatorOrOpts));
+    this._applyFormState(formState);
+    this._setUpdateStrategy(validatorOrOpts);
+    this._initObservables();
+    this.updateValueAndValidity({
+      onlySelf: true,
+      emitEvent: !!this.asyncValidator
+    });
+    if (isOptionsObj(validatorOrOpts) && (validatorOrOpts.nonNullable || validatorOrOpts.initialValueIsDefault)) {
+      if (isFormControlState(formState)) {
+        this.defaultValue = formState.value;
+      } else {
+        this.defaultValue = formState;
+      }
+    }
+  }
+  setValue(value, options = {}) {
+    this.value = this._pendingValue = value;
+    if (this._onChange.length && options.emitModelToViewChange !== false) {
+      this._onChange.forEach((changeFn) => changeFn(this.value, options.emitViewToModelChange !== false));
+    }
+    this.updateValueAndValidity(options);
+  }
+  patchValue(value, options = {}) {
+    this.setValue(value, options);
+  }
+  reset(formState = this.defaultValue, options = {}) {
+    this._applyFormState(formState);
+    this.markAsPristine(options);
+    this.markAsUntouched(options);
+    this.setValue(this.value, options);
+    if (options.overwriteDefaultValue) {
+      this.defaultValue = this.value;
+    }
+    this._pendingChange = false;
+    if (options?.emitEvent !== false) {
+      this._events.next(new FormResetEvent(this));
+    }
+  }
+  _updateValue() {
+  }
+  _anyControls(condition) {
+    return false;
+  }
+  _allControlsDisabled() {
+    return this.disabled;
+  }
+  registerOnChange(fn) {
+    this._onChange.push(fn);
+  }
+  _unregisterOnChange(fn) {
+    removeListItem(this._onChange, fn);
+  }
+  registerOnDisabledChange(fn) {
+    this._onDisabledChange.push(fn);
+  }
+  _unregisterOnDisabledChange(fn) {
+    removeListItem(this._onDisabledChange, fn);
+  }
+  _forEachChild(cb) {
+  }
+  _syncPendingControls() {
+    if (this.updateOn === "submit") {
+      if (this._pendingDirty) this.markAsDirty();
+      if (this._pendingTouched) this.markAsTouched();
+      if (this._pendingChange) {
+        this.setValue(this._pendingValue, {
+          onlySelf: true,
+          emitModelToViewChange: false
+        });
+        return true;
+      }
+    }
+    return false;
+  }
+  _applyFormState(formState) {
+    if (isFormControlState(formState)) {
+      this.value = this._pendingValue = formState.value;
+      formState.disabled ? this.disable({
+        onlySelf: true,
+        emitEvent: false
+      }) : this.enable({
+        onlySelf: true,
+        emitEvent: false
+      });
+    } else {
+      this.value = this._pendingValue = formState;
+    }
+  }
+};
+var isFormControl = (control) => control instanceof FormControl;
+var AbstractFormGroupDirective = class _AbstractFormGroupDirective extends ControlContainer {
+  _parent;
+  ngOnInit() {
+    this._checkParentType();
+    this.formDirective.addFormGroup(this);
+  }
+  ngOnDestroy() {
+    this.formDirective?.removeFormGroup(this);
+  }
+  get control() {
+    return this.formDirective.getFormGroup(this);
+  }
+  get path() {
+    return controlPath(this.name == null ? this.name : this.name.toString(), this._parent);
+  }
+  get formDirective() {
+    return this._parent ? this._parent.formDirective : null;
+  }
+  _checkParentType() {
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275AbstractFormGroupDirective_BaseFactory;
+    return function AbstractFormGroupDirective_Factory(__ngFactoryType__) {
+      return (\u0275AbstractFormGroupDirective_BaseFactory || (\u0275AbstractFormGroupDirective_BaseFactory = \u0275\u0275getInheritedFactory(_AbstractFormGroupDirective)))(__ngFactoryType__ || _AbstractFormGroupDirective);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _AbstractFormGroupDirective,
+    standalone: false,
+    features: [\u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AbstractFormGroupDirective, [{
+    type: Directive,
+    args: [{
+      standalone: false
+    }]
+  }], null, null);
+})();
+function modelParentException() {
+  return new RuntimeError(1350, `
+    ngModel cannot be used to register form controls with a parent formGroup directive.  Try using
+    formGroup's partner directive "formControlName" instead.  Example:
+
+    ${formControlNameExample}
+
+    Or, if you'd like to avoid registering this form control, indicate that it's standalone in ngModelOptions:
+
+    Example:
+
+    ${ngModelWithFormGroupExample}`);
+}
+function formGroupNameException() {
+  return new RuntimeError(1351, `
+    ngModel cannot be used to register form controls with a parent formGroupName or formArrayName directive.
+
+    Option 1: Use formControlName instead of ngModel (reactive strategy):
+
+    ${formGroupNameExample}
+
+    Option 2:  Update ngModel's parent be ngModelGroup (template-driven strategy):
+
+    ${ngModelGroupExample}`);
+}
+function missingNameException() {
+  return new RuntimeError(1352, `If ngModel is used within a form tag, either the name attribute must be set or the form
+    control must be defined as 'standalone' in ngModelOptions.
+
+    Example 1: <input [(ngModel)]="person.firstName" name="first">
+    Example 2: <input [(ngModel)]="person.firstName" [ngModelOptions]="{standalone: true}">`);
+}
+function modelGroupParentException() {
+  return new RuntimeError(1353, `
+    ngModelGroup cannot be used with a parent formGroup directive.
+
+    Option 1: Use formGroupName instead of ngModelGroup (reactive strategy):
+
+    ${formGroupNameExample}
+
+    Option 2:  Use a regular form tag instead of the formGroup directive (template-driven strategy):
+
+    ${ngModelGroupExample}`);
+}
+var modelGroupProvider = {
+  provide: ControlContainer,
+  useExisting: forwardRef(() => NgModelGroup)
+};
+var NgModelGroup = class _NgModelGroup extends AbstractFormGroupDirective {
+  name = "";
+  constructor(parent, validators, asyncValidators) {
+    super();
+    this._parent = parent;
+    this._setValidators(validators);
+    this._setAsyncValidators(asyncValidators);
+  }
+  _checkParentType() {
+    if (!(this._parent instanceof _NgModelGroup) && !(this._parent instanceof NgForm) && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw modelGroupParentException();
+    }
+  }
+  static \u0275fac = function NgModelGroup_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NgModelGroup)(\u0275\u0275directiveInject(ControlContainer, 5), \u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _NgModelGroup,
+    selectors: [["", "ngModelGroup", ""]],
+    inputs: {
+      name: [0, "ngModelGroup", "name"]
+    },
+    exportAs: ["ngModelGroup"],
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([modelGroupProvider]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgModelGroup, [{
+    type: Directive,
+    args: [{
+      selector: "[ngModelGroup]",
+      providers: [modelGroupProvider],
+      exportAs: "ngModelGroup",
+      standalone: false
+    }]
+  }], () => [{
+    type: ControlContainer,
+    decorators: [{
+      type: Host
+    }, {
+      type: SkipSelf
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }], {
+    name: [{
+      type: Input,
+      args: ["ngModelGroup"]
+    }]
+  });
+})();
+var formControlBinding$1 = {
+  provide: NgControl,
+  useExisting: forwardRef(() => NgModel)
+};
+var resolvedPromise = (() => Promise.resolve())();
+var NgModel = class _NgModel extends NgControl {
+  _changeDetectorRef;
+  callSetDisabledState;
+  control = new FormControl();
+  static ngAcceptInputType_isDisabled;
+  _registered = false;
+  viewModel;
+  name = "";
+  isDisabled;
+  model;
+  options;
+  update = new EventEmitter();
+  constructor(parent, validators, asyncValidators, valueAccessors, _changeDetectorRef, callSetDisabledState) {
+    super();
+    this._changeDetectorRef = _changeDetectorRef;
+    this.callSetDisabledState = callSetDisabledState;
+    this._parent = parent;
+    this._setValidators(validators);
+    this._setAsyncValidators(asyncValidators);
+    this.valueAccessor = selectValueAccessor(this, valueAccessors);
+  }
+  ngOnChanges(changes) {
+    this._checkForErrors();
+    if (!this._registered || "name" in changes) {
+      if (this._registered) {
+        this._checkName();
+        if (this.formDirective) {
+          const oldName = changes["name"].previousValue;
+          this.formDirective.removeControl({
+            name: oldName,
+            path: this._getPath(oldName)
+          });
+        }
+      }
+      this._setUpControl();
+    }
+    if ("isDisabled" in changes) {
+      this._updateDisabled(changes);
+    }
+    if (isPropertyUpdated(changes, this.viewModel)) {
+      this._updateValue(this.model);
+      this.viewModel = this.model;
+    }
+  }
+  ngOnDestroy() {
+    this.formDirective?.removeControl(this);
+  }
+  get path() {
+    return this._getPath(this.name);
+  }
+  get formDirective() {
+    return this._parent ? this._parent.formDirective : null;
+  }
+  viewToModelUpdate(newValue) {
+    this.viewModel = newValue;
+    this.update.emit(newValue);
+  }
+  _setUpControl() {
+    this._setUpdateStrategy();
+    this._isStandalone() ? this._setUpStandalone() : this.formDirective.addControl(this);
+    this._registered = true;
+  }
+  _setUpdateStrategy() {
+    if (this.options && this.options.updateOn != null) {
+      this.control._updateOn = this.options.updateOn;
+    }
+  }
+  _isStandalone() {
+    return !this._parent || !!(this.options && this.options.standalone);
+  }
+  _setUpStandalone() {
+    setUpControl(this.control, this, this.callSetDisabledState);
+    this.control.updateValueAndValidity({
+      emitEvent: false
+    });
+  }
+  _checkForErrors() {
+    if ((typeof ngDevMode === "undefined" || ngDevMode) && !this._isStandalone()) {
+      checkParentType$1(this._parent);
+    }
+    this._checkName();
+  }
+  _checkName() {
+    if (this.options && this.options.name) this.name = this.options.name;
+    if (!this._isStandalone() && !this.name && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw missingNameException();
+    }
+  }
+  _updateValue(value) {
+    resolvedPromise.then(() => {
+      this.control.setValue(value, {
+        emitViewToModelChange: false
+      });
+      this._changeDetectorRef?.markForCheck();
+    });
+  }
+  _updateDisabled(changes) {
+    const disabledValue = changes["isDisabled"].currentValue;
+    const isDisabled = disabledValue !== 0 && booleanAttribute(disabledValue);
+    resolvedPromise.then(() => {
+      if (isDisabled && !this.control.disabled) {
+        this.control.disable();
+      } else if (!isDisabled && this.control.disabled) {
+        this.control.enable();
+      }
+      this._changeDetectorRef?.markForCheck();
+    });
+  }
+  _getPath(controlName) {
+    return this._parent ? controlPath(controlName, this._parent) : [controlName];
+  }
+  static \u0275fac = function NgModel_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NgModel)(\u0275\u0275directiveInject(ControlContainer, 9), \u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10), \u0275\u0275directiveInject(NG_VALUE_ACCESSOR, 10), \u0275\u0275directiveInject(ChangeDetectorRef, 8), \u0275\u0275directiveInject(CALL_SET_DISABLED_STATE, 8));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _NgModel,
+    selectors: [["", "ngModel", "", 3, "formControlName", "", 3, "formControl", ""]],
+    inputs: {
+      name: "name",
+      isDisabled: [0, "disabled", "isDisabled"],
+      model: [0, "ngModel", "model"],
+      options: [0, "ngModelOptions", "options"]
+    },
+    outputs: {
+      update: "ngModelChange"
+    },
+    exportAs: ["ngModel"],
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([formControlBinding$1]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgModel, [{
+    type: Directive,
+    args: [{
+      selector: "[ngModel]:not([formControlName]):not([formControl])",
+      providers: [formControlBinding$1],
+      exportAs: "ngModel",
+      standalone: false
+    }]
+  }], () => [{
+    type: ControlContainer,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Host
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALUE_ACCESSOR]
+    }]
+  }, {
+    type: ChangeDetectorRef,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [ChangeDetectorRef]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [CALL_SET_DISABLED_STATE]
+    }]
+  }], {
+    name: [{
+      type: Input
+    }],
+    isDisabled: [{
+      type: Input,
+      args: ["disabled"]
+    }],
+    model: [{
+      type: Input,
+      args: ["ngModel"]
+    }],
+    options: [{
+      type: Input,
+      args: ["ngModelOptions"]
+    }],
+    update: [{
+      type: Output,
+      args: ["ngModelChange"]
+    }]
+  });
+})();
+function checkParentType$1(parent) {
+  if (!(parent instanceof NgModelGroup) && parent instanceof AbstractFormGroupDirective) {
+    throw formGroupNameException();
+  } else if (!(parent instanceof NgModelGroup) && !(parent instanceof NgForm)) {
+    throw modelParentException();
+  }
+}
+var \u0275NgNoValidate = class _\u0275NgNoValidate {
+  static \u0275fac = function \u0275NgNoValidate_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _\u0275NgNoValidate)();
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _\u0275NgNoValidate,
+    selectors: [["form", 3, "ngNoForm", "", 3, "ngNativeValidate", ""]],
+    hostAttrs: ["novalidate", ""],
+    standalone: false
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(\u0275NgNoValidate, [{
+    type: Directive,
+    args: [{
+      selector: "form:not([ngNoForm]):not([ngNativeValidate])",
+      host: {
+        "novalidate": ""
+      },
+      standalone: false
+    }]
+  }], null, null);
+})();
+var NUMBER_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => NumberValueAccessor),
+  multi: true
+};
+var NumberValueAccessor = class _NumberValueAccessor extends BuiltInControlValueAccessor {
+  writeValue(value) {
+    const normalizedValue = value == null ? "" : value;
+    this.setProperty("value", normalizedValue);
+  }
+  registerOnChange(fn) {
+    this.onChange = (value) => {
+      fn(value == "" ? null : parseFloat(value));
+    };
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275NumberValueAccessor_BaseFactory;
+    return function NumberValueAccessor_Factory(__ngFactoryType__) {
+      return (\u0275NumberValueAccessor_BaseFactory || (\u0275NumberValueAccessor_BaseFactory = \u0275\u0275getInheritedFactory(_NumberValueAccessor)))(__ngFactoryType__ || _NumberValueAccessor);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _NumberValueAccessor,
+    selectors: [["input", "type", "number", "formControlName", ""], ["input", "type", "number", "formControl", ""], ["input", "type", "number", "ngModel", ""]],
+    hostBindings: function NumberValueAccessor_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("input", function NumberValueAccessor_input_HostBindingHandler($event) {
+          return ctx.onChange($event.target.value);
+        })("blur", function NumberValueAccessor_blur_HostBindingHandler() {
+          return ctx.onTouched();
+        });
+      }
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([NUMBER_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NumberValueAccessor, [{
+    type: Directive,
+    args: [{
+      selector: "input[type=number][formControlName],input[type=number][formControl],input[type=number][ngModel]",
+      host: {
+        "(input)": "onChange($any($event.target).value)",
+        "(blur)": "onTouched()"
+      },
+      providers: [NUMBER_VALUE_ACCESSOR],
+      standalone: false
+    }]
+  }], null, null);
+})();
+var RADIO_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => RadioControlValueAccessor),
+  multi: true
+};
+function throwNameError() {
+  throw new RuntimeError(1202, `
+      If you define both a name and a formControlName attribute on your radio button, their values
+      must match. Ex: <input type="radio" formControlName="food" name="food">
+    `);
+}
+var RadioControlRegistry = class _RadioControlRegistry {
+  _accessors = [];
+  add(control, accessor) {
+    this._accessors.push([control, accessor]);
+  }
+  remove(accessor) {
+    for (let i = this._accessors.length - 1; i >= 0; --i) {
+      if (this._accessors[i][1] === accessor) {
+        this._accessors.splice(i, 1);
+        return;
+      }
+    }
+  }
+  select(accessor) {
+    this._accessors.forEach((c) => {
+      if (this._isSameGroup(c, accessor) && c[1] !== accessor) {
+        c[1].fireUncheck(accessor.value);
+      }
+    });
+  }
+  _isSameGroup(controlPair, accessor) {
+    if (!controlPair[0].control) return false;
+    return controlPair[0]._parent === accessor._control._parent && controlPair[1].name === accessor.name;
+  }
+  static \u0275fac = function RadioControlRegistry_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _RadioControlRegistry)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _RadioControlRegistry,
+    factory: _RadioControlRegistry.\u0275fac,
+    providedIn: "root"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RadioControlRegistry, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+var RadioControlValueAccessor = class _RadioControlValueAccessor extends BuiltInControlValueAccessor {
+  _registry;
+  _injector;
+  _state;
+  _control;
+  _fn;
+  setDisabledStateFired = false;
+  onChange = () => {
+  };
+  name;
+  formControlName;
+  value;
+  callSetDisabledState = inject2(CALL_SET_DISABLED_STATE, {
+    optional: true
+  }) ?? setDisabledStateDefault;
+  constructor(renderer, elementRef, _registry, _injector) {
+    super(renderer, elementRef);
+    this._registry = _registry;
+    this._injector = _injector;
+  }
+  ngOnInit() {
+    this._control = this._injector.get(NgControl);
+    this._checkName();
+    this._registry.add(this._control, this);
+  }
+  ngOnDestroy() {
+    this._registry.remove(this);
+  }
+  writeValue(value) {
+    this._state = value === this.value;
+    this.setProperty("checked", this._state);
+  }
+  registerOnChange(fn) {
+    this._fn = fn;
+    this.onChange = () => {
+      fn(this.value);
+      this._registry.select(this);
+    };
+  }
+  setDisabledState(isDisabled) {
+    if (this.setDisabledStateFired || isDisabled || this.callSetDisabledState === "whenDisabledForLegacyCode") {
+      this.setProperty("disabled", isDisabled);
+    }
+    this.setDisabledStateFired = true;
+  }
+  fireUncheck(value) {
+    this.writeValue(value);
+  }
+  _checkName() {
+    if (this.name && this.formControlName && this.name !== this.formControlName && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throwNameError();
+    }
+    if (!this.name && this.formControlName) this.name = this.formControlName;
+  }
+  static \u0275fac = function RadioControlValueAccessor_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _RadioControlValueAccessor)(\u0275\u0275directiveInject(Renderer2), \u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(RadioControlRegistry), \u0275\u0275directiveInject(Injector));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _RadioControlValueAccessor,
+    selectors: [["input", "type", "radio", "formControlName", ""], ["input", "type", "radio", "formControl", ""], ["input", "type", "radio", "ngModel", ""]],
+    hostBindings: function RadioControlValueAccessor_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("change", function RadioControlValueAccessor_change_HostBindingHandler() {
+          return ctx.onChange();
+        })("blur", function RadioControlValueAccessor_blur_HostBindingHandler() {
+          return ctx.onTouched();
+        });
+      }
+    },
+    inputs: {
+      name: "name",
+      formControlName: "formControlName",
+      value: "value"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([RADIO_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RadioControlValueAccessor, [{
+    type: Directive,
+    args: [{
+      selector: "input[type=radio][formControlName],input[type=radio][formControl],input[type=radio][ngModel]",
+      host: {
+        "(change)": "onChange()",
+        "(blur)": "onTouched()"
+      },
+      providers: [RADIO_VALUE_ACCESSOR],
+      standalone: false
+    }]
+  }], () => [{
+    type: Renderer2
+  }, {
+    type: ElementRef
+  }, {
+    type: RadioControlRegistry
+  }, {
+    type: Injector
+  }], {
+    name: [{
+      type: Input
+    }],
+    formControlName: [{
+      type: Input
+    }],
+    value: [{
+      type: Input
+    }]
+  });
+})();
+var RANGE_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => RangeValueAccessor),
+  multi: true
+};
+var RangeValueAccessor = class _RangeValueAccessor extends BuiltInControlValueAccessor {
+  writeValue(value) {
+    this.setProperty("value", parseFloat(value));
+  }
+  registerOnChange(fn) {
+    this.onChange = (value) => {
+      fn(value == "" ? null : parseFloat(value));
+    };
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275RangeValueAccessor_BaseFactory;
+    return function RangeValueAccessor_Factory(__ngFactoryType__) {
+      return (\u0275RangeValueAccessor_BaseFactory || (\u0275RangeValueAccessor_BaseFactory = \u0275\u0275getInheritedFactory(_RangeValueAccessor)))(__ngFactoryType__ || _RangeValueAccessor);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _RangeValueAccessor,
+    selectors: [["input", "type", "range", "formControlName", ""], ["input", "type", "range", "formControl", ""], ["input", "type", "range", "ngModel", ""]],
+    hostBindings: function RangeValueAccessor_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("change", function RangeValueAccessor_change_HostBindingHandler($event) {
+          return ctx.onChange($event.target.value);
+        })("input", function RangeValueAccessor_input_HostBindingHandler($event) {
+          return ctx.onChange($event.target.value);
+        })("blur", function RangeValueAccessor_blur_HostBindingHandler() {
+          return ctx.onTouched();
+        });
+      }
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([RANGE_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RangeValueAccessor, [{
+    type: Directive,
+    args: [{
+      selector: "input[type=range][formControlName],input[type=range][formControl],input[type=range][ngModel]",
+      host: {
+        "(change)": "onChange($any($event.target).value)",
+        "(input)": "onChange($any($event.target).value)",
+        "(blur)": "onTouched()"
+      },
+      providers: [RANGE_VALUE_ACCESSOR],
+      standalone: false
+    }]
+  }], null, null);
+})();
+var FormArray = class extends AbstractControl {
+  constructor(controls, validatorOrOpts, asyncValidator) {
+    super(pickValidators(validatorOrOpts), pickAsyncValidators(asyncValidator, validatorOrOpts));
+    this.controls = controls;
+    this._initObservables();
+    this._setUpdateStrategy(validatorOrOpts);
+    this._setUpControls();
+    this.updateValueAndValidity({
+      onlySelf: true,
+      emitEvent: !!this.asyncValidator
+    });
+  }
+  controls;
+  at(index) {
+    return this.controls[this._adjustIndex(index)];
+  }
+  push(control, options = {}) {
+    if (Array.isArray(control)) {
+      control.forEach((ctrl) => {
+        this.controls.push(ctrl);
+        this._registerControl(ctrl);
+      });
+    } else {
+      this.controls.push(control);
+      this._registerControl(control);
+    }
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+    this._onCollectionChange();
+  }
+  insert(index, control, options = {}) {
+    this.controls.splice(index, 0, control);
+    this._registerControl(control);
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+  }
+  removeAt(index, options = {}) {
+    let adjustedIndex = this._adjustIndex(index);
+    if (adjustedIndex < 0) adjustedIndex = 0;
+    if (this.controls[adjustedIndex]) this.controls[adjustedIndex]._registerOnCollectionChange(() => {
+    });
+    this.controls.splice(adjustedIndex, 1);
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+  }
+  setControl(index, control, options = {}) {
+    let adjustedIndex = this._adjustIndex(index);
+    if (adjustedIndex < 0) adjustedIndex = 0;
+    if (this.controls[adjustedIndex]) this.controls[adjustedIndex]._registerOnCollectionChange(() => {
+    });
+    this.controls.splice(adjustedIndex, 1);
+    if (control) {
+      this.controls.splice(adjustedIndex, 0, control);
+      this._registerControl(control);
+    }
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+    this._onCollectionChange();
+  }
+  get length() {
+    return this.controls.length;
+  }
+  setValue(value, options = {}) {
+    assertAllValuesPresent(this, false, value);
+    value.forEach((newValue, index) => {
+      assertControlPresent(this, false, index);
+      this.at(index).setValue(newValue, {
+        onlySelf: true,
+        emitEvent: options.emitEvent
+      });
+    });
+    this.updateValueAndValidity(options);
+  }
+  patchValue(value, options = {}) {
+    if (value == null) return;
+    value.forEach((newValue, index) => {
+      if (this.at(index)) {
+        this.at(index).patchValue(newValue, {
+          onlySelf: true,
+          emitEvent: options.emitEvent
+        });
+      }
+    });
+    this.updateValueAndValidity(options);
+  }
+  reset(value = [], options = {}) {
+    this._forEachChild((control, index) => {
+      control.reset(value[index], __spreadProps(__spreadValues({}, options), {
+        onlySelf: true
+      }));
+    });
+    this._updatePristine(options, this);
+    this._updateTouched(options, this);
+    this.updateValueAndValidity(options);
+    if (options?.emitEvent !== false) {
+      this._events.next(new FormResetEvent(this));
+    }
+  }
+  getRawValue() {
+    return this.controls.map((control) => control.getRawValue());
+  }
+  clear(options = {}) {
+    if (this.controls.length < 1) return;
+    this._forEachChild((control) => control._registerOnCollectionChange(() => {
+    }));
+    this.controls.splice(0);
+    this.updateValueAndValidity({
+      emitEvent: options.emitEvent
+    });
+  }
+  _adjustIndex(index) {
+    return index < 0 ? index + this.length : index;
+  }
+  _syncPendingControls() {
+    let subtreeUpdated = this.controls.reduce((updated, child) => {
+      return child._syncPendingControls() ? true : updated;
+    }, false);
+    if (subtreeUpdated) this.updateValueAndValidity({
+      onlySelf: true
+    });
+    return subtreeUpdated;
+  }
+  _forEachChild(cb) {
+    this.controls.forEach((control, index) => {
+      cb(control, index);
+    });
+  }
+  _updateValue() {
+    this.value = this.controls.filter((control) => control.enabled || this.disabled).map((control) => control.value);
+  }
+  _anyControls(condition) {
+    return this.controls.some((control) => control.enabled && condition(control));
+  }
+  _setUpControls() {
+    this._forEachChild((control) => this._registerControl(control));
+  }
+  _allControlsDisabled() {
+    for (const control of this.controls) {
+      if (control.enabled) return false;
+    }
+    return this.controls.length > 0 || this.disabled;
+  }
+  _registerControl(control) {
+    control.setParent(this);
+    control._registerOnCollectionChange(this._onCollectionChange);
+  }
+  _find(name) {
+    return this.at(name) ?? null;
+  }
+};
+var AbstractFormDirective = class _AbstractFormDirective extends ControlContainer {
+  callSetDisabledState;
+  get submitted() {
+    return untracked2(this._submittedReactive);
+  }
+  set submitted(value) {
+    this._submittedReactive.set(value);
+  }
+  _submitted = computed(() => this._submittedReactive(), ...ngDevMode ? [{
+    debugName: "_submitted"
+  }] : []);
+  _submittedReactive = signal(false, ...ngDevMode ? [{
+    debugName: "_submittedReactive"
+  }] : []);
+  _oldForm;
+  _onCollectionChange = () => this._updateDomValue();
+  directives = [];
+  constructor(validators, asyncValidators, callSetDisabledState) {
+    super();
+    this.callSetDisabledState = callSetDisabledState;
+    this._setValidators(validators);
+    this._setAsyncValidators(asyncValidators);
+  }
+  ngOnChanges(changes) {
+    this.onChanges(changes);
+  }
+  ngOnDestroy() {
+    this.onDestroy();
+  }
+  onChanges(changes) {
+    this._checkFormPresent();
+    if (changes.hasOwnProperty("form")) {
+      this._updateValidators();
+      this._updateDomValue();
+      this._updateRegistrations();
+      this._oldForm = this.form;
+    }
+  }
+  onDestroy() {
+    if (this.form) {
+      cleanUpValidators(this.form, this);
+      if (this.form._onCollectionChange === this._onCollectionChange) {
+        this.form._registerOnCollectionChange(() => {
+        });
+      }
+    }
+  }
+  get formDirective() {
+    return this;
+  }
+  get path() {
+    return [];
+  }
+  addControl(dir) {
+    const ctrl = this.form.get(dir.path);
+    setUpControl(ctrl, dir, this.callSetDisabledState);
+    ctrl.updateValueAndValidity({
+      emitEvent: false
+    });
+    this.directives.push(dir);
+    return ctrl;
+  }
+  getControl(dir) {
+    return this.form.get(dir.path);
+  }
+  removeControl(dir) {
+    cleanUpControl(dir.control || null, dir, false);
+    removeListItem$1(this.directives, dir);
+  }
+  addFormGroup(dir) {
+    this._setUpFormContainer(dir);
+  }
+  removeFormGroup(dir) {
+    this._cleanUpFormContainer(dir);
+  }
+  getFormGroup(dir) {
+    return this.form.get(dir.path);
+  }
+  getFormArray(dir) {
+    return this.form.get(dir.path);
+  }
+  addFormArray(dir) {
+    this._setUpFormContainer(dir);
+  }
+  removeFormArray(dir) {
+    this._cleanUpFormContainer(dir);
+  }
+  updateModel(dir, value) {
+    const ctrl = this.form.get(dir.path);
+    ctrl.setValue(value);
+  }
+  onReset() {
+    this.resetForm();
+  }
+  resetForm(value = void 0, options = {}) {
+    this.form.reset(value, options);
+    this._submittedReactive.set(false);
+  }
+  onSubmit($event) {
+    this.submitted = true;
+    syncPendingControls(this.form, this.directives);
+    this.ngSubmit.emit($event);
+    this.form._events.next(new FormSubmittedEvent(this.control));
+    return $event?.target?.method === "dialog";
+  }
+  _updateDomValue() {
+    this.directives.forEach((dir) => {
+      const oldCtrl = dir.control;
+      const newCtrl = this.form.get(dir.path);
+      if (oldCtrl !== newCtrl) {
+        cleanUpControl(oldCtrl || null, dir);
+        if (isFormControl(newCtrl)) {
+          setUpControl(newCtrl, dir, this.callSetDisabledState);
+          dir.control = newCtrl;
+        }
+      }
+    });
+    this.form._updateTreeValidity({
+      emitEvent: false
+    });
+  }
+  _setUpFormContainer(dir) {
+    const ctrl = this.form.get(dir.path);
+    setUpFormContainer(ctrl, dir);
+    ctrl.updateValueAndValidity({
+      emitEvent: false
+    });
+  }
+  _cleanUpFormContainer(dir) {
+    const ctrl = this.form?.get(dir.path);
+    if (ctrl) {
+      const isControlUpdated = cleanUpFormContainer(ctrl, dir);
+      if (isControlUpdated) {
+        ctrl.updateValueAndValidity({
+          emitEvent: false
+        });
+      }
+    }
+  }
+  _updateRegistrations() {
+    this.form._registerOnCollectionChange(this._onCollectionChange);
+    this._oldForm?._registerOnCollectionChange(() => {
+    });
+  }
+  _updateValidators() {
+    setUpValidators(this.form, this);
+    if (this._oldForm) {
+      cleanUpValidators(this._oldForm, this);
+    }
+  }
+  _checkFormPresent() {
+    if (!this.form && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw missingFormException();
+    }
+  }
+  static \u0275fac = function AbstractFormDirective_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AbstractFormDirective)(\u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10), \u0275\u0275directiveInject(CALL_SET_DISABLED_STATE, 8));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _AbstractFormDirective,
+    features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AbstractFormDirective, [{
+    type: Directive
+  }], () => [{
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [CALL_SET_DISABLED_STATE]
+    }]
+  }], null);
+})();
+var formDirectiveProvider$1 = {
+  provide: ControlContainer,
+  useExisting: forwardRef(() => FormArrayDirective)
+};
+var FormArrayDirective = class _FormArrayDirective extends AbstractFormDirective {
+  form = null;
+  ngSubmit = new EventEmitter();
+  get control() {
+    return this.form;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275FormArrayDirective_BaseFactory;
+    return function FormArrayDirective_Factory(__ngFactoryType__) {
+      return (\u0275FormArrayDirective_BaseFactory || (\u0275FormArrayDirective_BaseFactory = \u0275\u0275getInheritedFactory(_FormArrayDirective)))(__ngFactoryType__ || _FormArrayDirective);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _FormArrayDirective,
+    selectors: [["", "formArray", ""]],
+    hostBindings: function FormArrayDirective_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("submit", function FormArrayDirective_submit_HostBindingHandler($event) {
+          return ctx.onSubmit($event);
+        })("reset", function FormArrayDirective_reset_HostBindingHandler() {
+          return ctx.onReset();
+        });
+      }
+    },
+    inputs: {
+      form: [0, "formArray", "form"]
+    },
+    outputs: {
+      ngSubmit: "ngSubmit"
+    },
+    exportAs: ["ngForm"],
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([formDirectiveProvider$1]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormArrayDirective, [{
+    type: Directive,
+    args: [{
+      selector: "[formArray]",
+      providers: [formDirectiveProvider$1],
+      host: {
+        "(submit)": "onSubmit($event)",
+        "(reset)": "onReset()"
+      },
+      exportAs: "ngForm",
+      standalone: false
+    }]
+  }], null, {
+    form: [{
+      type: Input,
+      args: ["formArray"]
+    }],
+    ngSubmit: [{
+      type: Output
+    }]
+  });
+})();
+var NG_MODEL_WITH_FORM_CONTROL_WARNING = new InjectionToken(typeof ngDevMode !== "undefined" && ngDevMode ? "NgModelWithFormControlWarning" : "");
+var formControlBinding = {
+  provide: NgControl,
+  useExisting: forwardRef(() => FormControlDirective)
+};
+var FormControlDirective = class _FormControlDirective extends NgControl {
+  _ngModelWarningConfig;
+  callSetDisabledState;
+  viewModel;
+  form;
+  set isDisabled(isDisabled) {
+    if (typeof ngDevMode === "undefined" || ngDevMode) {
+      console.warn(disabledAttrWarning);
+    }
+  }
+  model;
+  update = new EventEmitter();
+  static _ngModelWarningSentOnce = false;
+  _ngModelWarningSent = false;
+  constructor(validators, asyncValidators, valueAccessors, _ngModelWarningConfig, callSetDisabledState) {
+    super();
+    this._ngModelWarningConfig = _ngModelWarningConfig;
+    this.callSetDisabledState = callSetDisabledState;
+    this._setValidators(validators);
+    this._setAsyncValidators(asyncValidators);
+    this.valueAccessor = selectValueAccessor(this, valueAccessors);
+  }
+  ngOnChanges(changes) {
+    if (this._isControlChanged(changes)) {
+      const previousForm = changes["form"].previousValue;
+      if (previousForm) {
+        cleanUpControl(previousForm, this, false);
+      }
+      setUpControl(this.form, this, this.callSetDisabledState);
+      this.form.updateValueAndValidity({
+        emitEvent: false
+      });
+    }
+    if (isPropertyUpdated(changes, this.viewModel)) {
+      if (typeof ngDevMode === "undefined" || ngDevMode) {
+        _ngModelWarning("formControl", _FormControlDirective, this, this._ngModelWarningConfig);
+      }
+      this.form.setValue(this.model);
+      this.viewModel = this.model;
+    }
+  }
+  ngOnDestroy() {
+    if (this.form) {
+      cleanUpControl(this.form, this, false);
+    }
+  }
+  get path() {
+    return [];
+  }
+  get control() {
+    return this.form;
+  }
+  viewToModelUpdate(newValue) {
+    this.viewModel = newValue;
+    this.update.emit(newValue);
+  }
+  _isControlChanged(changes) {
+    return changes.hasOwnProperty("form");
+  }
+  static \u0275fac = function FormControlDirective_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FormControlDirective)(\u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10), \u0275\u0275directiveInject(NG_VALUE_ACCESSOR, 10), \u0275\u0275directiveInject(NG_MODEL_WITH_FORM_CONTROL_WARNING, 8), \u0275\u0275directiveInject(CALL_SET_DISABLED_STATE, 8));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _FormControlDirective,
+    selectors: [["", "formControl", ""]],
+    inputs: {
+      form: [0, "formControl", "form"],
+      isDisabled: [0, "disabled", "isDisabled"],
+      model: [0, "ngModel", "model"]
+    },
+    outputs: {
+      update: "ngModelChange"
+    },
+    exportAs: ["ngForm"],
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([formControlBinding]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormControlDirective, [{
+    type: Directive,
+    args: [{
+      selector: "[formControl]",
+      providers: [formControlBinding],
+      exportAs: "ngForm",
+      standalone: false
+    }]
+  }], () => [{
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALUE_ACCESSOR]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [NG_MODEL_WITH_FORM_CONTROL_WARNING]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [CALL_SET_DISABLED_STATE]
+    }]
+  }], {
+    form: [{
+      type: Input,
+      args: ["formControl"]
+    }],
+    isDisabled: [{
+      type: Input,
+      args: ["disabled"]
+    }],
+    model: [{
+      type: Input,
+      args: ["ngModel"]
+    }],
+    update: [{
+      type: Output,
+      args: ["ngModelChange"]
+    }]
+  });
+})();
+var formGroupNameProvider = {
+  provide: ControlContainer,
+  useExisting: forwardRef(() => FormGroupName)
+};
+var FormGroupName = class _FormGroupName extends AbstractFormGroupDirective {
+  name = null;
+  constructor(parent, validators, asyncValidators) {
+    super();
+    this._parent = parent;
+    this._setValidators(validators);
+    this._setAsyncValidators(asyncValidators);
+  }
+  _checkParentType() {
+    if (hasInvalidParent(this._parent) && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw groupParentException();
+    }
+  }
+  static \u0275fac = function FormGroupName_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FormGroupName)(\u0275\u0275directiveInject(ControlContainer, 13), \u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _FormGroupName,
+    selectors: [["", "formGroupName", ""]],
+    inputs: {
+      name: [0, "formGroupName", "name"]
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([formGroupNameProvider]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormGroupName, [{
+    type: Directive,
+    args: [{
+      selector: "[formGroupName]",
+      providers: [formGroupNameProvider],
+      standalone: false
+    }]
+  }], () => [{
+    type: ControlContainer,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Host
+    }, {
+      type: SkipSelf
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }], {
+    name: [{
+      type: Input,
+      args: ["formGroupName"]
+    }]
+  });
+})();
+var formArrayNameProvider = {
+  provide: ControlContainer,
+  useExisting: forwardRef(() => FormArrayName)
+};
+var FormArrayName = class _FormArrayName extends ControlContainer {
+  _parent;
+  name = null;
+  constructor(parent, validators, asyncValidators) {
+    super();
+    this._parent = parent;
+    this._setValidators(validators);
+    this._setAsyncValidators(asyncValidators);
+  }
+  ngOnInit() {
+    if (hasInvalidParent(this._parent) && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw arrayParentException();
+    }
+    this.formDirective.addFormArray(this);
+  }
+  ngOnDestroy() {
+    this.formDirective?.removeFormArray(this);
+  }
+  get control() {
+    return this.formDirective.getFormArray(this);
+  }
+  get formDirective() {
+    return this._parent ? this._parent.formDirective : null;
+  }
+  get path() {
+    return controlPath(this.name == null ? this.name : this.name.toString(), this._parent);
+  }
+  static \u0275fac = function FormArrayName_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FormArrayName)(\u0275\u0275directiveInject(ControlContainer, 13), \u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _FormArrayName,
+    selectors: [["", "formArrayName", ""]],
+    inputs: {
+      name: [0, "formArrayName", "name"]
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([formArrayNameProvider]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormArrayName, [{
+    type: Directive,
+    args: [{
+      selector: "[formArrayName]",
+      providers: [formArrayNameProvider],
+      standalone: false
+    }]
+  }], () => [{
+    type: ControlContainer,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Host
+    }, {
+      type: SkipSelf
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }], {
+    name: [{
+      type: Input,
+      args: ["formArrayName"]
+    }]
+  });
+})();
+function hasInvalidParent(parent) {
+  return !(parent instanceof FormGroupName) && !(parent instanceof AbstractFormDirective) && !(parent instanceof FormArrayName);
+}
+var controlNameBinding = {
+  provide: NgControl,
+  useExisting: forwardRef(() => FormControlName)
+};
+var FormControlName = class _FormControlName extends NgControl {
+  _ngModelWarningConfig;
+  _added = false;
+  viewModel;
+  control;
+  name = null;
+  set isDisabled(isDisabled) {
+    if (typeof ngDevMode === "undefined" || ngDevMode) {
+      console.warn(disabledAttrWarning);
+    }
+  }
+  model;
+  update = new EventEmitter();
+  static _ngModelWarningSentOnce = false;
+  _ngModelWarningSent = false;
+  constructor(parent, validators, asyncValidators, valueAccessors, _ngModelWarningConfig) {
+    super();
+    this._ngModelWarningConfig = _ngModelWarningConfig;
+    this._parent = parent;
+    this._setValidators(validators);
+    this._setAsyncValidators(asyncValidators);
+    this.valueAccessor = selectValueAccessor(this, valueAccessors);
+  }
+  ngOnChanges(changes) {
+    if (!this._added) this._setUpControl();
+    if (isPropertyUpdated(changes, this.viewModel)) {
+      if (typeof ngDevMode === "undefined" || ngDevMode) {
+        _ngModelWarning("formControlName", _FormControlName, this, this._ngModelWarningConfig);
+      }
+      this.viewModel = this.model;
+      this.formDirective.updateModel(this, this.model);
+    }
+  }
+  ngOnDestroy() {
+    this.formDirective?.removeControl(this);
+  }
+  viewToModelUpdate(newValue) {
+    this.viewModel = newValue;
+    this.update.emit(newValue);
+  }
+  get path() {
+    return controlPath(this.name == null ? this.name : this.name.toString(), this._parent);
+  }
+  get formDirective() {
+    return this._parent ? this._parent.formDirective : null;
+  }
+  _setUpControl() {
+    if (typeof ngDevMode === "undefined" || ngDevMode) {
+      checkParentType(this._parent, this.name);
+    }
+    this.control = this.formDirective.addControl(this);
+    this._added = true;
+  }
+  static \u0275fac = function FormControlName_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FormControlName)(\u0275\u0275directiveInject(ControlContainer, 13), \u0275\u0275directiveInject(NG_VALIDATORS, 10), \u0275\u0275directiveInject(NG_ASYNC_VALIDATORS, 10), \u0275\u0275directiveInject(NG_VALUE_ACCESSOR, 10), \u0275\u0275directiveInject(NG_MODEL_WITH_FORM_CONTROL_WARNING, 8));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _FormControlName,
+    selectors: [["", "formControlName", ""]],
+    inputs: {
+      name: [0, "formControlName", "name"],
+      isDisabled: [0, "disabled", "isDisabled"],
+      model: [0, "ngModel", "model"]
+    },
+    outputs: {
+      update: "ngModelChange"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([controlNameBinding]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormControlName, [{
+    type: Directive,
+    args: [{
+      selector: "[formControlName]",
+      providers: [controlNameBinding],
+      standalone: false
+    }]
+  }], () => [{
+    type: ControlContainer,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Host
+    }, {
+      type: SkipSelf
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_ASYNC_VALIDATORS]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Self
+    }, {
+      type: Inject,
+      args: [NG_VALUE_ACCESSOR]
+    }]
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [NG_MODEL_WITH_FORM_CONTROL_WARNING]
+    }]
+  }], {
+    name: [{
+      type: Input,
+      args: ["formControlName"]
+    }],
+    isDisabled: [{
+      type: Input,
+      args: ["disabled"]
+    }],
+    model: [{
+      type: Input,
+      args: ["ngModel"]
+    }],
+    update: [{
+      type: Output,
+      args: ["ngModelChange"]
+    }]
+  });
+})();
+function checkParentType(parent, name) {
+  if (!(parent instanceof FormGroupName) && parent instanceof AbstractFormGroupDirective) {
+    throw ngModelGroupException();
+  } else if (!(parent instanceof FormGroupName) && !(parent instanceof AbstractFormDirective) && !(parent instanceof FormArrayName)) {
+    throw controlParentException(name);
+  }
+}
+var formDirectiveProvider = {
+  provide: ControlContainer,
+  useExisting: forwardRef(() => FormGroupDirective)
+};
+var FormGroupDirective = class _FormGroupDirective extends AbstractFormDirective {
+  form = null;
+  ngSubmit = new EventEmitter();
+  get control() {
+    return this.form;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275FormGroupDirective_BaseFactory;
+    return function FormGroupDirective_Factory(__ngFactoryType__) {
+      return (\u0275FormGroupDirective_BaseFactory || (\u0275FormGroupDirective_BaseFactory = \u0275\u0275getInheritedFactory(_FormGroupDirective)))(__ngFactoryType__ || _FormGroupDirective);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _FormGroupDirective,
+    selectors: [["", "formGroup", ""]],
+    hostBindings: function FormGroupDirective_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("submit", function FormGroupDirective_submit_HostBindingHandler($event) {
+          return ctx.onSubmit($event);
+        })("reset", function FormGroupDirective_reset_HostBindingHandler() {
+          return ctx.onReset();
+        });
+      }
+    },
+    inputs: {
+      form: [0, "formGroup", "form"]
+    },
+    outputs: {
+      ngSubmit: "ngSubmit"
+    },
+    exportAs: ["ngForm"],
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([formDirectiveProvider]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormGroupDirective, [{
+    type: Directive,
+    args: [{
+      selector: "[formGroup]",
+      providers: [formDirectiveProvider],
+      host: {
+        "(submit)": "onSubmit($event)",
+        "(reset)": "onReset()"
+      },
+      exportAs: "ngForm",
+      standalone: false
+    }]
+  }], null, {
+    form: [{
+      type: Input,
+      args: ["formGroup"]
+    }],
+    ngSubmit: [{
+      type: Output
+    }]
+  });
+})();
+var SELECT_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => SelectControlValueAccessor),
+  multi: true
+};
+function _buildValueString$1(id, value) {
+  if (id == null) return `${value}`;
+  if (value && typeof value === "object") value = "Object";
+  return `${id}: ${value}`.slice(0, 50);
+}
+function _extractId$1(valueString) {
+  return valueString.split(":")[0];
+}
+var SelectControlValueAccessor = class _SelectControlValueAccessor extends BuiltInControlValueAccessor {
+  value;
+  _optionMap = /* @__PURE__ */ new Map();
+  _idCounter = 0;
+  set compareWith(fn) {
+    if (typeof fn !== "function" && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw new RuntimeError(1201, `compareWith must be a function, but received ${JSON.stringify(fn)}`);
+    }
+    this._compareWith = fn;
+  }
+  _compareWith = Object.is;
+  appRefInjector = inject2(ApplicationRef).injector;
+  destroyRef = inject2(DestroyRef);
+  cdr = inject2(ChangeDetectorRef);
+  _queuedWrite = false;
+  _writeValueAfterRender() {
+    if (this._queuedWrite || this.appRefInjector.destroyed) {
+      return;
+    }
+    this._queuedWrite = true;
+    afterNextRender({
+      write: () => {
+        if (this.destroyRef.destroyed) {
+          return;
+        }
+        this._queuedWrite = false;
+        this.writeValue(this.value);
+      }
+    }, {
+      injector: this.appRefInjector
+    });
+  }
+  writeValue(value) {
+    this.cdr.markForCheck();
+    this.value = value;
+    const id = this._getOptionId(value);
+    const valueString = _buildValueString$1(id, value);
+    this.setProperty("value", valueString);
+  }
+  registerOnChange(fn) {
+    this.onChange = (valueString) => {
+      this.value = this._getOptionValue(valueString);
+      fn(this.value);
+    };
+  }
+  _registerOption() {
+    return (this._idCounter++).toString();
+  }
+  _getOptionId(value) {
+    for (const id of this._optionMap.keys()) {
+      if (this._compareWith(this._optionMap.get(id), value)) return id;
+    }
+    return null;
+  }
+  _getOptionValue(valueString) {
+    const id = _extractId$1(valueString);
+    return this._optionMap.has(id) ? this._optionMap.get(id) : valueString;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275SelectControlValueAccessor_BaseFactory;
+    return function SelectControlValueAccessor_Factory(__ngFactoryType__) {
+      return (\u0275SelectControlValueAccessor_BaseFactory || (\u0275SelectControlValueAccessor_BaseFactory = \u0275\u0275getInheritedFactory(_SelectControlValueAccessor)))(__ngFactoryType__ || _SelectControlValueAccessor);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _SelectControlValueAccessor,
+    selectors: [["select", "formControlName", "", 3, "multiple", ""], ["select", "formControl", "", 3, "multiple", ""], ["select", "ngModel", "", 3, "multiple", ""]],
+    hostBindings: function SelectControlValueAccessor_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("change", function SelectControlValueAccessor_change_HostBindingHandler($event) {
+          return ctx.onChange($event.target.value);
+        })("blur", function SelectControlValueAccessor_blur_HostBindingHandler() {
+          return ctx.onTouched();
+        });
+      }
+    },
+    inputs: {
+      compareWith: "compareWith"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([SELECT_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SelectControlValueAccessor, [{
+    type: Directive,
+    args: [{
+      selector: "select:not([multiple])[formControlName],select:not([multiple])[formControl],select:not([multiple])[ngModel]",
+      host: {
+        "(change)": "onChange($any($event.target).value)",
+        "(blur)": "onTouched()"
+      },
+      providers: [SELECT_VALUE_ACCESSOR],
+      standalone: false
+    }]
+  }], null, {
+    compareWith: [{
+      type: Input
+    }]
+  });
+})();
+var NgSelectOption = class _NgSelectOption {
+  _element;
+  _renderer;
+  _select;
+  id;
+  constructor(_element, _renderer, _select) {
+    this._element = _element;
+    this._renderer = _renderer;
+    this._select = _select;
+    if (this._select) this.id = this._select._registerOption();
+  }
+  set ngValue(value) {
+    if (this._select == null) return;
+    this._select._optionMap.set(this.id, value);
+    this._setElementValue(_buildValueString$1(this.id, value));
+    this._select._writeValueAfterRender();
+  }
+  set value(value) {
+    this._setElementValue(value);
+    this._select?._writeValueAfterRender();
+  }
+  _setElementValue(value) {
+    this._renderer.setProperty(this._element.nativeElement, "value", value);
+  }
+  ngOnDestroy() {
+    this._select?._optionMap.delete(this.id);
+    this._select?._writeValueAfterRender();
+  }
+  static \u0275fac = function NgSelectOption_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NgSelectOption)(\u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(Renderer2), \u0275\u0275directiveInject(SelectControlValueAccessor, 9));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _NgSelectOption,
+    selectors: [["option"]],
+    inputs: {
+      ngValue: "ngValue",
+      value: "value"
+    },
+    standalone: false
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgSelectOption, [{
+    type: Directive,
+    args: [{
+      selector: "option",
+      standalone: false
+    }]
+  }], () => [{
+    type: ElementRef
+  }, {
+    type: Renderer2
+  }, {
+    type: SelectControlValueAccessor,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Host
+    }]
+  }], {
+    ngValue: [{
+      type: Input,
+      args: ["ngValue"]
+    }],
+    value: [{
+      type: Input,
+      args: ["value"]
+    }]
+  });
+})();
+var SELECT_MULTIPLE_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => SelectMultipleControlValueAccessor),
+  multi: true
+};
+function _buildValueString(id, value) {
+  if (id == null) return `${value}`;
+  if (typeof value === "string") value = `'${value}'`;
+  if (value && typeof value === "object") value = "Object";
+  return `${id}: ${value}`.slice(0, 50);
+}
+function _extractId(valueString) {
+  return valueString.split(":")[0];
+}
+var SelectMultipleControlValueAccessor = class _SelectMultipleControlValueAccessor extends BuiltInControlValueAccessor {
+  value;
+  _optionMap = /* @__PURE__ */ new Map();
+  _idCounter = 0;
+  set compareWith(fn) {
+    if (typeof fn !== "function" && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw new RuntimeError(1201, `compareWith must be a function, but received ${JSON.stringify(fn)}`);
+    }
+    this._compareWith = fn;
+  }
+  _compareWith = Object.is;
+  writeValue(value) {
+    this.value = value;
+    let optionSelectedStateSetter;
+    if (Array.isArray(value)) {
+      const ids = value.map((v) => this._getOptionId(v));
+      optionSelectedStateSetter = (opt, o) => {
+        opt._setSelected(ids.indexOf(o.toString()) > -1);
+      };
+    } else {
+      optionSelectedStateSetter = (opt, o) => {
+        opt._setSelected(false);
+      };
+    }
+    this._optionMap.forEach(optionSelectedStateSetter);
+  }
+  registerOnChange(fn) {
+    this.onChange = (element) => {
+      const selected = [];
+      const selectedOptions = element.selectedOptions;
+      if (selectedOptions !== void 0) {
+        const options = selectedOptions;
+        for (let i = 0; i < options.length; i++) {
+          const opt = options[i];
+          const val = this._getOptionValue(opt.value);
+          selected.push(val);
+        }
+      } else {
+        const options = element.options;
+        for (let i = 0; i < options.length; i++) {
+          const opt = options[i];
+          if (opt.selected) {
+            const val = this._getOptionValue(opt.value);
+            selected.push(val);
+          }
+        }
+      }
+      this.value = selected;
+      fn(selected);
+    };
+  }
+  _registerOption(value) {
+    const id = (this._idCounter++).toString();
+    this._optionMap.set(id, value);
+    return id;
+  }
+  _getOptionId(value) {
+    for (const id of this._optionMap.keys()) {
+      if (this._compareWith(this._optionMap.get(id)._value, value)) return id;
+    }
+    return null;
+  }
+  _getOptionValue(valueString) {
+    const id = _extractId(valueString);
+    return this._optionMap.has(id) ? this._optionMap.get(id)._value : valueString;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275SelectMultipleControlValueAccessor_BaseFactory;
+    return function SelectMultipleControlValueAccessor_Factory(__ngFactoryType__) {
+      return (\u0275SelectMultipleControlValueAccessor_BaseFactory || (\u0275SelectMultipleControlValueAccessor_BaseFactory = \u0275\u0275getInheritedFactory(_SelectMultipleControlValueAccessor)))(__ngFactoryType__ || _SelectMultipleControlValueAccessor);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _SelectMultipleControlValueAccessor,
+    selectors: [["select", "multiple", "", "formControlName", ""], ["select", "multiple", "", "formControl", ""], ["select", "multiple", "", "ngModel", ""]],
+    hostBindings: function SelectMultipleControlValueAccessor_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("change", function SelectMultipleControlValueAccessor_change_HostBindingHandler($event) {
+          return ctx.onChange($event.target);
+        })("blur", function SelectMultipleControlValueAccessor_blur_HostBindingHandler() {
+          return ctx.onTouched();
+        });
+      }
+    },
+    inputs: {
+      compareWith: "compareWith"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([SELECT_MULTIPLE_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SelectMultipleControlValueAccessor, [{
+    type: Directive,
+    args: [{
+      selector: "select[multiple][formControlName],select[multiple][formControl],select[multiple][ngModel]",
+      host: {
+        "(change)": "onChange($event.target)",
+        "(blur)": "onTouched()"
+      },
+      providers: [SELECT_MULTIPLE_VALUE_ACCESSOR],
+      standalone: false
+    }]
+  }], null, {
+    compareWith: [{
+      type: Input
+    }]
+  });
+})();
+var \u0275NgSelectMultipleOption = class _\u0275NgSelectMultipleOption {
+  _element;
+  _renderer;
+  _select;
+  id;
+  _value;
+  constructor(_element, _renderer, _select) {
+    this._element = _element;
+    this._renderer = _renderer;
+    this._select = _select;
+    if (this._select) {
+      this.id = this._select._registerOption(this);
+    }
+  }
+  set ngValue(value) {
+    if (this._select == null) return;
+    this._value = value;
+    this._setElementValue(_buildValueString(this.id, value));
+    this._select.writeValue(this._select.value);
+  }
+  set value(value) {
+    if (this._select) {
+      this._value = value;
+      this._setElementValue(_buildValueString(this.id, value));
+      this._select.writeValue(this._select.value);
+    } else {
+      this._setElementValue(value);
+    }
+  }
+  _setElementValue(value) {
+    this._renderer.setProperty(this._element.nativeElement, "value", value);
+  }
+  _setSelected(selected) {
+    this._renderer.setProperty(this._element.nativeElement, "selected", selected);
+  }
+  ngOnDestroy() {
+    if (this._select) {
+      this._select._optionMap.delete(this.id);
+      this._select.writeValue(this._select.value);
+    }
+  }
+  static \u0275fac = function \u0275NgSelectMultipleOption_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _\u0275NgSelectMultipleOption)(\u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(Renderer2), \u0275\u0275directiveInject(SelectMultipleControlValueAccessor, 9));
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _\u0275NgSelectMultipleOption,
+    selectors: [["option"]],
+    inputs: {
+      ngValue: "ngValue",
+      value: "value"
+    },
+    standalone: false
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(\u0275NgSelectMultipleOption, [{
+    type: Directive,
+    args: [{
+      selector: "option",
+      standalone: false
+    }]
+  }], () => [{
+    type: ElementRef
+  }, {
+    type: Renderer2
+  }, {
+    type: SelectMultipleControlValueAccessor,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Host
+    }]
+  }], {
+    ngValue: [{
+      type: Input,
+      args: ["ngValue"]
+    }],
+    value: [{
+      type: Input,
+      args: ["value"]
+    }]
+  });
+})();
+function toInteger(value) {
+  return typeof value === "number" ? value : parseInt(value, 10);
+}
+function toFloat(value) {
+  return typeof value === "number" ? value : parseFloat(value);
+}
+var AbstractValidatorDirective = class _AbstractValidatorDirective {
+  _validator = nullValidator;
+  _onChange;
+  _enabled;
+  ngOnChanges(changes) {
+    if (this.inputName in changes) {
+      const input2 = this.normalizeInput(changes[this.inputName].currentValue);
+      this._enabled = this.enabled(input2);
+      this._validator = this._enabled ? this.createValidator(input2) : nullValidator;
+      this._onChange?.();
+    }
+  }
+  validate(control) {
+    return this._validator(control);
+  }
+  registerOnValidatorChange(fn) {
+    this._onChange = fn;
+  }
+  enabled(input2) {
+    return input2 != null;
+  }
+  static \u0275fac = function AbstractValidatorDirective_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AbstractValidatorDirective)();
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _AbstractValidatorDirective,
+    features: [\u0275\u0275NgOnChangesFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AbstractValidatorDirective, [{
+    type: Directive
+  }], null, null);
+})();
+var MAX_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => MaxValidator),
+  multi: true
+};
+var MaxValidator = class _MaxValidator extends AbstractValidatorDirective {
+  max;
+  inputName = "max";
+  normalizeInput = (input2) => toFloat(input2);
+  createValidator = (max) => maxValidator(max);
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275MaxValidator_BaseFactory;
+    return function MaxValidator_Factory(__ngFactoryType__) {
+      return (\u0275MaxValidator_BaseFactory || (\u0275MaxValidator_BaseFactory = \u0275\u0275getInheritedFactory(_MaxValidator)))(__ngFactoryType__ || _MaxValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MaxValidator,
+    selectors: [["input", "type", "number", "max", "", "formControlName", ""], ["input", "type", "number", "max", "", "formControl", ""], ["input", "type", "number", "max", "", "ngModel", ""]],
+    hostVars: 1,
+    hostBindings: function MaxValidator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("max", ctx._enabled ? ctx.max : null);
+      }
+    },
+    inputs: {
+      max: "max"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([MAX_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MaxValidator, [{
+    type: Directive,
+    args: [{
+      selector: "input[type=number][max][formControlName],input[type=number][max][formControl],input[type=number][max][ngModel]",
+      providers: [MAX_VALIDATOR],
+      host: {
+        "[attr.max]": "_enabled ? max : null"
+      },
+      standalone: false
+    }]
+  }], null, {
+    max: [{
+      type: Input
+    }]
+  });
+})();
+var MIN_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => MinValidator),
+  multi: true
+};
+var MinValidator = class _MinValidator extends AbstractValidatorDirective {
+  min;
+  inputName = "min";
+  normalizeInput = (input2) => toFloat(input2);
+  createValidator = (min) => minValidator(min);
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275MinValidator_BaseFactory;
+    return function MinValidator_Factory(__ngFactoryType__) {
+      return (\u0275MinValidator_BaseFactory || (\u0275MinValidator_BaseFactory = \u0275\u0275getInheritedFactory(_MinValidator)))(__ngFactoryType__ || _MinValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MinValidator,
+    selectors: [["input", "type", "number", "min", "", "formControlName", ""], ["input", "type", "number", "min", "", "formControl", ""], ["input", "type", "number", "min", "", "ngModel", ""]],
+    hostVars: 1,
+    hostBindings: function MinValidator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("min", ctx._enabled ? ctx.min : null);
+      }
+    },
+    inputs: {
+      min: "min"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([MIN_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MinValidator, [{
+    type: Directive,
+    args: [{
+      selector: "input[type=number][min][formControlName],input[type=number][min][formControl],input[type=number][min][ngModel]",
+      providers: [MIN_VALIDATOR],
+      host: {
+        "[attr.min]": "_enabled ? min : null"
+      },
+      standalone: false
+    }]
+  }], null, {
+    min: [{
+      type: Input
+    }]
+  });
+})();
+var REQUIRED_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => RequiredValidator),
+  multi: true
+};
+var CHECKBOX_REQUIRED_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => CheckboxRequiredValidator),
+  multi: true
+};
+var RequiredValidator = class _RequiredValidator extends AbstractValidatorDirective {
+  required;
+  inputName = "required";
+  normalizeInput = booleanAttribute;
+  createValidator = (input2) => requiredValidator;
+  enabled(input2) {
+    return input2;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275RequiredValidator_BaseFactory;
+    return function RequiredValidator_Factory(__ngFactoryType__) {
+      return (\u0275RequiredValidator_BaseFactory || (\u0275RequiredValidator_BaseFactory = \u0275\u0275getInheritedFactory(_RequiredValidator)))(__ngFactoryType__ || _RequiredValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _RequiredValidator,
+    selectors: [["", "required", "", "formControlName", "", 3, "type", "checkbox"], ["", "required", "", "formControl", "", 3, "type", "checkbox"], ["", "required", "", "ngModel", "", 3, "type", "checkbox"]],
+    hostVars: 1,
+    hostBindings: function RequiredValidator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("required", ctx._enabled ? "" : null);
+      }
+    },
+    inputs: {
+      required: "required"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([REQUIRED_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RequiredValidator, [{
+    type: Directive,
+    args: [{
+      selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]",
+      providers: [REQUIRED_VALIDATOR],
+      host: {
+        "[attr.required]": '_enabled ? "" : null'
+      },
+      standalone: false
+    }]
+  }], null, {
+    required: [{
+      type: Input
+    }]
+  });
+})();
+var CheckboxRequiredValidator = class _CheckboxRequiredValidator extends RequiredValidator {
+  createValidator = (input2) => requiredTrueValidator;
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275CheckboxRequiredValidator_BaseFactory;
+    return function CheckboxRequiredValidator_Factory(__ngFactoryType__) {
+      return (\u0275CheckboxRequiredValidator_BaseFactory || (\u0275CheckboxRequiredValidator_BaseFactory = \u0275\u0275getInheritedFactory(_CheckboxRequiredValidator)))(__ngFactoryType__ || _CheckboxRequiredValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _CheckboxRequiredValidator,
+    selectors: [["input", "type", "checkbox", "required", "", "formControlName", ""], ["input", "type", "checkbox", "required", "", "formControl", ""], ["input", "type", "checkbox", "required", "", "ngModel", ""]],
+    hostVars: 1,
+    hostBindings: function CheckboxRequiredValidator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("required", ctx._enabled ? "" : null);
+      }
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([CHECKBOX_REQUIRED_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CheckboxRequiredValidator, [{
+    type: Directive,
+    args: [{
+      selector: "input[type=checkbox][required][formControlName],input[type=checkbox][required][formControl],input[type=checkbox][required][ngModel]",
+      providers: [CHECKBOX_REQUIRED_VALIDATOR],
+      host: {
+        "[attr.required]": '_enabled ? "" : null'
+      },
+      standalone: false
+    }]
+  }], null, null);
+})();
+var EMAIL_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => EmailValidator),
+  multi: true
+};
+var EmailValidator = class _EmailValidator extends AbstractValidatorDirective {
+  email;
+  inputName = "email";
+  normalizeInput = booleanAttribute;
+  createValidator = (input2) => emailValidator;
+  enabled(input2) {
+    return input2;
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275EmailValidator_BaseFactory;
+    return function EmailValidator_Factory(__ngFactoryType__) {
+      return (\u0275EmailValidator_BaseFactory || (\u0275EmailValidator_BaseFactory = \u0275\u0275getInheritedFactory(_EmailValidator)))(__ngFactoryType__ || _EmailValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _EmailValidator,
+    selectors: [["", "email", "", "formControlName", ""], ["", "email", "", "formControl", ""], ["", "email", "", "ngModel", ""]],
+    inputs: {
+      email: "email"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([EMAIL_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(EmailValidator, [{
+    type: Directive,
+    args: [{
+      selector: "[email][formControlName],[email][formControl],[email][ngModel]",
+      providers: [EMAIL_VALIDATOR],
+      standalone: false
+    }]
+  }], null, {
+    email: [{
+      type: Input
+    }]
+  });
+})();
+var MIN_LENGTH_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => MinLengthValidator),
+  multi: true
+};
+var MinLengthValidator = class _MinLengthValidator extends AbstractValidatorDirective {
+  minlength;
+  inputName = "minlength";
+  normalizeInput = (input2) => toInteger(input2);
+  createValidator = (minlength) => minLengthValidator(minlength);
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275MinLengthValidator_BaseFactory;
+    return function MinLengthValidator_Factory(__ngFactoryType__) {
+      return (\u0275MinLengthValidator_BaseFactory || (\u0275MinLengthValidator_BaseFactory = \u0275\u0275getInheritedFactory(_MinLengthValidator)))(__ngFactoryType__ || _MinLengthValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MinLengthValidator,
+    selectors: [["", "minlength", "", "formControlName", ""], ["", "minlength", "", "formControl", ""], ["", "minlength", "", "ngModel", ""]],
+    hostVars: 1,
+    hostBindings: function MinLengthValidator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("minlength", ctx._enabled ? ctx.minlength : null);
+      }
+    },
+    inputs: {
+      minlength: "minlength"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([MIN_LENGTH_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MinLengthValidator, [{
+    type: Directive,
+    args: [{
+      selector: "[minlength][formControlName],[minlength][formControl],[minlength][ngModel]",
+      providers: [MIN_LENGTH_VALIDATOR],
+      host: {
+        "[attr.minlength]": "_enabled ? minlength : null"
+      },
+      standalone: false
+    }]
+  }], null, {
+    minlength: [{
+      type: Input
+    }]
+  });
+})();
+var MAX_LENGTH_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => MaxLengthValidator),
+  multi: true
+};
+var MaxLengthValidator = class _MaxLengthValidator extends AbstractValidatorDirective {
+  maxlength;
+  inputName = "maxlength";
+  normalizeInput = (input2) => toInteger(input2);
+  createValidator = (maxlength) => maxLengthValidator(maxlength);
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275MaxLengthValidator_BaseFactory;
+    return function MaxLengthValidator_Factory(__ngFactoryType__) {
+      return (\u0275MaxLengthValidator_BaseFactory || (\u0275MaxLengthValidator_BaseFactory = \u0275\u0275getInheritedFactory(_MaxLengthValidator)))(__ngFactoryType__ || _MaxLengthValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MaxLengthValidator,
+    selectors: [["", "maxlength", "", "formControlName", ""], ["", "maxlength", "", "formControl", ""], ["", "maxlength", "", "ngModel", ""]],
+    hostVars: 1,
+    hostBindings: function MaxLengthValidator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("maxlength", ctx._enabled ? ctx.maxlength : null);
+      }
+    },
+    inputs: {
+      maxlength: "maxlength"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([MAX_LENGTH_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MaxLengthValidator, [{
+    type: Directive,
+    args: [{
+      selector: "[maxlength][formControlName],[maxlength][formControl],[maxlength][ngModel]",
+      providers: [MAX_LENGTH_VALIDATOR],
+      host: {
+        "[attr.maxlength]": "_enabled ? maxlength : null"
+      },
+      standalone: false
+    }]
+  }], null, {
+    maxlength: [{
+      type: Input
+    }]
+  });
+})();
+var PATTERN_VALIDATOR = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => PatternValidator),
+  multi: true
+};
+var PatternValidator = class _PatternValidator extends AbstractValidatorDirective {
+  pattern;
+  inputName = "pattern";
+  normalizeInput = (input2) => input2;
+  createValidator = (input2) => patternValidator(input2);
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275PatternValidator_BaseFactory;
+    return function PatternValidator_Factory(__ngFactoryType__) {
+      return (\u0275PatternValidator_BaseFactory || (\u0275PatternValidator_BaseFactory = \u0275\u0275getInheritedFactory(_PatternValidator)))(__ngFactoryType__ || _PatternValidator);
+    };
+  })();
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _PatternValidator,
+    selectors: [["", "pattern", "", "formControlName", ""], ["", "pattern", "", "formControl", ""], ["", "pattern", "", "ngModel", ""]],
+    hostVars: 1,
+    hostBindings: function PatternValidator_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("pattern", ctx._enabled ? ctx.pattern : null);
+      }
+    },
+    inputs: {
+      pattern: "pattern"
+    },
+    standalone: false,
+    features: [\u0275\u0275ProvidersFeature([PATTERN_VALIDATOR]), \u0275\u0275InheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PatternValidator, [{
+    type: Directive,
+    args: [{
+      selector: "[pattern][formControlName],[pattern][formControl],[pattern][ngModel]",
+      providers: [PATTERN_VALIDATOR],
+      host: {
+        "[attr.pattern]": "_enabled ? pattern : null"
+      },
+      standalone: false
+    }]
+  }], null, {
+    pattern: [{
+      type: Input
+    }]
+  });
+})();
+var SHARED_FORM_DIRECTIVES = [\u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, NumberValueAccessor, RangeValueAccessor, CheckboxControlValueAccessor, SelectControlValueAccessor, SelectMultipleControlValueAccessor, RadioControlValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, MinLengthValidator, MaxLengthValidator, PatternValidator, CheckboxRequiredValidator, EmailValidator, MinValidator, MaxValidator];
+var TEMPLATE_DRIVEN_DIRECTIVES = [NgModel, NgModelGroup, NgForm];
+var REACTIVE_DRIVEN_DIRECTIVES = [FormControlDirective, FormGroupDirective, FormArrayDirective, FormControlName, FormGroupName, FormArrayName];
+var \u0275InternalFormsSharedModule = class _\u0275InternalFormsSharedModule {
+  static \u0275fac = function \u0275InternalFormsSharedModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _\u0275InternalFormsSharedModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _\u0275InternalFormsSharedModule,
+    declarations: [\u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, NumberValueAccessor, RangeValueAccessor, CheckboxControlValueAccessor, SelectControlValueAccessor, SelectMultipleControlValueAccessor, RadioControlValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, MinLengthValidator, MaxLengthValidator, PatternValidator, CheckboxRequiredValidator, EmailValidator, MinValidator, MaxValidator],
+    exports: [\u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, NumberValueAccessor, RangeValueAccessor, CheckboxControlValueAccessor, SelectControlValueAccessor, SelectMultipleControlValueAccessor, RadioControlValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, MinLengthValidator, MaxLengthValidator, PatternValidator, CheckboxRequiredValidator, EmailValidator, MinValidator, MaxValidator]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({});
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(\u0275InternalFormsSharedModule, [{
+    type: NgModule,
+    args: [{
+      declarations: SHARED_FORM_DIRECTIVES,
+      exports: SHARED_FORM_DIRECTIVES
+    }]
+  }], null, null);
+})();
+function isAbstractControlOptions(options) {
+  return !!options && (options.asyncValidators !== void 0 || options.validators !== void 0 || options.updateOn !== void 0);
+}
+var FormBuilder = class _FormBuilder {
+  useNonNullable = false;
+  get nonNullable() {
+    const nnfb = new _FormBuilder();
+    nnfb.useNonNullable = true;
+    return nnfb;
+  }
+  group(controls, options = null) {
+    const reducedControls = this._reduceControls(controls);
+    let newOptions = {};
+    if (isAbstractControlOptions(options)) {
+      newOptions = options;
+    } else if (options !== null) {
+      newOptions.validators = options.validator;
+      newOptions.asyncValidators = options.asyncValidator;
+    }
+    return new FormGroup(reducedControls, newOptions);
+  }
+  record(controls, options = null) {
+    const reducedControls = this._reduceControls(controls);
+    return new FormRecord(reducedControls, options);
+  }
+  control(formState, validatorOrOpts, asyncValidator) {
+    let newOptions = {};
+    if (!this.useNonNullable) {
+      return new FormControl(formState, validatorOrOpts, asyncValidator);
+    }
+    if (isAbstractControlOptions(validatorOrOpts)) {
+      newOptions = validatorOrOpts;
+    } else {
+      newOptions.validators = validatorOrOpts;
+      newOptions.asyncValidators = asyncValidator;
+    }
+    return new FormControl(formState, __spreadProps(__spreadValues({}, newOptions), {
+      nonNullable: true
+    }));
+  }
+  array(controls, validatorOrOpts, asyncValidator) {
+    const createdControls = controls.map((c) => this._createControl(c));
+    return new FormArray(createdControls, validatorOrOpts, asyncValidator);
+  }
+  _reduceControls(controls) {
+    const createdControls = {};
+    Object.keys(controls).forEach((controlName) => {
+      createdControls[controlName] = this._createControl(controls[controlName]);
+    });
+    return createdControls;
+  }
+  _createControl(controls) {
+    if (controls instanceof FormControl) {
+      return controls;
+    } else if (controls instanceof AbstractControl) {
+      return controls;
+    } else if (Array.isArray(controls)) {
+      const value = controls[0];
+      const validator = controls.length > 1 ? controls[1] : null;
+      const asyncValidator = controls.length > 2 ? controls[2] : null;
+      return this.control(value, validator, asyncValidator);
+    } else {
+      return this.control(controls);
+    }
+  }
+  static \u0275fac = function FormBuilder_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FormBuilder)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _FormBuilder,
+    factory: _FormBuilder.\u0275fac,
+    providedIn: "root"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormBuilder, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+var NonNullableFormBuilder = class _NonNullableFormBuilder {
+  static \u0275fac = function NonNullableFormBuilder_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NonNullableFormBuilder)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _NonNullableFormBuilder,
+    factory: () => (() => inject2(FormBuilder).nonNullable)(),
+    providedIn: "root"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NonNullableFormBuilder, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root",
+      useFactory: () => inject2(FormBuilder).nonNullable
+    }]
+  }], null, null);
+})();
+var UntypedFormBuilder = class _UntypedFormBuilder extends FormBuilder {
+  group(controlsConfig, options = null) {
+    return super.group(controlsConfig, options);
+  }
+  control(formState, validatorOrOpts, asyncValidator) {
+    return super.control(formState, validatorOrOpts, asyncValidator);
+  }
+  array(controlsConfig, validatorOrOpts, asyncValidator) {
+    return super.array(controlsConfig, validatorOrOpts, asyncValidator);
+  }
+  static \u0275fac = /* @__PURE__ */ (() => {
+    let \u0275UntypedFormBuilder_BaseFactory;
+    return function UntypedFormBuilder_Factory(__ngFactoryType__) {
+      return (\u0275UntypedFormBuilder_BaseFactory || (\u0275UntypedFormBuilder_BaseFactory = \u0275\u0275getInheritedFactory(_UntypedFormBuilder)))(__ngFactoryType__ || _UntypedFormBuilder);
+    };
+  })();
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _UntypedFormBuilder,
+    factory: _UntypedFormBuilder.\u0275fac,
+    providedIn: "root"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UntypedFormBuilder, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+var FormsModule = class _FormsModule {
+  static withConfig(opts) {
+    return {
+      ngModule: _FormsModule,
+      providers: [{
+        provide: CALL_SET_DISABLED_STATE,
+        useValue: opts.callSetDisabledState ?? setDisabledStateDefault
+      }]
+    };
+  }
+  static \u0275fac = function FormsModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FormsModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _FormsModule,
+    declarations: [NgModel, NgModelGroup, NgForm],
+    exports: [\u0275InternalFormsSharedModule, NgModel, NgModelGroup, NgForm]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [\u0275InternalFormsSharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FormsModule, [{
+    type: NgModule,
+    args: [{
+      declarations: TEMPLATE_DRIVEN_DIRECTIVES,
+      exports: [\u0275InternalFormsSharedModule, TEMPLATE_DRIVEN_DIRECTIVES]
+    }]
+  }], null, null);
+})();
+var ReactiveFormsModule = class _ReactiveFormsModule {
+  static withConfig(opts) {
+    return {
+      ngModule: _ReactiveFormsModule,
+      providers: [{
+        provide: NG_MODEL_WITH_FORM_CONTROL_WARNING,
+        useValue: opts.warnOnNgModelWithFormControl ?? "always"
+      }, {
+        provide: CALL_SET_DISABLED_STATE,
+        useValue: opts.callSetDisabledState ?? setDisabledStateDefault
+      }]
+    };
+  }
+  static \u0275fac = function ReactiveFormsModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ReactiveFormsModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _ReactiveFormsModule,
+    declarations: [FormControlDirective, FormGroupDirective, FormArrayDirective, FormControlName, FormGroupName, FormArrayName],
+    exports: [\u0275InternalFormsSharedModule, FormControlDirective, FormGroupDirective, FormArrayDirective, FormControlName, FormGroupName, FormArrayName]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [\u0275InternalFormsSharedModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ReactiveFormsModule, [{
+    type: NgModule,
+    args: [{
+      declarations: [REACTIVE_DRIVEN_DIRECTIVES],
+      exports: [\u0275InternalFormsSharedModule, REACTIVE_DRIVEN_DIRECTIVES]
+    }]
+  }], null, null);
+})();
+
+// apps/interview-ready-web/src/app/auth/auth.ts
+function AuthComponent_div_63_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 59)(1, "button", 60);
+    \u0275\u0275listener("click", function AuthComponent_div_63_Template_button_click_1_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.switchTab("login"));
+    });
+    \u0275\u0275text(2, " Log In ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 60);
+    \u0275\u0275listener("click", function AuthComponent_div_63_Template_button_click_3_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.switchTab("signup"));
+    });
+    \u0275\u0275text(4, " Sign Up ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275classProp("active", ctx_r1.currentTab() === "login");
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("active", ctx_r1.currentTab() === "signup");
+  }
+}
+function AuthComponent_div_64_div_35_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 104);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.loginForm, "email"), " ");
+  }
+}
+function AuthComponent_div_64_div_48_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 105);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.loginForm, "password"), " ");
+  }
+}
+function AuthComponent_div_64_span_57_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1, "Log In");
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_64_span_58_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 106);
+    \u0275\u0275text(1, "Signing in...");
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_64__svg_svg_59_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(0, "svg", 107);
+    \u0275\u0275element(1, "path", 108);
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_64_div_60_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 109);
+  }
+}
+function AuthComponent_div_64_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 61)(1, "div", 62)(2, "h1");
+    \u0275\u0275text(3, "Welcome back \u{1F44B}");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "Good to see you again. Let's get you in.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 63)(7, "button", 64);
+    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_7_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleSocial("Google"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(8, "svg", 65);
+    \u0275\u0275element(9, "path", 66)(10, "path", 67)(11, "path", 68)(12, "path", 69);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(13, " Continue with Google ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(14, "button", 70);
+    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_14_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleSocial("GitHub"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(15, "svg", 71);
+    \u0275\u0275element(16, "path", 72);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(17, " Continue with GitHub ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(18, "button", 73);
+    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_18_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleSocial("LinkedIn"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(19, "svg", 71);
+    \u0275\u0275element(20, "path", 74);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(21, " Continue with LinkedIn ");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(22, "div", 75);
+    \u0275\u0275element(23, "div", 76);
+    \u0275\u0275elementStart(24, "span", 77);
+    \u0275\u0275text(25, "or continue with email");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(26, "div", 76);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(27, "form", 78);
+    \u0275\u0275listener("ngSubmit", function AuthComponent_div_64_Template_form_ngSubmit_27_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleLogin());
+    });
+    \u0275\u0275elementStart(28, "div", 79)(29, "label", 80);
+    \u0275\u0275text(30, "Email address");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(31, "div", 81);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(32, "svg", 82);
+    \u0275\u0275element(33, "path", 83);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275element(34, "input", 84);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(35, AuthComponent_div_64_div_35_Template, 2, 1, "div", 85);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(36, "div", 79)(37, "label", 86);
+    \u0275\u0275text(38, "Password");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(39, "div", 81);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(40, "svg", 82);
+    \u0275\u0275element(41, "rect", 87)(42, "path", 88);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275element(43, "input", 89);
+    \u0275\u0275elementStart(44, "button", 90);
+    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_44_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.togglePasswordVisibility("loginPw"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(45, "svg", 82);
+    \u0275\u0275element(46, "path", 91)(47, "circle", 92);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275template(48, AuthComponent_div_64_div_48_Template, 2, 1, "div", 93);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(49, "div", 94)(50, "label", 95);
+    \u0275\u0275element(51, "input", 96)(52, "span", 97);
+    \u0275\u0275text(53, " Remember me ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(54, "a", 98);
+    \u0275\u0275listener("click", function AuthComponent_div_64_Template_a_click_54_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onShowForgot());
+    });
+    \u0275\u0275text(55, "Forgot password?");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(56, "button", 99);
+    \u0275\u0275template(57, AuthComponent_div_64_span_57_Template, 2, 0, "span", 100)(58, AuthComponent_div_64_span_58_Template, 2, 0, "span", 101)(59, AuthComponent_div_64__svg_svg_59_Template, 2, 0, "svg", 102)(60, AuthComponent_div_64_div_60_Template, 1, 0, "div", 103);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(27);
+    \u0275\u0275property("formGroup", ctx_r1.loginForm);
+    \u0275\u0275advance(7);
+    \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.loginForm, "email"));
+    \u0275\u0275attribute("aria-invalid", ctx_r1.isFieldInvalid(ctx_r1.loginForm, "email"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isFieldInvalid(ctx_r1.loginForm, "email"));
+    \u0275\u0275advance(8);
+    \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.loginForm, "password"));
+    \u0275\u0275attribute("aria-invalid", ctx_r1.isFieldInvalid(ctx_r1.loginForm, "password"));
+    \u0275\u0275advance(5);
+    \u0275\u0275property("ngIf", ctx_r1.isFieldInvalid(ctx_r1.loginForm, "password"));
+    \u0275\u0275advance(8);
+    \u0275\u0275classProp("loading", ctx_r1.isLoading());
+    \u0275\u0275property("disabled", ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isLoading());
+  }
+}
+function AuthComponent_div_65_div_18_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 116);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.forgotForm, "email"), " ");
+  }
+}
+function AuthComponent_div_65_span_20_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1, "Send Reset Link");
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_65_span_21_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 106);
+    \u0275\u0275text(1, "Sending...");
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_65__svg_svg_22_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(0, "svg", 107);
+    \u0275\u0275element(1, "path", 108);
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_65_div_23_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 109);
+  }
+}
+function AuthComponent_div_65_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 110)(1, "a", 111);
+    \u0275\u0275listener("click", function AuthComponent_div_65_Template_a_click_1_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.hideForgot());
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(2, "svg", 40);
+    \u0275\u0275element(3, "path", 112);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(4, " Back to login ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(5, "div", 62)(6, "h1");
+    \u0275\u0275text(7, "Reset your password \u{1F511}");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "p");
+    \u0275\u0275text(9, "Enter your email and we'll send a reset link.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "form", 78);
+    \u0275\u0275listener("ngSubmit", function AuthComponent_div_65_Template_form_ngSubmit_10_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleForgot());
+    });
+    \u0275\u0275elementStart(11, "div", 79)(12, "label", 113);
+    \u0275\u0275text(13, "Email address");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "div", 81);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(15, "svg", 82);
+    \u0275\u0275element(16, "path", 83);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275element(17, "input", 114);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(18, AuthComponent_div_65_div_18_Template, 2, 1, "div", 115);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(19, "button", 99);
+    \u0275\u0275template(20, AuthComponent_div_65_span_20_Template, 2, 0, "span", 100)(21, AuthComponent_div_65_span_21_Template, 2, 0, "span", 101)(22, AuthComponent_div_65__svg_svg_22_Template, 2, 0, "svg", 102)(23, AuthComponent_div_65_div_23_Template, 1, 0, "div", 103);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(10);
+    \u0275\u0275property("formGroup", ctx_r1.forgotForm);
+    \u0275\u0275advance(7);
+    \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.forgotForm, "email"));
+    \u0275\u0275attribute("aria-invalid", ctx_r1.isFieldInvalid(ctx_r1.forgotForm, "email"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isFieldInvalid(ctx_r1.forgotForm, "email"));
+    \u0275\u0275advance();
+    \u0275\u0275classProp("loading", ctx_r1.isLoading());
+    \u0275\u0275property("disabled", ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isLoading());
+  }
+}
+function AuthComponent_div_66_div_35_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 137);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "name"), " ");
+  }
+}
+function AuthComponent_div_66_div_43_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 138);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "email"), " ");
+  }
+}
+function AuthComponent_div_66_div_61_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 139);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "password"), " ");
+  }
+}
+function AuthComponent_div_66_div_62_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 140)(1, "div", 141)(2, "span", 142);
+    \u0275\u0275text(3, "\u2713");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(4, " At least 8 characters ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 141)(6, "span", 142);
+    \u0275\u0275text(7, "\u2713");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(8, " One uppercase letter ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "div", 141)(10, "span", 142);
+    \u0275\u0275text(11, "\u2713");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(12, " One lowercase letter ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "div", 141)(14, "span", 142);
+    \u0275\u0275text(15, "\u2713");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(16, " One number ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(17, "div", 141)(18, "span", 142);
+    \u0275\u0275text(19, "\u2713");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(20, " One special character ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().length);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().length);
+    \u0275\u0275advance(3);
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().uppercase);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().uppercase);
+    \u0275\u0275advance(3);
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().lowercase);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().lowercase);
+    \u0275\u0275advance(3);
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().number);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().number);
+    \u0275\u0275advance(3);
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().special);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().special);
+  }
+}
+function AuthComponent_div_66_div_71_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 143);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "confirmPassword"), " ");
+  }
+}
+function AuthComponent_div_66_span_73_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1, "Create Account");
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_66_span_74_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 106);
+    \u0275\u0275text(1, "Creating account...");
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_66__svg_svg_75_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(0, "svg", 107);
+    \u0275\u0275element(1, "path", 108);
+    \u0275\u0275elementEnd();
+  }
+}
+function AuthComponent_div_66_div_76_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 109);
+  }
+}
+function AuthComponent_div_66_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 117)(1, "div", 62)(2, "h1");
+    \u0275\u0275text(3, "Create your account \u{1F680}");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "Free to join. No card required. Start practicing today.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 63)(7, "button", 64);
+    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_7_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleSocial("Google"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(8, "svg", 118);
+    \u0275\u0275element(9, "path", 66)(10, "path", 67)(11, "path", 68)(12, "path", 69);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(13, " Continue with Google ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(14, "button", 70);
+    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_14_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleSocial("GitHub"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(15, "svg", 71);
+    \u0275\u0275element(16, "path", 72);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(17, " Continue with GitHub ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(18, "button", 73);
+    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_18_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleSocial("LinkedIn"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(19, "svg", 71);
+    \u0275\u0275element(20, "path", 74);
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(21, " Continue with LinkedIn ");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(22, "div", 75);
+    \u0275\u0275element(23, "div", 76);
+    \u0275\u0275elementStart(24, "span", 77);
+    \u0275\u0275text(25, "or sign up with email");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(26, "div", 76);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(27, "form", 78);
+    \u0275\u0275listener("ngSubmit", function AuthComponent_div_66_Template_form_ngSubmit_27_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.handleSignup());
+    });
+    \u0275\u0275elementStart(28, "div", 79)(29, "label", 119);
+    \u0275\u0275text(30, "Full Name");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(31, "div", 81);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(32, "svg", 82);
+    \u0275\u0275element(33, "path", 120);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275element(34, "input", 121);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(35, AuthComponent_div_66_div_35_Template, 2, 1, "div", 122);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(36, "div", 79)(37, "label", 123);
+    \u0275\u0275text(38, "Email address");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(39, "div", 81);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(40, "svg", 82);
+    \u0275\u0275element(41, "path", 83);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275element(42, "input", 124);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(43, AuthComponent_div_66_div_43_Template, 2, 1, "div", 125);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(44, "div", 79)(45, "label", 126);
+    \u0275\u0275text(46, "Create Password");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(47, "div", 81);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(48, "svg", 82);
+    \u0275\u0275element(49, "rect", 87)(50, "path", 88);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(51, "input", 127);
+    \u0275\u0275listener("input", function AuthComponent_div_66_Template_input_input_51_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onPasswordInput());
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(52, "button", 90);
+    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_52_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.togglePasswordVisibility("signupPw"));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(53, "svg", 82);
+    \u0275\u0275element(54, "path", 91)(55, "circle", 92);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(56, "div", 128);
+    \u0275\u0275element(57, "div", 129)(58, "div", 129)(59, "div", 129)(60, "div", 129);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(61, AuthComponent_div_66_div_61_Template, 2, 1, "div", 130)(62, AuthComponent_div_66_div_62_Template, 21, 20, "div", 131);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(63, "div", 79)(64, "label", 132);
+    \u0275\u0275text(65, "Confirm Password");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(66, "div", 81);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(67, "svg", 82);
+    \u0275\u0275element(68, "rect", 87)(69, "path", 88);
+    \u0275\u0275elementEnd();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275element(70, "input", 133);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(71, AuthComponent_div_66_div_71_Template, 2, 1, "div", 134);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(72, "button", 99);
+    \u0275\u0275template(73, AuthComponent_div_66_span_73_Template, 2, 0, "span", 100)(74, AuthComponent_div_66_span_74_Template, 2, 0, "span", 101)(75, AuthComponent_div_66__svg_svg_75_Template, 2, 0, "svg", 102)(76, AuthComponent_div_66_div_76_Template, 1, 0, "div", 103);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(77, "p", 135);
+    \u0275\u0275text(78, " By signing up you agree to our ");
+    \u0275\u0275elementStart(79, "a", 136);
+    \u0275\u0275text(80, "Terms of Service");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(81, " and ");
+    \u0275\u0275elementStart(82, "a", 136);
+    \u0275\u0275text(83, "Privacy Policy");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(84, ". ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_15_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(27);
+    \u0275\u0275property("formGroup", ctx_r1.signupForm);
+    \u0275\u0275advance(7);
+    \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "name"));
+    \u0275\u0275attribute("aria-invalid", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "name"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "name"));
+    \u0275\u0275advance(7);
+    \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "email"));
+    \u0275\u0275attribute("aria-invalid", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "email"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "email"));
+    \u0275\u0275advance(8);
+    \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "password"));
+    \u0275\u0275attribute("aria-invalid", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "password"));
+    \u0275\u0275advance(6);
+    \u0275\u0275classMap(ctx_r1.passwordStrength() >= 1 ? ctx_r1.getStrengthClass(0) : "");
+    \u0275\u0275advance();
+    \u0275\u0275classMap(ctx_r1.passwordStrength() >= 2 ? ctx_r1.getStrengthClass(1) : "");
+    \u0275\u0275advance();
+    \u0275\u0275classMap(ctx_r1.passwordStrength() >= 3 ? ctx_r1.getStrengthClass(2) : "");
+    \u0275\u0275advance();
+    \u0275\u0275classMap(ctx_r1.passwordStrength() >= 4 ? ctx_r1.getStrengthClass(3) : "");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "password"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", (tmp_15_0 = ctx_r1.signupForm.get("password")) == null ? null : tmp_15_0.value);
+    \u0275\u0275advance(8);
+    \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "confirmPassword"));
+    \u0275\u0275attribute("aria-invalid", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "confirmPassword"));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "confirmPassword"));
+    \u0275\u0275advance();
+    \u0275\u0275classProp("loading", ctx_r1.isLoading());
+    \u0275\u0275property("disabled", ctx_r1.isLoading() || ctx_r1.signupForm.invalid);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.isLoading());
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.isLoading());
+  }
+}
+function AuthComponent_div_67_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 144)(1, "div", 145);
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(2, "svg", 107);
+    \u0275\u0275element(3, "path", 43);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275namespaceHTML();
+    \u0275\u0275elementStart(4, "h2");
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "p");
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(ctx_r1.successTitle());
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r1.successMsg());
+  }
+}
+function AuthComponent_p_68_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1, "Don't have an account? ");
+    \u0275\u0275elementStart(2, "a", 147);
+    \u0275\u0275listener("click", function AuthComponent_p_68_ng_container_1_Template_a_click_2_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.switchTab("signup"));
+    });
+    \u0275\u0275text(3, "Sign up free");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+}
+function AuthComponent_p_68_ng_container_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1, "Already have an account? ");
+    \u0275\u0275elementStart(2, "a", 147);
+    \u0275\u0275listener("click", function AuthComponent_p_68_ng_container_2_Template_a_click_2_listener() {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.switchTab("login"));
+    });
+    \u0275\u0275text(3, "Log in");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+}
+function AuthComponent_p_68_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 146);
+    \u0275\u0275template(1, AuthComponent_p_68_ng_container_1_Template, 4, 0, "ng-container", 100)(2, AuthComponent_p_68_ng_container_2_Template, 4, 0, "ng-container", 100);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.currentTab() === "login");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.currentTab() === "signup");
+  }
+}
+var AuthComponent = class _AuthComponent {
+  fb = inject2(FormBuilder);
+  router = inject2(Router);
+  currentTab = signal("login", ...ngDevMode ? [{ debugName: "currentTab" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  showForgot = signal(false, ...ngDevMode ? [{ debugName: "showForgot" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  showSuccess = signal(false, ...ngDevMode ? [{ debugName: "showSuccess" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  successTitle = signal("", ...ngDevMode ? [{ debugName: "successTitle" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  successMsg = signal("", ...ngDevMode ? [{ debugName: "successMsg" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  toastMsg = signal("", ...ngDevMode ? [{ debugName: "toastMsg" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  showToast = signal(false, ...ngDevMode ? [{ debugName: "showToast" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  isLoading = signal(false, ...ngDevMode ? [{ debugName: "isLoading" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  toastTimer;
+  progress = signal(0, ...ngDevMode ? [{ debugName: "progress" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  loginForm;
+  signupForm;
+  forgotForm;
+  passwordStrength = signal(0, ...ngDevMode ? [{ debugName: "passwordStrength" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  initForms() {
+    this.loginForm = this.fb.group({
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(8)]],
+      rememberMe: [false]
+    });
+    this.signupForm = this.fb.group({
+      name: ["", [Validators.required, Validators.minLength(2)]],
+      email: ["", [Validators.required, Validators.email]],
+      password: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(8),
+          this.passwordValidator
+        ]
+      ],
+      confirmPassword: ["", [Validators.required]]
+    }, { validators: this.passwordMatchValidator });
+    this.forgotForm = this.fb.group({
+      email: ["", [Validators.required, Validators.email]]
+    });
+  }
+  passwordValidator(control) {
+    const value = control.value;
+    if (!value)
+      return null;
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const hasNumeric = /[0-9]/.test(value);
+    const hasSpecial = /[#?!@$%^&*-]/.test(value);
+    const hasMinLength = value.length >= 8;
+    const passwordValid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && hasMinLength;
+    return !passwordValid ? { invalidPassword: true } : null;
+  }
+  passwordMatchValidator(group) {
+    const password = group.get("password");
+    const confirmPassword = group.get("confirmPassword");
+    if (password?.value !== confirmPassword?.value) {
+      confirmPassword?.setErrors({ passwordMismatch: true });
+    } else {
+      const errors = confirmPassword?.errors;
+      if (errors) {
+        delete errors["passwordMismatch"];
+        confirmPassword?.setErrors(Object.keys(errors).length ? errors : null);
+      }
+    }
+    return null;
+  }
+  switchTab(tab) {
+    this.currentTab.set(tab);
+    this.showForgot.set(false);
+    this.clearErrors();
+  }
+  onShowForgot() {
+    this.showForgot.set(true);
+    this.clearErrors();
+  }
+  hideForgot() {
+    this.showForgot.set(false);
+    this.clearErrors();
+  }
+  clearErrors() {
+    this.loginForm?.markAsUntouched();
+    this.signupForm?.markAsUntouched();
+    this.forgotForm?.markAsUntouched();
+  }
+  async handleLogin() {
+    if (this.loginForm.invalid) {
+      this.markFormGroupTouched(this.loginForm);
+      return;
+    }
+    this.isLoading.set(true);
+    this.setProgress(30);
+    try {
+      await this.simulateAuthCall();
+      this.setProgress(100);
+      this.showSuccessState("Welcome back!", "Taking you to your dashboard\u2026");
+      setTimeout(() => {
+        this.router.navigate(["/dashboard"]);
+      }, 1500);
+    } catch (error) {
+      this.showToastMessage("Invalid email or password. Please try again.");
+      this.setProgress(0);
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+  async handleSignup() {
+    if (this.signupForm.invalid) {
+      this.markFormGroupTouched(this.signupForm);
+      return;
+    }
+    this.isLoading.set(true);
+    this.setProgress(30);
+    try {
+      await this.simulateAuthCall();
+      this.setProgress(100);
+      this.showSuccessState("Account created successfully!", "Welcome aboard. Redirecting to your dashboard\u2026");
+      setTimeout(() => {
+        this.router.navigate(["/dashboard"]);
+      }, 1500);
+    } catch (error) {
+      this.showToastMessage("Failed to create account. Please try again.");
+      this.setProgress(0);
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+  async handleForgot() {
+    if (this.forgotForm.invalid) {
+      this.markFormGroupTouched(this.forgotForm);
+      return;
+    }
+    this.isLoading.set(true);
+    try {
+      await this.simulateAuthCall();
+      this.showToastMessage("Reset link sent! Check your inbox.");
+      setTimeout(() => this.hideForgot(), 2e3);
+    } catch (error) {
+      this.showToastMessage("Failed to send reset link. Please try again.");
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+  simulateAuthCall() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.1) {
+          resolve();
+        } else {
+          reject(new Error("Auth failed"));
+        }
+      }, 1200);
+    });
+  }
+  markFormGroupTouched(formGroup) {
+    Object.keys(formGroup.controls).forEach((key) => {
+      const control = formGroup.get(key);
+      control?.markAsTouched();
+    });
+  }
+  async handleSocial(provider) {
+    this.showToastMessage(`Connecting with ${provider}\u2026`);
+    this.isLoading.set(true);
+    this.setProgress(40);
+    try {
+      await this.simulateAuthCall();
+      this.setProgress(100);
+      this.showSuccessState(`Connected via ${provider}!`, "Setting up your account\u2026");
+      setTimeout(() => {
+        this.router.navigate(["/dashboard"]);
+      }, 1500);
+    } catch (error) {
+      this.showToastMessage(`Failed to connect with ${provider}. Please try again.`);
+      this.setProgress(0);
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+  showSuccessState(title, msg) {
+    this.showSuccess.set(true);
+    this.successTitle.set(title);
+    this.successMsg.set(msg);
+    this.setProgress(0);
+  }
+  setProgress(pct) {
+    this.progress.set(pct);
+  }
+  togglePasswordVisibility(inputId) {
+    const input2 = document.getElementById(inputId);
+    if (input2) {
+      input2.type = input2.type === "password" ? "text" : "password";
+    }
+  }
+  onPasswordInput() {
+    const password = this.signupForm.get("password")?.value || "";
+    this.checkPasswordStrength(password);
+  }
+  checkPasswordStrength(password) {
+    let score = 0;
+    if (password.length >= 8)
+      score++;
+    if (/[A-Z]/.test(password))
+      score++;
+    if (/[a-z]/.test(password))
+      score++;
+    if (/[0-9]/.test(password))
+      score++;
+    if (/[^A-Za-z0-9]/.test(password))
+      score++;
+    this.passwordStrength.set(score);
+  }
+  getStrengthClass(index) {
+    const strength = this.passwordStrength();
+    if (strength <= 1)
+      return "weak";
+    if (strength === 2 || strength === 3)
+      return "fair";
+    return "strong";
+  }
+  getPasswordRequirements() {
+    const password = this.signupForm.get("password")?.value || "";
+    return {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /[0-9]/.test(password),
+      special: /[^A-Za-z0-9]/.test(password)
+    };
+  }
+  showToastMessage(msg) {
+    this.toastMsg.set(msg);
+    this.showToast.set(true);
+    clearTimeout(this.toastTimer);
+    this.toastTimer = setTimeout(() => {
+      this.showToast.set(false);
+    }, 4e3);
+  }
+  // Accessibility helpers
+  getErrorMessage(form, fieldName) {
+    const control = form.get(fieldName);
+    if (control?.errors && control.touched) {
+      if (control.errors["required"]) {
+        return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+      }
+      if (control.errors["email"]) {
+        return "Please enter a valid email address";
+      }
+      if (control.errors["minlength"]) {
+        return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${control.errors["minlength"].requiredLength} characters`;
+      }
+      if (control.errors["passwordMismatch"]) {
+        return "Passwords do not match";
+      }
+      if (control.errors["invalidPassword"]) {
+        return "Password does not meet requirements";
+      }
+    }
+    return "";
+  }
+  isFieldInvalid(form, fieldName) {
+    const control = form.get(fieldName);
+    return !!(control?.invalid && control?.touched);
+  }
+  messages = [
+    {
+      h: "Practice real interviews<br>with real engineers",
+      p: "Build confidence before your actual interview. Get honest feedback and improve fast."
+    },
+    {
+      h: "Affordable sessions<br>starting at \u20B999",
+      p: "No expensive coaching required. Just real practice, real engineers, real growth."
+    },
+    {
+      h: "Know exactly<br>what to improve",
+      p: "Get a structured scorecard \u2014 communication, technical depth, problem solving."
+    }
+  ];
+  dotIdx = 0;
+  ngOnInit() {
+    this.initForms();
+    setInterval(() => {
+      this.dotIdx = (this.dotIdx + 1) % this.messages.length;
+    }, 4e3);
+  }
+  static \u0275fac = function AuthComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AuthComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AuthComponent, selectors: [["app-auth"]], decls: 74, vars: 19, consts: [[1, "progress-bar"], [1, "auth-wrapper"], [1, "left-panel"], ["href", "#", 1, "panel-logo"], [1, "panel-logo-icon"], ["fill", "none", "stroke", "white", "stroke-width", "2.5", "viewBox", "0 0 24 24"], ["d", "M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"], [1, "panel-illustration"], ["viewBox", "0 0 360 280", "fill", "none", "xmlns", "http://www.w3.org/2000/svg", 1, "ill-scene"], ["x", "40", "y", "210", "width", "280", "height", "12", "rx", "6", "fill", "rgba(255,255,255,0.15)"], ["x", "90", "y", "155", "width", "180", "height", "58", "rx", "8", "fill", "rgba(255,255,255,0.18)"], ["x", "95", "y", "160", "width", "170", "height", "46", "rx", "5", "fill", "rgba(15,23,42,0.6)"], ["x", "99", "y", "163", "width", "162", "height", "40", "rx", "4", "fill", "rgba(37,99,235,0.3)"], ["x", "108", "y", "170", "width", "60", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.8)"], ["x", "108", "y", "177", "width", "90", "height", "3", "rx", "1.5", "fill", "rgba(52,211,153,0.6)"], ["x", "108", "y", "184", "width", "45", "height", "3", "rx", "1.5", "fill", "rgba(251,191,36,0.6)"], ["x", "108", "y", "191", "width", "80", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.6)"], ["x", "108", "y", "198", "width", "35", "height", "3", "rx", "1.5", "fill", "rgba(248,113,113,0.6)"], ["x", "90", "y", "210", "width", "180", "height", "5", "rx", "2.5", "fill", "rgba(255,255,255,0.1)"], ["cx", "180", "cy", "145", "rx", "24", "ry", "18", "fill", "rgba(255,255,255,0.15)"], ["cx", "180", "cy", "108", "r", "20", "fill", "rgba(255,255,255,0.2)"], ["cx", "174", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["cx", "186", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["d", "M174 114 Q180 118 186 114", "stroke", "rgba(255,255,255,0.6)", "stroke-width", "1.5", "stroke-linecap", "round"], ["d", "M162 100 Q165 88 180 87 Q195 88 198 100", "fill", "rgba(255,255,255,0.3)"], ["d", "M156 145 Q130 165 125 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["d", "M204 145 Q230 165 235 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["cx", "120", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["cx", "240", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["x", "155", "y", "160", "width", "50", "height", "6", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "162", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "192", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["cx", "58", "cy", "60", "r", "3", "fill", "rgba(255,255,255,0.4)"], ["cx", "298", "cy", "80", "r", "2", "fill", "rgba(255,255,255,0.3)"], ["cx", "72", "cy", "180", "r", "2", "fill", "rgba(255,255,255,0.25)"], ["cx", "312", "cy", "160", "r", "3", "fill", "rgba(255,255,255,0.35)"], ["cx", "50", "cy", "240", "r", "25", "stroke", "rgba(255,255,255,0.08)", "stroke-width", "2", "fill", "none"], ["cx", "318", "cy", "50", "r", "30", "stroke", "rgba(255,255,255,0.07)", "stroke-width", "2", "fill", "none"], [1, "float-cards"], [1, "fc", "fc-1"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24"], ["d", "M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"], [1, "fc", "fc-2"], ["d", "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"], [1, "fc", "fc-3"], ["d", "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"], [1, "panel-text"], [3, "innerHTML"], [1, "panel-dots"], [1, "panel-dot"], [1, "right-panel"], [1, "auth-box"], ["class", "auth-tabs", 4, "ngIf"], ["id", "loginState", 4, "ngIf"], ["id", "forgotState", 4, "ngIf"], ["id", "signupState", 4, "ngIf"], ["id", "successState", "class", "success-state", 4, "ngIf"], ["class", "switch-mode", 4, "ngIf"], [1, "toast"], [1, "auth-tabs"], [1, "auth-tab", 3, "click"], ["id", "loginState"], [1, "auth-heading"], [1, "social-btns"], [1, "social-btn", "btn-google", 3, "click"], ["viewBox", "0 0 24 24", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z", "fill", "#4285F4"], ["d", "M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z", "fill", "#34A853"], ["d", "M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z", "fill", "#FBBC05"], ["d", "M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z", "fill", "#EA4335"], [1, "social-btn", "btn-github", 3, "click"], ["viewBox", "0 0 24 24", "fill", "white"], ["d", "M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"], [1, "social-btn", "btn-linkedin", 3, "click"], ["d", "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"], [1, "divider"], [1, "divider-line"], [1, "divider-text"], ["novalidate", "", 1, "auth-form", 3, "ngSubmit", "formGroup"], [1, "field"], ["for", "loginEmail"], [1, "input-wrap"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24", "aria-hidden", "true"], ["d", "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"], ["type", "email", "id", "loginEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "loginEmail-error", "aria-invalid", "false"], ["id", "loginEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "loginPw"], ["x", "3", "y", "11", "width", "18", "height", "11", "rx", "2", "ry", "2"], ["d", "M7 11V7a5 5 0 0110 0v4"], ["type", "password", "id", "loginPw", "formControlName", "password", "placeholder", "Your password", "autocomplete", "current-password", "aria-describedby", "loginPw-error"], ["type", "button", "aria-label", "Toggle password visibility", 1, "pw-toggle", 3, "click"], ["d", "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"], ["cx", "12", "cy", "12", "r", "3"], ["id", "loginPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "field-row"], [1, "checkbox-label"], ["type", "checkbox", "formControlName", "rememberMe", "aria-describedby", "remember-help"], [1, "checkmark"], ["href", "#", 1, "forgot-link", 3, "click"], ["type", "submit", 1, "btn-submit", 3, "disabled"], [4, "ngIf"], ["class", "loading-text", 4, "ngIf"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24", 4, "ngIf"], ["class", "spinner", "aria-hidden", "true", 4, "ngIf"], ["id", "loginEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "loginPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], [1, "loading-text"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24"], ["d", "M17 8l4 4m0 0l-4 4m4-4H3"], ["aria-hidden", "true", 1, "spinner"], ["id", "forgotState"], [1, "back-link", 3, "click"], ["d", "M19 12H5M12 5l-7 7 7 7"], ["for", "forgotEmail"], ["type", "email", "id", "forgotEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "forgotEmail-error"], ["id", "forgotEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "forgotEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupState"], ["viewBox", "0 0 24 24", "fill", "none"], ["for", "signupName"], ["d", "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"], ["type", "text", "id", "signupName", "formControlName", "name", "placeholder", "Priya Kumar", "autocomplete", "name", "aria-describedby", "signupName-error"], ["id", "signupName-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupEmail"], ["type", "email", "id", "signupEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "signupEmail-error"], ["id", "signupEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupPw"], ["type", "password", "id", "signupPw", "formControlName", "password", "placeholder", "At least 8 characters", "autocomplete", "new-password", "aria-describedby", "signupPw-error pw-requirements", 3, "input"], [1, "pw-strength"], [1, "pw-bar"], ["id", "signupPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "pw-requirements", "class", "pw-requirements", 4, "ngIf"], ["for", "confirmPassword"], ["type", "password", "id", "confirmPassword", "formControlName", "confirmPassword", "placeholder", "Confirm your password", "autocomplete", "new-password", "aria-describedby", "confirmPassword-error"], ["id", "confirmPassword-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "terms-note"], ["href", "#"], ["id", "signupName-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "pw-requirements", 1, "pw-requirements"], [1, "requirement"], [1, "req-icon"], ["id", "confirmPassword-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "successState", 1, "success-state"], [1, "success-icon"], [1, "switch-mode"], [3, "click"]], template: function AuthComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275element(0, "div", 0);
+      \u0275\u0275elementStart(1, "div", 1)(2, "div", 2)(3, "a", 3)(4, "div", 4);
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(5, "svg", 5);
+      \u0275\u0275element(6, "path", 6);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(7, "span");
+      \u0275\u0275text(8, "InterviewReady");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(9, "div", 7);
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(10, "svg", 8);
+      \u0275\u0275element(11, "rect", 9)(12, "rect", 10)(13, "rect", 11)(14, "rect", 12)(15, "rect", 13)(16, "rect", 14)(17, "rect", 15)(18, "rect", 16)(19, "rect", 17)(20, "rect", 18)(21, "ellipse", 19)(22, "circle", 20)(23, "circle", 21)(24, "circle", 22)(25, "path", 23)(26, "path", 24)(27, "path", 25)(28, "path", 26)(29, "ellipse", 27)(30, "ellipse", 28)(31, "rect", 29)(32, "rect", 30)(33, "rect", 31)(34, "circle", 32)(35, "circle", 33)(36, "circle", 34)(37, "circle", 35)(38, "circle", 36)(39, "circle", 37);
+      \u0275\u0275elementEnd();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(40, "div", 38)(41, "div", 39);
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(42, "svg", 40);
+      \u0275\u0275element(43, "path", 41);
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(44, " Live Mock Interview ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(45, "div", 42);
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(46, "svg", 40);
+      \u0275\u0275element(47, "path", 43);
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(48, " Feedback in 24 hrs ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(49, "div", 44);
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(50, "svg", 40);
+      \u0275\u0275element(51, "path", 45);
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(52, " \u2191 4.8 Avg rating ");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(53, "div", 46);
+      \u0275\u0275element(54, "h2", 47);
+      \u0275\u0275elementStart(55, "p");
+      \u0275\u0275text(56);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(57, "div", 48);
+      \u0275\u0275element(58, "div", 49)(59, "div", 49)(60, "div", 49);
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(61, "div", 50)(62, "div", 51);
+      \u0275\u0275template(63, AuthComponent_div_63_Template, 5, 4, "div", 52)(64, AuthComponent_div_64_Template, 61, 16, "div", 53)(65, AuthComponent_div_65_Template, 24, 12, "div", 54)(66, AuthComponent_div_66_Template, 85, 33, "div", 55)(67, AuthComponent_div_67_Template, 8, 2, "div", 56)(68, AuthComponent_p_68_Template, 3, 2, "p", 57);
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(69, "div", 58);
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(70, "svg", 40);
+      \u0275\u0275element(71, "path", 43);
+      \u0275\u0275elementEnd();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(72, "span");
+      \u0275\u0275text(73);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275styleProp("width", ctx.progress(), "%");
+      \u0275\u0275advance(54);
+      \u0275\u0275property("innerHTML", ctx.messages[ctx.dotIdx].h, \u0275\u0275sanitizeHtml);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.messages[ctx.dotIdx].p);
+      \u0275\u0275advance(2);
+      \u0275\u0275classProp("active", ctx.dotIdx === 0);
+      \u0275\u0275advance();
+      \u0275\u0275classProp("active", ctx.dotIdx === 1);
+      \u0275\u0275advance();
+      \u0275\u0275classProp("active", ctx.dotIdx === 2);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", !ctx.showSuccess());
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.currentTab() === "login" && !ctx.showForgot() && !ctx.showSuccess());
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.showForgot() && !ctx.showSuccess());
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.currentTab() === "signup" && !ctx.showSuccess());
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.showSuccess());
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.showSuccess() && !ctx.showForgot());
+      \u0275\u0275advance();
+      \u0275\u0275classProp("show", ctx.showToast());
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate(ctx.toastMsg());
+    }
+  }, dependencies: [CommonModule, NgIf, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, CheckboxControlValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName], styles: ['@charset "UTF-8";\n\n\n.progress-bar[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 3px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 0 2px 2px 0;\n  transition: width 0.6s ease;\n  z-index: 999;\n}\n.auth-wrapper[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  min-height: 100vh;\n}\n.left-panel[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      145deg,\n      #1e3a8a 0%,\n      var(--blue-dark) 45%,\n      var(--teal) 100%);\n  padding: clamp(40px, 5vw, 64px);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  overflow: hidden;\n}\n.left-panel[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: -140px;\n  right: -100px;\n  width: 420px;\n  height: 420px;\n  background: rgba(255, 255, 255, 0.06);\n  border-radius: 50%;\n}\n.left-panel[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  bottom: -100px;\n  left: -60px;\n  width: 320px;\n  height: 320px;\n  background: rgba(255, 255, 255, 0.05);\n  border-radius: 50%;\n}\n.panel-logo[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  margin-bottom: auto;\n  position: relative;\n  z-index: 2;\n}\n.panel-logo-icon[_ngcontent-%COMP%] {\n  width: 38px;\n  height: 38px;\n  background: rgba(255, 255, 255, 0.15);\n  border: 1.5px solid rgba(255, 255, 255, 0.25);\n  border-radius: 11px;\n  display: grid;\n  place-items: center;\n  -webkit-backdrop-filter: blur(8px);\n  backdrop-filter: blur(8px);\n}\n.panel-logo-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 20px;\n  height: 20px;\n}\n.panel-logo[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.1rem;\n  color: white;\n}\n.panel-illustration[_ngcontent-%COMP%] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  z-index: 2;\n  padding: 32px 0;\n}\n.ill-scene[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 380px;\n}\n.float-cards[_ngcontent-%COMP%] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n.fc[_ngcontent-%COMP%] {\n  position: absolute;\n  background: rgba(255, 255, 255, 0.12);\n  -webkit-backdrop-filter: blur(12px);\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.2);\n  border-radius: 12px;\n  padding: 12px 16px;\n  font-size: 0.78rem;\n  color: white;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  white-space: nowrap;\n  animation: _ngcontent-%COMP%_floatY 4s ease-in-out infinite;\n}\n.fc[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 14px;\n  height: 14px;\n  opacity: 0.85;\n  flex-shrink: 0;\n}\n.fc-1[_ngcontent-%COMP%] {\n  top: 12%;\n  right: -8%;\n  animation-delay: 0s;\n}\n.fc-2[_ngcontent-%COMP%] {\n  bottom: 20%;\n  left: -6%;\n  animation-delay: 1.8s;\n}\n.fc-3[_ngcontent-%COMP%] {\n  top: 45%;\n  right: -12%;\n  animation-delay: 0.9s;\n}\n@keyframes _ngcontent-%COMP%_floatY {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-8px);\n  }\n}\n.panel-text[_ngcontent-%COMP%] {\n  position: relative;\n  z-index: 2;\n  margin-top: 16px;\n}\n.panel-text[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: clamp(1.4rem, 2.5vw, 2rem);\n  font-weight: 800;\n  color: white;\n  line-height: 1.25;\n  margin-bottom: 12px;\n  transition: opacity 0.3s;\n}\n.panel-text[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  color: rgba(255, 255, 255, 0.72);\n  font-size: 0.95rem;\n  line-height: 1.6;\n  max-width: 320px;\n  transition: opacity 0.3s;\n}\n.panel-dots[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 6px;\n  margin-top: 24px;\n}\n.panel-dot[_ngcontent-%COMP%] {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.3);\n  transition: all 0.3s;\n}\n.panel-dot.active[_ngcontent-%COMP%] {\n  width: 22px;\n  border-radius: 4px;\n  background: white;\n}\n.panel-testimonial[_ngcontent-%COMP%] {\n  background: rgba(255, 255, 255, 0.1);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: var(--radius-sm);\n  padding: 16px 20px;\n  margin-top: 24px;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n  position: relative;\n  z-index: 2;\n}\n.pt-stars[_ngcontent-%COMP%] {\n  color: #fcd34d;\n  font-size: 0.85rem;\n  letter-spacing: 2px;\n  margin-bottom: 6px;\n}\n.pt-quote[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.5;\n  font-style: italic;\n  margin-bottom: 10px;\n}\n.pt-author[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.pt-avatar[_ngcontent-%COMP%] {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background:\n    linear-gradient(\n      135deg,\n      #818cf8,\n      #a78bfa);\n  display: grid;\n  place-items: center;\n  font-size: 0.72rem;\n  font-weight: 700;\n  color: white;\n}\n.pt-name[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  color: rgba(255, 255, 255, 0.8);\n  font-weight: 600;\n}\n.pt-role[_ngcontent-%COMP%] {\n  font-size: 0.7rem;\n  color: rgba(255, 255, 255, 0.5);\n}\n.right-panel[_ngcontent-%COMP%] {\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: clamp(32px, 5vw, 64px);\n  position: relative;\n}\n.auth-box[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 420px;\n}\n.auth-tabs[_ngcontent-%COMP%] {\n  display: flex;\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  padding: 4px;\n  margin-bottom: 32px;\n  border: 1px solid var(--border);\n}\n.auth-tab[_ngcontent-%COMP%] {\n  flex: 1;\n  padding: 10px;\n  text-align: center;\n  font-size: 0.9rem;\n  font-weight: 600;\n  border-radius: calc(var(--radius) - 4px);\n  cursor: pointer;\n  transition: all 0.22s;\n  color: var(--text-muted);\n  border: none;\n  background: none;\n  font-family: "DM Sans", sans-serif;\n}\n.auth-tab.active[_ngcontent-%COMP%] {\n  background: white;\n  color: var(--blue);\n  box-shadow: var(--shadow);\n}\n.auth-heading[_ngcontent-%COMP%] {\n  margin-bottom: 28px;\n}\n.auth-heading[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1.6rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 6px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s ease both;\n}\n.auth-heading[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.9rem;\n  color: var(--text-soft);\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.05s ease both;\n}\n.social-btns[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  margin-bottom: 24px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.1s ease both;\n}\n.social-btn[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 13px 20px;\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  position: relative;\n  overflow: hidden;\n}\n.social-btn[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background: rgba(255, 255, 255, 0);\n  transition: background 0.2s;\n}\n.social-btn[_ngcontent-%COMP%]:hover::after {\n  background: rgba(255, 255, 255, 0.08);\n}\n.social-btn[_ngcontent-%COMP%]:active {\n  transform: scale(0.98);\n}\n.social-btn[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n.btn-google[_ngcontent-%COMP%] {\n  background: white;\n  color: #374151;\n  border: 1.5px solid var(--border);\n  box-shadow: var(--shadow);\n}\n.btn-google[_ngcontent-%COMP%]:hover {\n  border-color: #d1d5db;\n  box-shadow: var(--shadow-lg);\n}\n.btn-github[_ngcontent-%COMP%] {\n  background: #0d1117;\n  color: white;\n  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.25);\n}\n.btn-github[_ngcontent-%COMP%]:hover {\n  background: #161b22;\n  box-shadow: 0 6px 20px rgba(13, 17, 23, 0.35);\n}\n.btn-linkedin[_ngcontent-%COMP%] {\n  background: #0a66c2;\n  color: white;\n  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.3);\n}\n.btn-linkedin[_ngcontent-%COMP%]:hover {\n  background: #0958a8;\n  box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);\n}\n.divider[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  margin-bottom: 24px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.15s ease both;\n}\n.divider-line[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 1px;\n  background: var(--border);\n}\n.divider-text[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  white-space: nowrap;\n}\n.auth-form[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.18s ease both;\n}\n.field[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  letter-spacing: 0.01em;\n}\n.input-wrap[_ngcontent-%COMP%] {\n  position: relative;\n}\n.input-wrap[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  position: absolute;\n  left: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 16px;\n  height: 16px;\n  color: var(--text-muted);\n  pointer-events: none;\n  transition: color 0.2s;\n}\n.input-wrap[_ngcontent-%COMP%]:focus-within   svg[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 12px 14px 12px 42px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  transition: all 0.2s;\n  outline: none;\n  -webkit-appearance: none;\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]::placeholder {\n  color: var(--text-muted);\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.input-wrap[_ngcontent-%COMP%]   input.error[_ngcontent-%COMP%] {\n  border-color: var(--red);\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n.error-message[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n  color: var(--red);\n  margin-top: 4px;\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.error-message[_ngcontent-%COMP%]::before {\n  content: "\\26a0";\n  font-size: 0.9rem;\n}\n.pw-requirements[_ngcontent-%COMP%] {\n  margin-top: 8px;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 6px;\n}\n.requirement[_ngcontent-%COMP%] {\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.requirement.met[_ngcontent-%COMP%] {\n  color: var(--green);\n}\n.requirement[_ngcontent-%COMP%]   .req-icon[_ngcontent-%COMP%] {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  border: 1px solid var(--text-muted);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.6rem;\n  font-weight: bold;\n  color: transparent;\n}\n.requirement[_ngcontent-%COMP%]   .req-icon.met[_ngcontent-%COMP%] {\n  background: var(--green);\n  border-color: var(--green);\n  color: white;\n}\n.pw-toggle[_ngcontent-%COMP%] {\n  position: absolute;\n  right: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 18px;\n  height: 18px;\n  color: var(--text-muted);\n  cursor: pointer;\n  background: none;\n  border: none;\n  padding: 0;\n  display: grid;\n  place-items: center;\n  transition: color 0.2s;\n}\n.pw-toggle[_ngcontent-%COMP%]:hover {\n  color: var(--text);\n}\n.pw-toggle[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n}\n.pw-strength[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 4px;\n  margin-top: 6px;\n}\n.pw-bar[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 3px;\n  background: var(--border);\n  border-radius: 2px;\n  transition: background 0.3s;\n}\n.pw-bar.weak[_ngcontent-%COMP%] {\n  background: var(--red);\n}\n.pw-bar.fair[_ngcontent-%COMP%] {\n  background: var(--amber);\n}\n.pw-bar.strong[_ngcontent-%COMP%] {\n  background: var(--green);\n}\n.field-row[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: -4px;\n}\n.checkbox-label[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.checkbox-label[_ngcontent-%COMP%]   input[type=checkbox][_ngcontent-%COMP%] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n.checkbox-label[_ngcontent-%COMP%]   .checkmark[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border: 1.5px solid var(--border);\n  border-radius: 3px;\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all 0.2s;\n}\n.checkbox-label[_ngcontent-%COMP%]   .checkmark[_ngcontent-%COMP%]::after {\n  content: "";\n  width: 6px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg) scale(0);\n  transition: transform 0.2s;\n}\n.checkbox-label[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked    ~ .checkmark[_ngcontent-%COMP%] {\n  background: var(--blue);\n  border-color: var(--blue);\n}\n.checkbox-label[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked    ~ .checkmark[_ngcontent-%COMP%]::after {\n  transform: rotate(45deg) scale(1);\n}\n.checkbox-label[_ngcontent-%COMP%]:hover   .checkmark[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n}\n.btn-submit[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 14px;\n  background: var(--blue);\n  color: white;\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 1rem;\n  font-weight: 700;\n  cursor: pointer;\n  font-family: "Sora", sans-serif;\n  transition: all 0.22s;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  margin-top: 4px;\n  position: relative;\n  overflow: hidden;\n}\n.btn-submit[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background:\n    linear-gradient(\n      135deg,\n      transparent 40%,\n      rgba(255, 255, 255, 0.08));\n}\n.btn-submit[_ngcontent-%COMP%]:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-submit[_ngcontent-%COMP%]:active:not(:disabled) {\n  transform: scale(0.98);\n}\n.btn-submit[_ngcontent-%COMP%]:disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n  transform: none;\n}\n.btn-submit.loading[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n.btn-submit[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  flex-shrink: 0;\n}\n.spinner[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border: 2px solid rgba(255, 255, 255, 0.3);\n  border-top: 2px solid white;\n  border-radius: 50%;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.loading-text[_ngcontent-%COMP%] {\n  opacity: 0.9;\n}\n.terms-note[_ngcontent-%COMP%] {\n  text-align: center;\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  margin-top: 14px;\n  line-height: 1.5;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.22s ease both;\n}\n.terms-note[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  text-decoration: none;\n}\n.terms-note[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.switch-mode[_ngcontent-%COMP%] {\n  text-align: center;\n  margin-top: 20px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.25s ease both;\n}\n.switch-mode[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  font-weight: 600;\n  text-decoration: none;\n  cursor: pointer;\n}\n.switch-mode[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.success-state[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 24px 0;\n}\n.success-icon[_ngcontent-%COMP%] {\n  width: 68px;\n  height: 68px;\n  background: #ecfdf5;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n  border: 2px solid #a7f3d0;\n}\n.success-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 32px;\n  height: 32px;\n  color: var(--green);\n}\n.success-state[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1.4rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.success-state[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.back-link[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  text-decoration: none;\n  margin-bottom: 24px;\n  cursor: pointer;\n  transition: color 0.2s;\n}\n.back-link[_ngcontent-%COMP%]:hover {\n  color: var(--blue);\n}\n.back-link[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 14px;\n  height: 14px;\n}\n@keyframes _ngcontent-%COMP%_fadeSlideIn {\n  from {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.slide-in[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.32s ease both;\n}\n.toast[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 24px;\n  left: 50%;\n  transform: translateX(-50%) translateY(80px);\n  background: #0f172a;\n  color: white;\n  padding: 12px 20px;\n  border-radius: 10px;\n  font-size: 0.88rem;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);\n  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;\n  opacity: 0;\n  z-index: 9999;\n  white-space: nowrap;\n}\n.toast.show[_ngcontent-%COMP%] {\n  transform: translateX(-50%) translateY(0);\n  opacity: 1;\n}\n.toast[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n}\n@media (max-width: 900px) {\n  .auth-wrapper[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n  .left-panel[_ngcontent-%COMP%] {\n    display: none;\n  }\n  .right-panel[_ngcontent-%COMP%] {\n    min-height: 100vh;\n    background: var(--bg-soft);\n    padding: 40px 20px;\n  }\n  .auth-box[_ngcontent-%COMP%] {\n    background: white;\n    border-radius: var(--radius-lg);\n    padding: 32px 24px;\n    box-shadow: var(--shadow-lg);\n    border: 1px solid var(--border);\n  }\n}\n@media (max-width: 480px) {\n  .right-panel[_ngcontent-%COMP%] {\n    padding: 24px 16px;\n    background: white;\n  }\n  .auth-box[_ngcontent-%COMP%] {\n    box-shadow: none;\n    border: none;\n    padding: 0;\n  }\n}\n/*# sourceMappingURL=auth.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AuthComponent, [{
+    type: Component,
+    args: [{ selector: "app-auth", standalone: true, imports: [CommonModule, ReactiveFormsModule], template: `<div class="progress-bar" [style.width.%]="progress()"></div>
+
+<div class="auth-wrapper">
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <a href="#" class="panel-logo">
+      <div class="panel-logo-icon">
+        <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+          <path
+            d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"
+          />
+        </svg>
+      </div>
+      <span>InterviewReady</span>
+    </a>
+
+    <div class="panel-illustration">
+      <svg
+        class="ill-scene"
+        viewBox="0 0 360 280"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          x="40"
+          y="210"
+          width="280"
+          height="12"
+          rx="6"
+          fill="rgba(255,255,255,0.15)"
+        />
+        <rect
+          x="90"
+          y="155"
+          width="180"
+          height="58"
+          rx="8"
+          fill="rgba(255,255,255,0.18)"
+        />
+        <rect
+          x="95"
+          y="160"
+          width="170"
+          height="46"
+          rx="5"
+          fill="rgba(15,23,42,0.6)"
+        />
+        <rect
+          x="99"
+          y="163"
+          width="162"
+          height="40"
+          rx="4"
+          fill="rgba(37,99,235,0.3)"
+        />
+        <rect
+          x="108"
+          y="170"
+          width="60"
+          height="3"
+          rx="1.5"
+          fill="rgba(96,165,250,0.8)"
+        />
+        <rect
+          x="108"
+          y="177"
+          width="90"
+          height="3"
+          rx="1.5"
+          fill="rgba(52,211,153,0.6)"
+        />
+        <rect
+          x="108"
+          y="184"
+          width="45"
+          height="3"
+          rx="1.5"
+          fill="rgba(251,191,36,0.6)"
+        />
+        <rect
+          x="108"
+          y="191"
+          width="80"
+          height="3"
+          rx="1.5"
+          fill="rgba(96,165,250,0.6)"
+        />
+        <rect
+          x="108"
+          y="198"
+          width="35"
+          height="3"
+          rx="1.5"
+          fill="rgba(248,113,113,0.6)"
+        />
+        <rect
+          x="90"
+          y="210"
+          width="180"
+          height="5"
+          rx="2.5"
+          fill="rgba(255,255,255,0.1)"
+        />
+        <ellipse
+          cx="180"
+          cy="145"
+          rx="24"
+          ry="18"
+          fill="rgba(255,255,255,0.15)"
+        />
+        <circle cx="180" cy="108" r="20" fill="rgba(255,255,255,0.2)" />
+        <circle cx="174" cy="106" r="2.5" fill="rgba(255,255,255,0.6)" />
+        <circle cx="186" cy="106" r="2.5" fill="rgba(255,255,255,0.6)" />
+        <path
+          d="M174 114 Q180 118 186 114"
+          stroke="rgba(255,255,255,0.6)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        />
+        <path
+          d="M162 100 Q165 88 180 87 Q195 88 198 100"
+          fill="rgba(255,255,255,0.3)"
+        />
+        <path
+          d="M156 145 Q130 165 125 185"
+          stroke="rgba(255,255,255,0.2)"
+          stroke-width="12"
+          stroke-linecap="round"
+        />
+        <path
+          d="M204 145 Q230 165 235 185"
+          stroke="rgba(255,255,255,0.2)"
+          stroke-width="12"
+          stroke-linecap="round"
+        />
+        <ellipse
+          cx="120"
+          cy="190"
+          rx="18"
+          ry="10"
+          fill="rgba(255,255,255,0.15)"
+        />
+        <ellipse
+          cx="240"
+          cy="190"
+          rx="18"
+          ry="10"
+          fill="rgba(255,255,255,0.15)"
+        />
+        <rect
+          x="155"
+          y="160"
+          width="50"
+          height="6"
+          rx="3"
+          fill="rgba(255,255,255,0.1)"
+        />
+        <rect
+          x="162"
+          y="165"
+          width="6"
+          height="45"
+          rx="3"
+          fill="rgba(255,255,255,0.1)"
+        />
+        <rect
+          x="192"
+          y="165"
+          width="6"
+          height="45"
+          rx="3"
+          fill="rgba(255,255,255,0.1)"
+        />
+        <circle cx="58" cy="60" r="3" fill="rgba(255,255,255,0.4)" />
+        <circle cx="298" cy="80" r="2" fill="rgba(255,255,255,0.3)" />
+        <circle cx="72" cy="180" r="2" fill="rgba(255,255,255,0.25)" />
+        <circle cx="312" cy="160" r="3" fill="rgba(255,255,255,0.35)" />
+        <circle
+          cx="50"
+          cy="240"
+          r="25"
+          stroke="rgba(255,255,255,0.08)"
+          stroke-width="2"
+          fill="none"
+        />
+        <circle
+          cx="318"
+          cy="50"
+          r="30"
+          stroke="rgba(255,255,255,0.07)"
+          stroke-width="2"
+          fill="none"
+        />
+      </svg>
+
+      <div class="float-cards">
+        <div class="fc fc-1">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+            />
+          </svg>
+          Live Mock Interview
+        </div>
+        <div class="fc fc-2">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Feedback in 24 hrs
+        </div>
+        <div class="fc fc-3">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+          \u2191 4.8 Avg rating
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-text">
+      <h2 [innerHTML]="messages[dotIdx].h"></h2>
+      <p>{{ messages[dotIdx].p }}</p>
+      <div class="panel-dots">
+        <div class="panel-dot" [class.active]="dotIdx === 0"></div>
+        <div class="panel-dot" [class.active]="dotIdx === 1"></div>
+        <div class="panel-dot" [class.active]="dotIdx === 2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="auth-box">
+      <!-- Tab Switcher -->
+      <div class="auth-tabs" *ngIf="!showSuccess()">
+        <button
+          class="auth-tab"
+          [class.active]="currentTab() === 'login'"
+          (click)="switchTab('login')"
+        >
+          Log In
+        </button>
+        <button
+          class="auth-tab"
+          [class.active]="currentTab() === 'signup'"
+          (click)="switchTab('signup')"
+        >
+          Sign Up
+        </button>
+      </div>
+
+      <!-- LOGIN STATE -->
+      <div
+        id="loginState"
+        *ngIf="currentTab() === 'login' && !showForgot() && !showSuccess()"
+      >
+        <div class="auth-heading">
+          <h1>Welcome back \u{1F44B}</h1>
+          <p>Good to see you again. Let's get you in.</p>
+        </div>
+
+        <div class="social-btns">
+          <button
+            class="social-btn btn-google"
+            (click)="handleSocial('Google')"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4"
+              />
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853"
+              />
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                fill="#FBBC05"
+              />
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335"
+              />
+            </svg>
+            Continue with Google
+          </button>
+          <button
+            class="social-btn btn-github"
+            (click)="handleSocial('GitHub')"
+          >
+            <svg viewBox="0 0 24 24" fill="white">
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+            Continue with GitHub
+          </button>
+          <button
+            class="social-btn btn-linkedin"
+            (click)="handleSocial('LinkedIn')"
+          >
+            <svg viewBox="0 0 24 24" fill="white">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              />
+            </svg>
+            Continue with LinkedIn
+          </button>
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">or continue with email</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <form
+          class="auth-form"
+          [formGroup]="loginForm"
+          (ngSubmit)="handleLogin()"
+          novalidate
+        >
+          <div class="field">
+            <label for="loginEmail">Email address</label>
+            <div class="input-wrap">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              <input
+                type="email"
+                id="loginEmail"
+                formControlName="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                [class.error]="isFieldInvalid(loginForm, 'email')"
+                aria-describedby="loginEmail-error"
+                aria-invalid="false"
+                [attr.aria-invalid]="isFieldInvalid(loginForm, 'email')"
+              />
+            </div>
+            <div
+              id="loginEmail-error"
+              class="error-message"
+              *ngIf="isFieldInvalid(loginForm, 'email')"
+              role="alert"
+              aria-live="polite"
+            >
+              {{ getErrorMessage(loginForm, 'email') }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="loginPw">Password</label>
+            <div class="input-wrap">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
+              <input
+                type="password"
+                id="loginPw"
+                formControlName="password"
+                placeholder="Your password"
+                autocomplete="current-password"
+                [class.error]="isFieldInvalid(loginForm, 'password')"
+                aria-describedby="loginPw-error"
+                [attr.aria-invalid]="isFieldInvalid(loginForm, 'password')"
+              />
+              <button
+                type="button"
+                class="pw-toggle"
+                (click)="togglePasswordVisibility('loginPw')"
+                aria-label="Toggle password visibility"
+              >
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+            <div
+              id="loginPw-error"
+              class="error-message"
+              *ngIf="isFieldInvalid(loginForm, 'password')"
+              role="alert"
+              aria-live="polite"
+            >
+              {{ getErrorMessage(loginForm, 'password') }}
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                formControlName="rememberMe"
+                aria-describedby="remember-help"
+              />
+              <span class="checkmark"></span>
+              Remember me
+            </label>
+            <a href="#" class="forgot-link" (click)="onShowForgot()"
+              >Forgot password?</a
+            >
+          </div>
+
+          <button
+            type="submit"
+            class="btn-submit"
+            [disabled]="isLoading()"
+            [class.loading]="isLoading()"
+          >
+            <span *ngIf="!isLoading()">Log In</span>
+            <span *ngIf="isLoading()" class="loading-text">Signing in...</span>
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+              *ngIf="!isLoading()"
+            >
+              <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+            <div class="spinner" *ngIf="isLoading()" aria-hidden="true"></div>
+          </button>
+        </form>
+      </div>
+
+      <!-- FORGOT PASSWORD STATE -->
+      <div id="forgotState" *ngIf="showForgot() && !showSuccess()">
+        <a class="back-link" (click)="hideForgot()">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M19 12H5M12 5l-7 7 7 7" />
+          </svg>
+          Back to login
+        </a>
+        <div class="auth-heading">
+          <h1>Reset your password \u{1F511}</h1>
+          <p>Enter your email and we'll send a reset link.</p>
+        </div>
+        <form
+          class="auth-form"
+          [formGroup]="forgotForm"
+          (ngSubmit)="handleForgot()"
+          novalidate
+        >
+          <div class="field">
+            <label for="forgotEmail">Email address</label>
+            <div class="input-wrap">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              <input
+                type="email"
+                id="forgotEmail"
+                formControlName="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                [class.error]="isFieldInvalid(forgotForm, 'email')"
+                aria-describedby="forgotEmail-error"
+                [attr.aria-invalid]="isFieldInvalid(forgotForm, 'email')"
+              />
+            </div>
+            <div
+              id="forgotEmail-error"
+              class="error-message"
+              *ngIf="isFieldInvalid(forgotForm, 'email')"
+              role="alert"
+              aria-live="polite"
+            >
+              {{ getErrorMessage(forgotForm, 'email') }}
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn-submit"
+            [disabled]="isLoading()"
+            [class.loading]="isLoading()"
+          >
+            <span *ngIf="!isLoading()">Send Reset Link</span>
+            <span *ngIf="isLoading()" class="loading-text">Sending...</span>
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+              *ngIf="!isLoading()"
+            >
+              <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+            <div class="spinner" *ngIf="isLoading()" aria-hidden="true"></div>
+          </button>
+        </form>
+      </div>
+
+      <!-- SIGNUP STATE -->
+      <div id="signupState" *ngIf="currentTab() === 'signup' && !showSuccess()">
+        <div class="auth-heading">
+          <h1>Create your account \u{1F680}</h1>
+          <p>Free to join. No card required. Start practicing today.</p>
+        </div>
+
+        <div class="social-btns">
+          <button
+            class="social-btn btn-google"
+            (click)="handleSocial('Google')"
+          >
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4"
+              />
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853"
+              />
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                fill="#FBBC05"
+              />
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335"
+              />
+            </svg>
+            Continue with Google
+          </button>
+          <button
+            class="social-btn btn-github"
+            (click)="handleSocial('GitHub')"
+          >
+            <svg viewBox="0 0 24 24" fill="white">
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+            Continue with GitHub
+          </button>
+          <button
+            class="social-btn btn-linkedin"
+            (click)="handleSocial('LinkedIn')"
+          >
+            <svg viewBox="0 0 24 24" fill="white">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              />
+            </svg>
+            Continue with LinkedIn
+          </button>
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">or sign up with email</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <form
+          class="auth-form"
+          [formGroup]="signupForm"
+          (ngSubmit)="handleSignup()"
+          novalidate
+        >
+          <div class="field">
+            <label for="signupName">Full Name</label>
+            <div class="input-wrap">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"
+                />
+              </svg>
+              <input
+                type="text"
+                id="signupName"
+                formControlName="name"
+                placeholder="Priya Kumar"
+                autocomplete="name"
+                [class.error]="isFieldInvalid(signupForm, 'name')"
+                aria-describedby="signupName-error"
+                [attr.aria-invalid]="isFieldInvalid(signupForm, 'name')"
+              />
+            </div>
+            <div
+              id="signupName-error"
+              class="error-message"
+              *ngIf="isFieldInvalid(signupForm, 'name')"
+              role="alert"
+              aria-live="polite"
+            >
+              {{ getErrorMessage(signupForm, 'name') }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="signupEmail">Email address</label>
+            <div class="input-wrap">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              <input
+                type="email"
+                id="signupEmail"
+                formControlName="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                [class.error]="isFieldInvalid(signupForm, 'email')"
+                aria-describedby="signupEmail-error"
+                [attr.aria-invalid]="isFieldInvalid(signupForm, 'email')"
+              />
+            </div>
+            <div
+              id="signupEmail-error"
+              class="error-message"
+              *ngIf="isFieldInvalid(signupForm, 'email')"
+              role="alert"
+              aria-live="polite"
+            >
+              {{ getErrorMessage(signupForm, 'email') }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="signupPw">Create Password</label>
+            <div class="input-wrap">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
+              <input
+                type="password"
+                id="signupPw"
+                formControlName="password"
+                placeholder="At least 8 characters"
+                autocomplete="new-password"
+                [class.error]="isFieldInvalid(signupForm, 'password')"
+                aria-describedby="signupPw-error pw-requirements"
+                [attr.aria-invalid]="isFieldInvalid(signupForm, 'password')"
+                (input)="onPasswordInput()"
+              />
+              <button
+                type="button"
+                class="pw-toggle"
+                (click)="togglePasswordVisibility('signupPw')"
+                aria-label="Toggle password visibility"
+              >
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+            <div class="pw-strength">
+              <div
+                class="pw-bar"
+                [class]="passwordStrength() >= 1 ? getStrengthClass(0) : ''"
+              ></div>
+              <div
+                class="pw-bar"
+                [class]="passwordStrength() >= 2 ? getStrengthClass(1) : ''"
+              ></div>
+              <div
+                class="pw-bar"
+                [class]="passwordStrength() >= 3 ? getStrengthClass(2) : ''"
+              ></div>
+              <div
+                class="pw-bar"
+                [class]="passwordStrength() >= 4 ? getStrengthClass(3) : ''"
+              ></div>
+            </div>
+            <div
+              id="signupPw-error"
+              class="error-message"
+              *ngIf="isFieldInvalid(signupForm, 'password')"
+              role="alert"
+              aria-live="polite"
+            >
+              {{ getErrorMessage(signupForm, 'password') }}
+            </div>
+            <div
+              id="pw-requirements"
+              class="pw-requirements"
+              *ngIf="signupForm.get('password')?.value"
+            >
+              <div
+                class="requirement"
+                [class.met]="getPasswordRequirements().length"
+              >
+                <span
+                  class="req-icon"
+                  [class.met]="getPasswordRequirements().length"
+                  >\u2713</span
+                >
+                At least 8 characters
+              </div>
+              <div
+                class="requirement"
+                [class.met]="getPasswordRequirements().uppercase"
+              >
+                <span
+                  class="req-icon"
+                  [class.met]="getPasswordRequirements().uppercase"
+                  >\u2713</span
+                >
+                One uppercase letter
+              </div>
+              <div
+                class="requirement"
+                [class.met]="getPasswordRequirements().lowercase"
+              >
+                <span
+                  class="req-icon"
+                  [class.met]="getPasswordRequirements().lowercase"
+                  >\u2713</span
+                >
+                One lowercase letter
+              </div>
+              <div
+                class="requirement"
+                [class.met]="getPasswordRequirements().number"
+              >
+                <span
+                  class="req-icon"
+                  [class.met]="getPasswordRequirements().number"
+                  >\u2713</span
+                >
+                One number
+              </div>
+              <div
+                class="requirement"
+                [class.met]="getPasswordRequirements().special"
+              >
+                <span
+                  class="req-icon"
+                  [class.met]="getPasswordRequirements().special"
+                  >\u2713</span
+                >
+                One special character
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="input-wrap">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
+              <input
+                type="password"
+                id="confirmPassword"
+                formControlName="confirmPassword"
+                placeholder="Confirm your password"
+                autocomplete="new-password"
+                [class.error]="isFieldInvalid(signupForm, 'confirmPassword')"
+                aria-describedby="confirmPassword-error"
+                [attr.aria-invalid]="isFieldInvalid(signupForm, 'confirmPassword')"
+              />
+            </div>
+            <div
+              id="confirmPassword-error"
+              class="error-message"
+              *ngIf="isFieldInvalid(signupForm, 'confirmPassword')"
+              role="alert"
+              aria-live="polite"
+            >
+              {{ getErrorMessage(signupForm, 'confirmPassword') }}
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-submit"
+            [disabled]="isLoading() || signupForm.invalid"
+            [class.loading]="isLoading()"
+          >
+            <span *ngIf="!isLoading()">Create Account</span>
+            <span *ngIf="isLoading()" class="loading-text"
+              >Creating account...</span
+            >
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+              *ngIf="!isLoading()"
+            >
+              <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+            <div class="spinner" *ngIf="isLoading()" aria-hidden="true"></div>
+          </button>
+        </form>
+
+        <p class="terms-note">
+          By signing up you agree to our <a href="#">Terms of Service</a> and
+          <a href="#">Privacy Policy</a>.
+        </p>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div id="successState" class="success-state" *ngIf="showSuccess()">
+        <div class="success-icon">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h2>{{ successTitle() }}</h2>
+        <p>{{ successMsg() }}</p>
+      </div>
+
+      <!-- Switch mode footer -->
+      <p class="switch-mode" *ngIf="!showSuccess() && !showForgot()">
+        <ng-container *ngIf="currentTab() === 'login'"
+          >Don't have an account?
+          <a (click)="switchTab('signup')">Sign up free</a></ng-container
+        >
+        <ng-container *ngIf="currentTab() === 'signup'"
+          >Already have an account?
+          <a (click)="switchTab('login')">Log in</a></ng-container
+        >
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" [class.show]="showToast()">
+  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span>{{ toastMsg() }}</span>
+</div>
+`, styles: ['@charset "UTF-8";\n\n/* apps/interview-ready-web/src/app/auth/auth.scss */\n.progress-bar {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 3px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 0 2px 2px 0;\n  transition: width 0.6s ease;\n  z-index: 999;\n}\n.auth-wrapper {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  min-height: 100vh;\n}\n.left-panel {\n  background:\n    linear-gradient(\n      145deg,\n      #1e3a8a 0%,\n      var(--blue-dark) 45%,\n      var(--teal) 100%);\n  padding: clamp(40px, 5vw, 64px);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  overflow: hidden;\n}\n.left-panel::before {\n  content: "";\n  position: absolute;\n  top: -140px;\n  right: -100px;\n  width: 420px;\n  height: 420px;\n  background: rgba(255, 255, 255, 0.06);\n  border-radius: 50%;\n}\n.left-panel::after {\n  content: "";\n  position: absolute;\n  bottom: -100px;\n  left: -60px;\n  width: 320px;\n  height: 320px;\n  background: rgba(255, 255, 255, 0.05);\n  border-radius: 50%;\n}\n.panel-logo {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  margin-bottom: auto;\n  position: relative;\n  z-index: 2;\n}\n.panel-logo-icon {\n  width: 38px;\n  height: 38px;\n  background: rgba(255, 255, 255, 0.15);\n  border: 1.5px solid rgba(255, 255, 255, 0.25);\n  border-radius: 11px;\n  display: grid;\n  place-items: center;\n  -webkit-backdrop-filter: blur(8px);\n  backdrop-filter: blur(8px);\n}\n.panel-logo-icon svg {\n  width: 20px;\n  height: 20px;\n}\n.panel-logo span {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.1rem;\n  color: white;\n}\n.panel-illustration {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  z-index: 2;\n  padding: 32px 0;\n}\n.ill-scene {\n  width: 100%;\n  max-width: 380px;\n}\n.float-cards {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n.fc {\n  position: absolute;\n  background: rgba(255, 255, 255, 0.12);\n  -webkit-backdrop-filter: blur(12px);\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.2);\n  border-radius: 12px;\n  padding: 12px 16px;\n  font-size: 0.78rem;\n  color: white;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  white-space: nowrap;\n  animation: floatY 4s ease-in-out infinite;\n}\n.fc svg {\n  width: 14px;\n  height: 14px;\n  opacity: 0.85;\n  flex-shrink: 0;\n}\n.fc-1 {\n  top: 12%;\n  right: -8%;\n  animation-delay: 0s;\n}\n.fc-2 {\n  bottom: 20%;\n  left: -6%;\n  animation-delay: 1.8s;\n}\n.fc-3 {\n  top: 45%;\n  right: -12%;\n  animation-delay: 0.9s;\n}\n@keyframes floatY {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-8px);\n  }\n}\n.panel-text {\n  position: relative;\n  z-index: 2;\n  margin-top: 16px;\n}\n.panel-text h2 {\n  font-family: "Sora", sans-serif;\n  font-size: clamp(1.4rem, 2.5vw, 2rem);\n  font-weight: 800;\n  color: white;\n  line-height: 1.25;\n  margin-bottom: 12px;\n  transition: opacity 0.3s;\n}\n.panel-text p {\n  color: rgba(255, 255, 255, 0.72);\n  font-size: 0.95rem;\n  line-height: 1.6;\n  max-width: 320px;\n  transition: opacity 0.3s;\n}\n.panel-dots {\n  display: flex;\n  gap: 6px;\n  margin-top: 24px;\n}\n.panel-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.3);\n  transition: all 0.3s;\n}\n.panel-dot.active {\n  width: 22px;\n  border-radius: 4px;\n  background: white;\n}\n.panel-testimonial {\n  background: rgba(255, 255, 255, 0.1);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: var(--radius-sm);\n  padding: 16px 20px;\n  margin-top: 24px;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n  position: relative;\n  z-index: 2;\n}\n.pt-stars {\n  color: #fcd34d;\n  font-size: 0.85rem;\n  letter-spacing: 2px;\n  margin-bottom: 6px;\n}\n.pt-quote {\n  font-size: 0.82rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.5;\n  font-style: italic;\n  margin-bottom: 10px;\n}\n.pt-author {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.pt-avatar {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background:\n    linear-gradient(\n      135deg,\n      #818cf8,\n      #a78bfa);\n  display: grid;\n  place-items: center;\n  font-size: 0.72rem;\n  font-weight: 700;\n  color: white;\n}\n.pt-name {\n  font-size: 0.78rem;\n  color: rgba(255, 255, 255, 0.8);\n  font-weight: 600;\n}\n.pt-role {\n  font-size: 0.7rem;\n  color: rgba(255, 255, 255, 0.5);\n}\n.right-panel {\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: clamp(32px, 5vw, 64px);\n  position: relative;\n}\n.auth-box {\n  width: 100%;\n  max-width: 420px;\n}\n.auth-tabs {\n  display: flex;\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  padding: 4px;\n  margin-bottom: 32px;\n  border: 1px solid var(--border);\n}\n.auth-tab {\n  flex: 1;\n  padding: 10px;\n  text-align: center;\n  font-size: 0.9rem;\n  font-weight: 600;\n  border-radius: calc(var(--radius) - 4px);\n  cursor: pointer;\n  transition: all 0.22s;\n  color: var(--text-muted);\n  border: none;\n  background: none;\n  font-family: "DM Sans", sans-serif;\n}\n.auth-tab.active {\n  background: white;\n  color: var(--blue);\n  box-shadow: var(--shadow);\n}\n.auth-heading {\n  margin-bottom: 28px;\n}\n.auth-heading h1 {\n  font-family: "Sora", sans-serif;\n  font-size: 1.6rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 6px;\n  animation: fadeSlideIn 0.4s ease both;\n}\n.auth-heading p {\n  font-size: 0.9rem;\n  color: var(--text-soft);\n  animation: fadeSlideIn 0.4s 0.05s ease both;\n}\n.social-btns {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  margin-bottom: 24px;\n  animation: fadeSlideIn 0.4s 0.1s ease both;\n}\n.social-btn {\n  width: 100%;\n  padding: 13px 20px;\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  position: relative;\n  overflow: hidden;\n}\n.social-btn::after {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background: rgba(255, 255, 255, 0);\n  transition: background 0.2s;\n}\n.social-btn:hover::after {\n  background: rgba(255, 255, 255, 0.08);\n}\n.social-btn:active {\n  transform: scale(0.98);\n}\n.social-btn svg {\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n.btn-google {\n  background: white;\n  color: #374151;\n  border: 1.5px solid var(--border);\n  box-shadow: var(--shadow);\n}\n.btn-google:hover {\n  border-color: #d1d5db;\n  box-shadow: var(--shadow-lg);\n}\n.btn-github {\n  background: #0d1117;\n  color: white;\n  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.25);\n}\n.btn-github:hover {\n  background: #161b22;\n  box-shadow: 0 6px 20px rgba(13, 17, 23, 0.35);\n}\n.btn-linkedin {\n  background: #0a66c2;\n  color: white;\n  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.3);\n}\n.btn-linkedin:hover {\n  background: #0958a8;\n  box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);\n}\n.divider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  margin-bottom: 24px;\n  animation: fadeSlideIn 0.4s 0.15s ease both;\n}\n.divider-line {\n  flex: 1;\n  height: 1px;\n  background: var(--border);\n}\n.divider-text {\n  font-size: 0.78rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  white-space: nowrap;\n}\n.auth-form {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  animation: fadeSlideIn 0.4s 0.18s ease both;\n}\n.field {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field label {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  letter-spacing: 0.01em;\n}\n.input-wrap {\n  position: relative;\n}\n.input-wrap svg {\n  position: absolute;\n  left: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 16px;\n  height: 16px;\n  color: var(--text-muted);\n  pointer-events: none;\n  transition: color 0.2s;\n}\n.input-wrap:focus-within svg {\n  color: var(--blue);\n}\n.input-wrap input {\n  width: 100%;\n  padding: 12px 14px 12px 42px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  transition: all 0.2s;\n  outline: none;\n  -webkit-appearance: none;\n}\n.input-wrap input::placeholder {\n  color: var(--text-muted);\n}\n.input-wrap input:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.input-wrap input.error {\n  border-color: var(--red);\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n.error-message {\n  font-size: 0.8rem;\n  color: var(--red);\n  margin-top: 4px;\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.error-message::before {\n  content: "\\26a0";\n  font-size: 0.9rem;\n}\n.pw-requirements {\n  margin-top: 8px;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 6px;\n}\n.requirement {\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.requirement.met {\n  color: var(--green);\n}\n.requirement .req-icon {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  border: 1px solid var(--text-muted);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.6rem;\n  font-weight: bold;\n  color: transparent;\n}\n.requirement .req-icon.met {\n  background: var(--green);\n  border-color: var(--green);\n  color: white;\n}\n.pw-toggle {\n  position: absolute;\n  right: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 18px;\n  height: 18px;\n  color: var(--text-muted);\n  cursor: pointer;\n  background: none;\n  border: none;\n  padding: 0;\n  display: grid;\n  place-items: center;\n  transition: color 0.2s;\n}\n.pw-toggle:hover {\n  color: var(--text);\n}\n.pw-toggle svg {\n  width: 16px;\n  height: 16px;\n}\n.pw-strength {\n  display: flex;\n  gap: 4px;\n  margin-top: 6px;\n}\n.pw-bar {\n  flex: 1;\n  height: 3px;\n  background: var(--border);\n  border-radius: 2px;\n  transition: background 0.3s;\n}\n.pw-bar.weak {\n  background: var(--red);\n}\n.pw-bar.fair {\n  background: var(--amber);\n}\n.pw-bar.strong {\n  background: var(--green);\n}\n.field-row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: -4px;\n}\n.checkbox-label {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.checkbox-label input[type=checkbox] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n.checkbox-label .checkmark {\n  width: 16px;\n  height: 16px;\n  border: 1.5px solid var(--border);\n  border-radius: 3px;\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all 0.2s;\n}\n.checkbox-label .checkmark::after {\n  content: "";\n  width: 6px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg) scale(0);\n  transition: transform 0.2s;\n}\n.checkbox-label input:checked ~ .checkmark {\n  background: var(--blue);\n  border-color: var(--blue);\n}\n.checkbox-label input:checked ~ .checkmark::after {\n  transform: rotate(45deg) scale(1);\n}\n.checkbox-label:hover .checkmark {\n  border-color: var(--blue);\n}\n.btn-submit {\n  width: 100%;\n  padding: 14px;\n  background: var(--blue);\n  color: white;\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 1rem;\n  font-weight: 700;\n  cursor: pointer;\n  font-family: "Sora", sans-serif;\n  transition: all 0.22s;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  margin-top: 4px;\n  position: relative;\n  overflow: hidden;\n}\n.btn-submit::before {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background:\n    linear-gradient(\n      135deg,\n      transparent 40%,\n      rgba(255, 255, 255, 0.08));\n}\n.btn-submit:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-submit:active:not(:disabled) {\n  transform: scale(0.98);\n}\n.btn-submit:disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n  transform: none;\n}\n.btn-submit.loading {\n  pointer-events: none;\n}\n.btn-submit svg {\n  width: 16px;\n  height: 16px;\n  flex-shrink: 0;\n}\n.spinner {\n  width: 16px;\n  height: 16px;\n  border: 2px solid rgba(255, 255, 255, 0.3);\n  border-top: 2px solid white;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.loading-text {\n  opacity: 0.9;\n}\n.terms-note {\n  text-align: center;\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  margin-top: 14px;\n  line-height: 1.5;\n  animation: fadeSlideIn 0.4s 0.22s ease both;\n}\n.terms-note a {\n  color: var(--blue);\n  text-decoration: none;\n}\n.terms-note a:hover {\n  text-decoration: underline;\n}\n.switch-mode {\n  text-align: center;\n  margin-top: 20px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  animation: fadeSlideIn 0.4s 0.25s ease both;\n}\n.switch-mode a {\n  color: var(--blue);\n  font-weight: 600;\n  text-decoration: none;\n  cursor: pointer;\n}\n.switch-mode a:hover {\n  text-decoration: underline;\n}\n.success-state {\n  text-align: center;\n  padding: 24px 0;\n}\n.success-icon {\n  width: 68px;\n  height: 68px;\n  background: #ecfdf5;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n  border: 2px solid #a7f3d0;\n}\n.success-icon svg {\n  width: 32px;\n  height: 32px;\n  color: var(--green);\n}\n.success-state h2 {\n  font-family: "Sora", sans-serif;\n  font-size: 1.4rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.success-state p {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.back-link {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  text-decoration: none;\n  margin-bottom: 24px;\n  cursor: pointer;\n  transition: color 0.2s;\n}\n.back-link:hover {\n  color: var(--blue);\n}\n.back-link svg {\n  width: 14px;\n  height: 14px;\n}\n@keyframes fadeSlideIn {\n  from {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.slide-in {\n  animation: fadeSlideIn 0.32s ease both;\n}\n.toast {\n  position: fixed;\n  bottom: 24px;\n  left: 50%;\n  transform: translateX(-50%) translateY(80px);\n  background: #0f172a;\n  color: white;\n  padding: 12px 20px;\n  border-radius: 10px;\n  font-size: 0.88rem;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);\n  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;\n  opacity: 0;\n  z-index: 9999;\n  white-space: nowrap;\n}\n.toast.show {\n  transform: translateX(-50%) translateY(0);\n  opacity: 1;\n}\n.toast svg {\n  width: 16px;\n  height: 16px;\n}\n@media (max-width: 900px) {\n  .auth-wrapper {\n    grid-template-columns: 1fr;\n  }\n  .left-panel {\n    display: none;\n  }\n  .right-panel {\n    min-height: 100vh;\n    background: var(--bg-soft);\n    padding: 40px 20px;\n  }\n  .auth-box {\n    background: white;\n    border-radius: var(--radius-lg);\n    padding: 32px 24px;\n    box-shadow: var(--shadow-lg);\n    border: 1px solid var(--border);\n  }\n}\n@media (max-width: 480px) {\n  .right-panel {\n    padding: 24px 16px;\n    background: white;\n  }\n  .auth-box {\n    box-shadow: none;\n    border: none;\n    padding: 0;\n  }\n}\n/*# sourceMappingURL=auth.css.map */\n'] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AuthComponent, { className: "AuthComponent", filePath: "apps/interview-ready-web/src/app/auth/auth.ts", lineNumber: 19 });
+})();
+
 // apps/interview-ready-web/src/app/app.routes.ts
-var appRoutes = [];
+var appRoutes = [
+  {
+    path: "login",
+    component: AuthComponent
+  }
+];
 
 // apps/interview-ready-web/src/app/app.config.ts
 var appConfig = {
   providers: [provideBrowserGlobalErrorListeners(), provideRouter(appRoutes)]
 };
 
-// apps/interview-ready-web/src/app/nx-welcome.ts
-var NxWelcome = class _NxWelcome {
-  static \u0275fac = function NxWelcome_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _NxWelcome)();
+// apps/interview-ready-web/src/app/navbar/index.ts
+var Navbar = class _Navbar {
+  isOpen = signal(false, ...ngDevMode ? [{ debugName: "isOpen" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  toggle() {
+    this.isOpen.update((v) => !v);
+  }
+  static \u0275fac = function Navbar_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _Navbar)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NxWelcome, selectors: [["app-nx-welcome"]], decls: 165, vars: 0, consts: [[1, "wrapper"], [1, "container"], ["id", "welcome"], ["id", "hero", 1, "rounded"], [1, "text-container"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"], ["href", "#commands"], [1, "logo-container"], ["fill", "currentColor", "role", "img", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M11.987 14.138l-3.132 4.923-5.193-8.427-.012 8.822H0V4.544h3.691l5.247 8.833.005-3.998 3.044 4.759zm.601-5.761c.024-.048 0-3.784.008-3.833h-3.65c.002.059-.005 3.776-.003 3.833h3.645zm5.634 4.134a2.061 2.061 0 0 0-1.969 1.336 1.963 1.963 0 0 1 2.343-.739c.396.161.917.422 1.33.283a2.1 2.1 0 0 0-1.704-.88zm3.39 1.061c-.375-.13-.8-.277-1.109-.681-.06-.08-.116-.17-.176-.265a2.143 2.143 0 0 0-.533-.642c-.294-.216-.68-.322-1.18-.322a2.482 2.482 0 0 0-2.294 1.536 2.325 2.325 0 0 1 4.002.388.75.75 0 0 0 .836.334c.493-.105.46.36 1.203.518v-.133c-.003-.446-.246-.55-.75-.733zm2.024 1.266a.723.723 0 0 0 .347-.638c-.01-2.957-2.41-5.487-5.37-5.487a5.364 5.364 0 0 0-4.487 2.418c-.01-.026-1.522-2.39-1.538-2.418H8.943l3.463 5.423-3.379 5.32h3.54l1.54-2.366 1.568 2.366h3.541l-3.21-5.052a.7.7 0 0 1-.084-.32 2.69 2.69 0 0 1 2.69-2.691h.001c1.488 0 1.736.89 2.057 1.308.634.826 1.9.464 1.9 1.541a.707.707 0 0 0 1.066.596zm.35.133c-.173.372-.56.338-.755.639-.176.271.114.412.114.412s.337.156.538-.311c.104-.231.14-.488.103-.74z"], ["id", "middle-content"], ["id", "middle-left-content"], ["id", "learning-materials", 1, "rounded", "shadow"], ["href", "https://nx.dev/getting-started/intro?utm_source=nx-project", "target", "_blank", "rel", "noreferrer", 1, "list-item-link"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 5l7 7-7 7"], ["href", "https://nx.dev/blog?utm_source=nx-project", "target", "_blank", "rel", "noreferrer", 1, "list-item-link"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"], ["href", "https://www.youtube.com/@NxDevtools/videos?utm_source=nx-project&sub_confirmation=1", "target", "_blank", "rel", "noreferrer", 1, "list-item-link"], ["role", "img", "viewBox", "0 0 24 24", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"], ["href", "https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx-project", "target", "_blank", "rel", "noreferrer", 1, "list-item-link"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"], ["id", "nx-repo", "href", "https://github.com/nrwl/nx?utm_source=nx-project", "target", "_blank", "rel", "noreferrer", 1, "button-pill", "rounded", "shadow"], ["d", "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"], ["id", "other-links"], ["href", "https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console&utm_source=nx-project", "target", "_blank", "rel", "noreferrer", 1, "button-pill", "rounded", "shadow", "nx-console"], ["d", "M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"], ["href", "https://plugins.jetbrains.com/plugin/21060-nx-console", "target", "_blank", "rel", "noreferrer", 1, "button-pill", "rounded", "shadow", "nx-console-jetbrains"], ["height", "48", "width", "48", "viewBox", "20 20 60 60", "xmlns", "http://www.w3.org/2000/svg"], ["d", "m22.5 22.5h60v60h-60z"], ["fill", "#fff"], ["d", "m29.03 71.25h22.5v3.75h-22.5z"], ["d", "m28.09 38 1.67-1.58a1.88 1.88 0 0 0 1.47.87c.64 0 1.06-.44 1.06-1.31v-5.98h2.58v6a3.48 3.48 0 0 1 -.87 2.6 3.56 3.56 0 0 1 -2.57.95 3.84 3.84 0 0 1 -3.34-1.55z"], ["d", "m36 30h7.53v2.19h-5v1.44h4.49v2h-4.42v1.49h5v2.21h-7.6z"], ["d", "m47.23 32.29h-2.8v-2.29h8.21v2.27h-2.81v7.1h-2.6z"], ["d", "m29.13 43.08h4.42a3.53 3.53 0 0 1 2.55.83 2.09 2.09 0 0 1 .6 1.53 2.16 2.16 0 0 1 -1.44 2.09 2.27 2.27 0 0 1 1.86 2.29c0 1.61-1.31 2.59-3.55 2.59h-4.44zm5 2.89c0-.52-.42-.8-1.18-.8h-1.29v1.64h1.24c.79 0 1.25-.26 1.25-.81zm-.9 2.66h-1.57v1.73h1.62c.8 0 1.24-.31 1.24-.86 0-.5-.4-.87-1.27-.87z"], ["d", "m38 43.08h4.1a4.19 4.19 0 0 1 3 1 2.93 2.93 0 0 1 .9 2.19 3 3 0 0 1 -1.93 2.89l2.24 3.27h-3l-1.88-2.84h-.87v2.84h-2.56zm4 4.5c.87 0 1.39-.43 1.39-1.11 0-.75-.54-1.12-1.4-1.12h-1.44v2.26z"], ["d", "m49.59 43h2.5l4 9.44h-2.79l-.67-1.69h-3.63l-.67 1.69h-2.71zm2.27 5.73-1-2.65-1.06 2.65z"], ["d", "m56.46 43.05h2.6v9.37h-2.6z"], ["d", "m60.06 43.05h2.42l3.37 5v-5h2.57v9.37h-2.26l-3.53-5.14v5.14h-2.57z"], ["d", "m68.86 51 1.45-1.73a4.84 4.84 0 0 0 3 1.13c.71 0 1.08-.24 1.08-.65 0-.4-.31-.6-1.59-.91-2-.46-3.53-1-3.53-2.93 0-1.74 1.37-3 3.62-3a5.89 5.89 0 0 1 3.86 1.25l-1.26 1.84a4.63 4.63 0 0 0 -2.62-.92c-.63 0-.94.25-.94.6 0 .42.32.61 1.63.91 2.14.46 3.44 1.16 3.44 2.91 0 1.91-1.51 3-3.79 3a6.58 6.58 0 0 1 -4.35-1.5z"], ["id", "nx-cloud", 1, "rounded", "shadow"], ["id", "nx-cloud-logo", "role", "img", "xmlns", "http://www.w3.org/2000/svg", "stroke", "currentColor", "fill", "transparent", "viewBox", "0 0 24 24"], ["stroke-width", "2", "d", "M23 3.75V6.5c-3.036 0-5.5 2.464-5.5 5.5s-2.464 5.5-5.5 5.5-5.5 2.464-5.5 5.5H3.75C2.232 23 1 21.768 1 20.25V3.75C1 2.232 2.232 1 3.75 1h16.5C21.768 1 23 2.232 23 3.75Z"], ["stroke-width", "2", "d", "M23 6v14.1667C23 21.7307 21.7307 23 20.1667 23H6c0-3.128 2.53867-5.6667 5.6667-5.6667 3.128 0 5.6666-2.5386 5.6666-5.6666C17.3333 8.53867 19.872 6 23 6Z"], ["href", "https://nx.dev/nx-cloud?utm_source=nx-project", "target", "_blank", "rel", "noreferrer"], ["id", "commands", 1, "rounded", "shadow"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"], ["strokeLinecap", "round", "strokeLinejoin", "round", "strokeWidth", "2", "d", "M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"], ["id", "love"], ["fill", "currentColor", "stroke", "none", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"]], template: function NxWelcome_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Navbar, selectors: [["app-navbar"]], decls: 25, vars: 5, consts: [["href", "#main-content", 1, "skip-link"], ["role", "navigation", "aria-label", "Main navigation"], ["routerLink", "/", "aria-label", "InterviewReady home", 1, "nav-logo"], [1, "logo-icon"], ["fill", "none", "stroke", "white", "stroke-width", "2.5", "viewBox", "0 0 24 24", "aria-hidden", "true"], ["d", "M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"], [1, "nav-links"], ["href", "#how"], ["href", "#pricing"], ["routerLink", "/login", 1, "btn-outline"], ["href", "#", 1, "btn-primary"], ["aria-expanded", "false", "aria-label", "Toggle navigation menu", "type", "button", 1, "hamburger", 3, "click"], ["aria-hidden", "true"]], template: function Navbar_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275domElementStart(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "h1")(4, "span");
-      \u0275\u0275text(5, " Hello there, ");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(6, " Welcome interview-ready-web \u{1F44B} ");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275domElementStart(7, "div", 3)(8, "div", 4)(9, "h2");
+      \u0275\u0275elementStart(0, "a", 0);
+      \u0275\u0275text(1, "Skip to main content");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(2, "nav", 1)(3, "a", 2)(4, "div", 3);
       \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(10, "svg", 5);
-      \u0275\u0275domElement(11, "path", 6);
-      \u0275\u0275domElementEnd();
+      \u0275\u0275elementStart(5, "svg", 4);
+      \u0275\u0275element(6, "path", 5);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275text(7, " InterviewReady ");
+      \u0275\u0275elementEnd();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(12, "span");
-      \u0275\u0275text(13, "You're up and running");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275domElementStart(14, "a", 7);
-      \u0275\u0275text(15, " What's next? ");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275domElementStart(16, "div", 8);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(17, "svg", 9);
-      \u0275\u0275domElement(18, "path", 10);
-      \u0275\u0275domElementEnd()()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(19, "div", 11)(20, "div", 12)(21, "div", 13)(22, "h2");
-      \u0275\u0275text(23, "Learning materials");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElementStart(24, "a", 14);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(25, "svg", 5);
-      \u0275\u0275domElement(26, "path", 15);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(27, "span");
-      \u0275\u0275text(28, " Documentation ");
-      \u0275\u0275domElementStart(29, "span");
-      \u0275\u0275text(30, " Everything is in there ");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(31, "svg", 5);
-      \u0275\u0275domElement(32, "path", 16);
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(33, "a", 17);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(34, "svg", 5);
-      \u0275\u0275domElement(35, "path", 18);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(36, "span");
-      \u0275\u0275text(37, " Blog ");
-      \u0275\u0275domElementStart(38, "span");
-      \u0275\u0275text(39, " Changelog, features & events ");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(40, "svg", 5);
-      \u0275\u0275domElement(41, "path", 16);
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(42, "a", 19);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(43, "svg", 20)(44, "title");
-      \u0275\u0275text(45, "YouTube");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElement(46, "path", 21);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(47, "span");
-      \u0275\u0275text(48, " YouTube channel ");
-      \u0275\u0275domElementStart(49, "span");
-      \u0275\u0275text(50, " Nx Show, talks & tutorials ");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(51, "svg", 5);
-      \u0275\u0275domElement(52, "path", 16);
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(53, "a", 22);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(54, "svg", 5);
-      \u0275\u0275domElement(55, "path", 23);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(56, "span");
-      \u0275\u0275text(57, " Interactive tutorials ");
-      \u0275\u0275domElementStart(58, "span");
-      \u0275\u0275text(59, " Create an app, step-by-step ");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(60, "svg", 5);
-      \u0275\u0275domElement(61, "path", 16);
-      \u0275\u0275domElementEnd()()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(62, "a", 24);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(63, "svg", 9);
-      \u0275\u0275domElement(64, "path", 25);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(65, "span");
-      \u0275\u0275text(66, " Nx is open source ");
-      \u0275\u0275domElementStart(67, "span");
-      \u0275\u0275text(68, " Love Nx? Give us a star! ");
-      \u0275\u0275domElementEnd()()()();
-      \u0275\u0275domElementStart(69, "div", 26)(70, "a", 27);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(71, "svg", 9)(72, "title");
-      \u0275\u0275text(73, "Visual Studio Code");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElement(74, "path", 28);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(75, "span");
-      \u0275\u0275text(76, " Install Nx Console for VSCode ");
-      \u0275\u0275domElementStart(77, "span");
-      \u0275\u0275text(78, "The official VSCode extension for Nx.");
-      \u0275\u0275domElementEnd()()();
-      \u0275\u0275domElementStart(79, "a", 29);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(80, "svg", 30);
-      \u0275\u0275domElement(81, "path", 31);
-      \u0275\u0275domElementStart(82, "g", 32);
-      \u0275\u0275domElement(83, "path", 33)(84, "path", 34)(85, "path", 35)(86, "path", 36)(87, "path", 37)(88, "path", 38)(89, "path", 39)(90, "path", 40)(91, "path", 41)(92, "path", 42);
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(93, "span");
-      \u0275\u0275text(94, " Install Nx Console for JetBrains ");
-      \u0275\u0275domElementStart(95, "span");
-      \u0275\u0275text(96, "Available for WebStorm, Intellij IDEA Ultimate and more!");
-      \u0275\u0275domElementEnd()()();
-      \u0275\u0275domElementStart(97, "div", 43)(98, "div");
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(99, "svg", 44);
-      \u0275\u0275domElement(100, "path", 45)(101, "path", 46);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(102, "h2");
-      \u0275\u0275text(103, " Nx Cloud ");
-      \u0275\u0275domElementStart(104, "span");
-      \u0275\u0275text(105, " Enable faster CI & better DX ");
-      \u0275\u0275domElementEnd()()();
-      \u0275\u0275domElementStart(106, "p");
-      \u0275\u0275text(107, " You can activate distributed tasks executions and caching by running: ");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElementStart(108, "pre");
-      \u0275\u0275text(109, "nx connect");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElementStart(110, "a", 47);
-      \u0275\u0275text(111, " What is Nx Cloud? ");
-      \u0275\u0275domElementEnd()()()();
-      \u0275\u0275domElementStart(112, "div", 48)(113, "h2");
-      \u0275\u0275text(114, "Next steps");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElementStart(115, "p");
-      \u0275\u0275text(116, "Here are some things you can do with Nx:");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElementStart(117, "details")(118, "summary");
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(119, "svg", 5);
-      \u0275\u0275domElement(120, "path", 49);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(121, " Build, test and lint your app ");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(122, "pre")(123, "span");
-      \u0275\u0275text(124, "# Build");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(125, "\nnx build \n");
-      \u0275\u0275domElementStart(126, "span");
-      \u0275\u0275text(127, "# Test");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(128, "\nnx test \n");
-      \u0275\u0275domElementStart(129, "span");
-      \u0275\u0275text(130, "# Lint");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(131, "\nnx lint \n");
-      \u0275\u0275domElementStart(132, "span");
-      \u0275\u0275text(133, "# Run them together!");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(134, "\nnx run-many -t build test lint");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275domElementStart(135, "details")(136, "summary");
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(137, "svg", 5);
-      \u0275\u0275domElement(138, "path", 50);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(139, " View project details ");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(140, "pre");
-      \u0275\u0275text(141, "nx show project interview-ready-web");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275domElementStart(142, "details")(143, "summary");
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(144, "svg", 5);
-      \u0275\u0275domElement(145, "path", 49);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(146, " View interactive project graph ");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(147, "pre");
-      \u0275\u0275text(148, "nx graph");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275domElementStart(149, "details")(150, "summary");
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(151, "svg", 5);
-      \u0275\u0275domElement(152, "path", 49);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(153, " Add UI library ");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275domElementStart(154, "pre")(155, "span");
-      \u0275\u0275text(156, "# Generate UI lib");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(157, "\nnx g @nx/angular:lib ui\n");
-      \u0275\u0275domElementStart(158, "span");
-      \u0275\u0275text(159, "# Add a component");
-      \u0275\u0275domElementEnd();
-      \u0275\u0275text(160, "\nnx g @nx/angular:component ui/src/lib/button");
-      \u0275\u0275domElementEnd()()();
-      \u0275\u0275domElementStart(161, "p", 51);
-      \u0275\u0275text(162, " Carefully crafted with ");
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(163, "svg", 52);
-      \u0275\u0275domElement(164, "path", 53);
-      \u0275\u0275domElementEnd()()()();
+      \u0275\u0275elementStart(8, "ul", 6)(9, "li")(10, "a", 7);
+      \u0275\u0275text(11, "How It Works");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(12, "li")(13, "a", 8);
+      \u0275\u0275text(14, "Pricing");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(15, "li")(16, "a", 9);
+      \u0275\u0275text(17, "Login");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(18, "li")(19, "a", 10);
+      \u0275\u0275text(20, "Become Interviewer");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(21, "button", 11);
+      \u0275\u0275listener("click", function Navbar_Template_button_click_21_listener() {
+        return ctx.toggle();
+      });
+      \u0275\u0275element(22, "span", 12)(23, "span", 12)(24, "span", 12);
+      \u0275\u0275elementEnd()();
     }
-  }, dependencies: [CommonModule], styles: ['/* angular:styles/component:scss;8052d53e1ae4d631b2ede52bbd2e26187318fec0b66f51c5fbf7e891e53c748d;/home/runner/work/shivmadhav-apps/shivmadhav-apps/apps/interview-ready-web/src/app/nx-welcome.ts */\nhtml {\n  -webkit-text-size-adjust: 100%;\n  font-family:\n    ui-sans-serif,\n    system-ui,\n    -apple-system,\n    BlinkMacSystemFont,\n    "Segoe UI",\n    Roboto,\n    "Helvetica Neue",\n    Arial,\n    "Noto Sans",\n    sans-serif,\n    "Apple Color Emoji",\n    "Segoe UI Emoji",\n    "Segoe UI Symbol",\n    "Noto Color Emoji";\n  line-height: 1.5;\n  tab-size: 4;\n  scroll-behavior: smooth;\n}\nbody {\n  font-family: inherit;\n  line-height: inherit;\n  margin: 0;\n}\nh1,\nh2,\np,\npre {\n  margin: 0;\n}\n*,\n::before,\n::after {\n  box-sizing: border-box;\n  border-width: 0;\n  border-style: solid;\n  border-color: currentColor;\n}\nh1,\nh2 {\n  font-size: inherit;\n  font-weight: inherit;\n}\na {\n  color: inherit;\n  text-decoration: inherit;\n}\npre {\n  font-family:\n    ui-monospace,\n    SFMono-Regular,\n    Menlo,\n    Monaco,\n    Consolas,\n    "Liberation Mono",\n    "Courier New",\n    monospace;\n}\nsvg {\n  display: block;\n  vertical-align: middle;\n}\nsvg {\n  shape-rendering: auto;\n  text-rendering: optimizeLegibility;\n}\npre {\n  background-color: rgb(55, 65, 81);\n  border-radius: 0.25rem;\n  color: rgb(229, 231, 235);\n  font-family:\n    ui-monospace,\n    SFMono-Regular,\n    Menlo,\n    Monaco,\n    Consolas,\n    "Liberation Mono",\n    "Courier New",\n    monospace;\n  overflow: auto;\n  padding: 0.5rem 0.75rem;\n}\n.shadow {\n  box-shadow:\n    0 0 rgba(0, 0, 0, 0),\n    0 0 rgba(0, 0, 0, 0),\n    0 10px 15px -3px rgba(0, 0, 0, 0.1),\n    0 4px 6px -2px rgba(0, 0, 0, 0.05);\n}\n.rounded {\n  border-radius: 1.5rem;\n}\n.wrapper {\n  width: 100%;\n}\n.container {\n  margin-left: auto;\n  margin-right: auto;\n  max-width: 768px;\n  padding-bottom: 3rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: rgb(55, 65, 81);\n  width: 100%;\n}\n#welcome {\n  margin-top: 2.5rem;\n}\n#welcome h1 {\n  font-size: 3rem;\n  font-weight: 500;\n  letter-spacing: -0.025em;\n  line-height: 1;\n}\n#welcome span {\n  display: block;\n  font-size: 1.875rem;\n  font-weight: 300;\n  line-height: 2.25rem;\n  margin-bottom: 0.5rem;\n}\n#hero {\n  align-items: center;\n  background-color: hsl(214, 62%, 21%);\n  border: none;\n  box-sizing: border-box;\n  color: rgb(55, 65, 81);\n  display: grid;\n  grid-template-columns: 1fr;\n  margin-top: 3.5rem;\n}\n#hero .text-container {\n  color: rgb(255, 255, 255);\n  padding: 3rem 2rem;\n}\n#hero .text-container h2 {\n  font-size: 1.5rem;\n  line-height: 2rem;\n  position: relative;\n}\n#hero .text-container h2 svg {\n  color: hsl(162, 47%, 50%);\n  height: 2rem;\n  left: -0.25rem;\n  position: absolute;\n  top: 0;\n  width: 2rem;\n}\n#hero .text-container h2 span {\n  margin-left: 2.5rem;\n}\n#hero .text-container a {\n  background-color: rgb(255, 255, 255);\n  border-radius: 0.75rem;\n  color: rgb(55, 65, 81);\n  display: inline-block;\n  margin-top: 1.5rem;\n  padding: 1rem 2rem;\n  text-decoration: inherit;\n}\n#hero .logo-container {\n  display: none;\n  justify-content: center;\n  padding-left: 2rem;\n  padding-right: 2rem;\n}\n#hero .logo-container svg {\n  color: rgb(255, 255, 255);\n  width: 66.666667%;\n}\n#middle-content {\n  align-items: flex-start;\n  display: grid;\n  grid-template-columns: 1fr;\n  margin-top: 3.5rem;\n}\n#middle-content #middle-left-content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n}\n#learning-materials {\n  padding: 2.5rem 2rem;\n}\n#learning-materials h2 {\n  font-weight: 500;\n  font-size: 1.25rem;\n  letter-spacing: -0.025em;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.list-item-link {\n  align-items: center;\n  border-radius: 0.75rem;\n  display: flex;\n  margin-top: 1rem;\n  padding: 1rem;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  width: 100%;\n}\n.list-item-link svg:first-child {\n  margin-right: 1rem;\n  height: 1.5rem;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  width: 1.5rem;\n}\n.list-item-link > span {\n  flex-grow: 1;\n  font-weight: 400;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.list-item-link > span > span {\n  color: rgb(107, 114, 128);\n  display: block;\n  flex-grow: 1;\n  font-size: 0.75rem;\n  font-weight: 300;\n  line-height: 1rem;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.list-item-link svg:last-child {\n  height: 1rem;\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  width: 1rem;\n}\n.list-item-link:hover {\n  color: rgb(255, 255, 255);\n  background-color: hsl(162, 55%, 33%);\n}\n.list-item-link:hover > span > span {\n  color: rgb(243, 244, 246);\n}\n.list-item-link:hover svg:last-child {\n  transform: translateX(0.25rem);\n}\n.button-pill {\n  padding: 1.5rem 2rem;\n  margin-bottom: 2rem;\n  transition-duration: 300ms;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  align-items: center;\n  display: flex;\n}\n.button-pill svg {\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  flex-shrink: 0;\n  width: 3rem;\n}\n.button-pill > span {\n  letter-spacing: -0.025em;\n  font-weight: 400;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.button-pill span span {\n  display: block;\n  font-size: 0.875rem;\n  font-weight: 300;\n  line-height: 1.25rem;\n}\n.button-pill:hover svg,\n.button-pill:hover {\n  color: rgb(255, 255, 255) !important;\n}\n.nx-console:hover {\n  background-color: rgb(0, 122, 204);\n}\n.nx-console svg {\n  color: rgb(0, 122, 204);\n}\n.nx-console-jetbrains {\n  margin-top: 2rem;\n}\n.nx-console-jetbrains:hover {\n  background-color: rgb(255, 49, 140);\n}\n.nx-console-jetbrains svg {\n  color: rgb(255, 49, 140);\n}\n#nx-repo:hover {\n  background-color: rgb(24, 23, 23);\n}\n#nx-repo svg {\n  color: rgb(24, 23, 23);\n}\n#nx-cloud {\n  margin-bottom: 2rem;\n  margin-top: 2rem;\n  padding: 2.5rem 2rem;\n}\n#nx-cloud > div {\n  align-items: center;\n  display: flex;\n}\n#nx-cloud > div svg {\n  border-radius: 0.375rem;\n  flex-shrink: 0;\n  width: 3rem;\n}\n#nx-cloud > div h2 {\n  font-size: 1.125rem;\n  font-weight: 400;\n  letter-spacing: -0.025em;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n#nx-cloud > div h2 span {\n  display: block;\n  font-size: 0.875rem;\n  font-weight: 300;\n  line-height: 1.25rem;\n}\n#nx-cloud p {\n  font-size: 1rem;\n  line-height: 1.5rem;\n  margin-top: 1rem;\n}\n#nx-cloud pre {\n  margin-top: 1rem;\n}\n#nx-cloud a {\n  color: rgb(107, 114, 128);\n  display: block;\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n  margin-top: 1.5rem;\n  text-align: right;\n}\n#nx-cloud a:hover {\n  text-decoration: underline;\n}\n#commands {\n  padding: 2.5rem 2rem;\n  margin-top: 3.5rem;\n}\n#commands h2 {\n  font-size: 1.25rem;\n  font-weight: 400;\n  letter-spacing: -0.025em;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n#commands p {\n  font-size: 1rem;\n  font-weight: 300;\n  line-height: 1.5rem;\n  margin-top: 1rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\ndetails {\n  align-items: center;\n  display: flex;\n  margin-top: 1rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  width: 100%;\n}\ndetails pre > span {\n  color: rgb(181, 181, 181);\n}\nsummary {\n  border-radius: 0.5rem;\n  display: flex;\n  font-weight: 400;\n  padding: 0.5rem;\n  cursor: pointer;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\nsummary:hover {\n  background-color: rgb(243, 244, 246);\n}\nsummary svg {\n  height: 1.5rem;\n  margin-right: 1rem;\n  width: 1.5rem;\n}\n#love {\n  color: rgb(107, 114, 128);\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n  margin-top: 3.5rem;\n  opacity: 0.6;\n  text-align: center;\n}\n#love svg {\n  color: rgb(252, 165, 165);\n  width: 1.25rem;\n  height: 1.25rem;\n  display: inline;\n  margin-top: -0.25rem;\n}\n@media screen and (min-width: 768px) {\n  #hero {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n  #hero .logo-container {\n    display: flex;\n  }\n  #middle-content {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 4rem;\n  }\n}\n/*# sourceMappingURL=nx-welcome.css.map */\n'], encapsulation: 2 });
+    if (rf & 2) {
+      \u0275\u0275advance(8);
+      \u0275\u0275classProp("open", ctx.isOpen());
+      \u0275\u0275advance(13);
+      \u0275\u0275classProp("open", ctx.isOpen());
+      \u0275\u0275attribute("aria-expanded", ctx.isOpen());
+    }
+  }, dependencies: [CommonModule, RouterLink], styles: ['\n[_nghost-%COMP%] {\n  display: block;\n}\n.skip-link[_ngcontent-%COMP%] {\n  position: absolute;\n  top: -40px;\n  left: 6px;\n  background: var(--primary);\n  color: white;\n  padding: 8px;\n  text-decoration: none;\n  border-radius: 4px;\n  z-index: 1000;\n  font-size: 0.875rem;\n  font-weight: 500;\n}\n.skip-link[_ngcontent-%COMP%]:focus {\n  top: 6px;\n}\nnav[_ngcontent-%COMP%] {\n  position: sticky;\n  top: 0;\n  z-index: 100;\n  background: rgba(255, 255, 255, 0.92);\n  -webkit-backdrop-filter: blur(16px);\n  backdrop-filter: blur(16px);\n  border-bottom: 1px solid var(--border);\n  padding: 0 clamp(20px, 5vw, 80px);\n  height: 68px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 24px;\n}\n.nav-logo[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.15rem;\n  color: var(--text);\n  flex-shrink: 0;\n}\n.nav-logo[_ngcontent-%COMP%]:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n  border-radius: 8px;\n}\n.logo-icon[_ngcontent-%COMP%] {\n  width: 36px;\n  height: 36px;\n  background: var(--primary);\n  border-radius: 10px;\n  display: grid;\n  place-items: center;\n}\n.logo-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 20px;\n  height: 20px;\n}\n.nav-links[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n  list-style: none;\n}\n.nav-links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  text-decoration: none;\n  color: var(--text-soft);\n  font-size: 0.9rem;\n  font-weight: 500;\n  padding: 8px 14px;\n  border-radius: 8px;\n  transition: all 0.2s;\n  white-space: nowrap;\n  cursor: pointer;\n}\n.nav-links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  color: var(--primary);\n  background: var(--blue-light);\n}\n.nav-links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n}\n.nav-links[_ngcontent-%COMP%]   .btn-outline[_ngcontent-%COMP%] {\n  border: 1.5px solid var(--border);\n  color: var(--text);\n}\n.nav-links[_ngcontent-%COMP%]   .btn-outline[_ngcontent-%COMP%]:hover {\n  border-color: var(--primary);\n  color: var(--primary);\n  background: var(--blue-light);\n}\n.nav-links[_ngcontent-%COMP%]   .btn-outline[_ngcontent-%COMP%]:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n}\n.nav-links[_ngcontent-%COMP%]   .btn-primary[_ngcontent-%COMP%] {\n  background: var(--primary);\n  color: white;\n}\n.nav-links[_ngcontent-%COMP%]   .btn-primary[_ngcontent-%COMP%]:hover {\n  background: var(--blue-dark);\n  color: white;\n}\n.nav-links[_ngcontent-%COMP%]   .btn-primary[_ngcontent-%COMP%]:focus-visible {\n  outline: 2px solid white;\n  outline-offset: 2px;\n}\n.hamburger[_ngcontent-%COMP%] {\n  display: none;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  gap: 6px;\n  width: 40px;\n  height: 40px;\n  cursor: pointer;\n  padding: 8px;\n  border: none;\n  background: transparent;\n  border-radius: 8px;\n  transition: background 0.2s;\n}\n.hamburger[_ngcontent-%COMP%]:hover {\n  background: var(--blue-light);\n}\n.hamburger[_ngcontent-%COMP%]:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n}\n.hamburger[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  display: block;\n  width: 24px;\n  height: 2px;\n  background: var(--text);\n  border-radius: 2px;\n  transition: all 0.3s ease;\n}\n.hamburger.open[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]:nth-child(1) {\n  transform: translateY(8px) rotate(45deg);\n}\n.hamburger.open[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]:nth-child(2) {\n  opacity: 0;\n}\n.hamburger.open[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]:nth-child(3) {\n  transform: translateY(-8px) rotate(-45deg);\n}\n@media (max-width: 768px) {\n  .nav-links[_ngcontent-%COMP%] {\n    display: none;\n    flex-direction: column;\n    position: absolute;\n    top: 68px;\n    left: 0;\n    right: 0;\n    background: white;\n    border-bottom: 1px solid var(--border);\n    padding: 12px 16px;\n    gap: 4px;\n    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);\n    opacity: 0;\n    transform: translateY(-10px);\n    transition: all 0.3s ease;\n  }\n  .nav-links.open[_ngcontent-%COMP%] {\n    display: flex;\n    opacity: 1;\n    transform: translateY(0);\n  }\n  .nav-links[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n    width: 100%;\n    text-align: center;\n  }\n  .nav-links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n    display: block;\n    padding: 14px 16px;\n    width: 100%;\n    font-size: 1rem;\n    border-radius: 8px;\n    transition: background 0.2s, color 0.2s;\n  }\n  .nav-links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n    background: var(--blue-light);\n    color: var(--primary);\n  }\n  .nav-links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:focus-visible {\n    outline: 2px solid var(--primary);\n    outline-offset: 2px;\n  }\n  .nav-links[_ngcontent-%COMP%]   .btn-outline[_ngcontent-%COMP%], \n   .nav-links[_ngcontent-%COMP%]   .btn-primary[_ngcontent-%COMP%] {\n    margin: 4px 0;\n  }\n  .nav-links[_ngcontent-%COMP%]   .btn-outline[_ngcontent-%COMP%]:focus-visible, \n   .nav-links[_ngcontent-%COMP%]   .btn-primary[_ngcontent-%COMP%]:focus-visible {\n    outline: 2px solid var(--primary);\n    outline-offset: 2px;\n  }\n  .hamburger[_ngcontent-%COMP%] {\n    display: flex;\n  }\n}\n/*# sourceMappingURL=navbar.css.map */'] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NxWelcome, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Navbar, [{
     type: Component,
-    args: [{ selector: "app-nx-welcome", imports: [CommonModule], template: `
-    <!--
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     This is a starter component and can be deleted.
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     Delete this file and get started with your project!
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     -->
-
-    <style>
-      html {
-        -webkit-text-size-adjust: 100%;
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          Roboto,
-          'Helvetica Neue',
-          Arial,
-          'Noto Sans',
-          sans-serif,
-          'Apple Color Emoji',
-          'Segoe UI Emoji',
-          'Segoe UI Symbol',
-          'Noto Color Emoji';
-        line-height: 1.5;
-        tab-size: 4;
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: inherit;
-        line-height: inherit;
-        margin: 0;
-      }
-      h1,
-      h2,
-      p,
-      pre {
-        margin: 0;
-      }
-      *,
-      ::before,
-      ::after {
-        box-sizing: border-box;
-        border-width: 0;
-        border-style: solid;
-        border-color: currentColor;
-      }
-      h1,
-      h2 {
-        font-size: inherit;
-        font-weight: inherit;
-      }
-      a {
-        color: inherit;
-        text-decoration: inherit;
-      }
-      pre {
-        font-family:
-          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          'Liberation Mono', 'Courier New', monospace;
-      }
-      svg {
-        display: block;
-        vertical-align: middle;
-      }
-      svg {
-        shape-rendering: auto;
-        text-rendering: optimizeLegibility;
-      }
-      pre {
-        background-color: rgba(55, 65, 81, 1);
-        border-radius: 0.25rem;
-        color: rgba(229, 231, 235, 1);
-        font-family:
-          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          'Liberation Mono', 'Courier New', monospace;
-        overflow: auto;
-        padding: 0.5rem 0.75rem;
-      }
-      .shadow {
-        box-shadow:
-          0 0 #0000,
-          0 0 #0000,
-          0 10px 15px -3px rgba(0, 0, 0, 0.1),
-          0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      }
-      .rounded {
-        border-radius: 1.5rem;
-      }
-      .wrapper {
-        width: 100%;
-      }
-      .container {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 768px;
-        padding-bottom: 3rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        color: rgba(55, 65, 81, 1);
-        width: 100%;
-      }
-      #welcome {
-        margin-top: 2.5rem;
-      }
-      #welcome h1 {
-        font-size: 3rem;
-        font-weight: 500;
-        letter-spacing: -0.025em;
-        line-height: 1;
-      }
-      #welcome span {
-        display: block;
-        font-size: 1.875rem;
-        font-weight: 300;
-        line-height: 2.25rem;
-        margin-bottom: 0.5rem;
-      }
-      #hero {
-        align-items: center;
-        background-color: hsla(214, 62%, 21%, 1);
-        border: none;
-        box-sizing: border-box;
-        color: rgba(55, 65, 81, 1);
-        display: grid;
-        grid-template-columns: 1fr;
-        margin-top: 3.5rem;
-      }
-      #hero .text-container {
-        color: rgba(255, 255, 255, 1);
-        padding: 3rem 2rem;
-      }
-      #hero .text-container h2 {
-        font-size: 1.5rem;
-        line-height: 2rem;
-        position: relative;
-      }
-      #hero .text-container h2 svg {
-        color: hsla(162, 47%, 50%, 1);
-        height: 2rem;
-        left: -0.25rem;
-        position: absolute;
-        top: 0;
-        width: 2rem;
-      }
-      #hero .text-container h2 span {
-        margin-left: 2.5rem;
-      }
-      #hero .text-container a {
-        background-color: rgba(255, 255, 255, 1);
-        border-radius: 0.75rem;
-        color: rgba(55, 65, 81, 1);
-        display: inline-block;
-        margin-top: 1.5rem;
-        padding: 1rem 2rem;
-        text-decoration: inherit;
-      }
-      #hero .logo-container {
-        display: none;
-        justify-content: center;
-        padding-left: 2rem;
-        padding-right: 2rem;
-      }
-      #hero .logo-container svg {
-        color: rgba(255, 255, 255, 1);
-        width: 66.666667%;
-      }
-      #middle-content {
-        align-items: flex-start;
-        display: grid;
-        grid-template-columns: 1fr;
-        margin-top: 3.5rem;
-      }
-      #middle-content #middle-left-content {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-      #learning-materials {
-        padding: 2.5rem 2rem;
-      }
-      #learning-materials h2 {
-        font-weight: 500;
-        font-size: 1.25rem;
-        letter-spacing: -0.025em;
-        line-height: 1.75rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      .list-item-link {
-        align-items: center;
-        border-radius: 0.75rem;
-        display: flex;
-        margin-top: 1rem;
-        padding: 1rem;
-        transition-property:
-          background-color,
-          border-color,
-          color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          backdrop-filter,
-          -webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-        width: 100%;
-      }
-      .list-item-link svg:first-child {
-        margin-right: 1rem;
-        height: 1.5rem;
-        transition-property:
-          background-color,
-          border-color,
-          color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          backdrop-filter,
-          -webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-        width: 1.5rem;
-      }
-      .list-item-link > span {
-        flex-grow: 1;
-        font-weight: 400;
-        transition-property:
-          background-color,
-          border-color,
-          color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          backdrop-filter,
-          -webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .list-item-link > span > span {
-        color: rgba(107, 114, 128, 1);
-        display: block;
-        flex-grow: 1;
-        font-size: 0.75rem;
-        font-weight: 300;
-        line-height: 1rem;
-        transition-property:
-          background-color,
-          border-color,
-          color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          backdrop-filter,
-          -webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .list-item-link svg:last-child {
-        height: 1rem;
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-        width: 1rem;
-      }
-      .list-item-link:hover {
-        color: rgba(255, 255, 255, 1);
-        background-color: hsla(162, 55%, 33%, 1);
-      }
-
-      .list-item-link:hover > span > span {
-        color: rgba(243, 244, 246, 1);
-      }
-      .list-item-link:hover svg:last-child {
-        transform: translateX(0.25rem);
-      }
-
-      .button-pill {
-        padding: 1.5rem 2rem;
-        margin-bottom: 2rem;
-        transition-duration: 300ms;
-        transition-property:
-          background-color,
-          border-color,
-          color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          backdrop-filter,
-          -webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        align-items: center;
-        display: flex;
-      }
-      .button-pill svg {
-        transition-property:
-          background-color,
-          border-color,
-          color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          backdrop-filter,
-          -webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-        flex-shrink: 0;
-        width: 3rem;
-      }
-      .button-pill > span {
-        letter-spacing: -0.025em;
-        font-weight: 400;
-        font-size: 1.125rem;
-        line-height: 1.75rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      .button-pill span span {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 300;
-        line-height: 1.25rem;
-      }
-      .button-pill:hover svg,
-      .button-pill:hover {
-        color: rgba(255, 255, 255, 1) !important;
-      }
-      .nx-console:hover {
-        background-color: rgba(0, 122, 204, 1);
-      }
-      .nx-console svg {
-        color: rgba(0, 122, 204, 1);
-      }
-      .nx-console-jetbrains {
-        margin-top: 2rem;
-      }
-      .nx-console-jetbrains:hover {
-        background-color: rgba(255, 49, 140, 1);
-      }
-      .nx-console-jetbrains svg {
-        color: rgba(255, 49, 140, 1);
-      }
-      #nx-repo:hover {
-        background-color: rgba(24, 23, 23, 1);
-      }
-      #nx-repo svg {
-        color: rgba(24, 23, 23, 1);
-      }
-      #nx-cloud {
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-        padding: 2.5rem 2rem;
-      }
-      #nx-cloud > div {
-        align-items: center;
-        display: flex;
-      }
-      #nx-cloud > div svg {
-        border-radius: 0.375rem;
-        flex-shrink: 0;
-        width: 3rem;
-      }
-      #nx-cloud > div h2 {
-        font-size: 1.125rem;
-        font-weight: 400;
-        letter-spacing: -0.025em;
-        line-height: 1.75rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      #nx-cloud > div h2 span {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 300;
-        line-height: 1.25rem;
-      }
-      #nx-cloud p {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        margin-top: 1rem;
-      }
-      #nx-cloud pre {
-        margin-top: 1rem;
-      }
-      #nx-cloud a {
-        color: rgba(107, 114, 128, 1);
-        display: block;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        margin-top: 1.5rem;
-        text-align: right;
-      }
-      #nx-cloud a:hover {
-        text-decoration: underline;
-      }
-      #commands {
-        padding: 2.5rem 2rem;
-        margin-top: 3.5rem;
-      }
-      #commands h2 {
-        font-size: 1.25rem;
-        font-weight: 400;
-        letter-spacing: -0.025em;
-        line-height: 1.75rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      #commands p {
-        font-size: 1rem;
-        font-weight: 300;
-        line-height: 1.5rem;
-        margin-top: 1rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      details {
-        align-items: center;
-        display: flex;
-        margin-top: 1rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        width: 100%;
-      }
-      details pre > span {
-        color: rgba(181, 181, 181, 1);
-      }
-      summary {
-        border-radius: 0.5rem;
-        display: flex;
-        font-weight: 400;
-        padding: 0.5rem;
-        cursor: pointer;
-        transition-property:
-          background-color,
-          border-color,
-          color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          backdrop-filter,
-          -webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-      }
-      summary:hover {
-        background-color: rgba(243, 244, 246, 1);
-      }
-      summary svg {
-        height: 1.5rem;
-        margin-right: 1rem;
-        width: 1.5rem;
-      }
-      #love {
-        color: rgba(107, 114, 128, 1);
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        margin-top: 3.5rem;
-        opacity: 0.6;
-        text-align: center;
-      }
-      #love svg {
-        color: rgba(252, 165, 165, 1);
-        width: 1.25rem;
-        height: 1.25rem;
-        display: inline;
-        margin-top: -0.25rem;
-      }
-      @media screen and (min-width: 768px) {
-        #hero {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-        #hero .logo-container {
-          display: flex;
-        }
-        #middle-content {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 4rem;
-        }
-      }
-    </style>
-
-    <div class="wrapper">
-      <div class="container">
-        <!--  WELCOME  -->
-        <div id="welcome">
-          <h1>
-            <span> Hello there, </span>
-            Welcome interview-ready-web \u{1F44B}
-          </h1>
-        </div>
-        <!--  HERO  -->
-        <div id="hero" class="rounded">
-          <div class="text-container">
-            <h2>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                />
-              </svg>
-              <span>You&apos;re up and running</span>
-            </h2>
-            <a href="#commands"> What&apos;s next? </a>
-          </div>
-          <div class="logo-container">
-            <svg
-              fill="currentColor"
-              role="img"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.987 14.138l-3.132 4.923-5.193-8.427-.012 8.822H0V4.544h3.691l5.247 8.833.005-3.998 3.044 4.759zm.601-5.761c.024-.048 0-3.784.008-3.833h-3.65c.002.059-.005 3.776-.003 3.833h3.645zm5.634 4.134a2.061 2.061 0 0 0-1.969 1.336 1.963 1.963 0 0 1 2.343-.739c.396.161.917.422 1.33.283a2.1 2.1 0 0 0-1.704-.88zm3.39 1.061c-.375-.13-.8-.277-1.109-.681-.06-.08-.116-.17-.176-.265a2.143 2.143 0 0 0-.533-.642c-.294-.216-.68-.322-1.18-.322a2.482 2.482 0 0 0-2.294 1.536 2.325 2.325 0 0 1 4.002.388.75.75 0 0 0 .836.334c.493-.105.46.36 1.203.518v-.133c-.003-.446-.246-.55-.75-.733zm2.024 1.266a.723.723 0 0 0 .347-.638c-.01-2.957-2.41-5.487-5.37-5.487a5.364 5.364 0 0 0-4.487 2.418c-.01-.026-1.522-2.39-1.538-2.418H8.943l3.463 5.423-3.379 5.32h3.54l1.54-2.366 1.568 2.366h3.541l-3.21-5.052a.7.7 0 0 1-.084-.32 2.69 2.69 0 0 1 2.69-2.691h.001c1.488 0 1.736.89 2.057 1.308.634.826 1.9.464 1.9 1.541a.707.707 0 0 0 1.066.596zm.35.133c-.173.372-.56.338-.755.639-.176.271.114.412.114.412s.337.156.538-.311c.104-.231.14-.488.103-.74z"
-              />
-            </svg>
-          </div>
-        </div>
-        <!--  MIDDLE CONTENT  -->
-        <div id="middle-content">
-          <div id="middle-left-content">
-            <div id="learning-materials" class="rounded shadow">
-              <h2>Learning materials</h2>
-              <a
-                href="https://nx.dev/getting-started/intro?utm_source=nx-project"
-                target="_blank"
-                rel="noreferrer"
-                class="list-item-link"
-              >
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                  />
-                </svg>
-                <span>
-                  Documentation
-                  <span> Everything is in there </span>
-                </span>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://nx.dev/blog?utm_source=nx-project"
-                target="_blank"
-                rel="noreferrer"
-                class="list-item-link"
-              >
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                  />
-                </svg>
-                <span>
-                  Blog
-                  <span> Changelog, features & events </span>
-                </span>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://www.youtube.com/@NxDevtools/videos?utm_source=nx-project&sub_confirmation=1"
-                target="_blank"
-                rel="noreferrer"
-                class="list-item-link"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>YouTube</title>
-                  <path
-                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-                  />
-                </svg>
-                <span>
-                  YouTube channel
-                  <span> Nx Show, talks & tutorials </span>
-                </span>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx-project"
-                target="_blank"
-                rel="noreferrer"
-                class="list-item-link"
-              >
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
-                  />
-                </svg>
-                <span>
-                  Interactive tutorials
-                  <span> Create an app, step-by-step </span>
-                </span>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
-            </div>
-            <a
-              id="nx-repo"
-              class="button-pill rounded shadow"
-              href="https://github.com/nrwl/nx?utm_source=nx-project"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <svg
-                fill="currentColor"
-                role="img"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                />
-              </svg>
-              <span>
-                Nx is open source
-                <span> Love Nx? Give us a star! </span>
-              </span>
-            </a>
-          </div>
-          <div id="other-links">
-            <a
-              class="button-pill rounded shadow nx-console"
-              href="https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console&utm_source=nx-project"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <svg
-                fill="currentColor"
-                role="img"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Visual Studio Code</title>
-                <path
-                  d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"
-                />
-              </svg>
-              <span>
-                Install Nx Console for VSCode
-                <span>The official VSCode extension for Nx.</span>
-              </span>
-            </a>
-            <a
-              class="button-pill rounded shadow nx-console-jetbrains"
-              href="https://plugins.jetbrains.com/plugin/21060-nx-console"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <svg
-                height="48"
-                width="48"
-                viewBox="20 20 60 60"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="m22.5 22.5h60v60h-60z" />
-                <g fill="#fff">
-                  <path d="m29.03 71.25h22.5v3.75h-22.5z" />
-                  <path
-                    d="m28.09 38 1.67-1.58a1.88 1.88 0 0 0 1.47.87c.64 0 1.06-.44 1.06-1.31v-5.98h2.58v6a3.48 3.48 0 0 1 -.87 2.6 3.56 3.56 0 0 1 -2.57.95 3.84 3.84 0 0 1 -3.34-1.55z"
-                  />
-                  <path
-                    d="m36 30h7.53v2.19h-5v1.44h4.49v2h-4.42v1.49h5v2.21h-7.6z"
-                  />
-                  <path d="m47.23 32.29h-2.8v-2.29h8.21v2.27h-2.81v7.1h-2.6z" />
-                  <path
-                    d="m29.13 43.08h4.42a3.53 3.53 0 0 1 2.55.83 2.09 2.09 0 0 1 .6 1.53 2.16 2.16 0 0 1 -1.44 2.09 2.27 2.27 0 0 1 1.86 2.29c0 1.61-1.31 2.59-3.55 2.59h-4.44zm5 2.89c0-.52-.42-.8-1.18-.8h-1.29v1.64h1.24c.79 0 1.25-.26 1.25-.81zm-.9 2.66h-1.57v1.73h1.62c.8 0 1.24-.31 1.24-.86 0-.5-.4-.87-1.27-.87z"
-                  />
-                  <path
-                    d="m38 43.08h4.1a4.19 4.19 0 0 1 3 1 2.93 2.93 0 0 1 .9 2.19 3 3 0 0 1 -1.93 2.89l2.24 3.27h-3l-1.88-2.84h-.87v2.84h-2.56zm4 4.5c.87 0 1.39-.43 1.39-1.11 0-.75-.54-1.12-1.4-1.12h-1.44v2.26z"
-                  />
-                  <path
-                    d="m49.59 43h2.5l4 9.44h-2.79l-.67-1.69h-3.63l-.67 1.69h-2.71zm2.27 5.73-1-2.65-1.06 2.65z"
-                  />
-                  <path d="m56.46 43.05h2.6v9.37h-2.6z" />
-                  <path
-                    d="m60.06 43.05h2.42l3.37 5v-5h2.57v9.37h-2.26l-3.53-5.14v5.14h-2.57z"
-                  />
-                  <path
-                    d="m68.86 51 1.45-1.73a4.84 4.84 0 0 0 3 1.13c.71 0 1.08-.24 1.08-.65 0-.4-.31-.6-1.59-.91-2-.46-3.53-1-3.53-2.93 0-1.74 1.37-3 3.62-3a5.89 5.89 0 0 1 3.86 1.25l-1.26 1.84a4.63 4.63 0 0 0 -2.62-.92c-.63 0-.94.25-.94.6 0 .42.32.61 1.63.91 2.14.46 3.44 1.16 3.44 2.91 0 1.91-1.51 3-3.79 3a6.58 6.58 0 0 1 -4.35-1.5z"
-                  />
-                </g>
-              </svg>
-              <span>
-                Install Nx Console for JetBrains
-                <span
-                  >Available for WebStorm, Intellij IDEA Ultimate and
-                  more!</span
-                >
-              </span>
-            </a>
-            <div id="nx-cloud" class="rounded shadow">
-              <div>
-                <svg
-                  id="nx-cloud-logo"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  stroke="currentColor"
-                  fill="transparent"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-width="2"
-                    d="M23 3.75V6.5c-3.036 0-5.5 2.464-5.5 5.5s-2.464 5.5-5.5 5.5-5.5 2.464-5.5 5.5H3.75C2.232 23 1 21.768 1 20.25V3.75C1 2.232 2.232 1 3.75 1h16.5C21.768 1 23 2.232 23 3.75Z"
-                  />
-                  <path
-                    stroke-width="2"
-                    d="M23 6v14.1667C23 21.7307 21.7307 23 20.1667 23H6c0-3.128 2.53867-5.6667 5.6667-5.6667 3.128 0 5.6666-2.5386 5.6666-5.6666C17.3333 8.53867 19.872 6 23 6Z"
-                  />
-                </svg>
-                <h2>
-                  Nx Cloud
-                  <span> Enable faster CI & better DX </span>
-                </h2>
-              </div>
-              <p>
-                You can activate distributed tasks executions and caching by
-                running:
-              </p>
-              <pre>nx connect</pre>
-              <a
-                href="https://nx.dev/nx-cloud?utm_source=nx-project"
-                target="_blank"
-                rel="noreferrer"
-              >
-                What is Nx Cloud?
-              </a>
-            </div>
-          </div>
-        </div>
-        <!--  COMMANDS  -->
-        <div id="commands" class="rounded shadow">
-          <h2>Next steps</h2>
-          <p>Here are some things you can do with Nx:</p>
-          <details>
-            <summary>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Build, test and lint your app
-            </summary>
-            <pre><span># Build</span>
-nx build 
-<span># Test</span>
-nx test 
-<span># Lint</span>
-nx lint 
-<span># Run them together!</span>
-nx run-many -t build test lint</pre>
-          </details>
-          <details>
-            <summary>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              View project details
-            </summary>
-            <pre>nx show project interview-ready-web</pre>
-          </details>
-
-          <details>
-            <summary>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              View interactive project graph
-            </summary>
-            <pre>nx graph</pre>
-          </details>
-
-          <details>
-            <summary>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Add UI library
-            </summary>
-            <pre><span># Generate UI lib</span>
-nx g &#64;nx/angular:lib ui
-<span># Add a component</span>
-nx g &#64;nx/angular:component ui/src/lib/button</pre>
-          </details>
-        </div>
-        <p id="love">
-          Carefully crafted with
-          <svg
-            fill="currentColor"
-            stroke="none"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-        </p>
-      </div>
-    </div>
-  `, encapsulation: ViewEncapsulation.None, styles: ['/* angular:styles/component:scss;8052d53e1ae4d631b2ede52bbd2e26187318fec0b66f51c5fbf7e891e53c748d;/home/runner/work/shivmadhav-apps/shivmadhav-apps/apps/interview-ready-web/src/app/nx-welcome.ts */\nhtml {\n  -webkit-text-size-adjust: 100%;\n  font-family:\n    ui-sans-serif,\n    system-ui,\n    -apple-system,\n    BlinkMacSystemFont,\n    "Segoe UI",\n    Roboto,\n    "Helvetica Neue",\n    Arial,\n    "Noto Sans",\n    sans-serif,\n    "Apple Color Emoji",\n    "Segoe UI Emoji",\n    "Segoe UI Symbol",\n    "Noto Color Emoji";\n  line-height: 1.5;\n  tab-size: 4;\n  scroll-behavior: smooth;\n}\nbody {\n  font-family: inherit;\n  line-height: inherit;\n  margin: 0;\n}\nh1,\nh2,\np,\npre {\n  margin: 0;\n}\n*,\n::before,\n::after {\n  box-sizing: border-box;\n  border-width: 0;\n  border-style: solid;\n  border-color: currentColor;\n}\nh1,\nh2 {\n  font-size: inherit;\n  font-weight: inherit;\n}\na {\n  color: inherit;\n  text-decoration: inherit;\n}\npre {\n  font-family:\n    ui-monospace,\n    SFMono-Regular,\n    Menlo,\n    Monaco,\n    Consolas,\n    "Liberation Mono",\n    "Courier New",\n    monospace;\n}\nsvg {\n  display: block;\n  vertical-align: middle;\n}\nsvg {\n  shape-rendering: auto;\n  text-rendering: optimizeLegibility;\n}\npre {\n  background-color: rgb(55, 65, 81);\n  border-radius: 0.25rem;\n  color: rgb(229, 231, 235);\n  font-family:\n    ui-monospace,\n    SFMono-Regular,\n    Menlo,\n    Monaco,\n    Consolas,\n    "Liberation Mono",\n    "Courier New",\n    monospace;\n  overflow: auto;\n  padding: 0.5rem 0.75rem;\n}\n.shadow {\n  box-shadow:\n    0 0 rgba(0, 0, 0, 0),\n    0 0 rgba(0, 0, 0, 0),\n    0 10px 15px -3px rgba(0, 0, 0, 0.1),\n    0 4px 6px -2px rgba(0, 0, 0, 0.05);\n}\n.rounded {\n  border-radius: 1.5rem;\n}\n.wrapper {\n  width: 100%;\n}\n.container {\n  margin-left: auto;\n  margin-right: auto;\n  max-width: 768px;\n  padding-bottom: 3rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  color: rgb(55, 65, 81);\n  width: 100%;\n}\n#welcome {\n  margin-top: 2.5rem;\n}\n#welcome h1 {\n  font-size: 3rem;\n  font-weight: 500;\n  letter-spacing: -0.025em;\n  line-height: 1;\n}\n#welcome span {\n  display: block;\n  font-size: 1.875rem;\n  font-weight: 300;\n  line-height: 2.25rem;\n  margin-bottom: 0.5rem;\n}\n#hero {\n  align-items: center;\n  background-color: hsl(214, 62%, 21%);\n  border: none;\n  box-sizing: border-box;\n  color: rgb(55, 65, 81);\n  display: grid;\n  grid-template-columns: 1fr;\n  margin-top: 3.5rem;\n}\n#hero .text-container {\n  color: rgb(255, 255, 255);\n  padding: 3rem 2rem;\n}\n#hero .text-container h2 {\n  font-size: 1.5rem;\n  line-height: 2rem;\n  position: relative;\n}\n#hero .text-container h2 svg {\n  color: hsl(162, 47%, 50%);\n  height: 2rem;\n  left: -0.25rem;\n  position: absolute;\n  top: 0;\n  width: 2rem;\n}\n#hero .text-container h2 span {\n  margin-left: 2.5rem;\n}\n#hero .text-container a {\n  background-color: rgb(255, 255, 255);\n  border-radius: 0.75rem;\n  color: rgb(55, 65, 81);\n  display: inline-block;\n  margin-top: 1.5rem;\n  padding: 1rem 2rem;\n  text-decoration: inherit;\n}\n#hero .logo-container {\n  display: none;\n  justify-content: center;\n  padding-left: 2rem;\n  padding-right: 2rem;\n}\n#hero .logo-container svg {\n  color: rgb(255, 255, 255);\n  width: 66.666667%;\n}\n#middle-content {\n  align-items: flex-start;\n  display: grid;\n  grid-template-columns: 1fr;\n  margin-top: 3.5rem;\n}\n#middle-content #middle-left-content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n}\n#learning-materials {\n  padding: 2.5rem 2rem;\n}\n#learning-materials h2 {\n  font-weight: 500;\n  font-size: 1.25rem;\n  letter-spacing: -0.025em;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.list-item-link {\n  align-items: center;\n  border-radius: 0.75rem;\n  display: flex;\n  margin-top: 1rem;\n  padding: 1rem;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  width: 100%;\n}\n.list-item-link svg:first-child {\n  margin-right: 1rem;\n  height: 1.5rem;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  width: 1.5rem;\n}\n.list-item-link > span {\n  flex-grow: 1;\n  font-weight: 400;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.list-item-link > span > span {\n  color: rgb(107, 114, 128);\n  display: block;\n  flex-grow: 1;\n  font-size: 0.75rem;\n  font-weight: 300;\n  line-height: 1rem;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.list-item-link svg:last-child {\n  height: 1rem;\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  width: 1rem;\n}\n.list-item-link:hover {\n  color: rgb(255, 255, 255);\n  background-color: hsl(162, 55%, 33%);\n}\n.list-item-link:hover > span > span {\n  color: rgb(243, 244, 246);\n}\n.list-item-link:hover svg:last-child {\n  transform: translateX(0.25rem);\n}\n.button-pill {\n  padding: 1.5rem 2rem;\n  margin-bottom: 2rem;\n  transition-duration: 300ms;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  align-items: center;\n  display: flex;\n}\n.button-pill svg {\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  flex-shrink: 0;\n  width: 3rem;\n}\n.button-pill > span {\n  letter-spacing: -0.025em;\n  font-weight: 400;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.button-pill span span {\n  display: block;\n  font-size: 0.875rem;\n  font-weight: 300;\n  line-height: 1.25rem;\n}\n.button-pill:hover svg,\n.button-pill:hover {\n  color: rgb(255, 255, 255) !important;\n}\n.nx-console:hover {\n  background-color: rgb(0, 122, 204);\n}\n.nx-console svg {\n  color: rgb(0, 122, 204);\n}\n.nx-console-jetbrains {\n  margin-top: 2rem;\n}\n.nx-console-jetbrains:hover {\n  background-color: rgb(255, 49, 140);\n}\n.nx-console-jetbrains svg {\n  color: rgb(255, 49, 140);\n}\n#nx-repo:hover {\n  background-color: rgb(24, 23, 23);\n}\n#nx-repo svg {\n  color: rgb(24, 23, 23);\n}\n#nx-cloud {\n  margin-bottom: 2rem;\n  margin-top: 2rem;\n  padding: 2.5rem 2rem;\n}\n#nx-cloud > div {\n  align-items: center;\n  display: flex;\n}\n#nx-cloud > div svg {\n  border-radius: 0.375rem;\n  flex-shrink: 0;\n  width: 3rem;\n}\n#nx-cloud > div h2 {\n  font-size: 1.125rem;\n  font-weight: 400;\n  letter-spacing: -0.025em;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n#nx-cloud > div h2 span {\n  display: block;\n  font-size: 0.875rem;\n  font-weight: 300;\n  line-height: 1.25rem;\n}\n#nx-cloud p {\n  font-size: 1rem;\n  line-height: 1.5rem;\n  margin-top: 1rem;\n}\n#nx-cloud pre {\n  margin-top: 1rem;\n}\n#nx-cloud a {\n  color: rgb(107, 114, 128);\n  display: block;\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n  margin-top: 1.5rem;\n  text-align: right;\n}\n#nx-cloud a:hover {\n  text-decoration: underline;\n}\n#commands {\n  padding: 2.5rem 2rem;\n  margin-top: 3.5rem;\n}\n#commands h2 {\n  font-size: 1.25rem;\n  font-weight: 400;\n  letter-spacing: -0.025em;\n  line-height: 1.75rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n#commands p {\n  font-size: 1rem;\n  font-weight: 300;\n  line-height: 1.5rem;\n  margin-top: 1rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\ndetails {\n  align-items: center;\n  display: flex;\n  margin-top: 1rem;\n  padding-left: 1rem;\n  padding-right: 1rem;\n  width: 100%;\n}\ndetails pre > span {\n  color: rgb(181, 181, 181);\n}\nsummary {\n  border-radius: 0.5rem;\n  display: flex;\n  font-weight: 400;\n  padding: 0.5rem;\n  cursor: pointer;\n  transition-property:\n    background-color,\n    border-color,\n    color,\n    fill,\n    stroke,\n    opacity,\n    box-shadow,\n    transform,\n    filter,\n    backdrop-filter,\n    -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\nsummary:hover {\n  background-color: rgb(243, 244, 246);\n}\nsummary svg {\n  height: 1.5rem;\n  margin-right: 1rem;\n  width: 1.5rem;\n}\n#love {\n  color: rgb(107, 114, 128);\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n  margin-top: 3.5rem;\n  opacity: 0.6;\n  text-align: center;\n}\n#love svg {\n  color: rgb(252, 165, 165);\n  width: 1.25rem;\n  height: 1.25rem;\n  display: inline;\n  margin-top: -0.25rem;\n}\n@media screen and (min-width: 768px) {\n  #hero {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n  #hero .logo-container {\n    display: flex;\n  }\n  #middle-content {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 4rem;\n  }\n}\n/*# sourceMappingURL=nx-welcome.css.map */\n'] }]
+    args: [{ imports: [CommonModule, RouterLink], selector: "app-navbar", template: '<a href="#main-content" class="skip-link">Skip to main content</a>\n<nav role="navigation" aria-label="Main navigation">\n  <a routerLink="/" class="nav-logo" aria-label="InterviewReady home">\n    <div class="logo-icon">\n      <svg\n        fill="none"\n        stroke="white"\n        stroke-width="2.5"\n        viewBox="0 0 24 24"\n        aria-hidden="true"\n      >\n        <path\n          d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"\n        />\n      </svg>\n    </div>\n    InterviewReady\n  </a>\n\n  <ul class="nav-links" [class.open]="isOpen()">\n    <li><a href="#how">How It Works</a></li>\n    <li><a href="#pricing">Pricing</a></li>\n    <li><a routerLink="/login" class="btn-outline">Login</a></li>\n    <li><a href="#" class="btn-primary">Become Interviewer</a></li>\n  </ul>\n\n  <button\n    class="hamburger"\n    [class.open]="isOpen()"\n    (click)="toggle()"\n    aria-expanded="false"\n    [attr.aria-expanded]="isOpen()"\n    aria-label="Toggle navigation menu"\n    type="button"\n  >\n    <span aria-hidden="true"></span>\n    <span aria-hidden="true"></span>\n    <span aria-hidden="true"></span>\n  </button>\n</nav>\n', styles: ['/* apps/interview-ready-web/src/app/navbar/navbar.scss */\n:host {\n  display: block;\n}\n.skip-link {\n  position: absolute;\n  top: -40px;\n  left: 6px;\n  background: var(--primary);\n  color: white;\n  padding: 8px;\n  text-decoration: none;\n  border-radius: 4px;\n  z-index: 1000;\n  font-size: 0.875rem;\n  font-weight: 500;\n}\n.skip-link:focus {\n  top: 6px;\n}\nnav {\n  position: sticky;\n  top: 0;\n  z-index: 100;\n  background: rgba(255, 255, 255, 0.92);\n  -webkit-backdrop-filter: blur(16px);\n  backdrop-filter: blur(16px);\n  border-bottom: 1px solid var(--border);\n  padding: 0 clamp(20px, 5vw, 80px);\n  height: 68px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 24px;\n}\n.nav-logo {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.15rem;\n  color: var(--text);\n  flex-shrink: 0;\n}\n.nav-logo:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n  border-radius: 8px;\n}\n.logo-icon {\n  width: 36px;\n  height: 36px;\n  background: var(--primary);\n  border-radius: 10px;\n  display: grid;\n  place-items: center;\n}\n.logo-icon svg {\n  width: 20px;\n  height: 20px;\n}\n.nav-links {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n  list-style: none;\n}\n.nav-links a {\n  text-decoration: none;\n  color: var(--text-soft);\n  font-size: 0.9rem;\n  font-weight: 500;\n  padding: 8px 14px;\n  border-radius: 8px;\n  transition: all 0.2s;\n  white-space: nowrap;\n  cursor: pointer;\n}\n.nav-links a:hover {\n  color: var(--primary);\n  background: var(--blue-light);\n}\n.nav-links a:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n}\n.nav-links .btn-outline {\n  border: 1.5px solid var(--border);\n  color: var(--text);\n}\n.nav-links .btn-outline:hover {\n  border-color: var(--primary);\n  color: var(--primary);\n  background: var(--blue-light);\n}\n.nav-links .btn-outline:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n}\n.nav-links .btn-primary {\n  background: var(--primary);\n  color: white;\n}\n.nav-links .btn-primary:hover {\n  background: var(--blue-dark);\n  color: white;\n}\n.nav-links .btn-primary:focus-visible {\n  outline: 2px solid white;\n  outline-offset: 2px;\n}\n.hamburger {\n  display: none;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  gap: 6px;\n  width: 40px;\n  height: 40px;\n  cursor: pointer;\n  padding: 8px;\n  border: none;\n  background: transparent;\n  border-radius: 8px;\n  transition: background 0.2s;\n}\n.hamburger:hover {\n  background: var(--blue-light);\n}\n.hamburger:focus-visible {\n  outline: 2px solid var(--primary);\n  outline-offset: 2px;\n}\n.hamburger span {\n  display: block;\n  width: 24px;\n  height: 2px;\n  background: var(--text);\n  border-radius: 2px;\n  transition: all 0.3s ease;\n}\n.hamburger.open span:nth-child(1) {\n  transform: translateY(8px) rotate(45deg);\n}\n.hamburger.open span:nth-child(2) {\n  opacity: 0;\n}\n.hamburger.open span:nth-child(3) {\n  transform: translateY(-8px) rotate(-45deg);\n}\n@media (max-width: 768px) {\n  .nav-links {\n    display: none;\n    flex-direction: column;\n    position: absolute;\n    top: 68px;\n    left: 0;\n    right: 0;\n    background: white;\n    border-bottom: 1px solid var(--border);\n    padding: 12px 16px;\n    gap: 4px;\n    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);\n    opacity: 0;\n    transform: translateY(-10px);\n    transition: all 0.3s ease;\n  }\n  .nav-links.open {\n    display: flex;\n    opacity: 1;\n    transform: translateY(0);\n  }\n  .nav-links li {\n    width: 100%;\n    text-align: center;\n  }\n  .nav-links a {\n    display: block;\n    padding: 14px 16px;\n    width: 100%;\n    font-size: 1rem;\n    border-radius: 8px;\n    transition: background 0.2s, color 0.2s;\n  }\n  .nav-links a:hover {\n    background: var(--blue-light);\n    color: var(--primary);\n  }\n  .nav-links a:focus-visible {\n    outline: 2px solid var(--primary);\n    outline-offset: 2px;\n  }\n  .nav-links .btn-outline,\n  .nav-links .btn-primary {\n    margin: 4px 0;\n  }\n  .nav-links .btn-outline:focus-visible,\n  .nav-links .btn-primary:focus-visible {\n    outline: 2px solid var(--primary);\n    outline-offset: 2px;\n  }\n  .hamburger {\n    display: flex;\n  }\n}\n/*# sourceMappingURL=navbar.css.map */\n'] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NxWelcome, { className: "NxWelcome", filePath: "apps/interview-ready-web/src/app/nx-welcome.ts", lineNumber: 953 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Navbar, { className: "Navbar", filePath: "apps/interview-ready-web/src/app/navbar/index.ts", lineNumber: 11 });
 })();
 
 // apps/interview-ready-web/src/app/app.ts
@@ -35933,16 +41565,19 @@ var App = class _App {
   static \u0275fac = function App_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _App)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _App, selectors: [["app-root"]], decls: 2, vars: 0, template: function App_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _App, selectors: [["app-root"]], decls: 3, vars: 0, consts: [["id", "main-content"]], template: function App_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275element(0, "app-nx-welcome")(1, "router-outlet");
+      \u0275\u0275element(0, "app-navbar");
+      \u0275\u0275elementStart(1, "main", 0);
+      \u0275\u0275element(2, "router-outlet");
+      \u0275\u0275elementEnd();
     }
-  }, dependencies: [NxWelcome, RouterModule, RouterOutlet], encapsulation: 2 });
+  }, dependencies: [Navbar, RouterModule, RouterOutlet], encapsulation: 2 });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(App, [{
     type: Component,
-    args: [{ imports: [NxWelcome, RouterModule], selector: "app-root", template: "<app-nx-welcome></app-nx-welcome>\n<router-outlet></router-outlet>\n" }]
+    args: [{ imports: [Navbar, RouterModule], selector: "app-root", template: '<app-navbar></app-navbar>\n<main id="main-content">\n  <router-outlet></router-outlet>\n</main>\n' }]
   }], null, null);
 })();
 (() => {
@@ -35974,6 +41609,7 @@ bootstrapApplication(App, appConfig).catch((err) => console.error(err));
 @angular/router/fesm2022/_router-chunk.mjs:
 @angular/router/fesm2022/_router_module-chunk.mjs:
 @angular/router/fesm2022/router.mjs:
+@angular/forms/fesm2022/forms.mjs:
   (**
    * @license Angular v21.2.7
    * (c) 2010-2026 Google LLC. https://angular.dev/

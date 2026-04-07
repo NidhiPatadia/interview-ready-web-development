@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": [],
-  "sourcesContent": [],
-  "mappings": "",
+  "sources": ["apps/interview-ready-web/src/styles.scss"],
+  "sourcesContent": [":root {\n  --blue: #2563eb;\n  --blue-light: #eff6ff;\n  --blue-mid: #bfdbfe;\n  --blue-dark: #1d4ed8;\n  --teal: #0ea5e9;\n  --green: #10b981;\n  --amber: #f59e0b;\n  --red: #ef4444;\n  --text: #0f172a;\n  --text-soft: #475569;\n  --text-muted: #94a3b8;\n  --bg: #ffffff;\n  --bg-soft: #f8faff;\n  --bg-alt: #f1f5f9;\n  --border: #e2e8f0;\n  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);\n  --shadow: 0 4px 16px rgba(37, 99, 235, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);\n  --shadow-lg:\n    0 12px 40px rgba(37, 99, 235, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);\n  --radius: 16px;\n  --radius-sm: 10px;\n  --radius-lg: 24px;\n  --primary: var(--blue);\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nbody {\n  font-family: 'DM Sans', sans-serif;\n  background: var(--bg);\n  color: var(--text);\n  line-height: 1.6;\n  overflow-x: hidden;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5 {\n  font-family: 'Sora', sans-serif;\n  line-height: 1.2;\n}\n"],
+  "mappings": ";AAAA;AACE,UAAA;AACA,gBAAA;AACA,cAAA;AACA,eAAA;AACA,UAAA;AACA,WAAA;AACA,WAAA;AACA,SAAA;AACA,UAAA;AACA,eAAA;AACA,gBAAA;AACA,QAAA;AACA,aAAA;AACA,YAAA;AACA,YAAA;AACA,eAAA,EAAA,IAAA,IAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA,KAAA,EAAA,EAAA,IAAA,IAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;AACA,YAAA,EAAA,IAAA,KAAA,KAAA,EAAA,EAAA,EAAA,EAAA,GAAA,EAAA,KAAA,EAAA,EAAA,IAAA,IAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;AACA,eAAA,EAAA,KAAA,KAAA,KAAA,EAAA,EAAA,EAAA,EAAA,GAAA,EAAA,KAAA,EAAA,EAAA,IAAA,KAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;AAEA,YAAA;AACA,eAAA;AACA,eAAA;AACA,aAAA,IAAA;;AAGF;AAAA,CAAA;AAAA,CAAA;AAGE,cAAA;AACA,UAAA;AACA,WAAA;;AAGF;AACE,mBAAA;;AAGF;AACE,eAAA,SAAA,EAAA;AACA,cAAA,IAAA;AACA,SAAA,IAAA;AACA,eAAA;AACA,cAAA;;AAGF;AAAA;AAAA;AAAA;AAAA;AAKE,eAAA,MAAA,EAAA;AACA,eAAA;;",
   "names": []
 }
