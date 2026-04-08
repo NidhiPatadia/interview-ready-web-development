@@ -39425,12 +39425,107 @@ var ReactiveFormsModule = class _ReactiveFormsModule {
   }], null, null);
 })();
 
+// apps/interview-ready-web/src/app/shared/icons/icon.ts
+var IconComponent = class _IconComponent {
+  name;
+  size = 24;
+  viewBox = "0 0 24 24";
+  fill = "none";
+  stroke = "currentColor";
+  strokeWidth = 2;
+  class = "";
+  iconPaths = {
+    pencil: "M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z",
+    video: "M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z",
+    "check-circle": "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+    chart: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
+    mail: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    lock: "M12 11v8M3 11a9 9 0 0118 0M7 11V7a5 5 0 0110 0v4",
+    lockAlt: "M12 11v8M3 11a9 9 0 0118 0M7 11V7a5 5 0 0110 0v4",
+    eye: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zM12 9a3 3 0 100 6 3 3 0 000-6z",
+    "eye-off": "M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24M1 1l22 22",
+    user: "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z",
+    "arrow-right": "M17 8l4 4m0 0l-4 4m4-4H3",
+    "arrow-left": "M19 12H5M12 5l-7 7 7 7",
+    send: "M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z",
+    menu: "M4 6h16M4 12h16M4 18h16",
+    close: "M6 18L18 6M6 6l12 12",
+    google: "",
+    github: "",
+    linkedin: "",
+    calendar: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
+    feedback: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+    code: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+    users: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z",
+    document: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    rupee: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    heart: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+    clock: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+  };
+  get paths() {
+    return this.iconPaths[this.name] || "";
+  }
+  static \u0275fac = function IconComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _IconComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["app-icon"]], inputs: { name: "name", size: "size", viewBox: "viewBox", fill: "fill", stroke: "stroke", strokeWidth: "strokeWidth", class: "class" }, decls: 2, vars: 11, template: function IconComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275domElementStart(0, "svg");
+      \u0275\u0275domElement(1, "path");
+      \u0275\u0275domElementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275classMap(ctx.class);
+      \u0275\u0275styleProp("width", ctx.size, "px")("height", ctx.size, "px");
+      \u0275\u0275attribute("viewBox", ctx.viewBox)("fill", ctx.fill)("stroke", ctx.stroke)("stroke-width", ctx.strokeWidth);
+      \u0275\u0275advance();
+      \u0275\u0275attribute("d", ctx.paths);
+    }
+  }, dependencies: [CommonModule], styles: ["\n[_nghost-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n}\n/*# sourceMappingURL=icon.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IconComponent, [{
+    type: Component,
+    args: [{ selector: "app-icon", standalone: true, imports: [CommonModule], template: `
+    <svg
+      [attr.viewBox]="viewBox"
+      [attr.fill]="fill"
+      [attr.stroke]="stroke"
+      [attr.stroke-width]="strokeWidth"
+      [class]="class"
+      [style.width.px]="size"
+      [style.height.px]="size"
+    >
+      <path [attr.d]="paths" />
+    </svg>
+  `, styles: ["/* angular:styles/component:scss;7885c9d6a8bd246b495d3e6d4ee3b3afd03d6d540c5f0b0dbc7b3d29e485eea6;/home/runner/work/shivmadhav-apps/shivmadhav-apps/apps/interview-ready-web/src/app/shared/icons/icon.ts */\n:host {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n}\n/*# sourceMappingURL=icon.css.map */\n"] }]
+  }], null, { name: [{
+    type: Input
+  }], size: [{
+    type: Input
+  }], viewBox: [{
+    type: Input
+  }], fill: [{
+    type: Input
+  }], stroke: [{
+    type: Input
+  }], strokeWidth: [{
+    type: Input
+  }], class: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "apps/interview-ready-web/src/app/shared/icons/icon.ts", lineNumber: 31 });
+})();
+
 // apps/interview-ready-web/src/app/auth/auth.ts
-function AuthComponent_div_63_Template(rf, ctx) {
+function AuthComponent_div_59_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 59)(1, "button", 60);
-    \u0275\u0275listener("click", function AuthComponent_div_63_Template_button_click_1_listener() {
+    \u0275\u0275listener("click", function AuthComponent_div_59_Template_button_click_1_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.switchTab("login"));
@@ -39438,7 +39533,7 @@ function AuthComponent_div_63_Template(rf, ctx) {
     \u0275\u0275text(2, " Log In ");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "button", 60);
-    \u0275\u0275listener("click", function AuthComponent_div_63_Template_button_click_3_listener() {
+    \u0275\u0275listener("click", function AuthComponent_div_59_Template_button_click_3_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.switchTab("signup"));
@@ -39454,9 +39549,9 @@ function AuthComponent_div_63_Template(rf, ctx) {
     \u0275\u0275classProp("active", ctx_r1.currentTab() === "signup");
   }
 }
-function AuthComponent_div_64_div_35_Template(rf, ctx) {
+function AuthComponent_div_60_div_27_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 104);
+    \u0275\u0275elementStart(0, "div", 99);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -39466,9 +39561,9 @@ function AuthComponent_div_64_div_35_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.loginForm, "email"), " ");
   }
 }
-function AuthComponent_div_64_div_48_Template(rf, ctx) {
+function AuthComponent_div_60_div_40_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 105);
+    \u0275\u0275elementStart(0, "div", 100);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -39478,34 +39573,34 @@ function AuthComponent_div_64_div_48_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.loginForm, "password"), " ");
   }
 }
-function AuthComponent_div_64_span_57_Template(rf, ctx) {
+function AuthComponent_div_60_span_49_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span");
     \u0275\u0275text(1, "Log In");
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_64_span_58_Template(rf, ctx) {
+function AuthComponent_div_60_span_50_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 106);
+    \u0275\u0275elementStart(0, "span", 101);
     \u0275\u0275text(1, "Signing in...");
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_64__svg_svg_59_Template(rf, ctx) {
+function AuthComponent_div_60__svg_svg_51_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(0, "svg", 107);
-    \u0275\u0275element(1, "path", 108);
+    \u0275\u0275elementStart(0, "svg", 102);
+    \u0275\u0275element(1, "path", 103);
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_64_div_60_Template(rf, ctx) {
+function AuthComponent_div_60_div_52_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 109);
+    \u0275\u0275element(0, "div", 104);
   }
 }
-function AuthComponent_div_64_Template(rf, ctx) {
+function AuthComponent_div_60_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 61)(1, "div", 62)(2, "h1");
@@ -39515,7 +39610,7 @@ function AuthComponent_div_64_Template(rf, ctx) {
     \u0275\u0275text(5, "Good to see you again. Let's get you in.");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(6, "div", 63)(7, "button", 64);
-    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_7_listener() {
+    \u0275\u0275listener("click", function AuthComponent_div_60_Template_button_click_7_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.handleSocial("Google"));
@@ -39525,102 +39620,76 @@ function AuthComponent_div_64_Template(rf, ctx) {
     \u0275\u0275element(9, "path", 66)(10, "path", 67)(11, "path", 68)(12, "path", 69);
     \u0275\u0275elementEnd();
     \u0275\u0275text(13, " Continue with Google ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(14, "button", 70);
-    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_14_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.handleSocial("GitHub"));
-    });
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(15, "svg", 71);
-    \u0275\u0275element(16, "path", 72);
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(17, " Continue with GitHub ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(18, "button", 73);
-    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_18_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.handleSocial("LinkedIn"));
-    });
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(19, "svg", 71);
-    \u0275\u0275element(20, "path", 74);
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(21, " Continue with LinkedIn ");
     \u0275\u0275elementEnd()();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(22, "div", 75);
-    \u0275\u0275element(23, "div", 76);
-    \u0275\u0275elementStart(24, "span", 77);
-    \u0275\u0275text(25, "or continue with email");
+    \u0275\u0275elementStart(14, "div", 70);
+    \u0275\u0275element(15, "div", 71);
+    \u0275\u0275elementStart(16, "span", 72);
+    \u0275\u0275text(17, "or continue with email");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(26, "div", 76);
+    \u0275\u0275element(18, "div", 71);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(27, "form", 78);
-    \u0275\u0275listener("ngSubmit", function AuthComponent_div_64_Template_form_ngSubmit_27_listener() {
+    \u0275\u0275elementStart(19, "form", 73);
+    \u0275\u0275listener("ngSubmit", function AuthComponent_div_60_Template_form_ngSubmit_19_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.handleLogin());
     });
-    \u0275\u0275elementStart(28, "div", 79)(29, "label", 80);
-    \u0275\u0275text(30, "Email address");
+    \u0275\u0275elementStart(20, "div", 74)(21, "label", 75);
+    \u0275\u0275text(22, "Email address");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "div", 81);
+    \u0275\u0275elementStart(23, "div", 76);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(32, "svg", 82);
-    \u0275\u0275element(33, "path", 83);
+    \u0275\u0275elementStart(24, "svg", 77);
+    \u0275\u0275element(25, "path", 78);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275element(34, "input", 84);
+    \u0275\u0275element(26, "input", 79);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(35, AuthComponent_div_64_div_35_Template, 2, 1, "div", 85);
+    \u0275\u0275template(27, AuthComponent_div_60_div_27_Template, 2, 1, "div", 80);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(36, "div", 79)(37, "label", 86);
-    \u0275\u0275text(38, "Password");
+    \u0275\u0275elementStart(28, "div", 74)(29, "label", 81);
+    \u0275\u0275text(30, "Password");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(39, "div", 81);
+    \u0275\u0275elementStart(31, "div", 76);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(40, "svg", 82);
-    \u0275\u0275element(41, "rect", 87)(42, "path", 88);
+    \u0275\u0275elementStart(32, "svg", 77);
+    \u0275\u0275element(33, "rect", 82)(34, "path", 83);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275element(43, "input", 89);
-    \u0275\u0275elementStart(44, "button", 90);
-    \u0275\u0275listener("click", function AuthComponent_div_64_Template_button_click_44_listener() {
+    \u0275\u0275element(35, "input", 84);
+    \u0275\u0275elementStart(36, "button", 85);
+    \u0275\u0275listener("click", function AuthComponent_div_60_Template_button_click_36_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.togglePasswordVisibility("loginPw"));
     });
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(45, "svg", 82);
-    \u0275\u0275element(46, "path", 91)(47, "circle", 92);
+    \u0275\u0275elementStart(37, "svg", 77);
+    \u0275\u0275element(38, "path", 86)(39, "circle", 87);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(48, AuthComponent_div_64_div_48_Template, 2, 1, "div", 93);
+    \u0275\u0275template(40, AuthComponent_div_60_div_40_Template, 2, 1, "div", 88);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(49, "div", 94)(50, "label", 95);
-    \u0275\u0275element(51, "input", 96)(52, "span", 97);
-    \u0275\u0275text(53, " Remember me ");
+    \u0275\u0275elementStart(41, "div", 89)(42, "label", 90);
+    \u0275\u0275element(43, "input", 91)(44, "span", 92);
+    \u0275\u0275text(45, " Remember me ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(54, "a", 98);
-    \u0275\u0275listener("click", function AuthComponent_div_64_Template_a_click_54_listener() {
+    \u0275\u0275elementStart(46, "a", 93);
+    \u0275\u0275listener("click", function AuthComponent_div_60_Template_a_click_46_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onShowForgot());
     });
-    \u0275\u0275text(55, "Forgot password?");
+    \u0275\u0275text(47, "Forgot password?");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(56, "button", 99);
-    \u0275\u0275template(57, AuthComponent_div_64_span_57_Template, 2, 0, "span", 100)(58, AuthComponent_div_64_span_58_Template, 2, 0, "span", 101)(59, AuthComponent_div_64__svg_svg_59_Template, 2, 0, "svg", 102)(60, AuthComponent_div_64_div_60_Template, 1, 0, "div", 103);
+    \u0275\u0275elementStart(48, "button", 94);
+    \u0275\u0275template(49, AuthComponent_div_60_span_49_Template, 2, 0, "span", 95)(50, AuthComponent_div_60_span_50_Template, 2, 0, "span", 96)(51, AuthComponent_div_60__svg_svg_51_Template, 2, 0, "svg", 97)(52, AuthComponent_div_60_div_52_Template, 1, 0, "div", 98);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(27);
+    \u0275\u0275advance(19);
     \u0275\u0275property("formGroup", ctx_r1.loginForm);
     \u0275\u0275advance(7);
     \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.loginForm, "email"));
@@ -39645,9 +39714,9 @@ function AuthComponent_div_64_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.isLoading());
   }
 }
-function AuthComponent_div_65_div_18_Template(rf, ctx) {
+function AuthComponent_div_61_div_18_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 116);
+    \u0275\u0275elementStart(0, "div", 111);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -39657,45 +39726,45 @@ function AuthComponent_div_65_div_18_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.forgotForm, "email"), " ");
   }
 }
-function AuthComponent_div_65_span_20_Template(rf, ctx) {
+function AuthComponent_div_61_span_20_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span");
     \u0275\u0275text(1, "Send Reset Link");
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_65_span_21_Template(rf, ctx) {
+function AuthComponent_div_61_span_21_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 106);
+    \u0275\u0275elementStart(0, "span", 101);
     \u0275\u0275text(1, "Sending...");
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_65__svg_svg_22_Template(rf, ctx) {
+function AuthComponent_div_61__svg_svg_22_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(0, "svg", 107);
-    \u0275\u0275element(1, "path", 108);
+    \u0275\u0275elementStart(0, "svg", 102);
+    \u0275\u0275element(1, "path", 103);
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_65_div_23_Template(rf, ctx) {
+function AuthComponent_div_61_div_23_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 109);
+    \u0275\u0275element(0, "div", 104);
   }
 }
-function AuthComponent_div_65_Template(rf, ctx) {
+function AuthComponent_div_61_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 110)(1, "a", 111);
-    \u0275\u0275listener("click", function AuthComponent_div_65_Template_a_click_1_listener() {
+    \u0275\u0275elementStart(0, "div", 105)(1, "a", 106);
+    \u0275\u0275listener("click", function AuthComponent_div_61_Template_a_click_1_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.hideForgot());
     });
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(2, "svg", 40);
-    \u0275\u0275element(3, "path", 112);
+    \u0275\u0275elementStart(2, "svg", 57);
+    \u0275\u0275element(3, "path", 107);
     \u0275\u0275elementEnd();
     \u0275\u0275text(4, " Back to login ");
     \u0275\u0275elementEnd();
@@ -39706,27 +39775,27 @@ function AuthComponent_div_65_Template(rf, ctx) {
     \u0275\u0275elementStart(8, "p");
     \u0275\u0275text(9, "Enter your email and we'll send a reset link.");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "form", 78);
-    \u0275\u0275listener("ngSubmit", function AuthComponent_div_65_Template_form_ngSubmit_10_listener() {
+    \u0275\u0275elementStart(10, "form", 73);
+    \u0275\u0275listener("ngSubmit", function AuthComponent_div_61_Template_form_ngSubmit_10_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.handleForgot());
     });
-    \u0275\u0275elementStart(11, "div", 79)(12, "label", 113);
+    \u0275\u0275elementStart(11, "div", 74)(12, "label", 108);
     \u0275\u0275text(13, "Email address");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "div", 81);
+    \u0275\u0275elementStart(14, "div", 76);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(15, "svg", 82);
-    \u0275\u0275element(16, "path", 83);
+    \u0275\u0275elementStart(15, "svg", 77);
+    \u0275\u0275element(16, "path", 78);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275element(17, "input", 114);
+    \u0275\u0275element(17, "input", 109);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(18, AuthComponent_div_65_div_18_Template, 2, 1, "div", 115);
+    \u0275\u0275template(18, AuthComponent_div_61_div_18_Template, 2, 1, "div", 110);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "button", 99);
-    \u0275\u0275template(20, AuthComponent_div_65_span_20_Template, 2, 0, "span", 100)(21, AuthComponent_div_65_span_21_Template, 2, 0, "span", 101)(22, AuthComponent_div_65__svg_svg_22_Template, 2, 0, "svg", 102)(23, AuthComponent_div_65_div_23_Template, 1, 0, "div", 103);
+    \u0275\u0275elementStart(19, "button", 94);
+    \u0275\u0275template(20, AuthComponent_div_61_span_20_Template, 2, 0, "span", 95)(21, AuthComponent_div_61_span_21_Template, 2, 0, "span", 96)(22, AuthComponent_div_61__svg_svg_22_Template, 2, 0, "svg", 97)(23, AuthComponent_div_61_div_23_Template, 1, 0, "div", 98);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
@@ -39751,9 +39820,9 @@ function AuthComponent_div_65_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.isLoading());
   }
 }
-function AuthComponent_div_66_div_35_Template(rf, ctx) {
+function AuthComponent_div_62_div_27_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 137);
+    \u0275\u0275elementStart(0, "div", 132);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -39763,9 +39832,9 @@ function AuthComponent_div_66_div_35_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "name"), " ");
   }
 }
-function AuthComponent_div_66_div_43_Template(rf, ctx) {
+function AuthComponent_div_62_div_35_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 138);
+    \u0275\u0275elementStart(0, "div", 133);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -39775,9 +39844,9 @@ function AuthComponent_div_66_div_43_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "email"), " ");
   }
 }
-function AuthComponent_div_66_div_61_Template(rf, ctx) {
+function AuthComponent_div_62_div_53_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 139);
+    \u0275\u0275elementStart(0, "div", 134);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -39787,29 +39856,29 @@ function AuthComponent_div_66_div_61_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "password"), " ");
   }
 }
-function AuthComponent_div_66_div_62_Template(rf, ctx) {
+function AuthComponent_div_62_div_54_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 140)(1, "div", 141)(2, "span", 142);
+    \u0275\u0275elementStart(0, "div", 135)(1, "div", 136)(2, "span", 137);
     \u0275\u0275text(3, "\u2713");
     \u0275\u0275elementEnd();
     \u0275\u0275text(4, " At least 8 characters ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 141)(6, "span", 142);
+    \u0275\u0275elementStart(5, "div", 136)(6, "span", 137);
     \u0275\u0275text(7, "\u2713");
     \u0275\u0275elementEnd();
     \u0275\u0275text(8, " One uppercase letter ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "div", 141)(10, "span", 142);
+    \u0275\u0275elementStart(9, "div", 136)(10, "span", 137);
     \u0275\u0275text(11, "\u2713");
     \u0275\u0275elementEnd();
     \u0275\u0275text(12, " One lowercase letter ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "div", 141)(14, "span", 142);
+    \u0275\u0275elementStart(13, "div", 136)(14, "span", 137);
     \u0275\u0275text(15, "\u2713");
     \u0275\u0275elementEnd();
     \u0275\u0275text(16, " One number ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "div", 141)(18, "span", 142);
+    \u0275\u0275elementStart(17, "div", 136)(18, "span", 137);
     \u0275\u0275text(19, "\u2713");
     \u0275\u0275elementEnd();
     \u0275\u0275text(20, " One special character ");
@@ -39839,9 +39908,9 @@ function AuthComponent_div_66_div_62_Template(rf, ctx) {
     \u0275\u0275classProp("met", ctx_r1.getPasswordRequirements().special);
   }
 }
-function AuthComponent_div_66_div_71_Template(rf, ctx) {
+function AuthComponent_div_62_div_63_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 143);
+    \u0275\u0275elementStart(0, "div", 138);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -39851,184 +39920,158 @@ function AuthComponent_div_66_div_71_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.getErrorMessage(ctx_r1.signupForm, "confirmPassword"), " ");
   }
 }
-function AuthComponent_div_66_span_73_Template(rf, ctx) {
+function AuthComponent_div_62_span_65_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span");
     \u0275\u0275text(1, "Create Account");
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_66_span_74_Template(rf, ctx) {
+function AuthComponent_div_62_span_66_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 106);
+    \u0275\u0275elementStart(0, "span", 101);
     \u0275\u0275text(1, "Creating account...");
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_66__svg_svg_75_Template(rf, ctx) {
+function AuthComponent_div_62__svg_svg_67_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(0, "svg", 107);
-    \u0275\u0275element(1, "path", 108);
+    \u0275\u0275elementStart(0, "svg", 102);
+    \u0275\u0275element(1, "path", 103);
     \u0275\u0275elementEnd();
   }
 }
-function AuthComponent_div_66_div_76_Template(rf, ctx) {
+function AuthComponent_div_62_div_68_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 109);
+    \u0275\u0275element(0, "div", 104);
   }
 }
-function AuthComponent_div_66_Template(rf, ctx) {
+function AuthComponent_div_62_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 117)(1, "div", 62)(2, "h1");
+    \u0275\u0275elementStart(0, "div", 112)(1, "div", 62)(2, "h1");
     \u0275\u0275text(3, "Create your account \u{1F680}");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "p");
     \u0275\u0275text(5, "Free to join. No card required. Start practicing today.");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(6, "div", 63)(7, "button", 64);
-    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_7_listener() {
+    \u0275\u0275listener("click", function AuthComponent_div_62_Template_button_click_7_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.handleSocial("Google"));
     });
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(8, "svg", 118);
+    \u0275\u0275elementStart(8, "svg", 113);
     \u0275\u0275element(9, "path", 66)(10, "path", 67)(11, "path", 68)(12, "path", 69);
     \u0275\u0275elementEnd();
     \u0275\u0275text(13, " Continue with Google ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(14, "button", 70);
-    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_14_listener() {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.handleSocial("GitHub"));
-    });
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(15, "svg", 71);
-    \u0275\u0275element(16, "path", 72);
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(17, " Continue with GitHub ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(18, "button", 73);
-    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_18_listener() {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.handleSocial("LinkedIn"));
-    });
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(19, "svg", 71);
-    \u0275\u0275element(20, "path", 74);
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(21, " Continue with LinkedIn ");
     \u0275\u0275elementEnd()();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(22, "div", 75);
-    \u0275\u0275element(23, "div", 76);
-    \u0275\u0275elementStart(24, "span", 77);
-    \u0275\u0275text(25, "or sign up with email");
+    \u0275\u0275elementStart(14, "div", 70);
+    \u0275\u0275element(15, "div", 71);
+    \u0275\u0275elementStart(16, "span", 72);
+    \u0275\u0275text(17, "or sign up with email");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(26, "div", 76);
+    \u0275\u0275element(18, "div", 71);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(27, "form", 78);
-    \u0275\u0275listener("ngSubmit", function AuthComponent_div_66_Template_form_ngSubmit_27_listener() {
+    \u0275\u0275elementStart(19, "form", 73);
+    \u0275\u0275listener("ngSubmit", function AuthComponent_div_62_Template_form_ngSubmit_19_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.handleSignup());
     });
-    \u0275\u0275elementStart(28, "div", 79)(29, "label", 119);
-    \u0275\u0275text(30, "Full Name");
+    \u0275\u0275elementStart(20, "div", 74)(21, "label", 114);
+    \u0275\u0275text(22, "Full Name");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "div", 81);
+    \u0275\u0275elementStart(23, "div", 76);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(32, "svg", 82);
-    \u0275\u0275element(33, "path", 120);
+    \u0275\u0275elementStart(24, "svg", 77);
+    \u0275\u0275element(25, "path", 115);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275element(34, "input", 121);
+    \u0275\u0275element(26, "input", 116);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(35, AuthComponent_div_66_div_35_Template, 2, 1, "div", 122);
+    \u0275\u0275template(27, AuthComponent_div_62_div_27_Template, 2, 1, "div", 117);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(36, "div", 79)(37, "label", 123);
-    \u0275\u0275text(38, "Email address");
+    \u0275\u0275elementStart(28, "div", 74)(29, "label", 118);
+    \u0275\u0275text(30, "Email address");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(39, "div", 81);
+    \u0275\u0275elementStart(31, "div", 76);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(40, "svg", 82);
-    \u0275\u0275element(41, "path", 83);
+    \u0275\u0275elementStart(32, "svg", 77);
+    \u0275\u0275element(33, "path", 78);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275element(42, "input", 124);
+    \u0275\u0275element(34, "input", 119);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(43, AuthComponent_div_66_div_43_Template, 2, 1, "div", 125);
+    \u0275\u0275template(35, AuthComponent_div_62_div_35_Template, 2, 1, "div", 120);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(44, "div", 79)(45, "label", 126);
-    \u0275\u0275text(46, "Create Password");
+    \u0275\u0275elementStart(36, "div", 74)(37, "label", 121);
+    \u0275\u0275text(38, "Create Password");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(47, "div", 81);
+    \u0275\u0275elementStart(39, "div", 76);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(48, "svg", 82);
-    \u0275\u0275element(49, "rect", 87)(50, "path", 88);
+    \u0275\u0275elementStart(40, "svg", 77);
+    \u0275\u0275element(41, "rect", 82)(42, "path", 83);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(51, "input", 127);
-    \u0275\u0275listener("input", function AuthComponent_div_66_Template_input_input_51_listener() {
+    \u0275\u0275elementStart(43, "input", 122);
+    \u0275\u0275listener("input", function AuthComponent_div_62_Template_input_input_43_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onPasswordInput());
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(52, "button", 90);
-    \u0275\u0275listener("click", function AuthComponent_div_66_Template_button_click_52_listener() {
+    \u0275\u0275elementStart(44, "button", 85);
+    \u0275\u0275listener("click", function AuthComponent_div_62_Template_button_click_44_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.togglePasswordVisibility("signupPw"));
     });
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(53, "svg", 82);
-    \u0275\u0275element(54, "path", 91)(55, "circle", 92);
+    \u0275\u0275elementStart(45, "svg", 77);
+    \u0275\u0275element(46, "path", 86)(47, "circle", 87);
     \u0275\u0275elementEnd()()();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(56, "div", 128);
-    \u0275\u0275element(57, "div", 129)(58, "div", 129)(59, "div", 129)(60, "div", 129);
+    \u0275\u0275elementStart(48, "div", 123);
+    \u0275\u0275element(49, "div", 124)(50, "div", 124)(51, "div", 124)(52, "div", 124);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(61, AuthComponent_div_66_div_61_Template, 2, 1, "div", 130)(62, AuthComponent_div_66_div_62_Template, 21, 20, "div", 131);
+    \u0275\u0275template(53, AuthComponent_div_62_div_53_Template, 2, 1, "div", 125)(54, AuthComponent_div_62_div_54_Template, 21, 20, "div", 126);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(63, "div", 79)(64, "label", 132);
-    \u0275\u0275text(65, "Confirm Password");
+    \u0275\u0275elementStart(55, "div", 74)(56, "label", 127);
+    \u0275\u0275text(57, "Confirm Password");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(66, "div", 81);
+    \u0275\u0275elementStart(58, "div", 76);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(67, "svg", 82);
-    \u0275\u0275element(68, "rect", 87)(69, "path", 88);
+    \u0275\u0275elementStart(59, "svg", 77);
+    \u0275\u0275element(60, "rect", 82)(61, "path", 83);
     \u0275\u0275elementEnd();
     \u0275\u0275namespaceHTML();
-    \u0275\u0275element(70, "input", 133);
+    \u0275\u0275element(62, "input", 128);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(71, AuthComponent_div_66_div_71_Template, 2, 1, "div", 134);
+    \u0275\u0275template(63, AuthComponent_div_62_div_63_Template, 2, 1, "div", 129);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(72, "button", 99);
-    \u0275\u0275template(73, AuthComponent_div_66_span_73_Template, 2, 0, "span", 100)(74, AuthComponent_div_66_span_74_Template, 2, 0, "span", 101)(75, AuthComponent_div_66__svg_svg_75_Template, 2, 0, "svg", 102)(76, AuthComponent_div_66_div_76_Template, 1, 0, "div", 103);
+    \u0275\u0275elementStart(64, "button", 94);
+    \u0275\u0275template(65, AuthComponent_div_62_span_65_Template, 2, 0, "span", 95)(66, AuthComponent_div_62_span_66_Template, 2, 0, "span", 96)(67, AuthComponent_div_62__svg_svg_67_Template, 2, 0, "svg", 97)(68, AuthComponent_div_62_div_68_Template, 1, 0, "div", 98);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(77, "p", 135);
-    \u0275\u0275text(78, " By signing up you agree to our ");
-    \u0275\u0275elementStart(79, "a", 136);
-    \u0275\u0275text(80, "Terms of Service");
+    \u0275\u0275elementStart(69, "p", 130);
+    \u0275\u0275text(70, " By signing up you agree to our ");
+    \u0275\u0275elementStart(71, "a", 131);
+    \u0275\u0275text(72, "Terms of Service");
     \u0275\u0275elementEnd();
-    \u0275\u0275text(81, " and ");
-    \u0275\u0275elementStart(82, "a", 136);
-    \u0275\u0275text(83, "Privacy Policy");
+    \u0275\u0275text(73, " and ");
+    \u0275\u0275elementStart(74, "a", 131);
+    \u0275\u0275text(75, "Privacy Policy");
     \u0275\u0275elementEnd();
-    \u0275\u0275text(84, ". ");
+    \u0275\u0275text(76, ". ");
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     let tmp_15_0;
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(27);
+    \u0275\u0275advance(19);
     \u0275\u0275property("formGroup", ctx_r1.signupForm);
     \u0275\u0275advance(7);
     \u0275\u0275classProp("error", ctx_r1.isFieldInvalid(ctx_r1.signupForm, "name"));
@@ -40073,12 +40116,12 @@ function AuthComponent_div_66_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.isLoading());
   }
 }
-function AuthComponent_div_67_Template(rf, ctx) {
+function AuthComponent_div_63_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 144)(1, "div", 145);
+    \u0275\u0275elementStart(0, "div", 139)(1, "div", 140);
     \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(2, "svg", 107);
-    \u0275\u0275element(3, "path", 43);
+    \u0275\u0275elementStart(2, "svg", 102);
+    \u0275\u0275element(3, "path", 58);
     \u0275\u0275elementEnd()();
     \u0275\u0275namespaceHTML();
     \u0275\u0275elementStart(4, "h2");
@@ -40096,13 +40139,13 @@ function AuthComponent_div_67_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r1.successMsg());
   }
 }
-function AuthComponent_p_68_ng_container_1_Template(rf, ctx) {
+function AuthComponent_p_64_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
     \u0275\u0275text(1, "Don't have an account? ");
-    \u0275\u0275elementStart(2, "a", 147);
-    \u0275\u0275listener("click", function AuthComponent_p_68_ng_container_1_Template_a_click_2_listener() {
+    \u0275\u0275elementStart(2, "a", 142);
+    \u0275\u0275listener("click", function AuthComponent_p_64_ng_container_1_Template_a_click_2_listener() {
       \u0275\u0275restoreView(_r6);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.switchTab("signup"));
@@ -40112,13 +40155,13 @@ function AuthComponent_p_68_ng_container_1_Template(rf, ctx) {
     \u0275\u0275elementContainerEnd();
   }
 }
-function AuthComponent_p_68_ng_container_2_Template(rf, ctx) {
+function AuthComponent_p_64_ng_container_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r7 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
     \u0275\u0275text(1, "Already have an account? ");
-    \u0275\u0275elementStart(2, "a", 147);
-    \u0275\u0275listener("click", function AuthComponent_p_68_ng_container_2_Template_a_click_2_listener() {
+    \u0275\u0275elementStart(2, "a", 142);
+    \u0275\u0275listener("click", function AuthComponent_p_64_ng_container_2_Template_a_click_2_listener() {
       \u0275\u0275restoreView(_r7);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.switchTab("login"));
@@ -40128,10 +40171,10 @@ function AuthComponent_p_68_ng_container_2_Template(rf, ctx) {
     \u0275\u0275elementContainerEnd();
   }
 }
-function AuthComponent_p_68_Template(rf, ctx) {
+function AuthComponent_p_64_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 146);
-    \u0275\u0275template(1, AuthComponent_p_68_ng_container_1_Template, 4, 0, "ng-container", 100)(2, AuthComponent_p_68_ng_container_2_Template, 4, 0, "ng-container", 100);
+    \u0275\u0275elementStart(0, "p", 141);
+    \u0275\u0275template(1, AuthComponent_p_64_ng_container_1_Template, 4, 0, "ng-container", 95)(2, AuthComponent_p_64_ng_container_2_Template, 4, 0, "ng-container", 95);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -40448,91 +40491,87 @@ var AuthComponent = class _AuthComponent {
       p: "Get a structured scorecard \u2014 communication, technical depth, problem solving."
     }
   ];
-  dotIdx = 0;
+  dotIdx = signal(0, ...ngDevMode ? [{ debugName: "dotIdx" }] : (
+    /* istanbul ignore next */
+    []
+  ));
   ngOnInit() {
     this.initForms();
     setInterval(() => {
-      this.dotIdx = (this.dotIdx + 1) % this.messages.length;
+      this.dotIdx.update((v) => (v + 1) % this.messages.length);
     }, 4e3);
   }
   static \u0275fac = function AuthComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _AuthComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AuthComponent, selectors: [["app-auth"]], decls: 74, vars: 19, consts: [[1, "progress-bar"], [1, "auth-wrapper"], [1, "left-panel"], ["href", "#", 1, "panel-logo"], [1, "panel-logo-icon"], ["fill", "none", "stroke", "white", "stroke-width", "2.5", "viewBox", "0 0 24 24"], ["d", "M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"], [1, "panel-illustration"], ["viewBox", "0 0 360 280", "fill", "none", "xmlns", "http://www.w3.org/2000/svg", 1, "ill-scene"], ["x", "40", "y", "210", "width", "280", "height", "12", "rx", "6", "fill", "rgba(255,255,255,0.15)"], ["x", "90", "y", "155", "width", "180", "height", "58", "rx", "8", "fill", "rgba(255,255,255,0.18)"], ["x", "95", "y", "160", "width", "170", "height", "46", "rx", "5", "fill", "rgba(15,23,42,0.6)"], ["x", "99", "y", "163", "width", "162", "height", "40", "rx", "4", "fill", "rgba(37,99,235,0.3)"], ["x", "108", "y", "170", "width", "60", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.8)"], ["x", "108", "y", "177", "width", "90", "height", "3", "rx", "1.5", "fill", "rgba(52,211,153,0.6)"], ["x", "108", "y", "184", "width", "45", "height", "3", "rx", "1.5", "fill", "rgba(251,191,36,0.6)"], ["x", "108", "y", "191", "width", "80", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.6)"], ["x", "108", "y", "198", "width", "35", "height", "3", "rx", "1.5", "fill", "rgba(248,113,113,0.6)"], ["x", "90", "y", "210", "width", "180", "height", "5", "rx", "2.5", "fill", "rgba(255,255,255,0.1)"], ["cx", "180", "cy", "145", "rx", "24", "ry", "18", "fill", "rgba(255,255,255,0.15)"], ["cx", "180", "cy", "108", "r", "20", "fill", "rgba(255,255,255,0.2)"], ["cx", "174", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["cx", "186", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["d", "M174 114 Q180 118 186 114", "stroke", "rgba(255,255,255,0.6)", "stroke-width", "1.5", "stroke-linecap", "round"], ["d", "M162 100 Q165 88 180 87 Q195 88 198 100", "fill", "rgba(255,255,255,0.3)"], ["d", "M156 145 Q130 165 125 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["d", "M204 145 Q230 165 235 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["cx", "120", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["cx", "240", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["x", "155", "y", "160", "width", "50", "height", "6", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "162", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "192", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["cx", "58", "cy", "60", "r", "3", "fill", "rgba(255,255,255,0.4)"], ["cx", "298", "cy", "80", "r", "2", "fill", "rgba(255,255,255,0.3)"], ["cx", "72", "cy", "180", "r", "2", "fill", "rgba(255,255,255,0.25)"], ["cx", "312", "cy", "160", "r", "3", "fill", "rgba(255,255,255,0.35)"], ["cx", "50", "cy", "240", "r", "25", "stroke", "rgba(255,255,255,0.08)", "stroke-width", "2", "fill", "none"], ["cx", "318", "cy", "50", "r", "30", "stroke", "rgba(255,255,255,0.07)", "stroke-width", "2", "fill", "none"], [1, "float-cards"], [1, "fc", "fc-1"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24"], ["d", "M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"], [1, "fc", "fc-2"], ["d", "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"], [1, "fc", "fc-3"], ["d", "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"], [1, "panel-text"], [3, "innerHTML"], [1, "panel-dots"], [1, "panel-dot"], [1, "right-panel"], [1, "auth-box"], ["class", "auth-tabs", 4, "ngIf"], ["id", "loginState", 4, "ngIf"], ["id", "forgotState", 4, "ngIf"], ["id", "signupState", 4, "ngIf"], ["id", "successState", "class", "success-state", 4, "ngIf"], ["class", "switch-mode", 4, "ngIf"], [1, "toast"], [1, "auth-tabs"], [1, "auth-tab", 3, "click"], ["id", "loginState"], [1, "auth-heading"], [1, "social-btns"], [1, "social-btn", "btn-google", 3, "click"], ["viewBox", "0 0 24 24", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z", "fill", "#4285F4"], ["d", "M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z", "fill", "#34A853"], ["d", "M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z", "fill", "#FBBC05"], ["d", "M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z", "fill", "#EA4335"], [1, "social-btn", "btn-github", 3, "click"], ["viewBox", "0 0 24 24", "fill", "white"], ["d", "M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"], [1, "social-btn", "btn-linkedin", 3, "click"], ["d", "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"], [1, "divider"], [1, "divider-line"], [1, "divider-text"], ["novalidate", "", 1, "auth-form", 3, "ngSubmit", "formGroup"], [1, "field"], ["for", "loginEmail"], [1, "input-wrap"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24", "aria-hidden", "true"], ["d", "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"], ["type", "email", "id", "loginEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "loginEmail-error", "aria-invalid", "false"], ["id", "loginEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "loginPw"], ["x", "3", "y", "11", "width", "18", "height", "11", "rx", "2", "ry", "2"], ["d", "M7 11V7a5 5 0 0110 0v4"], ["type", "password", "id", "loginPw", "formControlName", "password", "placeholder", "Your password", "autocomplete", "current-password", "aria-describedby", "loginPw-error"], ["type", "button", "aria-label", "Toggle password visibility", 1, "pw-toggle", 3, "click"], ["d", "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"], ["cx", "12", "cy", "12", "r", "3"], ["id", "loginPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "field-row"], [1, "checkbox-label"], ["type", "checkbox", "formControlName", "rememberMe", "aria-describedby", "remember-help"], [1, "checkmark"], ["href", "#", 1, "forgot-link", 3, "click"], ["type", "submit", 1, "btn-submit", 3, "disabled"], [4, "ngIf"], ["class", "loading-text", 4, "ngIf"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24", 4, "ngIf"], ["class", "spinner", "aria-hidden", "true", 4, "ngIf"], ["id", "loginEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "loginPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], [1, "loading-text"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24"], ["d", "M17 8l4 4m0 0l-4 4m4-4H3"], ["aria-hidden", "true", 1, "spinner"], ["id", "forgotState"], [1, "back-link", 3, "click"], ["d", "M19 12H5M12 5l-7 7 7 7"], ["for", "forgotEmail"], ["type", "email", "id", "forgotEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "forgotEmail-error"], ["id", "forgotEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "forgotEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupState"], ["viewBox", "0 0 24 24", "fill", "none"], ["for", "signupName"], ["d", "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"], ["type", "text", "id", "signupName", "formControlName", "name", "placeholder", "Priya Kumar", "autocomplete", "name", "aria-describedby", "signupName-error"], ["id", "signupName-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupEmail"], ["type", "email", "id", "signupEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "signupEmail-error"], ["id", "signupEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupPw"], ["type", "password", "id", "signupPw", "formControlName", "password", "placeholder", "At least 8 characters", "autocomplete", "new-password", "aria-describedby", "signupPw-error pw-requirements", 3, "input"], [1, "pw-strength"], [1, "pw-bar"], ["id", "signupPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "pw-requirements", "class", "pw-requirements", 4, "ngIf"], ["for", "confirmPassword"], ["type", "password", "id", "confirmPassword", "formControlName", "confirmPassword", "placeholder", "Confirm your password", "autocomplete", "new-password", "aria-describedby", "confirmPassword-error"], ["id", "confirmPassword-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "terms-note"], ["href", "#"], ["id", "signupName-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "pw-requirements", 1, "pw-requirements"], [1, "requirement"], [1, "req-icon"], ["id", "confirmPassword-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "successState", 1, "success-state"], [1, "success-icon"], [1, "switch-mode"], [3, "click"]], template: function AuthComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AuthComponent, selectors: [["app-auth"]], decls: 70, vars: 23, consts: [[1, "progress-bar"], [1, "auth-wrapper"], [1, "left-panel"], ["routerLink", "/", 1, "panel-logo"], [1, "panel-logo-icon"], ["name", "pencil", "stroke", "white", "strokeWidth", "2.5", 3, "size"], [1, "panel-illustration"], ["viewBox", "0 0 360 280", "fill", "none", "xmlns", "http://www.w3.org/2000/svg", 1, "ill-scene"], ["x", "40", "y", "210", "width", "280", "height", "12", "rx", "6", "fill", "rgba(255,255,255,0.15)"], ["x", "90", "y", "155", "width", "180", "height", "58", "rx", "8", "fill", "rgba(255,255,255,0.18)"], ["x", "95", "y", "160", "width", "170", "height", "46", "rx", "5", "fill", "rgba(15,23,42,0.6)"], ["x", "99", "y", "163", "width", "162", "height", "40", "rx", "4", "fill", "rgba(37,99,235,0.3)"], ["x", "108", "y", "170", "width", "60", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.8)"], ["x", "108", "y", "177", "width", "90", "height", "3", "rx", "1.5", "fill", "rgba(52,211,153,0.6)"], ["x", "108", "y", "184", "width", "45", "height", "3", "rx", "1.5", "fill", "rgba(251,191,36,0.6)"], ["x", "108", "y", "191", "width", "80", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.6)"], ["x", "108", "y", "198", "width", "35", "height", "3", "rx", "1.5", "fill", "rgba(248,113,113,0.6)"], ["x", "90", "y", "210", "width", "180", "height", "5", "rx", "2.5", "fill", "rgba(255,255,255,0.1)"], ["cx", "180", "cy", "145", "rx", "24", "ry", "18", "fill", "rgba(255,255,255,0.15)"], ["cx", "180", "cy", "108", "r", "20", "fill", "rgba(255,255,255,0.2)"], ["cx", "174", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["cx", "186", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["d", "M174 114 Q180 118 186 114", "stroke", "rgba(255,255,255,0.6)", "stroke-width", "1.5", "stroke-linecap", "round"], ["d", "M162 100 Q165 88 180 87 Q195 88 198 100", "fill", "rgba(255,255,255,0.3)"], ["d", "M156 145 Q130 165 125 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["d", "M204 145 Q230 165 235 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["cx", "120", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["cx", "240", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["x", "155", "y", "160", "width", "50", "height", "6", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "162", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "192", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["cx", "58", "cy", "60", "r", "3", "fill", "rgba(255,255,255,0.4)"], ["cx", "298", "cy", "80", "r", "2", "fill", "rgba(255,255,255,0.3)"], ["cx", "72", "cy", "180", "r", "2", "fill", "rgba(255,255,255,0.25)"], ["cx", "312", "cy", "160", "r", "3", "fill", "rgba(255,255,255,0.35)"], ["cx", "50", "cy", "240", "r", "25", "stroke", "rgba(255,255,255,0.08)", "stroke-width", "2", "fill", "none"], ["cx", "318", "cy", "50", "r", "30", "stroke", "rgba(255,255,255,0.07)", "stroke-width", "2", "fill", "none"], [1, "float-cards"], [1, "fc", "fc-1"], ["name", "video", 3, "size"], [1, "fc", "fc-2"], ["name", "check-circle", 3, "size"], [1, "fc", "fc-3"], ["name", "chart", 3, "size"], [1, "panel-text"], [3, "innerHTML"], [1, "panel-dots"], [1, "panel-dot"], [1, "right-panel"], [1, "auth-box"], ["class", "auth-tabs", 4, "ngIf"], ["id", "loginState", 4, "ngIf"], ["id", "forgotState", 4, "ngIf"], ["id", "signupState", 4, "ngIf"], ["id", "successState", "class", "success-state", 4, "ngIf"], ["class", "switch-mode", 4, "ngIf"], [1, "toast"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24"], ["d", "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"], [1, "auth-tabs"], [1, "auth-tab", 3, "click"], ["id", "loginState"], [1, "auth-heading"], [1, "social-btns"], [1, "social-btn", "btn-google", 3, "click"], ["viewBox", "0 0 24 24", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z", "fill", "#4285F4"], ["d", "M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z", "fill", "#34A853"], ["d", "M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z", "fill", "#FBBC05"], ["d", "M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z", "fill", "#EA4335"], [1, "divider"], [1, "divider-line"], [1, "divider-text"], ["novalidate", "", 1, "auth-form", 3, "ngSubmit", "formGroup"], [1, "field"], ["for", "loginEmail"], [1, "input-wrap"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24", "aria-hidden", "true"], ["d", "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"], ["type", "email", "id", "loginEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "loginEmail-error", "aria-invalid", "false"], ["id", "loginEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "loginPw"], ["x", "3", "y", "11", "width", "18", "height", "11", "rx", "2", "ry", "2"], ["d", "M7 11V7a5 5 0 0110 0v4"], ["type", "password", "id", "loginPw", "formControlName", "password", "placeholder", "Your password", "autocomplete", "current-password", "aria-describedby", "loginPw-error"], ["type", "button", "aria-label", "Toggle password visibility", 1, "pw-toggle", 3, "click"], ["d", "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"], ["cx", "12", "cy", "12", "r", "3"], ["id", "loginPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "field-row"], [1, "checkbox-label"], ["type", "checkbox", "formControlName", "rememberMe", "aria-describedby", "remember-help"], [1, "checkmark"], ["href", "#", 1, "forgot-link", 3, "click"], ["type", "submit", 1, "btn-submit", 3, "disabled"], [4, "ngIf"], ["class", "loading-text", 4, "ngIf"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24", 4, "ngIf"], ["class", "spinner", "aria-hidden", "true", 4, "ngIf"], ["id", "loginEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "loginPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], [1, "loading-text"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24"], ["d", "M17 8l4 4m0 0l-4 4m4-4H3"], ["aria-hidden", "true", 1, "spinner"], ["id", "forgotState"], [1, "back-link", 3, "click"], ["d", "M19 12H5M12 5l-7 7 7 7"], ["for", "forgotEmail"], ["type", "email", "id", "forgotEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "forgotEmail-error"], ["id", "forgotEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "forgotEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupState"], ["viewBox", "0 0 24 24", "fill", "none"], ["for", "signupName"], ["d", "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"], ["type", "text", "id", "signupName", "formControlName", "name", "placeholder", "Priya Kumar", "autocomplete", "name", "aria-describedby", "signupName-error"], ["id", "signupName-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupEmail"], ["type", "email", "id", "signupEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "signupEmail-error"], ["id", "signupEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupPw"], ["type", "password", "id", "signupPw", "formControlName", "password", "placeholder", "At least 8 characters", "autocomplete", "new-password", "aria-describedby", "signupPw-error pw-requirements", 3, "input"], [1, "pw-strength"], [1, "pw-bar"], ["id", "signupPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "pw-requirements", "class", "pw-requirements", 4, "ngIf"], ["for", "confirmPassword"], ["type", "password", "id", "confirmPassword", "formControlName", "confirmPassword", "placeholder", "Confirm your password", "autocomplete", "new-password", "aria-describedby", "confirmPassword-error"], ["id", "confirmPassword-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "terms-note"], ["href", "#"], ["id", "signupName-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "pw-requirements", 1, "pw-requirements"], [1, "requirement"], [1, "req-icon"], ["id", "confirmPassword-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "successState", 1, "success-state"], [1, "success-icon"], [1, "switch-mode"], [3, "click"]], template: function AuthComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275element(0, "div", 0);
       \u0275\u0275elementStart(1, "div", 1)(2, "div", 2)(3, "a", 3)(4, "div", 4);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(5, "svg", 5);
-      \u0275\u0275element(6, "path", 6);
+      \u0275\u0275element(5, "app-icon", 5);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "span");
+      \u0275\u0275text(7, "InterviewReady");
       \u0275\u0275elementEnd()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(7, "span");
-      \u0275\u0275text(8, "InterviewReady");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(9, "div", 7);
+      \u0275\u0275elementStart(8, "div", 6);
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(10, "svg", 8);
-      \u0275\u0275element(11, "rect", 9)(12, "rect", 10)(13, "rect", 11)(14, "rect", 12)(15, "rect", 13)(16, "rect", 14)(17, "rect", 15)(18, "rect", 16)(19, "rect", 17)(20, "rect", 18)(21, "ellipse", 19)(22, "circle", 20)(23, "circle", 21)(24, "circle", 22)(25, "path", 23)(26, "path", 24)(27, "path", 25)(28, "path", 26)(29, "ellipse", 27)(30, "ellipse", 28)(31, "rect", 29)(32, "rect", 30)(33, "rect", 31)(34, "circle", 32)(35, "circle", 33)(36, "circle", 34)(37, "circle", 35)(38, "circle", 36)(39, "circle", 37);
+      \u0275\u0275elementStart(9, "svg", 7);
+      \u0275\u0275element(10, "rect", 8)(11, "rect", 9)(12, "rect", 10)(13, "rect", 11)(14, "rect", 12)(15, "rect", 13)(16, "rect", 14)(17, "rect", 15)(18, "rect", 16)(19, "rect", 17)(20, "ellipse", 18)(21, "circle", 19)(22, "circle", 20)(23, "circle", 21)(24, "path", 22)(25, "path", 23)(26, "path", 24)(27, "path", 25)(28, "ellipse", 26)(29, "ellipse", 27)(30, "rect", 28)(31, "rect", 29)(32, "rect", 30)(33, "circle", 31)(34, "circle", 32)(35, "circle", 33)(36, "circle", 34)(37, "circle", 35)(38, "circle", 36);
       \u0275\u0275elementEnd();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(40, "div", 38)(41, "div", 39);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(42, "svg", 40);
-      \u0275\u0275element(43, "path", 41);
+      \u0275\u0275elementStart(39, "div", 37)(40, "div", 38);
+      \u0275\u0275element(41, "app-icon", 39);
+      \u0275\u0275text(42, " Live Mock Interview ");
       \u0275\u0275elementEnd();
-      \u0275\u0275text(44, " Live Mock Interview ");
+      \u0275\u0275elementStart(43, "div", 40);
+      \u0275\u0275element(44, "app-icon", 41);
+      \u0275\u0275text(45, " Feedback in 24 hrs ");
       \u0275\u0275elementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(45, "div", 42);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(46, "svg", 40);
-      \u0275\u0275element(47, "path", 43);
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(48, " Feedback in 24 hrs ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(46, "div", 42);
+      \u0275\u0275element(47, "app-icon", 43);
+      \u0275\u0275text(48, " \u2191 4.8 Avg rating ");
+      \u0275\u0275elementEnd()()();
       \u0275\u0275elementStart(49, "div", 44);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(50, "svg", 40);
-      \u0275\u0275element(51, "path", 45);
+      \u0275\u0275element(50, "h2", 45);
+      \u0275\u0275elementStart(51, "p");
+      \u0275\u0275text(52);
       \u0275\u0275elementEnd();
-      \u0275\u0275text(52, " \u2191 4.8 Avg rating ");
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275namespaceHTML();
       \u0275\u0275elementStart(53, "div", 46);
-      \u0275\u0275element(54, "h2", 47);
-      \u0275\u0275elementStart(55, "p");
-      \u0275\u0275text(56);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(57, "div", 48);
-      \u0275\u0275element(58, "div", 49)(59, "div", 49)(60, "div", 49);
+      \u0275\u0275element(54, "div", 47)(55, "div", 47)(56, "div", 47);
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(61, "div", 50)(62, "div", 51);
-      \u0275\u0275template(63, AuthComponent_div_63_Template, 5, 4, "div", 52)(64, AuthComponent_div_64_Template, 61, 16, "div", 53)(65, AuthComponent_div_65_Template, 24, 12, "div", 54)(66, AuthComponent_div_66_Template, 85, 33, "div", 55)(67, AuthComponent_div_67_Template, 8, 2, "div", 56)(68, AuthComponent_p_68_Template, 3, 2, "p", 57);
+      \u0275\u0275elementStart(57, "div", 48)(58, "div", 49);
+      \u0275\u0275template(59, AuthComponent_div_59_Template, 5, 4, "div", 50)(60, AuthComponent_div_60_Template, 53, 16, "div", 51)(61, AuthComponent_div_61_Template, 24, 12, "div", 52)(62, AuthComponent_div_62_Template, 77, 33, "div", 53)(63, AuthComponent_div_63_Template, 8, 2, "div", 54)(64, AuthComponent_p_64_Template, 3, 2, "p", 55);
       \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(69, "div", 58);
+      \u0275\u0275elementStart(65, "div", 56);
       \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(70, "svg", 40);
-      \u0275\u0275element(71, "path", 43);
+      \u0275\u0275elementStart(66, "svg", 57);
+      \u0275\u0275element(67, "path", 58);
       \u0275\u0275elementEnd();
       \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(72, "span");
-      \u0275\u0275text(73);
+      \u0275\u0275elementStart(68, "span");
+      \u0275\u0275text(69);
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
       \u0275\u0275styleProp("width", ctx.progress(), "%");
-      \u0275\u0275advance(54);
-      \u0275\u0275property("innerHTML", ctx.messages[ctx.dotIdx].h, \u0275\u0275sanitizeHtml);
+      \u0275\u0275advance(5);
+      \u0275\u0275property("size", 20);
+      \u0275\u0275advance(36);
+      \u0275\u0275property("size", 14);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("size", 14);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("size", 14);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("innerHTML", ctx.messages[ctx.dotIdx()].h, \u0275\u0275sanitizeHtml);
       \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(ctx.messages[ctx.dotIdx].p);
+      \u0275\u0275textInterpolate(ctx.messages[ctx.dotIdx()].p);
       \u0275\u0275advance(2);
-      \u0275\u0275classProp("active", ctx.dotIdx === 0);
+      \u0275\u0275classProp("active", ctx.dotIdx() === 0);
       \u0275\u0275advance();
-      \u0275\u0275classProp("active", ctx.dotIdx === 1);
+      \u0275\u0275classProp("active", ctx.dotIdx() === 1);
       \u0275\u0275advance();
-      \u0275\u0275classProp("active", ctx.dotIdx === 2);
+      \u0275\u0275classProp("active", ctx.dotIdx() === 2);
       \u0275\u0275advance(3);
       \u0275\u0275property("ngIf", !ctx.showSuccess());
       \u0275\u0275advance();
@@ -40550,23 +40589,24 @@ var AuthComponent = class _AuthComponent {
       \u0275\u0275advance(4);
       \u0275\u0275textInterpolate(ctx.toastMsg());
     }
-  }, dependencies: [CommonModule, NgIf, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, CheckboxControlValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName], styles: ['@charset "UTF-8";\n\n\n.progress-bar[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 3px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 0 2px 2px 0;\n  transition: width 0.6s ease;\n  z-index: 999;\n}\n.auth-wrapper[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  min-height: 100vh;\n}\n.left-panel[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      145deg,\n      #1e3a8a 0%,\n      var(--blue-dark) 45%,\n      var(--teal) 100%);\n  padding: clamp(40px, 5vw, 64px);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  overflow: hidden;\n}\n.left-panel[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: -140px;\n  right: -100px;\n  width: 420px;\n  height: 420px;\n  background: rgba(255, 255, 255, 0.06);\n  border-radius: 50%;\n}\n.left-panel[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  bottom: -100px;\n  left: -60px;\n  width: 320px;\n  height: 320px;\n  background: rgba(255, 255, 255, 0.05);\n  border-radius: 50%;\n}\n.panel-logo[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  margin-bottom: auto;\n  position: relative;\n  z-index: 2;\n}\n.panel-logo-icon[_ngcontent-%COMP%] {\n  width: 38px;\n  height: 38px;\n  background: rgba(255, 255, 255, 0.15);\n  border: 1.5px solid rgba(255, 255, 255, 0.25);\n  border-radius: 11px;\n  display: grid;\n  place-items: center;\n  -webkit-backdrop-filter: blur(8px);\n  backdrop-filter: blur(8px);\n}\n.panel-logo-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 20px;\n  height: 20px;\n}\n.panel-logo[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.1rem;\n  color: white;\n}\n.panel-illustration[_ngcontent-%COMP%] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  z-index: 2;\n  padding: 32px 0;\n}\n.ill-scene[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 380px;\n}\n.float-cards[_ngcontent-%COMP%] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n.fc[_ngcontent-%COMP%] {\n  position: absolute;\n  background: rgba(255, 255, 255, 0.12);\n  -webkit-backdrop-filter: blur(12px);\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.2);\n  border-radius: 12px;\n  padding: 12px 16px;\n  font-size: 0.78rem;\n  color: white;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  white-space: nowrap;\n  animation: _ngcontent-%COMP%_floatY 4s ease-in-out infinite;\n}\n.fc[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 14px;\n  height: 14px;\n  opacity: 0.85;\n  flex-shrink: 0;\n}\n.fc-1[_ngcontent-%COMP%] {\n  top: 12%;\n  right: -8%;\n  animation-delay: 0s;\n}\n.fc-2[_ngcontent-%COMP%] {\n  bottom: 20%;\n  left: -6%;\n  animation-delay: 1.8s;\n}\n.fc-3[_ngcontent-%COMP%] {\n  top: 45%;\n  right: -12%;\n  animation-delay: 0.9s;\n}\n@keyframes _ngcontent-%COMP%_floatY {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-8px);\n  }\n}\n.panel-text[_ngcontent-%COMP%] {\n  position: relative;\n  z-index: 2;\n  margin-top: 16px;\n}\n.panel-text[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: clamp(1.4rem, 2.5vw, 2rem);\n  font-weight: 800;\n  color: white;\n  line-height: 1.25;\n  margin-bottom: 12px;\n  transition: opacity 0.3s;\n}\n.panel-text[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  color: rgba(255, 255, 255, 0.72);\n  font-size: 0.95rem;\n  line-height: 1.6;\n  max-width: 320px;\n  transition: opacity 0.3s;\n}\n.panel-dots[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 6px;\n  margin-top: 24px;\n}\n.panel-dot[_ngcontent-%COMP%] {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.3);\n  transition: all 0.3s;\n}\n.panel-dot.active[_ngcontent-%COMP%] {\n  width: 22px;\n  border-radius: 4px;\n  background: white;\n}\n.panel-testimonial[_ngcontent-%COMP%] {\n  background: rgba(255, 255, 255, 0.1);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: var(--radius-sm);\n  padding: 16px 20px;\n  margin-top: 24px;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n  position: relative;\n  z-index: 2;\n}\n.pt-stars[_ngcontent-%COMP%] {\n  color: #fcd34d;\n  font-size: 0.85rem;\n  letter-spacing: 2px;\n  margin-bottom: 6px;\n}\n.pt-quote[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.5;\n  font-style: italic;\n  margin-bottom: 10px;\n}\n.pt-author[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.pt-avatar[_ngcontent-%COMP%] {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background:\n    linear-gradient(\n      135deg,\n      #818cf8,\n      #a78bfa);\n  display: grid;\n  place-items: center;\n  font-size: 0.72rem;\n  font-weight: 700;\n  color: white;\n}\n.pt-name[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  color: rgba(255, 255, 255, 0.8);\n  font-weight: 600;\n}\n.pt-role[_ngcontent-%COMP%] {\n  font-size: 0.7rem;\n  color: rgba(255, 255, 255, 0.5);\n}\n.right-panel[_ngcontent-%COMP%] {\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: clamp(32px, 5vw, 64px);\n  position: relative;\n}\n.auth-box[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 420px;\n}\n.auth-tabs[_ngcontent-%COMP%] {\n  display: flex;\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  padding: 4px;\n  margin-bottom: 32px;\n  border: 1px solid var(--border);\n}\n.auth-tab[_ngcontent-%COMP%] {\n  flex: 1;\n  padding: 10px;\n  text-align: center;\n  font-size: 0.9rem;\n  font-weight: 600;\n  border-radius: calc(var(--radius) - 4px);\n  cursor: pointer;\n  transition: all 0.22s;\n  color: var(--text-muted);\n  border: none;\n  background: none;\n  font-family: "DM Sans", sans-serif;\n}\n.auth-tab.active[_ngcontent-%COMP%] {\n  background: white;\n  color: var(--blue);\n  box-shadow: var(--shadow);\n}\n.auth-heading[_ngcontent-%COMP%] {\n  margin-bottom: 28px;\n}\n.auth-heading[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1.6rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 6px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s ease both;\n}\n.auth-heading[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.9rem;\n  color: var(--text-soft);\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.05s ease both;\n}\n.social-btns[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  margin-bottom: 24px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.1s ease both;\n}\n.social-btn[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 13px 20px;\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  position: relative;\n  overflow: hidden;\n}\n.social-btn[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background: rgba(255, 255, 255, 0);\n  transition: background 0.2s;\n}\n.social-btn[_ngcontent-%COMP%]:hover::after {\n  background: rgba(255, 255, 255, 0.08);\n}\n.social-btn[_ngcontent-%COMP%]:active {\n  transform: scale(0.98);\n}\n.social-btn[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n.btn-google[_ngcontent-%COMP%] {\n  background: white;\n  color: #374151;\n  border: 1.5px solid var(--border);\n  box-shadow: var(--shadow);\n}\n.btn-google[_ngcontent-%COMP%]:hover {\n  border-color: #d1d5db;\n  box-shadow: var(--shadow-lg);\n}\n.btn-github[_ngcontent-%COMP%] {\n  background: #0d1117;\n  color: white;\n  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.25);\n}\n.btn-github[_ngcontent-%COMP%]:hover {\n  background: #161b22;\n  box-shadow: 0 6px 20px rgba(13, 17, 23, 0.35);\n}\n.btn-linkedin[_ngcontent-%COMP%] {\n  background: #0a66c2;\n  color: white;\n  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.3);\n}\n.btn-linkedin[_ngcontent-%COMP%]:hover {\n  background: #0958a8;\n  box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);\n}\n.divider[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  margin-bottom: 24px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.15s ease both;\n}\n.divider-line[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 1px;\n  background: var(--border);\n}\n.divider-text[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  white-space: nowrap;\n}\n.auth-form[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.18s ease both;\n}\n.field[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  letter-spacing: 0.01em;\n}\n.input-wrap[_ngcontent-%COMP%] {\n  position: relative;\n}\n.input-wrap[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  position: absolute;\n  left: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 16px;\n  height: 16px;\n  color: var(--text-muted);\n  pointer-events: none;\n  transition: color 0.2s;\n}\n.input-wrap[_ngcontent-%COMP%]:focus-within   svg[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 12px 14px 12px 42px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  transition: all 0.2s;\n  outline: none;\n  -webkit-appearance: none;\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]::placeholder {\n  color: var(--text-muted);\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.input-wrap[_ngcontent-%COMP%]   input.error[_ngcontent-%COMP%] {\n  border-color: var(--red);\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n.error-message[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n  color: var(--red);\n  margin-top: 4px;\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.error-message[_ngcontent-%COMP%]::before {\n  content: "\\26a0";\n  font-size: 0.9rem;\n}\n.pw-requirements[_ngcontent-%COMP%] {\n  margin-top: 8px;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 6px;\n}\n.requirement[_ngcontent-%COMP%] {\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.requirement.met[_ngcontent-%COMP%] {\n  color: var(--green);\n}\n.requirement[_ngcontent-%COMP%]   .req-icon[_ngcontent-%COMP%] {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  border: 1px solid var(--text-muted);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.6rem;\n  font-weight: bold;\n  color: transparent;\n}\n.requirement[_ngcontent-%COMP%]   .req-icon.met[_ngcontent-%COMP%] {\n  background: var(--green);\n  border-color: var(--green);\n  color: white;\n}\n.pw-toggle[_ngcontent-%COMP%] {\n  position: absolute;\n  right: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 18px;\n  height: 18px;\n  color: var(--text-muted);\n  cursor: pointer;\n  background: none;\n  border: none;\n  padding: 0;\n  display: grid;\n  place-items: center;\n  transition: color 0.2s;\n}\n.pw-toggle[_ngcontent-%COMP%]:hover {\n  color: var(--text);\n}\n.pw-toggle[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n}\n.pw-strength[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 4px;\n  margin-top: 6px;\n}\n.pw-bar[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 3px;\n  background: var(--border);\n  border-radius: 2px;\n  transition: background 0.3s;\n}\n.pw-bar.weak[_ngcontent-%COMP%] {\n  background: var(--red);\n}\n.pw-bar.fair[_ngcontent-%COMP%] {\n  background: var(--amber);\n}\n.pw-bar.strong[_ngcontent-%COMP%] {\n  background: var(--green);\n}\n.field-row[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: -4px;\n}\n.checkbox-label[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.checkbox-label[_ngcontent-%COMP%]   input[type=checkbox][_ngcontent-%COMP%] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n.checkbox-label[_ngcontent-%COMP%]   .checkmark[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border: 1.5px solid var(--border);\n  border-radius: 3px;\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all 0.2s;\n}\n.checkbox-label[_ngcontent-%COMP%]   .checkmark[_ngcontent-%COMP%]::after {\n  content: "";\n  width: 6px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg) scale(0);\n  transition: transform 0.2s;\n}\n.checkbox-label[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked    ~ .checkmark[_ngcontent-%COMP%] {\n  background: var(--blue);\n  border-color: var(--blue);\n}\n.checkbox-label[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked    ~ .checkmark[_ngcontent-%COMP%]::after {\n  transform: rotate(45deg) scale(1);\n}\n.checkbox-label[_ngcontent-%COMP%]:hover   .checkmark[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n}\n.btn-submit[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 14px;\n  background: var(--blue);\n  color: white;\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 1rem;\n  font-weight: 700;\n  cursor: pointer;\n  font-family: "Sora", sans-serif;\n  transition: all 0.22s;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  margin-top: 4px;\n  position: relative;\n  overflow: hidden;\n}\n.btn-submit[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background:\n    linear-gradient(\n      135deg,\n      transparent 40%,\n      rgba(255, 255, 255, 0.08));\n}\n.btn-submit[_ngcontent-%COMP%]:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-submit[_ngcontent-%COMP%]:active:not(:disabled) {\n  transform: scale(0.98);\n}\n.btn-submit[_ngcontent-%COMP%]:disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n  transform: none;\n}\n.btn-submit.loading[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n.btn-submit[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  flex-shrink: 0;\n}\n.spinner[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border: 2px solid rgba(255, 255, 255, 0.3);\n  border-top: 2px solid white;\n  border-radius: 50%;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.loading-text[_ngcontent-%COMP%] {\n  opacity: 0.9;\n}\n.terms-note[_ngcontent-%COMP%] {\n  text-align: center;\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  margin-top: 14px;\n  line-height: 1.5;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.22s ease both;\n}\n.terms-note[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  text-decoration: none;\n}\n.terms-note[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.switch-mode[_ngcontent-%COMP%] {\n  text-align: center;\n  margin-top: 20px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.25s ease both;\n}\n.switch-mode[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  font-weight: 600;\n  text-decoration: none;\n  cursor: pointer;\n}\n.switch-mode[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.success-state[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 24px 0;\n}\n.success-icon[_ngcontent-%COMP%] {\n  width: 68px;\n  height: 68px;\n  background: #ecfdf5;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n  border: 2px solid #a7f3d0;\n}\n.success-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 32px;\n  height: 32px;\n  color: var(--green);\n}\n.success-state[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1.4rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.success-state[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.back-link[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  text-decoration: none;\n  margin-bottom: 24px;\n  cursor: pointer;\n  transition: color 0.2s;\n}\n.back-link[_ngcontent-%COMP%]:hover {\n  color: var(--blue);\n}\n.back-link[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 14px;\n  height: 14px;\n}\n@keyframes _ngcontent-%COMP%_fadeSlideIn {\n  from {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.slide-in[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.32s ease both;\n}\n.toast[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 24px;\n  left: 50%;\n  transform: translateX(-50%) translateY(80px);\n  background: #0f172a;\n  color: white;\n  padding: 12px 20px;\n  border-radius: 10px;\n  font-size: 0.88rem;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);\n  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;\n  opacity: 0;\n  z-index: 9999;\n  white-space: nowrap;\n}\n.toast.show[_ngcontent-%COMP%] {\n  transform: translateX(-50%) translateY(0);\n  opacity: 1;\n}\n.toast[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n}\n@media (max-width: 900px) {\n  .auth-wrapper[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n  .left-panel[_ngcontent-%COMP%] {\n    display: none;\n  }\n  .right-panel[_ngcontent-%COMP%] {\n    min-height: 100vh;\n    background: var(--bg-soft);\n    padding: 40px 20px;\n  }\n  .auth-box[_ngcontent-%COMP%] {\n    background: white;\n    border-radius: var(--radius-lg);\n    padding: 32px 24px;\n    box-shadow: var(--shadow-lg);\n    border: 1px solid var(--border);\n  }\n}\n@media (max-width: 480px) {\n  .right-panel[_ngcontent-%COMP%] {\n    padding: 24px 16px;\n    background: white;\n  }\n  .auth-box[_ngcontent-%COMP%] {\n    box-shadow: none;\n    border: none;\n    padding: 0;\n  }\n}\n/*# sourceMappingURL=auth.css.map */'] });
+  }, dependencies: [CommonModule, NgIf, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, CheckboxControlValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, IconComponent, RouterLink], styles: ['@charset "UTF-8";\n\n\n[_nghost-%COMP%] {\n  display: block;\n  min-height: 100vh;\n  overflow: hidden;\n}\n.progress-bar[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 3px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 0 2px 2px 0;\n  transition: width 0.6s ease;\n  z-index: 999;\n}\n.auth-wrapper[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  min-height: 100vh;\n  overflow: hidden;\n}\n.left-panel[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      145deg,\n      #1e3a8a 0%,\n      var(--blue-dark) 45%,\n      var(--teal) 100%);\n  padding: clamp(20px, 2vw, 32px) clamp(40px, 5vw, 64px) clamp(20px, 2vw, 32px);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  overflow: hidden;\n}\n.left-panel[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: -140px;\n  right: -100px;\n  width: 420px;\n  height: 420px;\n  background: rgba(255, 255, 255, 0.06);\n  border-radius: 50%;\n}\n.left-panel[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  bottom: -100px;\n  left: -60px;\n  width: 320px;\n  height: 320px;\n  background: rgba(255, 255, 255, 0.05);\n  border-radius: 50%;\n}\n.panel-logo[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  margin-bottom: auto;\n  position: relative;\n  z-index: 2;\n}\n.panel-logo-icon[_ngcontent-%COMP%] {\n  width: 38px;\n  height: 38px;\n  background: rgba(255, 255, 255, 0.15);\n  border: 1.5px solid rgba(255, 255, 255, 0.25);\n  border-radius: 11px;\n  display: grid;\n  place-items: center;\n  -webkit-backdrop-filter: blur(8px);\n  backdrop-filter: blur(8px);\n}\n.panel-logo-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 20px;\n  height: 20px;\n}\n.panel-logo[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.1rem;\n  color: white;\n}\n.panel-illustration[_ngcontent-%COMP%] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  z-index: 2;\n  padding: 32px 0;\n}\n.ill-scene[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 380px;\n}\n.float-cards[_ngcontent-%COMP%] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n.fc[_ngcontent-%COMP%] {\n  position: absolute;\n  background: rgba(255, 255, 255, 0.12);\n  -webkit-backdrop-filter: blur(12px);\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.2);\n  border-radius: 12px;\n  padding: 12px 16px;\n  font-size: 0.78rem;\n  color: white;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  white-space: nowrap;\n  animation: _ngcontent-%COMP%_floatY 4s ease-in-out infinite;\n}\n.fc[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 14px;\n  height: 14px;\n  opacity: 0.85;\n  flex-shrink: 0;\n}\n.fc-1[_ngcontent-%COMP%] {\n  top: 12%;\n  right: -8%;\n  animation-delay: 0s;\n}\n.fc-2[_ngcontent-%COMP%] {\n  bottom: 20%;\n  left: -6%;\n  animation-delay: 1.8s;\n}\n.fc-3[_ngcontent-%COMP%] {\n  top: 45%;\n  right: -12%;\n  animation-delay: 0.9s;\n}\n@keyframes _ngcontent-%COMP%_floatY {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-8px);\n  }\n}\n.panel-text[_ngcontent-%COMP%] {\n  position: relative;\n  z-index: 2;\n  margin-top: 16px;\n}\n.panel-text[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: clamp(1.4rem, 2.5vw, 2rem);\n  font-weight: 800;\n  color: white;\n  line-height: 1.25;\n  margin-bottom: 12px;\n  transition: opacity 0.3s;\n}\n.panel-text[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  color: rgba(255, 255, 255, 0.72);\n  font-size: 0.95rem;\n  line-height: 1.6;\n  max-width: 320px;\n  transition: opacity 0.3s;\n}\n.panel-dots[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 6px;\n  margin-top: 24px;\n}\n.panel-dot[_ngcontent-%COMP%] {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.3);\n  transition: all 0.3s;\n}\n.panel-dot.active[_ngcontent-%COMP%] {\n  width: 22px;\n  border-radius: 4px;\n  background: white;\n}\n.panel-testimonial[_ngcontent-%COMP%] {\n  background: rgba(255, 255, 255, 0.1);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: var(--radius-sm);\n  padding: 16px 20px;\n  margin-top: 24px;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n  position: relative;\n  z-index: 2;\n}\n.pt-stars[_ngcontent-%COMP%] {\n  color: #fcd34d;\n  font-size: 0.85rem;\n  letter-spacing: 2px;\n  margin-bottom: 6px;\n}\n.pt-quote[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.5;\n  font-style: italic;\n  margin-bottom: 10px;\n}\n.pt-author[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.pt-avatar[_ngcontent-%COMP%] {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background:\n    linear-gradient(\n      135deg,\n      #818cf8,\n      #a78bfa);\n  display: grid;\n  place-items: center;\n  font-size: 0.72rem;\n  font-weight: 700;\n  color: white;\n}\n.pt-name[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  color: rgba(255, 255, 255, 0.8);\n  font-weight: 600;\n}\n.pt-role[_ngcontent-%COMP%] {\n  font-size: 0.7rem;\n  color: rgba(255, 255, 255, 0.5);\n}\n.right-panel[_ngcontent-%COMP%] {\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: clamp(16px, 2vw, 32px) clamp(32px, 5vw, 64px);\n  position: relative;\n}\n.auth-box[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 420px;\n}\n.auth-tabs[_ngcontent-%COMP%] {\n  display: flex;\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  padding: 4px;\n  margin-bottom: 32px;\n  border: 1px solid var(--border);\n}\n.auth-tab[_ngcontent-%COMP%] {\n  flex: 1;\n  padding: 10px;\n  text-align: center;\n  font-size: 0.9rem;\n  font-weight: 600;\n  border-radius: calc(var(--radius) - 4px);\n  cursor: pointer;\n  transition: all 0.22s;\n  color: var(--text-muted);\n  border: none;\n  background: none;\n  font-family: "DM Sans", sans-serif;\n}\n.auth-tab.active[_ngcontent-%COMP%] {\n  background: white;\n  color: var(--blue);\n  box-shadow: var(--shadow);\n}\n.auth-heading[_ngcontent-%COMP%] {\n  margin-bottom: 28px;\n}\n.auth-heading[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1.6rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 6px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s ease both;\n}\n.auth-heading[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.9rem;\n  color: var(--text-soft);\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.05s ease both;\n}\n.social-btns[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  margin-bottom: 24px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.1s ease both;\n}\n.social-btn[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 13px 20px;\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  position: relative;\n  overflow: hidden;\n}\n.social-btn[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background: rgba(255, 255, 255, 0);\n  transition: background 0.2s;\n}\n.social-btn[_ngcontent-%COMP%]:hover::after {\n  background: rgba(255, 255, 255, 0.08);\n}\n.social-btn[_ngcontent-%COMP%]:active {\n  transform: scale(0.98);\n}\n.social-btn[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n.btn-google[_ngcontent-%COMP%] {\n  background: white;\n  color: #374151;\n  border: 1.5px solid var(--border);\n  box-shadow: var(--shadow);\n}\n.btn-google[_ngcontent-%COMP%]:hover {\n  border-color: #d1d5db;\n  box-shadow: var(--shadow-lg);\n}\n.btn-github[_ngcontent-%COMP%] {\n  background: #0d1117;\n  color: white;\n  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.25);\n}\n.btn-github[_ngcontent-%COMP%]:hover {\n  background: #161b22;\n  box-shadow: 0 6px 20px rgba(13, 17, 23, 0.35);\n}\n.btn-linkedin[_ngcontent-%COMP%] {\n  background: #0a66c2;\n  color: white;\n  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.3);\n}\n.btn-linkedin[_ngcontent-%COMP%]:hover {\n  background: #0958a8;\n  box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);\n}\n.divider[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  margin-bottom: 24px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.15s ease both;\n}\n.divider-line[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 1px;\n  background: var(--border);\n}\n.divider-text[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  white-space: nowrap;\n}\n.auth-form[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.18s ease both;\n}\n.field[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  letter-spacing: 0.01em;\n}\n.input-wrap[_ngcontent-%COMP%] {\n  position: relative;\n}\n.input-wrap[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  position: absolute;\n  left: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 16px;\n  height: 16px;\n  color: var(--text-muted);\n  pointer-events: none;\n  transition: color 0.2s;\n}\n.input-wrap[_ngcontent-%COMP%]:focus-within   svg[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 12px 14px 12px 42px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  transition: all 0.2s;\n  outline: none;\n  -webkit-appearance: none;\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]::placeholder {\n  color: var(--text-muted);\n}\n.input-wrap[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.input-wrap[_ngcontent-%COMP%]   input.error[_ngcontent-%COMP%] {\n  border-color: var(--red);\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n.error-message[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n  color: var(--red);\n  margin-top: 4px;\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.error-message[_ngcontent-%COMP%]::before {\n  content: "\\26a0";\n  font-size: 0.9rem;\n}\n.pw-requirements[_ngcontent-%COMP%] {\n  margin-top: 8px;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 6px;\n}\n.requirement[_ngcontent-%COMP%] {\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.requirement.met[_ngcontent-%COMP%] {\n  color: var(--green);\n}\n.requirement[_ngcontent-%COMP%]   .req-icon[_ngcontent-%COMP%] {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  border: 1px solid var(--text-muted);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.6rem;\n  font-weight: bold;\n  color: transparent;\n}\n.requirement[_ngcontent-%COMP%]   .req-icon.met[_ngcontent-%COMP%] {\n  background: var(--green);\n  border-color: var(--green);\n  color: white;\n}\n.pw-toggle[_ngcontent-%COMP%] {\n  position: absolute;\n  right: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 18px;\n  height: 18px;\n  color: var(--text-muted);\n  cursor: pointer;\n  background: none;\n  border: none;\n  padding: 0;\n  display: grid;\n  place-items: center;\n  transition: color 0.2s;\n}\n.pw-toggle[_ngcontent-%COMP%]:hover {\n  color: var(--text);\n}\n.pw-toggle[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n}\n.pw-strength[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 4px;\n  margin-top: 6px;\n}\n.pw-bar[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 3px;\n  background: var(--border);\n  border-radius: 2px;\n  transition: background 0.3s;\n}\n.pw-bar.weak[_ngcontent-%COMP%] {\n  background: var(--red);\n}\n.pw-bar.fair[_ngcontent-%COMP%] {\n  background: var(--amber);\n}\n.pw-bar.strong[_ngcontent-%COMP%] {\n  background: var(--green);\n}\n.field-row[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: -4px;\n}\n.checkbox-label[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.checkbox-label[_ngcontent-%COMP%]   input[type=checkbox][_ngcontent-%COMP%] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n.checkbox-label[_ngcontent-%COMP%]   .checkmark[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border: 1.5px solid var(--border);\n  border-radius: 3px;\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all 0.2s;\n}\n.checkbox-label[_ngcontent-%COMP%]   .checkmark[_ngcontent-%COMP%]::after {\n  content: "";\n  width: 6px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg) scale(0);\n  transition: transform 0.2s;\n}\n.checkbox-label[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked    ~ .checkmark[_ngcontent-%COMP%] {\n  background: var(--blue);\n  border-color: var(--blue);\n}\n.checkbox-label[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked    ~ .checkmark[_ngcontent-%COMP%]::after {\n  transform: rotate(45deg) scale(1);\n}\n.checkbox-label[_ngcontent-%COMP%]:hover   .checkmark[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n}\n.btn-submit[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 14px;\n  background: var(--blue);\n  color: white;\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 1rem;\n  font-weight: 700;\n  cursor: pointer;\n  font-family: "Sora", sans-serif;\n  transition: all 0.22s;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  margin-top: 4px;\n  position: relative;\n  overflow: hidden;\n}\n.btn-submit[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background:\n    linear-gradient(\n      135deg,\n      transparent 40%,\n      rgba(255, 255, 255, 0.08));\n}\n.btn-submit[_ngcontent-%COMP%]:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-submit[_ngcontent-%COMP%]:active:not(:disabled) {\n  transform: scale(0.98);\n}\n.btn-submit[_ngcontent-%COMP%]:disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n  transform: none;\n}\n.btn-submit.loading[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n.btn-submit[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  flex-shrink: 0;\n}\n.spinner[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n  border: 2px solid rgba(255, 255, 255, 0.3);\n  border-top: 2px solid white;\n  border-radius: 50%;\n  animation: _ngcontent-%COMP%_spin 1s linear infinite;\n}\n@keyframes _ngcontent-%COMP%_spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.loading-text[_ngcontent-%COMP%] {\n  opacity: 0.9;\n}\n.terms-note[_ngcontent-%COMP%] {\n  text-align: center;\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  margin-top: 14px;\n  line-height: 1.5;\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.22s ease both;\n}\n.terms-note[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  text-decoration: none;\n}\n.terms-note[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.switch-mode[_ngcontent-%COMP%] {\n  text-align: center;\n  margin-top: 20px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.4s 0.25s ease both;\n}\n.switch-mode[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  font-weight: 600;\n  text-decoration: none;\n  cursor: pointer;\n}\n.switch-mode[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.success-state[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 24px 0;\n}\n.success-icon[_ngcontent-%COMP%] {\n  width: 68px;\n  height: 68px;\n  background: #ecfdf5;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n  border: 2px solid #a7f3d0;\n}\n.success-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 32px;\n  height: 32px;\n  color: var(--green);\n}\n.success-state[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1.4rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.success-state[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.back-link[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  text-decoration: none;\n  margin-bottom: 24px;\n  cursor: pointer;\n  transition: color 0.2s;\n}\n.back-link[_ngcontent-%COMP%]:hover {\n  color: var(--blue);\n}\n.back-link[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 14px;\n  height: 14px;\n}\n@keyframes _ngcontent-%COMP%_fadeSlideIn {\n  from {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.slide-in[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_fadeSlideIn 0.32s ease both;\n}\n.toast[_ngcontent-%COMP%] {\n  position: fixed;\n  bottom: 24px;\n  left: 50%;\n  transform: translateX(-50%) translateY(80px);\n  background: #0f172a;\n  color: white;\n  padding: 12px 20px;\n  border-radius: 10px;\n  font-size: 0.88rem;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);\n  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;\n  opacity: 0;\n  z-index: 9999;\n  white-space: nowrap;\n}\n.toast.show[_ngcontent-%COMP%] {\n  transform: translateX(-50%) translateY(0);\n  opacity: 1;\n}\n.toast[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n}\n@media (max-width: 900px) {\n  .auth-wrapper[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n  .left-panel[_ngcontent-%COMP%] {\n    display: none;\n  }\n  .right-panel[_ngcontent-%COMP%] {\n    min-height: 100vh;\n    background: var(--bg-soft);\n    padding: 40px 20px;\n  }\n  .auth-box[_ngcontent-%COMP%] {\n    background: white;\n    border-radius: var(--radius-lg);\n    padding: 32px 24px;\n    box-shadow: var(--shadow-lg);\n    border: 1px solid var(--border);\n  }\n}\n@media (max-width: 480px) {\n  .right-panel[_ngcontent-%COMP%] {\n    padding: 24px 16px;\n    background: white;\n  }\n  .auth-box[_ngcontent-%COMP%] {\n    box-shadow: none;\n    border: none;\n    padding: 0;\n  }\n}\n/*# sourceMappingURL=auth.css.map */'] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AuthComponent, [{
     type: Component,
-    args: [{ selector: "app-auth", standalone: true, imports: [CommonModule, ReactiveFormsModule], template: `<div class="progress-bar" [style.width.%]="progress()"></div>
+    args: [{ selector: "app-auth", standalone: true, imports: [CommonModule, ReactiveFormsModule, IconComponent, RouterLink], template: `<div class="progress-bar" [style.width.%]="progress()"></div>
 
 <div class="auth-wrapper">
   <!-- LEFT PANEL -->
   <div class="left-panel">
-    <a href="#" class="panel-logo">
+    <a routerLink="/" class="panel-logo">
       <div class="panel-logo-icon">
-        <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-          <path
-            d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"
-          />
-        </svg>
+        <app-icon
+          name="pencil"
+          [size]="20"
+          stroke="white"
+          strokeWidth="2.5"
+        ></app-icon>
       </div>
       <span>InterviewReady</span>
     </a>
@@ -40752,50 +40792,27 @@ var AuthComponent = class _AuthComponent {
 
       <div class="float-cards">
         <div class="fc fc-1">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-            />
-          </svg>
+          <app-icon name="video" [size]="14"></app-icon>
           Live Mock Interview
         </div>
         <div class="fc fc-2">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+          <app-icon name="check-circle" [size]="14"></app-icon>
           Feedback in 24 hrs
         </div>
         <div class="fc fc-3">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-          </svg>
+          <app-icon name="chart" [size]="14"></app-icon>
           \u2191 4.8 Avg rating
         </div>
       </div>
     </div>
 
     <div class="panel-text">
-      <h2 [innerHTML]="messages[dotIdx].h"></h2>
-      <p>{{ messages[dotIdx].p }}</p>
+      <h2 [innerHTML]="messages[dotIdx()].h"></h2>
+      <p>{{ messages[dotIdx()].p }}</p>
       <div class="panel-dots">
-        <div class="panel-dot" [class.active]="dotIdx === 0"></div>
-        <div class="panel-dot" [class.active]="dotIdx === 1"></div>
-        <div class="panel-dot" [class.active]="dotIdx === 2"></div>
+        <div class="panel-dot" [class.active]="dotIdx() === 0"></div>
+        <div class="panel-dot" [class.active]="dotIdx() === 1"></div>
+        <div class="panel-dot" [class.active]="dotIdx() === 2"></div>
       </div>
     </div>
   </div>
@@ -40859,28 +40876,6 @@ var AuthComponent = class _AuthComponent {
               />
             </svg>
             Continue with Google
-          </button>
-          <button
-            class="social-btn btn-github"
-            (click)="handleSocial('GitHub')"
-          >
-            <svg viewBox="0 0 24 24" fill="white">
-              <path
-                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-              />
-            </svg>
-            Continue with GitHub
-          </button>
-          <button
-            class="social-btn btn-linkedin"
-            (click)="handleSocial('LinkedIn')"
-          >
-            <svg viewBox="0 0 24 24" fill="white">
-              <path
-                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-              />
-            </svg>
-            Continue with LinkedIn
           </button>
         </div>
 
@@ -41133,28 +41128,6 @@ var AuthComponent = class _AuthComponent {
               />
             </svg>
             Continue with Google
-          </button>
-          <button
-            class="social-btn btn-github"
-            (click)="handleSocial('GitHub')"
-          >
-            <svg viewBox="0 0 24 24" fill="white">
-              <path
-                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-              />
-            </svg>
-            Continue with GitHub
-          </button>
-          <button
-            class="social-btn btn-linkedin"
-            (click)="handleSocial('LinkedIn')"
-          >
-            <svg viewBox="0 0 24 24" fill="white">
-              <path
-                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-              />
-            </svg>
-            Continue with LinkedIn
           </button>
         </div>
 
@@ -41476,18 +41449,1883 @@ var AuthComponent = class _AuthComponent {
   </svg>
   <span>{{ toastMsg() }}</span>
 </div>
-`, styles: ['@charset "UTF-8";\n\n/* apps/interview-ready-web/src/app/auth/auth.scss */\n.progress-bar {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 3px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 0 2px 2px 0;\n  transition: width 0.6s ease;\n  z-index: 999;\n}\n.auth-wrapper {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  min-height: 100vh;\n}\n.left-panel {\n  background:\n    linear-gradient(\n      145deg,\n      #1e3a8a 0%,\n      var(--blue-dark) 45%,\n      var(--teal) 100%);\n  padding: clamp(40px, 5vw, 64px);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  overflow: hidden;\n}\n.left-panel::before {\n  content: "";\n  position: absolute;\n  top: -140px;\n  right: -100px;\n  width: 420px;\n  height: 420px;\n  background: rgba(255, 255, 255, 0.06);\n  border-radius: 50%;\n}\n.left-panel::after {\n  content: "";\n  position: absolute;\n  bottom: -100px;\n  left: -60px;\n  width: 320px;\n  height: 320px;\n  background: rgba(255, 255, 255, 0.05);\n  border-radius: 50%;\n}\n.panel-logo {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  margin-bottom: auto;\n  position: relative;\n  z-index: 2;\n}\n.panel-logo-icon {\n  width: 38px;\n  height: 38px;\n  background: rgba(255, 255, 255, 0.15);\n  border: 1.5px solid rgba(255, 255, 255, 0.25);\n  border-radius: 11px;\n  display: grid;\n  place-items: center;\n  -webkit-backdrop-filter: blur(8px);\n  backdrop-filter: blur(8px);\n}\n.panel-logo-icon svg {\n  width: 20px;\n  height: 20px;\n}\n.panel-logo span {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.1rem;\n  color: white;\n}\n.panel-illustration {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  z-index: 2;\n  padding: 32px 0;\n}\n.ill-scene {\n  width: 100%;\n  max-width: 380px;\n}\n.float-cards {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n.fc {\n  position: absolute;\n  background: rgba(255, 255, 255, 0.12);\n  -webkit-backdrop-filter: blur(12px);\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.2);\n  border-radius: 12px;\n  padding: 12px 16px;\n  font-size: 0.78rem;\n  color: white;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  white-space: nowrap;\n  animation: floatY 4s ease-in-out infinite;\n}\n.fc svg {\n  width: 14px;\n  height: 14px;\n  opacity: 0.85;\n  flex-shrink: 0;\n}\n.fc-1 {\n  top: 12%;\n  right: -8%;\n  animation-delay: 0s;\n}\n.fc-2 {\n  bottom: 20%;\n  left: -6%;\n  animation-delay: 1.8s;\n}\n.fc-3 {\n  top: 45%;\n  right: -12%;\n  animation-delay: 0.9s;\n}\n@keyframes floatY {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-8px);\n  }\n}\n.panel-text {\n  position: relative;\n  z-index: 2;\n  margin-top: 16px;\n}\n.panel-text h2 {\n  font-family: "Sora", sans-serif;\n  font-size: clamp(1.4rem, 2.5vw, 2rem);\n  font-weight: 800;\n  color: white;\n  line-height: 1.25;\n  margin-bottom: 12px;\n  transition: opacity 0.3s;\n}\n.panel-text p {\n  color: rgba(255, 255, 255, 0.72);\n  font-size: 0.95rem;\n  line-height: 1.6;\n  max-width: 320px;\n  transition: opacity 0.3s;\n}\n.panel-dots {\n  display: flex;\n  gap: 6px;\n  margin-top: 24px;\n}\n.panel-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.3);\n  transition: all 0.3s;\n}\n.panel-dot.active {\n  width: 22px;\n  border-radius: 4px;\n  background: white;\n}\n.panel-testimonial {\n  background: rgba(255, 255, 255, 0.1);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: var(--radius-sm);\n  padding: 16px 20px;\n  margin-top: 24px;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n  position: relative;\n  z-index: 2;\n}\n.pt-stars {\n  color: #fcd34d;\n  font-size: 0.85rem;\n  letter-spacing: 2px;\n  margin-bottom: 6px;\n}\n.pt-quote {\n  font-size: 0.82rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.5;\n  font-style: italic;\n  margin-bottom: 10px;\n}\n.pt-author {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.pt-avatar {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background:\n    linear-gradient(\n      135deg,\n      #818cf8,\n      #a78bfa);\n  display: grid;\n  place-items: center;\n  font-size: 0.72rem;\n  font-weight: 700;\n  color: white;\n}\n.pt-name {\n  font-size: 0.78rem;\n  color: rgba(255, 255, 255, 0.8);\n  font-weight: 600;\n}\n.pt-role {\n  font-size: 0.7rem;\n  color: rgba(255, 255, 255, 0.5);\n}\n.right-panel {\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: clamp(32px, 5vw, 64px);\n  position: relative;\n}\n.auth-box {\n  width: 100%;\n  max-width: 420px;\n}\n.auth-tabs {\n  display: flex;\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  padding: 4px;\n  margin-bottom: 32px;\n  border: 1px solid var(--border);\n}\n.auth-tab {\n  flex: 1;\n  padding: 10px;\n  text-align: center;\n  font-size: 0.9rem;\n  font-weight: 600;\n  border-radius: calc(var(--radius) - 4px);\n  cursor: pointer;\n  transition: all 0.22s;\n  color: var(--text-muted);\n  border: none;\n  background: none;\n  font-family: "DM Sans", sans-serif;\n}\n.auth-tab.active {\n  background: white;\n  color: var(--blue);\n  box-shadow: var(--shadow);\n}\n.auth-heading {\n  margin-bottom: 28px;\n}\n.auth-heading h1 {\n  font-family: "Sora", sans-serif;\n  font-size: 1.6rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 6px;\n  animation: fadeSlideIn 0.4s ease both;\n}\n.auth-heading p {\n  font-size: 0.9rem;\n  color: var(--text-soft);\n  animation: fadeSlideIn 0.4s 0.05s ease both;\n}\n.social-btns {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  margin-bottom: 24px;\n  animation: fadeSlideIn 0.4s 0.1s ease both;\n}\n.social-btn {\n  width: 100%;\n  padding: 13px 20px;\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  position: relative;\n  overflow: hidden;\n}\n.social-btn::after {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background: rgba(255, 255, 255, 0);\n  transition: background 0.2s;\n}\n.social-btn:hover::after {\n  background: rgba(255, 255, 255, 0.08);\n}\n.social-btn:active {\n  transform: scale(0.98);\n}\n.social-btn svg {\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n.btn-google {\n  background: white;\n  color: #374151;\n  border: 1.5px solid var(--border);\n  box-shadow: var(--shadow);\n}\n.btn-google:hover {\n  border-color: #d1d5db;\n  box-shadow: var(--shadow-lg);\n}\n.btn-github {\n  background: #0d1117;\n  color: white;\n  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.25);\n}\n.btn-github:hover {\n  background: #161b22;\n  box-shadow: 0 6px 20px rgba(13, 17, 23, 0.35);\n}\n.btn-linkedin {\n  background: #0a66c2;\n  color: white;\n  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.3);\n}\n.btn-linkedin:hover {\n  background: #0958a8;\n  box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);\n}\n.divider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  margin-bottom: 24px;\n  animation: fadeSlideIn 0.4s 0.15s ease both;\n}\n.divider-line {\n  flex: 1;\n  height: 1px;\n  background: var(--border);\n}\n.divider-text {\n  font-size: 0.78rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  white-space: nowrap;\n}\n.auth-form {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  animation: fadeSlideIn 0.4s 0.18s ease both;\n}\n.field {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field label {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  letter-spacing: 0.01em;\n}\n.input-wrap {\n  position: relative;\n}\n.input-wrap svg {\n  position: absolute;\n  left: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 16px;\n  height: 16px;\n  color: var(--text-muted);\n  pointer-events: none;\n  transition: color 0.2s;\n}\n.input-wrap:focus-within svg {\n  color: var(--blue);\n}\n.input-wrap input {\n  width: 100%;\n  padding: 12px 14px 12px 42px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  transition: all 0.2s;\n  outline: none;\n  -webkit-appearance: none;\n}\n.input-wrap input::placeholder {\n  color: var(--text-muted);\n}\n.input-wrap input:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.input-wrap input.error {\n  border-color: var(--red);\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n.error-message {\n  font-size: 0.8rem;\n  color: var(--red);\n  margin-top: 4px;\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.error-message::before {\n  content: "\\26a0";\n  font-size: 0.9rem;\n}\n.pw-requirements {\n  margin-top: 8px;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 6px;\n}\n.requirement {\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.requirement.met {\n  color: var(--green);\n}\n.requirement .req-icon {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  border: 1px solid var(--text-muted);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.6rem;\n  font-weight: bold;\n  color: transparent;\n}\n.requirement .req-icon.met {\n  background: var(--green);\n  border-color: var(--green);\n  color: white;\n}\n.pw-toggle {\n  position: absolute;\n  right: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 18px;\n  height: 18px;\n  color: var(--text-muted);\n  cursor: pointer;\n  background: none;\n  border: none;\n  padding: 0;\n  display: grid;\n  place-items: center;\n  transition: color 0.2s;\n}\n.pw-toggle:hover {\n  color: var(--text);\n}\n.pw-toggle svg {\n  width: 16px;\n  height: 16px;\n}\n.pw-strength {\n  display: flex;\n  gap: 4px;\n  margin-top: 6px;\n}\n.pw-bar {\n  flex: 1;\n  height: 3px;\n  background: var(--border);\n  border-radius: 2px;\n  transition: background 0.3s;\n}\n.pw-bar.weak {\n  background: var(--red);\n}\n.pw-bar.fair {\n  background: var(--amber);\n}\n.pw-bar.strong {\n  background: var(--green);\n}\n.field-row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: -4px;\n}\n.checkbox-label {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.checkbox-label input[type=checkbox] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n.checkbox-label .checkmark {\n  width: 16px;\n  height: 16px;\n  border: 1.5px solid var(--border);\n  border-radius: 3px;\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all 0.2s;\n}\n.checkbox-label .checkmark::after {\n  content: "";\n  width: 6px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg) scale(0);\n  transition: transform 0.2s;\n}\n.checkbox-label input:checked ~ .checkmark {\n  background: var(--blue);\n  border-color: var(--blue);\n}\n.checkbox-label input:checked ~ .checkmark::after {\n  transform: rotate(45deg) scale(1);\n}\n.checkbox-label:hover .checkmark {\n  border-color: var(--blue);\n}\n.btn-submit {\n  width: 100%;\n  padding: 14px;\n  background: var(--blue);\n  color: white;\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 1rem;\n  font-weight: 700;\n  cursor: pointer;\n  font-family: "Sora", sans-serif;\n  transition: all 0.22s;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  margin-top: 4px;\n  position: relative;\n  overflow: hidden;\n}\n.btn-submit::before {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background:\n    linear-gradient(\n      135deg,\n      transparent 40%,\n      rgba(255, 255, 255, 0.08));\n}\n.btn-submit:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-submit:active:not(:disabled) {\n  transform: scale(0.98);\n}\n.btn-submit:disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n  transform: none;\n}\n.btn-submit.loading {\n  pointer-events: none;\n}\n.btn-submit svg {\n  width: 16px;\n  height: 16px;\n  flex-shrink: 0;\n}\n.spinner {\n  width: 16px;\n  height: 16px;\n  border: 2px solid rgba(255, 255, 255, 0.3);\n  border-top: 2px solid white;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.loading-text {\n  opacity: 0.9;\n}\n.terms-note {\n  text-align: center;\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  margin-top: 14px;\n  line-height: 1.5;\n  animation: fadeSlideIn 0.4s 0.22s ease both;\n}\n.terms-note a {\n  color: var(--blue);\n  text-decoration: none;\n}\n.terms-note a:hover {\n  text-decoration: underline;\n}\n.switch-mode {\n  text-align: center;\n  margin-top: 20px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  animation: fadeSlideIn 0.4s 0.25s ease both;\n}\n.switch-mode a {\n  color: var(--blue);\n  font-weight: 600;\n  text-decoration: none;\n  cursor: pointer;\n}\n.switch-mode a:hover {\n  text-decoration: underline;\n}\n.success-state {\n  text-align: center;\n  padding: 24px 0;\n}\n.success-icon {\n  width: 68px;\n  height: 68px;\n  background: #ecfdf5;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n  border: 2px solid #a7f3d0;\n}\n.success-icon svg {\n  width: 32px;\n  height: 32px;\n  color: var(--green);\n}\n.success-state h2 {\n  font-family: "Sora", sans-serif;\n  font-size: 1.4rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.success-state p {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.back-link {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  text-decoration: none;\n  margin-bottom: 24px;\n  cursor: pointer;\n  transition: color 0.2s;\n}\n.back-link:hover {\n  color: var(--blue);\n}\n.back-link svg {\n  width: 14px;\n  height: 14px;\n}\n@keyframes fadeSlideIn {\n  from {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.slide-in {\n  animation: fadeSlideIn 0.32s ease both;\n}\n.toast {\n  position: fixed;\n  bottom: 24px;\n  left: 50%;\n  transform: translateX(-50%) translateY(80px);\n  background: #0f172a;\n  color: white;\n  padding: 12px 20px;\n  border-radius: 10px;\n  font-size: 0.88rem;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);\n  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;\n  opacity: 0;\n  z-index: 9999;\n  white-space: nowrap;\n}\n.toast.show {\n  transform: translateX(-50%) translateY(0);\n  opacity: 1;\n}\n.toast svg {\n  width: 16px;\n  height: 16px;\n}\n@media (max-width: 900px) {\n  .auth-wrapper {\n    grid-template-columns: 1fr;\n  }\n  .left-panel {\n    display: none;\n  }\n  .right-panel {\n    min-height: 100vh;\n    background: var(--bg-soft);\n    padding: 40px 20px;\n  }\n  .auth-box {\n    background: white;\n    border-radius: var(--radius-lg);\n    padding: 32px 24px;\n    box-shadow: var(--shadow-lg);\n    border: 1px solid var(--border);\n  }\n}\n@media (max-width: 480px) {\n  .right-panel {\n    padding: 24px 16px;\n    background: white;\n  }\n  .auth-box {\n    box-shadow: none;\n    border: none;\n    padding: 0;\n  }\n}\n/*# sourceMappingURL=auth.css.map */\n'] }]
+`, styles: ['@charset "UTF-8";\n\n/* apps/interview-ready-web/src/app/auth/auth.scss */\n:host {\n  display: block;\n  min-height: 100vh;\n  overflow: hidden;\n}\n.progress-bar {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 3px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 0 2px 2px 0;\n  transition: width 0.6s ease;\n  z-index: 999;\n}\n.auth-wrapper {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  min-height: 100vh;\n  overflow: hidden;\n}\n.left-panel {\n  background:\n    linear-gradient(\n      145deg,\n      #1e3a8a 0%,\n      var(--blue-dark) 45%,\n      var(--teal) 100%);\n  padding: clamp(20px, 2vw, 32px) clamp(40px, 5vw, 64px) clamp(20px, 2vw, 32px);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  overflow: hidden;\n}\n.left-panel::before {\n  content: "";\n  position: absolute;\n  top: -140px;\n  right: -100px;\n  width: 420px;\n  height: 420px;\n  background: rgba(255, 255, 255, 0.06);\n  border-radius: 50%;\n}\n.left-panel::after {\n  content: "";\n  position: absolute;\n  bottom: -100px;\n  left: -60px;\n  width: 320px;\n  height: 320px;\n  background: rgba(255, 255, 255, 0.05);\n  border-radius: 50%;\n}\n.panel-logo {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  text-decoration: none;\n  margin-bottom: auto;\n  position: relative;\n  z-index: 2;\n}\n.panel-logo-icon {\n  width: 38px;\n  height: 38px;\n  background: rgba(255, 255, 255, 0.15);\n  border: 1.5px solid rgba(255, 255, 255, 0.25);\n  border-radius: 11px;\n  display: grid;\n  place-items: center;\n  -webkit-backdrop-filter: blur(8px);\n  backdrop-filter: blur(8px);\n}\n.panel-logo-icon svg {\n  width: 20px;\n  height: 20px;\n}\n.panel-logo span {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.1rem;\n  color: white;\n}\n.panel-illustration {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  z-index: 2;\n  padding: 32px 0;\n}\n.ill-scene {\n  width: 100%;\n  max-width: 380px;\n}\n.float-cards {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n.fc {\n  position: absolute;\n  background: rgba(255, 255, 255, 0.12);\n  -webkit-backdrop-filter: blur(12px);\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.2);\n  border-radius: 12px;\n  padding: 12px 16px;\n  font-size: 0.78rem;\n  color: white;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  white-space: nowrap;\n  animation: floatY 4s ease-in-out infinite;\n}\n.fc svg {\n  width: 14px;\n  height: 14px;\n  opacity: 0.85;\n  flex-shrink: 0;\n}\n.fc-1 {\n  top: 12%;\n  right: -8%;\n  animation-delay: 0s;\n}\n.fc-2 {\n  bottom: 20%;\n  left: -6%;\n  animation-delay: 1.8s;\n}\n.fc-3 {\n  top: 45%;\n  right: -12%;\n  animation-delay: 0.9s;\n}\n@keyframes floatY {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-8px);\n  }\n}\n.panel-text {\n  position: relative;\n  z-index: 2;\n  margin-top: 16px;\n}\n.panel-text h2 {\n  font-family: "Sora", sans-serif;\n  font-size: clamp(1.4rem, 2.5vw, 2rem);\n  font-weight: 800;\n  color: white;\n  line-height: 1.25;\n  margin-bottom: 12px;\n  transition: opacity 0.3s;\n}\n.panel-text p {\n  color: rgba(255, 255, 255, 0.72);\n  font-size: 0.95rem;\n  line-height: 1.6;\n  max-width: 320px;\n  transition: opacity 0.3s;\n}\n.panel-dots {\n  display: flex;\n  gap: 6px;\n  margin-top: 24px;\n}\n.panel-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.3);\n  transition: all 0.3s;\n}\n.panel-dot.active {\n  width: 22px;\n  border-radius: 4px;\n  background: white;\n}\n.panel-testimonial {\n  background: rgba(255, 255, 255, 0.1);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: var(--radius-sm);\n  padding: 16px 20px;\n  margin-top: 24px;\n  -webkit-backdrop-filter: blur(10px);\n  backdrop-filter: blur(10px);\n  position: relative;\n  z-index: 2;\n}\n.pt-stars {\n  color: #fcd34d;\n  font-size: 0.85rem;\n  letter-spacing: 2px;\n  margin-bottom: 6px;\n}\n.pt-quote {\n  font-size: 0.82rem;\n  color: rgba(255, 255, 255, 0.88);\n  line-height: 1.5;\n  font-style: italic;\n  margin-bottom: 10px;\n}\n.pt-author {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.pt-avatar {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background:\n    linear-gradient(\n      135deg,\n      #818cf8,\n      #a78bfa);\n  display: grid;\n  place-items: center;\n  font-size: 0.72rem;\n  font-weight: 700;\n  color: white;\n}\n.pt-name {\n  font-size: 0.78rem;\n  color: rgba(255, 255, 255, 0.8);\n  font-weight: 600;\n}\n.pt-role {\n  font-size: 0.7rem;\n  color: rgba(255, 255, 255, 0.5);\n}\n.right-panel {\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: clamp(16px, 2vw, 32px) clamp(32px, 5vw, 64px);\n  position: relative;\n}\n.auth-box {\n  width: 100%;\n  max-width: 420px;\n}\n.auth-tabs {\n  display: flex;\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  padding: 4px;\n  margin-bottom: 32px;\n  border: 1px solid var(--border);\n}\n.auth-tab {\n  flex: 1;\n  padding: 10px;\n  text-align: center;\n  font-size: 0.9rem;\n  font-weight: 600;\n  border-radius: calc(var(--radius) - 4px);\n  cursor: pointer;\n  transition: all 0.22s;\n  color: var(--text-muted);\n  border: none;\n  background: none;\n  font-family: "DM Sans", sans-serif;\n}\n.auth-tab.active {\n  background: white;\n  color: var(--blue);\n  box-shadow: var(--shadow);\n}\n.auth-heading {\n  margin-bottom: 28px;\n}\n.auth-heading h1 {\n  font-family: "Sora", sans-serif;\n  font-size: 1.6rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 6px;\n  animation: fadeSlideIn 0.4s ease both;\n}\n.auth-heading p {\n  font-size: 0.9rem;\n  color: var(--text-soft);\n  animation: fadeSlideIn 0.4s 0.05s ease both;\n}\n.social-btns {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  margin-bottom: 24px;\n  animation: fadeSlideIn 0.4s 0.1s ease both;\n}\n.social-btn {\n  width: 100%;\n  padding: 13px 20px;\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  position: relative;\n  overflow: hidden;\n}\n.social-btn::after {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background: rgba(255, 255, 255, 0);\n  transition: background 0.2s;\n}\n.social-btn:hover::after {\n  background: rgba(255, 255, 255, 0.08);\n}\n.social-btn:active {\n  transform: scale(0.98);\n}\n.social-btn svg {\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n.btn-google {\n  background: white;\n  color: #374151;\n  border: 1.5px solid var(--border);\n  box-shadow: var(--shadow);\n}\n.btn-google:hover {\n  border-color: #d1d5db;\n  box-shadow: var(--shadow-lg);\n}\n.btn-github {\n  background: #0d1117;\n  color: white;\n  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.25);\n}\n.btn-github:hover {\n  background: #161b22;\n  box-shadow: 0 6px 20px rgba(13, 17, 23, 0.35);\n}\n.btn-linkedin {\n  background: #0a66c2;\n  color: white;\n  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.3);\n}\n.btn-linkedin:hover {\n  background: #0958a8;\n  box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);\n}\n.divider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  margin-bottom: 24px;\n  animation: fadeSlideIn 0.4s 0.15s ease both;\n}\n.divider-line {\n  flex: 1;\n  height: 1px;\n  background: var(--border);\n}\n.divider-text {\n  font-size: 0.78rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  white-space: nowrap;\n}\n.auth-form {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  animation: fadeSlideIn 0.4s 0.18s ease both;\n}\n.field {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field label {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  letter-spacing: 0.01em;\n}\n.input-wrap {\n  position: relative;\n}\n.input-wrap svg {\n  position: absolute;\n  left: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 16px;\n  height: 16px;\n  color: var(--text-muted);\n  pointer-events: none;\n  transition: color 0.2s;\n}\n.input-wrap:focus-within svg {\n  color: var(--blue);\n}\n.input-wrap input {\n  width: 100%;\n  padding: 12px 14px 12px 42px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 0.92rem;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  transition: all 0.2s;\n  outline: none;\n  -webkit-appearance: none;\n}\n.input-wrap input::placeholder {\n  color: var(--text-muted);\n}\n.input-wrap input:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.input-wrap input.error {\n  border-color: var(--red);\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n.error-message {\n  font-size: 0.8rem;\n  color: var(--red);\n  margin-top: 4px;\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.error-message::before {\n  content: "\\26a0";\n  font-size: 0.9rem;\n}\n.pw-requirements {\n  margin-top: 8px;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 6px;\n}\n.requirement {\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.requirement.met {\n  color: var(--green);\n}\n.requirement .req-icon {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  border: 1px solid var(--text-muted);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.6rem;\n  font-weight: bold;\n  color: transparent;\n}\n.requirement .req-icon.met {\n  background: var(--green);\n  border-color: var(--green);\n  color: white;\n}\n.pw-toggle {\n  position: absolute;\n  right: 14px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 18px;\n  height: 18px;\n  color: var(--text-muted);\n  cursor: pointer;\n  background: none;\n  border: none;\n  padding: 0;\n  display: grid;\n  place-items: center;\n  transition: color 0.2s;\n}\n.pw-toggle:hover {\n  color: var(--text);\n}\n.pw-toggle svg {\n  width: 16px;\n  height: 16px;\n}\n.pw-strength {\n  display: flex;\n  gap: 4px;\n  margin-top: 6px;\n}\n.pw-bar {\n  flex: 1;\n  height: 3px;\n  background: var(--border);\n  border-radius: 2px;\n  transition: background 0.3s;\n}\n.pw-bar.weak {\n  background: var(--red);\n}\n.pw-bar.fair {\n  background: var(--amber);\n}\n.pw-bar.strong {\n  background: var(--green);\n}\n.field-row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: -4px;\n}\n.checkbox-label {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.checkbox-label input[type=checkbox] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n.checkbox-label .checkmark {\n  width: 16px;\n  height: 16px;\n  border: 1.5px solid var(--border);\n  border-radius: 3px;\n  background: var(--bg);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all 0.2s;\n}\n.checkbox-label .checkmark::after {\n  content: "";\n  width: 6px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg) scale(0);\n  transition: transform 0.2s;\n}\n.checkbox-label input:checked ~ .checkmark {\n  background: var(--blue);\n  border-color: var(--blue);\n}\n.checkbox-label input:checked ~ .checkmark::after {\n  transform: rotate(45deg) scale(1);\n}\n.checkbox-label:hover .checkmark {\n  border-color: var(--blue);\n}\n.btn-submit {\n  width: 100%;\n  padding: 14px;\n  background: var(--blue);\n  color: white;\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 1rem;\n  font-weight: 700;\n  cursor: pointer;\n  font-family: "Sora", sans-serif;\n  transition: all 0.22s;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  margin-top: 4px;\n  position: relative;\n  overflow: hidden;\n}\n.btn-submit::before {\n  content: "";\n  position: absolute;\n  inset: 0;\n  background:\n    linear-gradient(\n      135deg,\n      transparent 40%,\n      rgba(255, 255, 255, 0.08));\n}\n.btn-submit:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-submit:active:not(:disabled) {\n  transform: scale(0.98);\n}\n.btn-submit:disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n  transform: none;\n}\n.btn-submit.loading {\n  pointer-events: none;\n}\n.btn-submit svg {\n  width: 16px;\n  height: 16px;\n  flex-shrink: 0;\n}\n.spinner {\n  width: 16px;\n  height: 16px;\n  border: 2px solid rgba(255, 255, 255, 0.3);\n  border-top: 2px solid white;\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n@keyframes spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.loading-text {\n  opacity: 0.9;\n}\n.terms-note {\n  text-align: center;\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  margin-top: 14px;\n  line-height: 1.5;\n  animation: fadeSlideIn 0.4s 0.22s ease both;\n}\n.terms-note a {\n  color: var(--blue);\n  text-decoration: none;\n}\n.terms-note a:hover {\n  text-decoration: underline;\n}\n.switch-mode {\n  text-align: center;\n  margin-top: 20px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  animation: fadeSlideIn 0.4s 0.25s ease both;\n}\n.switch-mode a {\n  color: var(--blue);\n  font-weight: 600;\n  text-decoration: none;\n  cursor: pointer;\n}\n.switch-mode a:hover {\n  text-decoration: underline;\n}\n.success-state {\n  text-align: center;\n  padding: 24px 0;\n}\n.success-icon {\n  width: 68px;\n  height: 68px;\n  background: #ecfdf5;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n  border: 2px solid #a7f3d0;\n}\n.success-icon svg {\n  width: 32px;\n  height: 32px;\n  color: var(--green);\n}\n.success-state h2 {\n  font-family: "Sora", sans-serif;\n  font-size: 1.4rem;\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.success-state p {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.back-link {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  text-decoration: none;\n  margin-bottom: 24px;\n  cursor: pointer;\n  transition: color 0.2s;\n}\n.back-link:hover {\n  color: var(--blue);\n}\n.back-link svg {\n  width: 14px;\n  height: 14px;\n}\n@keyframes fadeSlideIn {\n  from {\n    opacity: 0;\n    transform: translateY(12px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.slide-in {\n  animation: fadeSlideIn 0.32s ease both;\n}\n.toast {\n  position: fixed;\n  bottom: 24px;\n  left: 50%;\n  transform: translateX(-50%) translateY(80px);\n  background: #0f172a;\n  color: white;\n  padding: 12px 20px;\n  border-radius: 10px;\n  font-size: 0.88rem;\n  font-weight: 500;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);\n  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;\n  opacity: 0;\n  z-index: 9999;\n  white-space: nowrap;\n}\n.toast.show {\n  transform: translateX(-50%) translateY(0);\n  opacity: 1;\n}\n.toast svg {\n  width: 16px;\n  height: 16px;\n}\n@media (max-width: 900px) {\n  .auth-wrapper {\n    grid-template-columns: 1fr;\n  }\n  .left-panel {\n    display: none;\n  }\n  .right-panel {\n    min-height: 100vh;\n    background: var(--bg-soft);\n    padding: 40px 20px;\n  }\n  .auth-box {\n    background: white;\n    border-radius: var(--radius-lg);\n    padding: 32px 24px;\n    box-shadow: var(--shadow-lg);\n    border: 1px solid var(--border);\n  }\n}\n@media (max-width: 480px) {\n  .right-panel {\n    padding: 24px 16px;\n    background: white;\n  }\n  .auth-box {\n    box-shadow: none;\n    border: none;\n    padding: 0;\n  }\n}\n/*# sourceMappingURL=auth.css.map */\n'] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AuthComponent, { className: "AuthComponent", filePath: "apps/interview-ready-web/src/app/auth/auth.ts", lineNumber: 19 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AuthComponent, { className: "AuthComponent", filePath: "apps/interview-ready-web/src/app/auth/auth.ts", lineNumber: 21 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/hero/hero.ts
+var _forTrack0 = ($index, $item) => $item.text;
+var _forTrack1 = ($index, $item) => $item.label;
+function HeroComponent_For_15_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "app-icon", 144);
+  }
+  if (rf & 2) {
+    const button_r1 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("name", button_r1.icon)("size", button_r1.variant === "primary" ? 18 : 16)("stroke", "currentColor")("strokeWidth", 2);
+  }
+}
+function HeroComponent_For_15_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "a", 143);
+    \u0275\u0275conditionalCreate(1, HeroComponent_For_15_Conditional_1_Template, 1, 4, "app-icon", 144);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const button_r1 = ctx.$implicit;
+    \u0275\u0275classProp("btn-blue", button_r1.variant === "primary")("btn-ghost", button_r1.variant === "ghost");
+    \u0275\u0275property("href", button_r1.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(button_r1.icon ? 1 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", button_r1.text, " ");
+  }
+}
+function HeroComponent_For_18_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 9)(1, "span", 145);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "span", 146);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const stat_r2 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(stat_r2.value);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(stat_r2.label);
+  }
+}
+var HeroComponent = class _HeroComponent {
+  data;
+  static \u0275fac = function HeroComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _HeroComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeroComponent, selectors: [["app-hero"]], inputs: { data: "data" }, decls: 155, vars: 10, consts: [[1, "hero"], [1, "hero-grid"], [1, "hero-left"], [1, "hero-badge"], [1, "dot"], [1, "hero-sub"], [1, "hero-ctas"], [1, "btn-lg", 3, "href", "btn-blue", "btn-ghost"], [1, "hero-stats"], [1, "stat"], [1, "hero-visual"], [2, "position", "relative", "padding", "24px"], ["viewBox", "0 0 480 420", "fill", "none", "xmlns", "http://www.w3.org/2000/svg", 1, "hero-svg"], ["id", "heroGrad", "x1", "0", "y1", "0", "x2", "464", "y2", "0", "gradientUnits", "userSpaceOnUse"], ["stop-color", "#2563EB"], ["offset", "1", "stop-color", "#0EA5E9"], ["id", "skyGrad", "x1", "0", "y1", "0", "x2", "0", "y2", "1", "gradientUnits", "objectBoundingBox"], ["stop-color", "#EFF6FF"], ["offset", "1", "stop-color", "#DBEAFE"], ["id", "deskGrad", "x1", "0", "y1", "0", "x2", "0", "y2", "1", "gradientUnits", "objectBoundingBox"], ["stop-color", "#F1F5F9"], ["offset", "1", "stop-color", "#E2E8F0"], ["id", "cardClip"], ["x", "8", "y", "8", "width", "464", "height", "404", "rx", "24"], ["x", "8", "y", "8", "width", "464", "height", "404", "rx", "24", "fill", "white", "stroke", "#E2E8F0", "stroke-width", "1.5"], ["x", "8", "y", "8", "width", "464", "height", "5", "rx", "3", "fill", "url(#heroGrad)"], ["clip-path", "url(#cardClip)"], ["x", "8", "y", "13", "width", "464", "height", "240", "fill", "#F0F7FF"], ["x", "8", "y", "253", "width", "464", "height", "160", "fill", "#F8FAFF"], ["x1", "8", "y1", "253", "x2", "472", "y2", "253", "stroke", "#E2E8F0", "stroke-width", "1"], ["x", "330", "y", "40", "width", "110", "height", "130", "rx", "8", "fill", "white", "stroke", "#BFDBFE", "stroke-width", "2"], ["x1", "385", "y1", "40", "x2", "385", "y2", "170", "stroke", "#BFDBFE", "stroke-width", "1.5"], ["x1", "330", "y1", "105", "x2", "440", "y2", "105", "stroke", "#BFDBFE", "stroke-width", "1.5"], ["x", "332", "y", "42", "width", "51", "height", "61", "rx", "4", "fill", "#DBEAFE", "opacity", "0.6"], ["x", "387", "y", "42", "width", "51", "height", "61", "rx", "4", "fill", "#DBEAFE", "opacity", "0.6"], ["cx", "358", "cy", "68", "r", "14", "fill", "#FDE68A", "opacity", "0.8"], ["cx", "358", "cy", "68", "r", "10", "fill", "#FCD34D"], ["cx", "410", "cy", "62", "rx", "14", "ry", "8", "fill", "white", "opacity", "0.9"], ["cx", "422", "cy", "60", "rx", "10", "ry", "7", "fill", "white", "opacity", "0.9"], ["x", "38", "y", "38", "width", "80", "height", "120", "rx", "6", "fill", "#F1F5F9", "stroke", "#E2E8F0", "stroke-width", "1.5"], ["x1", "38", "y1", "85", "x2", "118", "y2", "85", "stroke", "#E2E8F0", "stroke-width", "1.2"], ["x1", "38", "y1", "130", "x2", "118", "y2", "130", "stroke", "#E2E8F0", "stroke-width", "1.2"], ["x", "44", "y", "48", "width", "10", "height", "34", "rx", "2", "fill", "#2563EB"], ["x", "56", "y", "52", "width", "8", "height", "30", "rx", "2", "fill", "#10B981"], ["x", "66", "y", "50", "width", "12", "height", "32", "rx", "2", "fill", "#F59E0B"], ["x", "80", "y", "54", "width", "8", "height", "28", "rx", "2", "fill", "#EF4444"], ["x", "90", "y", "49", "width", "10", "height", "33", "rx", "2", "fill", "#8B5CF6"], ["x", "44", "y", "93", "width", "12", "height", "34", "rx", "2", "fill", "#0EA5E9"], ["x", "58", "y", "96", "width", "9", "height", "31", "rx", "2", "fill", "#F59E0B"], ["x", "69", "y", "92", "width", "11", "height", "35", "rx", "2", "fill", "#10B981"], ["x", "82", "y", "95", "width", "8", "height", "32", "rx", "2", "fill", "#2563EB", "opacity", "0.6"], ["x", "48", "y", "137", "width", "18", "height", "12", "rx", "3", "fill", "#D1FAE5"], ["cx", "57", "cy", "137", "rx", "10", "ry", "8", "fill", "#34D399"], ["cx", "52", "cy", "134", "rx", "7", "ry", "6", "fill", "#10B981"], ["cx", "62", "cy", "133", "rx", "8", "ry", "7", "fill", "#6EE7B7"], ["x", "60", "y", "250", "width", "360", "height", "14", "rx", "7", "fill", "url(#deskGrad)", "stroke", "#CBD5E1", "stroke-width", "1"], ["x", "90", "y", "263", "width", "12", "height", "60", "rx", "4", "fill", "#E2E8F0"], ["x", "378", "y", "263", "width", "12", "height", "60", "rx", "4", "fill", "#E2E8F0"], ["x", "148", "y", "224", "width", "184", "height", "28", "rx", "6", "fill", "#CBD5E1"], ["x", "152", "y", "226", "width", "176", "height", "24", "rx", "5", "fill", "#E2E8F0"], ["x", "160", "y", "231", "width", "160", "height", "13", "rx", "3", "fill", "#D1D5DB"], ["x", "164", "y", "233", "width", "24", "height", "7", "rx", "2", "fill", "#CBD5E1"], ["x", "192", "y", "233", "width", "24", "height", "7", "rx", "2", "fill", "#CBD5E1"], ["x", "220", "y", "233", "width", "24", "height", "7", "rx", "2", "fill", "#CBD5E1"], ["x", "248", "y", "233", "width", "24", "height", "7", "rx", "2", "fill", "#CBD5E1"], ["x", "276", "y", "233", "width", "20", "height", "7", "rx", "2", "fill", "#CBD5E1"], ["x", "150", "y", "110", "width", "180", "height", "120", "rx", "10", "fill", "#1E293B"], ["x", "155", "y", "115", "width", "170", "height", "110", "rx", "7", "fill", "#0F172A"], ["x", "159", "y", "119", "width", "162", "height", "102", "rx", "5", "fill", "#1E293B"], ["x", "168", "y", "128", "width", "12", "height", "4", "rx", "2", "fill", "#94A3B8", "opacity", "0.5"], ["x", "168", "y", "135", "width", "80", "height", "4", "rx", "2", "fill", "#60A5FA"], ["x", "176", "y", "142", "width", "50", "height", "4", "rx", "2", "fill", "#34D399"], ["x", "176", "y", "149", "width", "70", "height", "4", "rx", "2", "fill", "#FBBF24"], ["x", "184", "y", "156", "width", "40", "height", "4", "rx", "2", "fill", "#F87171"], ["x", "184", "y", "163", "width", "60", "height", "4", "rx", "2", "fill", "#60A5FA"], ["x", "176", "y", "170", "width", "55", "height", "4", "rx", "2", "fill", "#34D399"], ["x", "168", "y", "177", "width", "30", "height", "4", "rx", "2", "fill", "#60A5FA"], ["x", "200", "y", "177", "width", "2", "height", "9", "rx", "1", "fill", "#60A5FA", "opacity", "0.9"], ["attributeName", "opacity", "values", "0.9;0;0.9", "dur", "1.2s", "repeatCount", "indefinite"], ["x", "155", "y", "115", "width", "40", "height", "110", "rx", "7", "fill", "white", "opacity", "0.02"], ["x", "150", "y", "228", "width", "180", "height", "4", "rx", "2", "fill", "#94A3B8", "opacity", "0.3"], ["x", "216", "y", "195", "width", "48", "height", "70", "rx", "8", "fill", "#DBEAFE", "stroke", "#BFDBFE", "stroke-width", "1.5"], ["x", "221", "y", "200", "width", "38", "height", "60", "rx", "6", "fill", "#EFF6FF"], ["cx", "240", "cy", "220", "rx", "32", "ry", "26", "fill", "#DBEAFE"], ["d", "M215 215 Q240 240 265 215 L265 250 Q240 268 215 250 Z", "fill", "#2563EB", "opacity", "0.9"], ["d", "M232 215 L240 228 L248 215", "stroke", "white", "stroke-width", "2", "fill", "none"], ["d", "M220 238 Q204 244 185 249 Q176 251 170 252 L168 264 Q178 263 188 260 Q208 254 224 248 Z", "fill", "#2563EB"], ["x", "152", "y", "251", "width", "24", "height", "10", "rx", "5", "fill", "#F59E0B"], ["x", "152", "y", "246", "width", "6", "height", "8", "rx", "3", "fill", "#F59E0B"], ["x", "160", "y", "245", "width", "6", "height", "8", "rx", "3", "fill", "#F59E0B"], ["x", "168", "y", "246", "width", "6", "height", "8", "rx", "3", "fill", "#F59E0B"], ["d", "M260 238 Q276 244 295 249 Q304 251 310 252 L312 264 Q302 263 292 260 Q272 254 256 248 Z", "fill", "#2563EB"], ["x", "304", "y", "251", "width", "24", "height", "10", "rx", "5", "fill", "#F59E0B"], ["x", "304", "y", "246", "width", "6", "height", "8", "rx", "3", "fill", "#F59E0B"], ["x", "312", "y", "245", "width", "6", "height", "8", "rx", "3", "fill", "#F59E0B"], ["x", "320", "y", "246", "width", "6", "height", "8", "rx", "3", "fill", "#F59E0B"], ["x", "233", "y", "190", "width", "14", "height", "20", "rx", "7", "fill", "#FBBF24"], ["cx", "240", "cy", "178", "rx", "30", "ry", "32", "fill", "#FBBF24"], ["d", "M212 165 Q216 140 240 138 Q264 140 268 165 Q264 152 240 150 Q216 152 212 165Z", "fill", "#1E293B"], ["cx", "240", "cy", "148", "rx", "22", "ry", "10", "fill", "#1E293B"], ["cx", "211", "cy", "178", "rx", "5", "ry", "7", "fill", "#F59E0B"], ["cx", "269", "cy", "178", "rx", "5", "ry", "7", "fill", "#F59E0B"], ["cx", "229", "cy", "176", "rx", "5", "ry", "5.5", "fill", "white"], ["cx", "251", "cy", "176", "rx", "5", "ry", "5.5", "fill", "white"], ["cx", "230", "cy", "177", "r", "3", "fill", "#1E293B"], ["cx", "252", "cy", "177", "r", "3", "fill", "#1E293B"], ["cx", "231", "cy", "175", "r", "1", "fill", "white"], ["cx", "253", "cy", "175", "r", "1", "fill", "white"], ["d", "M224 169 Q229 166 234 169", "stroke", "#1E293B", "stroke-width", "2", "stroke-linecap", "round", "fill", "none"], ["d", "M246 169 Q251 166 256 169", "stroke", "#1E293B", "stroke-width", "2", "stroke-linecap", "round", "fill", "none"], ["d", "M231 187 Q240 194 249 187", "stroke", "#1E293B", "stroke-width", "2", "stroke-linecap", "round", "fill", "none"], ["d", "M212 168 Q212 148 240 146 Q268 148 268 168", "stroke", "#2563EB", "stroke-width", "4", "stroke-linecap", "round", "fill", "none"], ["x", "206", "y", "165", "width", "12", "height", "18", "rx", "6", "fill", "#2563EB"], ["x", "262", "y", "165", "width", "12", "height", "18", "rx", "6", "fill", "#2563EB"], ["x", "360", "y", "224", "width", "28", "height", "26", "rx", "5", "fill", "white", "stroke", "#E2E8F0", "stroke-width", "1.5"], ["d", "M388 232 Q398 232 398 240 Q398 248 388 248", "stroke", "#E2E8F0", "stroke-width", "2", "fill", "none", "stroke-linecap", "round"], ["x", "362", "y", "226", "width", "24", "height", "8", "rx", "3", "fill", "#FEF3C7"], ["d", "M368 222 Q370 216 368 210", "stroke", "#94A3B8", "stroke-width", "1.5", "stroke-linecap", "round", "fill", "none", "opacity", "0.5"], ["attributeName", "opacity", "values", "0.5;0.1;0.5", "dur", "2s", "repeatCount", "indefinite"], ["d", "M376 220 Q378 214 376 208", "stroke", "#94A3B8", "stroke-width", "1.5", "stroke-linecap", "round", "fill", "none", "opacity", "0.4"], ["attributeName", "opacity", "values", "0.4;0.1;0.4", "dur", "2.4s", "repeatCount", "indefinite"], ["x", "60", "y", "220", "width", "68", "height", "32", "rx", "5", "fill", "white", "stroke", "#E2E8F0", "stroke-width", "1.5"], ["x1", "68", "y1", "228", "x2", "120", "y2", "228", "stroke", "#BFDBFE", "stroke-width", "1.2"], ["x1", "68", "y1", "234", "x2", "116", "y2", "234", "stroke", "#BFDBFE", "stroke-width", "1.2"], ["x1", "68", "y1", "240", "x2", "122", "y2", "240", "stroke", "#BFDBFE", "stroke-width", "1.2"], ["x1", "68", "y1", "246", "x2", "110", "y2", "246", "stroke", "#BFDBFE", "stroke-width", "1.2"], ["x", "132", "y", "218", "width", "5", "height", "36", "rx", "2.5", "fill", "#2563EB", "transform", "rotate(-10 132 218)"], ["points", "131,251 136,251 133.5,258", "fill", "#F59E0B"], ["cx", "430", "cy", "280", "r", "4", "fill", "#BFDBFE", "opacity", "0.7"], ["cx", "420", "cy", "295", "r", "3", "fill", "#BFDBFE", "opacity", "0.5"], ["cx", "440", "cy", "295", "r", "2.5", "fill", "#BFDBFE", "opacity", "0.5"], ["cx", "50", "cy", "300", "r", "4", "fill", "#DBEAFE", "opacity", "0.6"], ["cx", "62", "cy", "315", "r", "3", "fill", "#DBEAFE", "opacity", "0.5"], ["opacity", "0.7"], ["x1", "438", "y1", "50", "x2", "438", "y2", "60", "stroke", "#BFDBFE", "stroke-width", "2", "stroke-linecap", "round"], ["x1", "433", "y1", "55", "x2", "443", "y2", "55", "stroke", "#BFDBFE", "stroke-width", "2", "stroke-linecap", "round"], ["opacity", "0.5"], ["x1", "55", "y1", "200", "x2", "55", "y2", "208", "stroke", "#DBEAFE", "stroke-width", "1.5", "stroke-linecap", "round"], ["x1", "51", "y1", "204", "x2", "59", "y2", "204", "stroke", "#DBEAFE", "stroke-width", "1.5", "stroke-linecap", "round"], [1, "float-badge", "badge-1"], ["name", "check-circle", 3, "size", "stroke", "strokeWidth"], [1, "float-badge", "badge-2"], ["name", "clock", 3, "size", "stroke", "strokeWidth"], [1, "btn-lg", 3, "href"], [3, "name", "size", "stroke", "strokeWidth"], [1, "stat-num"], [1, "stat-label"]], template: function HeroComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "section", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
+      \u0275\u0275element(4, "span", 4);
+      \u0275\u0275text(5);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "h1");
+      \u0275\u0275text(7);
+      \u0275\u0275element(8, "br");
+      \u0275\u0275elementStart(9, "span");
+      \u0275\u0275text(10);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(11, "p", 5);
+      \u0275\u0275text(12);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(13, "div", 6);
+      \u0275\u0275repeaterCreate(14, HeroComponent_For_15_Template, 3, 7, "a", 7, _forTrack0);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(16, "div", 8);
+      \u0275\u0275repeaterCreate(17, HeroComponent_For_18_Template, 5, 2, "div", 9, _forTrack1);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(19, "div", 10)(20, "div", 11);
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(21, "svg", 12)(22, "defs")(23, "linearGradient", 13);
+      \u0275\u0275element(24, "stop", 14)(25, "stop", 15);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(26, "linearGradient", 16);
+      \u0275\u0275element(27, "stop", 17)(28, "stop", 18);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(29, "linearGradient", 19);
+      \u0275\u0275element(30, "stop", 20)(31, "stop", 21);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(32, "clipPath", 22);
+      \u0275\u0275element(33, "rect", 23);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275element(34, "rect", 24)(35, "rect", 25);
+      \u0275\u0275elementStart(36, "g", 26);
+      \u0275\u0275element(37, "rect", 27)(38, "rect", 28)(39, "line", 29)(40, "rect", 30)(41, "line", 31)(42, "line", 32)(43, "rect", 33)(44, "rect", 34)(45, "circle", 35)(46, "circle", 36)(47, "ellipse", 37)(48, "ellipse", 38)(49, "rect", 39)(50, "line", 40)(51, "line", 41)(52, "rect", 42)(53, "rect", 43)(54, "rect", 44)(55, "rect", 45)(56, "rect", 46)(57, "rect", 47)(58, "rect", 48)(59, "rect", 49)(60, "rect", 50)(61, "rect", 51)(62, "ellipse", 52)(63, "ellipse", 53)(64, "ellipse", 54)(65, "rect", 55)(66, "rect", 56)(67, "rect", 57)(68, "rect", 58)(69, "rect", 59)(70, "rect", 60)(71, "rect", 61)(72, "rect", 62)(73, "rect", 63)(74, "rect", 64)(75, "rect", 65)(76, "rect", 66)(77, "rect", 67)(78, "rect", 68)(79, "rect", 69)(80, "rect", 70)(81, "rect", 71)(82, "rect", 72)(83, "rect", 73)(84, "rect", 74)(85, "rect", 75)(86, "rect", 76);
+      \u0275\u0275elementStart(87, "rect", 77);
+      \u0275\u0275element(88, "animate", 78);
+      \u0275\u0275elementEnd();
+      \u0275\u0275element(89, "rect", 79)(90, "rect", 80)(91, "rect", 81)(92, "rect", 82)(93, "ellipse", 83)(94, "path", 84)(95, "path", 85)(96, "path", 86)(97, "rect", 87)(98, "rect", 88)(99, "rect", 89)(100, "rect", 90)(101, "path", 91)(102, "rect", 92)(103, "rect", 93)(104, "rect", 94)(105, "rect", 95)(106, "rect", 96)(107, "ellipse", 97)(108, "path", 98)(109, "ellipse", 99)(110, "ellipse", 100)(111, "ellipse", 101)(112, "ellipse", 102)(113, "ellipse", 103)(114, "circle", 104)(115, "circle", 105)(116, "circle", 106)(117, "circle", 107)(118, "path", 108)(119, "path", 109)(120, "path", 110)(121, "path", 111)(122, "rect", 112)(123, "rect", 113)(124, "rect", 114)(125, "path", 115)(126, "rect", 116);
+      \u0275\u0275elementStart(127, "path", 117);
+      \u0275\u0275element(128, "animate", 118);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(129, "path", 119);
+      \u0275\u0275element(130, "animate", 120);
+      \u0275\u0275elementEnd();
+      \u0275\u0275element(131, "rect", 121)(132, "line", 122)(133, "line", 123)(134, "line", 124)(135, "line", 125)(136, "rect", 126)(137, "polygon", 127)(138, "circle", 128)(139, "circle", 129)(140, "circle", 130)(141, "circle", 131)(142, "circle", 132);
+      \u0275\u0275elementStart(143, "g", 133);
+      \u0275\u0275element(144, "line", 134)(145, "line", 135);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(146, "g", 136);
+      \u0275\u0275element(147, "line", 137)(148, "line", 138);
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275elementStart(149, "div", 139);
+      \u0275\u0275element(150, "app-icon", 140);
+      \u0275\u0275text(151, " Feedback in 24 hrs ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(152, "div", 141);
+      \u0275\u0275element(153, "app-icon", 142);
+      \u0275\u0275text(154, " 30 min session ");
+      \u0275\u0275elementEnd()()()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(5);
+      \u0275\u0275textInterpolate1(" ", ctx.data.badgeText, " ");
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.title);
+      \u0275\u0275advance(3);
+      \u0275\u0275textInterpolate(ctx.data.titleHighlight);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.subtitle);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.data.buttons);
+      \u0275\u0275advance(3);
+      \u0275\u0275repeater(ctx.data.stats);
+      \u0275\u0275advance(133);
+      \u0275\u0275property("size", 14)("stroke", "currentColor")("strokeWidth", 2);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("size", 14)("stroke", "currentColor")("strokeWidth", 2);
+    }
+  }, dependencies: [CommonModule, IconComponent], styles: ['\n.hero[_ngcontent-%COMP%] {\n  min-height: calc(100vh - 68px);\n  display: flex;\n  align-items: center;\n  padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 80px);\n  background: var(--bg-soft);\n  position: relative;\n  overflow: hidden;\n}\n.hero[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: -120px;\n  right: -120px;\n  width: 600px;\n  height: 600px;\n  background:\n    radial-gradient(\n      circle,\n      rgba(37, 99, 235, 0.06) 0%,\n      transparent 70%);\n  border-radius: 50%;\n}\n.hero[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  bottom: -80px;\n  left: -80px;\n  width: 400px;\n  height: 400px;\n  background:\n    radial-gradient(\n      circle,\n      rgba(14, 165, 233, 0.05) 0%,\n      transparent 70%);\n  border-radius: 50%;\n}\n.hero-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 60px;\n  align-items: center;\n  max-width: 1200px;\n  margin: 0 auto;\n  width: 100%;\n  position: relative;\n  z-index: 1;\n}\n.hero-badge[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.8rem;\n  font-weight: 600;\n  padding: 6px 14px;\n  border-radius: 100px;\n  margin-bottom: 24px;\n  border: 1px solid var(--blue-mid);\n}\n.hero-badge[_ngcontent-%COMP%]   .dot[_ngcontent-%COMP%] {\n  width: 7px;\n  height: 7px;\n  background: var(--blue);\n  border-radius: 50%;\n  animation: _ngcontent-%COMP%_pulse 2s infinite;\n}\n@keyframes _ngcontent-%COMP%_pulse {\n  0%, 100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n  50% {\n    opacity: 0.5;\n    transform: scale(0.8);\n  }\n}\n.hero[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: clamp(2rem, 4.5vw, 3.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 20px;\n}\n.hero[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.hero-sub[_ngcontent-%COMP%] {\n  font-size: clamp(1rem, 1.8vw, 1.15rem);\n  color: var(--text-soft);\n  margin-bottom: 36px;\n  max-width: 440px;\n  line-height: 1.7;\n}\n.hero-ctas[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 14px;\n  flex-wrap: wrap;\n}\n.btn-lg[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 14px 28px;\n  border-radius: 12px;\n  font-size: 1rem;\n  font-weight: 600;\n  cursor: pointer;\n  text-decoration: none;\n  border: none;\n  transition: all 0.22s;\n  font-family: "DM Sans", sans-serif;\n}\n.btn-blue[_ngcontent-%COMP%] {\n  background: var(--blue);\n  color: white;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n}\n.btn-blue[_ngcontent-%COMP%]:hover {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.38);\n}\n.btn-ghost[_ngcontent-%COMP%] {\n  background: white;\n  color: var(--text);\n  border: 1.5px solid var(--border);\n}\n.btn-ghost[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue);\n  color: var(--blue);\n  background: var(--blue-light);\n  transform: translateY(-2px);\n}\n.hero-stats[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 32px;\n  margin-top: 40px;\n}\n.stat[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\n.stat-num[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1.5rem;\n  font-weight: 800;\n  color: var(--text);\n}\n.stat-label[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n  color: var(--text-muted);\n  font-weight: 500;\n}\n.hero-visual[_ngcontent-%COMP%] {\n  position: relative;\n}\n.hero-visual[_ngcontent-%COMP%]   .hero-svg[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 520px;\n  display: block;\n  margin: auto;\n  filter: drop-shadow(0 20px 48px rgba(37, 99, 235, 0.13));\n}\n.hero-illustration[_ngcontent-%COMP%] {\n  background: white;\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  padding: 32px;\n  position: relative;\n  overflow: hidden;\n  border: 1px solid var(--border);\n}\n.hero-illustration[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 4px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n}\n.ill-header[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  margin-bottom: 24px;\n}\n.ill-avatar[_ngcontent-%COMP%] {\n  width: 44px;\n  height: 44px;\n  border-radius: 12px;\n  background:\n    linear-gradient(\n      135deg,\n      #667eea,\n      #764ba2);\n  display: grid;\n  place-items: center;\n  color: white;\n  font-weight: 700;\n  font-size: 1rem;\n}\n.ill-meta[_ngcontent-%COMP%] {\n  flex: 1;\n}\n.ill-name[_ngcontent-%COMP%] {\n  font-weight: 600;\n  font-size: 0.9rem;\n  color: var(--text);\n}\n.ill-role[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n}\n.ill-badge[_ngcontent-%COMP%] {\n  background: #ecfdf5;\n  color: var(--green);\n  font-size: 0.72rem;\n  font-weight: 600;\n  padding: 4px 10px;\n  border-radius: 100px;\n  border: 1px solid #a7f3d0;\n}\n.ill-question[_ngcontent-%COMP%] {\n  background: var(--bg-soft);\n  border-radius: var(--radius-sm);\n  padding: 16px;\n  margin-bottom: 16px;\n  border-left: 3px solid var(--blue);\n}\n.ill-qlabel[_ngcontent-%COMP%] {\n  font-size: 0.72rem;\n  color: var(--blue);\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 4px;\n}\n.ill-qtext[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  color: var(--text);\n  font-weight: 500;\n}\n.ill-typing[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 12px 16px;\n  background: var(--blue-light);\n  border-radius: var(--radius-sm);\n  margin-bottom: 16px;\n}\n.ill-typing-text[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: var(--blue);\n  font-weight: 500;\n}\n.typing-dots[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 4px;\n}\n.typing-dots[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  width: 6px;\n  height: 6px;\n  background: var(--blue);\n  border-radius: 50%;\n  animation: _ngcontent-%COMP%_bounce 1.2s infinite;\n  opacity: 0.5;\n}\n.typing-dots[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]:nth-child(2) {\n  animation-delay: 0.2s;\n}\n.typing-dots[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]:nth-child(3) {\n  animation-delay: 0.4s;\n}\n@keyframes _ngcontent-%COMP%_bounce {\n  0%, 60%, 100% {\n    transform: translateY(0);\n  }\n  30% {\n    transform: translateY(-6px);\n    opacity: 1;\n  }\n}\n.ill-scores[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 10px;\n}\n.ill-score[_ngcontent-%COMP%] {\n  background: var(--bg-soft);\n  border-radius: var(--radius-sm);\n  padding: 12px;\n  border: 1px solid var(--border);\n}\n.ill-score-label[_ngcontent-%COMP%] {\n  font-size: 0.72rem;\n  color: var(--text-muted);\n  margin-bottom: 6px;\n  font-weight: 500;\n}\n.ill-score-bar[_ngcontent-%COMP%] {\n  height: 6px;\n  background: var(--border);\n  border-radius: 3px;\n  overflow: hidden;\n}\n.ill-score-fill[_ngcontent-%COMP%] {\n  height: 100%;\n  border-radius: 3px;\n}\n.float-badge[_ngcontent-%COMP%] {\n  position: absolute;\n  background: white;\n  border-radius: 12px;\n  padding: 10px 14px;\n  box-shadow: var(--shadow-lg);\n  font-size: 0.78rem;\n  font-weight: 600;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  border: 1px solid var(--border);\n}\n.float-badge.badge-1[_ngcontent-%COMP%] {\n  bottom: -16px;\n  left: -20px;\n  color: var(--green);\n}\n.float-badge.badge-2[_ngcontent-%COMP%] {\n  top: -16px;\n  right: -20px;\n  color: var(--amber);\n  animation-delay: 1.5s;\n}\n.float-badge[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_float 3s ease-in-out infinite;\n}\n@keyframes _ngcontent-%COMP%_float {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-6px);\n  }\n}\n@media (max-width: 1024px) {\n  .hero-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n    gap: 40px;\n  }\n  .hero-visual[_ngcontent-%COMP%] {\n    order: -1;\n  }\n  .float-badge[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n@media (max-width: 768px) {\n  .hero[_ngcontent-%COMP%] {\n    padding: clamp(32px, 6vw, 48px) clamp(16px, 4vw, 24px);\n  }\n  .hero-stats[_ngcontent-%COMP%] {\n    gap: 20px;\n  }\n  .hero-ctas[_ngcontent-%COMP%] {\n    flex-direction: column;\n  }\n  .btn-lg[_ngcontent-%COMP%] {\n    justify-content: center;\n  }\n}\n/*# sourceMappingURL=hero.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HeroComponent, [{
+    type: Component,
+    args: [{ selector: "app-hero", standalone: true, imports: [CommonModule, IconComponent], template: `<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        {{ data.badgeText }}
+      </div>
+      <h1>{{ data.title }}<br /><span>{{ data.titleHighlight }}</span></h1>
+      <p class="hero-sub">{{ data.subtitle }}</p>
+      <div class="hero-ctas">
+        @for (button of data.buttons; track button.text) {
+        <a
+          [href]="button.href"
+          class="btn-lg"
+          [class.btn-blue]="button.variant === 'primary'"
+          [class.btn-ghost]="button.variant === 'ghost'"
+        >
+          @if (button.icon) {
+          <app-icon
+            [name]="button.icon"
+            [size]="button.variant === 'primary' ? 18 : 16"
+            [stroke]="'currentColor'"
+            [strokeWidth]="2"
+          ></app-icon>
+          } {{ button.text }}
+        </a>
+        }
+      </div>
+      <div class="hero-stats">
+        @for (stat of data.stats; track stat.label) {
+        <div class="stat">
+          <span class="stat-num">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div style="position: relative; padding: 24px">
+        <svg
+          viewBox="0 0 480 420"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="hero-svg"
+        >
+          <defs>
+            <linearGradient
+              id="heroGrad"
+              x1="0"
+              y1="0"
+              x2="464"
+              y2="0"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#2563EB" />
+              <stop offset="1" stop-color="#0EA5E9" />
+            </linearGradient>
+            <linearGradient
+              id="skyGrad"
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="1"
+              gradientUnits="objectBoundingBox"
+            >
+              <stop stop-color="#EFF6FF" />
+              <stop offset="1" stop-color="#DBEAFE" />
+            </linearGradient>
+            <linearGradient
+              id="deskGrad"
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="1"
+              gradientUnits="objectBoundingBox"
+            >
+              <stop stop-color="#F1F5F9" />
+              <stop offset="1" stop-color="#E2E8F0" />
+            </linearGradient>
+            <clipPath id="cardClip">
+              <rect x="8" y="8" width="464" height="404" rx="24" />
+            </clipPath>
+          </defs>
+
+          <!-- Background card -->
+          <rect
+            x="8"
+            y="8"
+            width="464"
+            height="404"
+            rx="24"
+            fill="white"
+            stroke="#E2E8F0"
+            stroke-width="1.5"
+          />
+          <!-- Top accent bar -->
+          <rect
+            x="8"
+            y="8"
+            width="464"
+            height="5"
+            rx="3"
+            fill="url(#heroGrad)"
+          />
+
+          <!-- Background scene -->
+          <g clip-path="url(#cardClip)">
+            <!-- Sky background -->
+            <rect x="8" y="13" width="464" height="240" fill="#F0F7FF" />
+            <!-- Floor -->
+            <rect x="8" y="253" width="464" height="160" fill="#F8FAFF" />
+            <!-- Floor line -->
+            <line
+              x1="8"
+              y1="253"
+              x2="472"
+              y2="253"
+              stroke="#E2E8F0"
+              stroke-width="1"
+            />
+
+            <!-- Window in background -->
+            <rect
+              x="330"
+              y="40"
+              width="110"
+              height="130"
+              rx="8"
+              fill="white"
+              stroke="#BFDBFE"
+              stroke-width="2"
+            />
+            <line
+              x1="385"
+              y1="40"
+              x2="385"
+              y2="170"
+              stroke="#BFDBFE"
+              stroke-width="1.5"
+            />
+            <line
+              x1="330"
+              y1="105"
+              x2="440"
+              y2="105"
+              stroke="#BFDBFE"
+              stroke-width="1.5"
+            />
+            <!-- Window sky view -->
+            <rect
+              x="332"
+              y="42"
+              width="51"
+              height="61"
+              rx="4"
+              fill="#DBEAFE"
+              opacity="0.6"
+            />
+            <rect
+              x="387"
+              y="42"
+              width="51"
+              height="61"
+              rx="4"
+              fill="#DBEAFE"
+              opacity="0.6"
+            />
+            <!-- Sun in window -->
+            <circle cx="358" cy="68" r="14" fill="#FDE68A" opacity="0.8" />
+            <circle cx="358" cy="68" r="10" fill="#FCD34D" />
+            <!-- Clouds in window -->
+            <ellipse
+              cx="410"
+              cy="62"
+              rx="14"
+              ry="8"
+              fill="white"
+              opacity="0.9"
+            />
+            <ellipse
+              cx="422"
+              cy="60"
+              rx="10"
+              ry="7"
+              fill="white"
+              opacity="0.9"
+            />
+
+            <!-- Bookshelf on wall -->
+            <rect
+              x="38"
+              y="38"
+              width="80"
+              height="120"
+              rx="6"
+              fill="#F1F5F9"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+            <!-- Shelf lines -->
+            <line
+              x1="38"
+              y1="85"
+              x2="118"
+              y2="85"
+              stroke="#E2E8F0"
+              stroke-width="1.2"
+            />
+            <line
+              x1="38"
+              y1="130"
+              x2="118"
+              y2="130"
+              stroke="#E2E8F0"
+              stroke-width="1.2"
+            />
+            <!-- Books top shelf -->
+            <rect x="44" y="48" width="10" height="34" rx="2" fill="#2563EB" />
+            <rect x="56" y="52" width="8" height="30" rx="2" fill="#10B981" />
+            <rect x="66" y="50" width="12" height="32" rx="2" fill="#F59E0B" />
+            <rect x="80" y="54" width="8" height="28" rx="2" fill="#EF4444" />
+            <rect x="90" y="49" width="10" height="33" rx="2" fill="#8B5CF6" />
+            <!-- Books mid shelf -->
+            <rect x="44" y="93" width="12" height="34" rx="2" fill="#0EA5E9" />
+            <rect x="58" y="96" width="9" height="31" rx="2" fill="#F59E0B" />
+            <rect x="69" y="92" width="11" height="35" rx="2" fill="#10B981" />
+            <rect
+              x="82"
+              y="95"
+              width="8"
+              height="32"
+              rx="2"
+              fill="#2563EB"
+              opacity="0.6"
+            />
+            <!-- Plant on shelf -->
+            <rect x="48" y="137" width="18" height="12" rx="3" fill="#D1FAE5" />
+            <ellipse cx="57" cy="137" rx="10" ry="8" fill="#34D399" />
+            <ellipse cx="52" cy="134" rx="7" ry="6" fill="#10B981" />
+            <ellipse cx="62" cy="133" rx="8" ry="7" fill="#6EE7B7" />
+
+            <!-- DESK -->
+            <rect
+              x="60"
+              y="250"
+              width="360"
+              height="14"
+              rx="7"
+              fill="url(#deskGrad)"
+              stroke="#CBD5E1"
+              stroke-width="1"
+            />
+            <!-- Desk legs -->
+            <rect x="90" y="263" width="12" height="60" rx="4" fill="#E2E8F0" />
+            <rect
+              x="378"
+              y="263"
+              width="12"
+              height="60"
+              rx="4"
+              fill="#E2E8F0"
+            />
+
+            <!-- LAPTOP on desk -->
+            <rect
+              x="148"
+              y="224"
+              width="184"
+              height="28"
+              rx="6"
+              fill="#CBD5E1"
+            />
+            <rect
+              x="152"
+              y="226"
+              width="176"
+              height="24"
+              rx="5"
+              fill="#E2E8F0"
+            />
+            <!-- Keyboard keys suggestion -->
+            <rect
+              x="160"
+              y="231"
+              width="160"
+              height="13"
+              rx="3"
+              fill="#D1D5DB"
+            />
+            <rect x="164" y="233" width="24" height="7" rx="2" fill="#CBD5E1" />
+            <rect x="192" y="233" width="24" height="7" rx="2" fill="#CBD5E1" />
+            <rect x="220" y="233" width="24" height="7" rx="2" fill="#CBD5E1" />
+            <rect x="248" y="233" width="24" height="7" rx="2" fill="#CBD5E1" />
+            <rect x="276" y="233" width="20" height="7" rx="2" fill="#CBD5E1" />
+            <!-- Laptop screen panel -->
+            <rect
+              x="150"
+              y="110"
+              width="180"
+              height="120"
+              rx="10"
+              fill="#1E293B"
+            />
+            <!-- Screen bezel inner glow -->
+            <rect
+              x="155"
+              y="115"
+              width="170"
+              height="110"
+              rx="7"
+              fill="#0F172A"
+            />
+            <!-- Screen content - code editor look -->
+            <rect
+              x="159"
+              y="119"
+              width="162"
+              height="102"
+              rx="5"
+              fill="#1E293B"
+            />
+            <!-- Code lines -->
+            <rect
+              x="168"
+              y="128"
+              width="12"
+              height="4"
+              rx="2"
+              fill="#94A3B8"
+              opacity="0.5"
+            />
+            <rect x="168" y="135" width="80" height="4" rx="2" fill="#60A5FA" />
+            <rect x="176" y="142" width="50" height="4" rx="2" fill="#34D399" />
+            <rect x="176" y="149" width="70" height="4" rx="2" fill="#FBBF24" />
+            <rect x="184" y="156" width="40" height="4" rx="2" fill="#F87171" />
+            <rect x="184" y="163" width="60" height="4" rx="2" fill="#60A5FA" />
+            <rect x="176" y="170" width="55" height="4" rx="2" fill="#34D399" />
+            <rect x="168" y="177" width="30" height="4" rx="2" fill="#60A5FA" />
+            <!-- Blinking cursor -->
+            <rect
+              x="200"
+              y="177"
+              width="2"
+              height="9"
+              rx="1"
+              fill="#60A5FA"
+              opacity="0.9"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.9;0;0.9"
+                dur="1.2s"
+                repeatCount="indefinite"
+              />
+            </rect>
+            <!-- Screen shine -->
+            <rect
+              x="155"
+              y="115"
+              width="40"
+              height="110"
+              rx="7"
+              fill="white"
+              opacity="0.02"
+            />
+            <!-- Laptop hinge shadow -->
+            <rect
+              x="150"
+              y="228"
+              width="180"
+              height="4"
+              rx="2"
+              fill="#94A3B8"
+              opacity="0.3"
+            />
+
+            <!-- STUDENT CHARACTER -->
+            <!-- Chair back -->
+            <rect
+              x="216"
+              y="195"
+              width="48"
+              height="70"
+              rx="8"
+              fill="#DBEAFE"
+              stroke="#BFDBFE"
+              stroke-width="1.5"
+            />
+            <rect
+              x="221"
+              y="200"
+              width="38"
+              height="60"
+              rx="6"
+              fill="#EFF6FF"
+            />
+
+            <!-- Body -->
+            <ellipse cx="240" cy="220" rx="32" ry="26" fill="#DBEAFE" />
+            <!-- Shirt / torso -->
+            <path
+              d="M215 215 Q240 240 265 215 L265 250 Q240 268 215 250 Z"
+              fill="#2563EB"
+              opacity="0.9"
+            />
+            <!-- Shirt collar -->
+            <path
+              d="M232 215 L240 228 L248 215"
+              stroke="white"
+              stroke-width="2"
+              fill="none"
+            />
+
+            <!-- Left arm sleeve -->
+            <path
+              d="M220 238 Q204 244 185 249 Q176 251 170 252 L168 264 Q178 263 188 260 Q208 254 224 248 Z"
+              fill="#2563EB"
+            />
+            <!-- Left hand resting flat on desk -->
+            <rect
+              x="152"
+              y="251"
+              width="24"
+              height="10"
+              rx="5"
+              fill="#F59E0B"
+            />
+            <!-- Fingers left -->
+            <rect x="152" y="246" width="6" height="8" rx="3" fill="#F59E0B" />
+            <rect x="160" y="245" width="6" height="8" rx="3" fill="#F59E0B" />
+            <rect x="168" y="246" width="6" height="8" rx="3" fill="#F59E0B" />
+
+            <!-- Right arm sleeve -->
+            <path
+              d="M260 238 Q276 244 295 249 Q304 251 310 252 L312 264 Q302 263 292 260 Q272 254 256 248 Z"
+              fill="#2563EB"
+            />
+            <!-- Right hand resting flat on desk -->
+            <rect
+              x="304"
+              y="251"
+              width="24"
+              height="10"
+              rx="5"
+              fill="#F59E0B"
+            />
+            <!-- Fingers right -->
+            <rect x="304" y="246" width="6" height="8" rx="3" fill="#F59E0B" />
+            <rect x="312" y="245" width="6" height="8" rx="3" fill="#F59E0B" />
+            <rect x="320" y="246" width="6" height="8" rx="3" fill="#F59E0B" />
+
+            <!-- Neck -->
+            <rect
+              x="233"
+              y="190"
+              width="14"
+              height="20"
+              rx="7"
+              fill="#FBBF24"
+            />
+
+            <!-- Head -->
+            <ellipse cx="240" cy="178" rx="30" ry="32" fill="#FBBF24" />
+            <!-- Hair -->
+            <path
+              d="M212 165 Q216 140 240 138 Q264 140 268 165 Q264 152 240 150 Q216 152 212 165Z"
+              fill="#1E293B"
+            />
+            <ellipse cx="240" cy="148" rx="22" ry="10" fill="#1E293B" />
+            <!-- Ear left -->
+            <ellipse cx="211" cy="178" rx="5" ry="7" fill="#F59E0B" />
+            <!-- Ear right -->
+            <ellipse cx="269" cy="178" rx="5" ry="7" fill="#F59E0B" />
+            <!-- Eyes -->
+            <ellipse cx="229" cy="176" rx="5" ry="5.5" fill="white" />
+            <ellipse cx="251" cy="176" rx="5" ry="5.5" fill="white" />
+            <circle cx="230" cy="177" r="3" fill="#1E293B" />
+            <circle cx="252" cy="177" r="3" fill="#1E293B" />
+            <circle cx="231" cy="175" r="1" fill="white" />
+            <circle cx="253" cy="175" r="1" fill="white" />
+            <!-- Eyebrows -->
+            <path
+              d="M224 169 Q229 166 234 169"
+              stroke="#1E293B"
+              stroke-width="2"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <path
+              d="M246 169 Q251 166 256 169"
+              stroke="#1E293B"
+              stroke-width="2"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <!-- Smile -->
+            <path
+              d="M231 187 Q240 194 249 187"
+              stroke="#1E293B"
+              stroke-width="2"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <!-- Headphones -->
+            <path
+              d="M212 168 Q212 148 240 146 Q268 148 268 168"
+              stroke="#2563EB"
+              stroke-width="4"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <rect
+              x="206"
+              y="165"
+              width="12"
+              height="18"
+              rx="6"
+              fill="#2563EB"
+            />
+            <rect
+              x="262"
+              y="165"
+              width="12"
+              height="18"
+              rx="6"
+              fill="#2563EB"
+            />
+
+            <!-- MUG on desk -->
+            <rect
+              x="360"
+              y="224"
+              width="28"
+              height="26"
+              rx="5"
+              fill="white"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+            <path
+              d="M388 232 Q398 232 398 240 Q398 248 388 248"
+              stroke="#E2E8F0"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"
+            />
+            <!-- Mug liquid -->
+            <rect x="362" y="226" width="24" height="8" rx="3" fill="#FEF3C7" />
+            <!-- Steam from mug -->
+            <path
+              d="M368 222 Q370 216 368 210"
+              stroke="#94A3B8"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              fill="none"
+              opacity="0.5"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.5;0.1;0.5"
+                dur="2s"
+                repeatCount="indefinite"
+              />
+            </path>
+            <path
+              d="M376 220 Q378 214 376 208"
+              stroke="#94A3B8"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              fill="none"
+              opacity="0.4"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.4;0.1;0.4"
+                dur="2.4s"
+                repeatCount="indefinite"
+              />
+            </path>
+
+            <!-- Notepad on desk -->
+            <rect
+              x="60"
+              y="220"
+              width="68"
+              height="32"
+              rx="5"
+              fill="white"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+            <line
+              x1="68"
+              y1="228"
+              x2="120"
+              y2="228"
+              stroke="#BFDBFE"
+              stroke-width="1.2"
+            />
+            <line
+              x1="68"
+              y1="234"
+              x2="116"
+              y2="234"
+              stroke="#BFDBFE"
+              stroke-width="1.2"
+            />
+            <line
+              x1="68"
+              y1="240"
+              x2="122"
+              y2="240"
+              stroke="#BFDBFE"
+              stroke-width="1.2"
+            />
+            <line
+              x1="68"
+              y1="246"
+              x2="110"
+              y2="246"
+              stroke="#BFDBFE"
+              stroke-width="1.2"
+            />
+            <!-- Pen -->
+            <rect
+              x="132"
+              y="218"
+              width="5"
+              height="36"
+              rx="2.5"
+              fill="#2563EB"
+              transform="rotate(-10 132 218)"
+            />
+            <polygon points="131,251 136,251 133.5,258" fill="#F59E0B" />
+
+            <!-- Decorative dots -->
+            <circle cx="430" cy="280" r="4" fill="#BFDBFE" opacity="0.7" />
+            <circle cx="420" cy="295" r="3" fill="#BFDBFE" opacity="0.5" />
+            <circle cx="440" cy="295" r="2.5" fill="#BFDBFE" opacity="0.5" />
+            <circle cx="50" cy="300" r="4" fill="#DBEAFE" opacity="0.6" />
+            <circle cx="62" cy="315" r="3" fill="#DBEAFE" opacity="0.5" />
+
+            <!-- Sparkle top right -->
+            <g opacity="0.7">
+              <line
+                x1="438"
+                y1="50"
+                x2="438"
+                y2="60"
+                stroke="#BFDBFE"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <line
+                x1="433"
+                y1="55"
+                x2="443"
+                y2="55"
+                stroke="#BFDBFE"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </g>
+            <g opacity="0.5">
+              <line
+                x1="55"
+                y1="200"
+                x2="55"
+                y2="208"
+                stroke="#DBEAFE"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+              <line
+                x1="51"
+                y1="204"
+                x2="59"
+                y2="204"
+                stroke="#DBEAFE"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </g>
+          </g>
+        </svg>
+
+        <!-- Floating badges -->
+        <div class="float-badge badge-1">
+          <app-icon
+            name="check-circle"
+            [size]="14"
+            [stroke]="'currentColor'"
+            [strokeWidth]="2"
+          ></app-icon>
+          Feedback in 24 hrs
+        </div>
+        <div class="float-badge badge-2">
+          <app-icon
+            name="clock"
+            [size]="14"
+            [stroke]="'currentColor'"
+            [strokeWidth]="2"
+          ></app-icon>
+          30 min session
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`, styles: ['/* apps/interview-ready-web/src/app/home/components/hero/hero.scss */\n.hero {\n  min-height: calc(100vh - 68px);\n  display: flex;\n  align-items: center;\n  padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 80px);\n  background: var(--bg-soft);\n  position: relative;\n  overflow: hidden;\n}\n.hero::before {\n  content: "";\n  position: absolute;\n  top: -120px;\n  right: -120px;\n  width: 600px;\n  height: 600px;\n  background:\n    radial-gradient(\n      circle,\n      rgba(37, 99, 235, 0.06) 0%,\n      transparent 70%);\n  border-radius: 50%;\n}\n.hero::after {\n  content: "";\n  position: absolute;\n  bottom: -80px;\n  left: -80px;\n  width: 400px;\n  height: 400px;\n  background:\n    radial-gradient(\n      circle,\n      rgba(14, 165, 233, 0.05) 0%,\n      transparent 70%);\n  border-radius: 50%;\n}\n.hero-grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 60px;\n  align-items: center;\n  max-width: 1200px;\n  margin: 0 auto;\n  width: 100%;\n  position: relative;\n  z-index: 1;\n}\n.hero-badge {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.8rem;\n  font-weight: 600;\n  padding: 6px 14px;\n  border-radius: 100px;\n  margin-bottom: 24px;\n  border: 1px solid var(--blue-mid);\n}\n.hero-badge .dot {\n  width: 7px;\n  height: 7px;\n  background: var(--blue);\n  border-radius: 50%;\n  animation: pulse 2s infinite;\n}\n@keyframes pulse {\n  0%, 100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n  50% {\n    opacity: 0.5;\n    transform: scale(0.8);\n  }\n}\n.hero h1 {\n  font-size: clamp(2rem, 4.5vw, 3.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 20px;\n}\n.hero h1 span {\n  color: var(--blue);\n}\n.hero-sub {\n  font-size: clamp(1rem, 1.8vw, 1.15rem);\n  color: var(--text-soft);\n  margin-bottom: 36px;\n  max-width: 440px;\n  line-height: 1.7;\n}\n.hero-ctas {\n  display: flex;\n  gap: 14px;\n  flex-wrap: wrap;\n}\n.btn-lg {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 14px 28px;\n  border-radius: 12px;\n  font-size: 1rem;\n  font-weight: 600;\n  cursor: pointer;\n  text-decoration: none;\n  border: none;\n  transition: all 0.22s;\n  font-family: "DM Sans", sans-serif;\n}\n.btn-blue {\n  background: var(--blue);\n  color: white;\n  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.32);\n}\n.btn-blue:hover {\n  background: var(--blue-dark);\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.38);\n}\n.btn-ghost {\n  background: white;\n  color: var(--text);\n  border: 1.5px solid var(--border);\n}\n.btn-ghost:hover {\n  border-color: var(--blue);\n  color: var(--blue);\n  background: var(--blue-light);\n  transform: translateY(-2px);\n}\n.hero-stats {\n  display: flex;\n  gap: 32px;\n  margin-top: 40px;\n}\n.stat {\n  display: flex;\n  flex-direction: column;\n}\n.stat-num {\n  font-family: "Sora", sans-serif;\n  font-size: 1.5rem;\n  font-weight: 800;\n  color: var(--text);\n}\n.stat-label {\n  font-size: 0.8rem;\n  color: var(--text-muted);\n  font-weight: 500;\n}\n.hero-visual {\n  position: relative;\n}\n.hero-visual .hero-svg {\n  width: 100%;\n  max-width: 520px;\n  display: block;\n  margin: auto;\n  filter: drop-shadow(0 20px 48px rgba(37, 99, 235, 0.13));\n}\n.hero-illustration {\n  background: white;\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  padding: 32px;\n  position: relative;\n  overflow: hidden;\n  border: 1px solid var(--border);\n}\n.hero-illustration::before {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 4px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n}\n.ill-header {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  margin-bottom: 24px;\n}\n.ill-avatar {\n  width: 44px;\n  height: 44px;\n  border-radius: 12px;\n  background:\n    linear-gradient(\n      135deg,\n      #667eea,\n      #764ba2);\n  display: grid;\n  place-items: center;\n  color: white;\n  font-weight: 700;\n  font-size: 1rem;\n}\n.ill-meta {\n  flex: 1;\n}\n.ill-name {\n  font-weight: 600;\n  font-size: 0.9rem;\n  color: var(--text);\n}\n.ill-role {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n}\n.ill-badge {\n  background: #ecfdf5;\n  color: var(--green);\n  font-size: 0.72rem;\n  font-weight: 600;\n  padding: 4px 10px;\n  border-radius: 100px;\n  border: 1px solid #a7f3d0;\n}\n.ill-question {\n  background: var(--bg-soft);\n  border-radius: var(--radius-sm);\n  padding: 16px;\n  margin-bottom: 16px;\n  border-left: 3px solid var(--blue);\n}\n.ill-qlabel {\n  font-size: 0.72rem;\n  color: var(--blue);\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 4px;\n}\n.ill-qtext {\n  font-size: 0.88rem;\n  color: var(--text);\n  font-weight: 500;\n}\n.ill-typing {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 12px 16px;\n  background: var(--blue-light);\n  border-radius: var(--radius-sm);\n  margin-bottom: 16px;\n}\n.ill-typing-text {\n  font-size: 0.82rem;\n  color: var(--blue);\n  font-weight: 500;\n}\n.typing-dots {\n  display: flex;\n  gap: 4px;\n}\n.typing-dots span {\n  width: 6px;\n  height: 6px;\n  background: var(--blue);\n  border-radius: 50%;\n  animation: bounce 1.2s infinite;\n  opacity: 0.5;\n}\n.typing-dots span:nth-child(2) {\n  animation-delay: 0.2s;\n}\n.typing-dots span:nth-child(3) {\n  animation-delay: 0.4s;\n}\n@keyframes bounce {\n  0%, 60%, 100% {\n    transform: translateY(0);\n  }\n  30% {\n    transform: translateY(-6px);\n    opacity: 1;\n  }\n}\n.ill-scores {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 10px;\n}\n.ill-score {\n  background: var(--bg-soft);\n  border-radius: var(--radius-sm);\n  padding: 12px;\n  border: 1px solid var(--border);\n}\n.ill-score-label {\n  font-size: 0.72rem;\n  color: var(--text-muted);\n  margin-bottom: 6px;\n  font-weight: 500;\n}\n.ill-score-bar {\n  height: 6px;\n  background: var(--border);\n  border-radius: 3px;\n  overflow: hidden;\n}\n.ill-score-fill {\n  height: 100%;\n  border-radius: 3px;\n}\n.float-badge {\n  position: absolute;\n  background: white;\n  border-radius: 12px;\n  padding: 10px 14px;\n  box-shadow: var(--shadow-lg);\n  font-size: 0.78rem;\n  font-weight: 600;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  border: 1px solid var(--border);\n}\n.float-badge.badge-1 {\n  bottom: -16px;\n  left: -20px;\n  color: var(--green);\n}\n.float-badge.badge-2 {\n  top: -16px;\n  right: -20px;\n  color: var(--amber);\n  animation-delay: 1.5s;\n}\n.float-badge {\n  animation: float 3s ease-in-out infinite;\n}\n@keyframes float {\n  0%, 100% {\n    transform: translateY(0);\n  }\n  50% {\n    transform: translateY(-6px);\n  }\n}\n@media (max-width: 1024px) {\n  .hero-grid {\n    grid-template-columns: 1fr;\n    gap: 40px;\n  }\n  .hero-visual {\n    order: -1;\n  }\n  .float-badge {\n    display: none;\n  }\n}\n@media (max-width: 768px) {\n  .hero {\n    padding: clamp(32px, 6vw, 48px) clamp(16px, 4vw, 24px);\n  }\n  .hero-stats {\n    gap: 20px;\n  }\n  .hero-ctas {\n    flex-direction: column;\n  }\n  .btn-lg {\n    justify-content: center;\n  }\n}\n/*# sourceMappingURL=hero.css.map */\n'] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeroComponent, { className: "HeroComponent", filePath: "apps/interview-ready-web/src/app/home/components/hero/hero.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/steps/steps.ts
+function StepsComponent_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 2)(1, "div", 3);
+    \u0275\u0275element(2, "app-icon", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 5);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 6);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const step_r1 = ctx.$implicit;
+    const i_r2 = ctx.index;
+    \u0275\u0275styleProp("animation-delay", i_r2 * 80, "ms");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("name", step_r1.icon)("size", 28);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(step_r1.title);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(step_r1.description);
+  }
+}
+var StepsComponent = class _StepsComponent {
+  steps = [];
+  static \u0275fac = function StepsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _StepsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StepsComponent, selectors: [["app-steps"]], inputs: { steps: "steps" }, decls: 2, vars: 1, consts: [[1, "steps"], ["class", "step", 3, "animation-delay", 4, "ngFor", "ngForOf"], [1, "step"], [1, "step-num-wrap"], [1, "step-icon", 3, "name", "size"], [1, "step-title"], [1, "step-desc"]], template: function StepsComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "div", 0);
+      \u0275\u0275template(1, StepsComponent_div_1_Template, 7, 6, "div", 1);
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance();
+      \u0275\u0275property("ngForOf", ctx.steps);
+    }
+  }, dependencies: [CommonModule, NgForOf, IconComponent], styles: ['\n.steps[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n  position: relative;\n}\n.steps[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: 32px;\n  left: 15%;\n  right: 15%;\n  height: 2px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue-mid),\n      var(--blue-mid));\n  border-radius: 2px;\n  z-index: 0;\n}\n.step[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  position: relative;\n  z-index: 1;\n  animation: _ngcontent-%COMP%_fadeInUp 0.5s ease both;\n}\n.step-num-wrap[_ngcontent-%COMP%] {\n  width: 64px;\n  height: 64px;\n  background: var(--bg);\n  border: 2px solid var(--blue-mid);\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin-bottom: 20px;\n  box-shadow: var(--shadow);\n  transition: all 0.3s;\n}\n.step-num-wrap[_ngcontent-%COMP%]:hover {\n  background: var(--blue);\n  border-color: var(--blue);\n  transform: scale(1.08);\n}\n.step-num-wrap[_ngcontent-%COMP%]:hover     .step-icon {\n  filter: brightness(0) invert(1);\n}\n.step-icon[_ngcontent-%COMP%] {\n  color: var(--blue);\n  transition: all 0.3s;\n}\n.step-title[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 1rem;\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 6px;\n}\n.step-desc[_ngcontent-%COMP%] {\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  line-height: 1.5;\n}\n@keyframes _ngcontent-%COMP%_fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(24px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n@media (max-width: 1024px) {\n  .steps[_ngcontent-%COMP%] {\n    gap: 20px;\n  }\n}\n@media (max-width: 768px) {\n  .steps[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, 1fr);\n    gap: 24px 16px;\n  }\n  .steps[_ngcontent-%COMP%]::before {\n    display: none;\n  }\n  .step-num-wrap[_ngcontent-%COMP%] {\n    width: 56px;\n    height: 56px;\n    margin-bottom: 16px;\n  }\n  .step-title[_ngcontent-%COMP%] {\n    font-size: 0.95rem;\n  }\n  .step-desc[_ngcontent-%COMP%] {\n    font-size: 0.8rem;\n  }\n}\n@media (max-width: 480px) {\n  .steps[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n    gap: 24px;\n  }\n  .step-num-wrap[_ngcontent-%COMP%] {\n    width: 60px;\n    height: 60px;\n  }\n  .step-title[_ngcontent-%COMP%] {\n    font-size: 1rem;\n  }\n}\n/*# sourceMappingURL=steps.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StepsComponent, [{
+    type: Component,
+    args: [{ selector: "app-steps", standalone: true, imports: [CommonModule, IconComponent], template: '<div class="steps">\n  <div\n    class="step"\n    *ngFor="let step of steps; let i = index"\n    [style.animation-delay.ms]="i * 80"\n  >\n    <div class="step-num-wrap">\n      <app-icon [name]="step.icon" [size]="28" class="step-icon"></app-icon>\n    </div>\n    <div class="step-title">{{ step.title }}</div>\n    <div class="step-desc">{{ step.description }}</div>\n  </div>\n</div>\n', styles: ['/* apps/interview-ready-web/src/app/home/components/steps/steps.scss */\n.steps {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n  position: relative;\n}\n.steps::before {\n  content: "";\n  position: absolute;\n  top: 32px;\n  left: 15%;\n  right: 15%;\n  height: 2px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue-mid),\n      var(--blue-mid));\n  border-radius: 2px;\n  z-index: 0;\n}\n.step {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  position: relative;\n  z-index: 1;\n  animation: fadeInUp 0.5s ease both;\n}\n.step-num-wrap {\n  width: 64px;\n  height: 64px;\n  background: var(--bg);\n  border: 2px solid var(--blue-mid);\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin-bottom: 20px;\n  box-shadow: var(--shadow);\n  transition: all 0.3s;\n}\n.step-num-wrap:hover {\n  background: var(--blue);\n  border-color: var(--blue);\n  transform: scale(1.08);\n}\n.step-num-wrap:hover ::ng-deep .step-icon {\n  filter: brightness(0) invert(1);\n}\n.step-icon {\n  color: var(--blue);\n  transition: all 0.3s;\n}\n.step-title {\n  font-family: "Sora", sans-serif;\n  font-size: 1rem;\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 6px;\n}\n.step-desc {\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  line-height: 1.5;\n}\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(24px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n@media (max-width: 1024px) {\n  .steps {\n    gap: 20px;\n  }\n}\n@media (max-width: 768px) {\n  .steps {\n    grid-template-columns: repeat(2, 1fr);\n    gap: 24px 16px;\n  }\n  .steps::before {\n    display: none;\n  }\n  .step-num-wrap {\n    width: 56px;\n    height: 56px;\n    margin-bottom: 16px;\n  }\n  .step-title {\n    font-size: 0.95rem;\n  }\n  .step-desc {\n    font-size: 0.8rem;\n  }\n}\n@media (max-width: 480px) {\n  .steps {\n    grid-template-columns: 1fr;\n    gap: 24px;\n  }\n  .step-num-wrap {\n    width: 60px;\n    height: 60px;\n  }\n  .step-title {\n    font-size: 1rem;\n  }\n}\n/*# sourceMappingURL=steps.css.map */\n'] }]
+  }], null, { steps: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(StepsComponent, { className: "StepsComponent", filePath: "apps/interview-ready-web/src/app/home/components/steps/steps.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/how-it-works/how-it-works.ts
+var HowItWorksComponent = class _HowItWorksComponent {
+  data;
+  static \u0275fac = function HowItWorksComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _HowItWorksComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HowItWorksComponent, selectors: [["app-how-it-works"]], inputs: { data: "data" }, decls: 9, vars: 4, consts: [["id", "how", 1, "how"], [1, "section-inner"], [1, "section-tag"], [1, "section-title"], [1, "section-sub"], [3, "steps"]], template: function HowItWorksComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "section", 0)(1, "div", 1)(2, "div", 2);
+      \u0275\u0275text(3);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(4, "h2", 3);
+      \u0275\u0275text(5);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "p", 4);
+      \u0275\u0275text(7);
+      \u0275\u0275elementEnd();
+      \u0275\u0275element(8, "app-steps", 5);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(3);
+      \u0275\u0275textInterpolate(ctx.data.tag);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.subtitle);
+      \u0275\u0275advance();
+      \u0275\u0275property("steps", ctx.data.steps);
+    }
+  }, dependencies: [CommonModule, StepsComponent], styles: ["\n.how[_ngcontent-%COMP%] {\n  background: var(--bg);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner[_ngcontent-%COMP%] {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title[_ngcontent-%COMP%] {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n@media (max-width: 768px) {\n  .how[_ngcontent-%COMP%] {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .section-sub[_ngcontent-%COMP%] {\n    max-width: 100%;\n  }\n}\n@media (max-width: 480px) {\n  .how[_ngcontent-%COMP%] {\n    padding: 40px 16px;\n  }\n}\n/*# sourceMappingURL=how-it-works.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HowItWorksComponent, [{
+    type: Component,
+    args: [{ selector: "app-how-it-works", standalone: true, imports: [CommonModule, StepsComponent], template: '<section class="how" id="how">\n  <div class="section-inner">\n    <div class="section-tag">{{ data.tag }}</div>\n    <h2 class="section-title">{{ data.title }}</h2>\n    <p class="section-sub">{{ data.subtitle }}</p>\n\n    <app-steps [steps]="data.steps"></app-steps>\n  </div>\n</section>\n', styles: ["/* apps/interview-ready-web/src/app/home/components/how-it-works/how-it-works.scss */\n.how {\n  background: var(--bg);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n@media (max-width: 768px) {\n  .how {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .section-sub {\n    max-width: 100%;\n  }\n}\n@media (max-width: 480px) {\n  .how {\n    padding: 40px 16px;\n  }\n}\n/*# sourceMappingURL=how-it-works.css.map */\n"] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HowItWorksComponent, { className: "HowItWorksComponent", filePath: "apps/interview-ready-web/src/app/home/components/how-it-works/how-it-works.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/type-card/type-card.ts
+var TypeCardComponent = class _TypeCardComponent {
+  type;
+  static \u0275fac = function TypeCardComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _TypeCardComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TypeCardComponent, selectors: [["app-type-card"]], inputs: { type: "type" }, decls: 10, vars: 11, consts: [[1, "type-card"], [1, "card-icon-wrap"], [1, "card-icon", 3, "name", "size", "stroke", "strokeWidth"], ["href", "#", 1, "card-link"], ["name", "arrow-right", 3, "size", "stroke", "strokeWidth"]], template: function TypeCardComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+      \u0275\u0275element(2, "app-icon", 2);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(3, "h3");
+      \u0275\u0275text(4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(5, "p");
+      \u0275\u0275text(6);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "a", 3);
+      \u0275\u0275text(8, " Learn More ");
+      \u0275\u0275element(9, "app-icon", 4);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275classMap(ctx.type.type);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("name", ctx.type.icon)("size", 28)("stroke", "currentColor")("strokeWidth", 2);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.type.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.type.description);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("size", 14)("stroke", "currentColor")("strokeWidth", 2);
+    }
+  }, dependencies: [CommonModule, IconComponent], styles: ['\n.type-card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  padding: 32px;\n  box-shadow: var(--shadow);\n  border: 1px solid var(--border);\n  transition: all 0.3s;\n  cursor: default;\n  position: relative;\n  overflow: hidden;\n}\n.type-card[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 3px;\n  border-radius: 3px 3px 0 0;\n  opacity: 0;\n  transition: opacity 0.3s;\n}\n.type-card.dsa[_ngcontent-%COMP%]::before {\n  background: var(--blue);\n}\n.type-card.hr[_ngcontent-%COMP%]::before {\n  background: var(--green);\n}\n.type-card.resume[_ngcontent-%COMP%]::before {\n  background: var(--amber);\n}\n.type-card[_ngcontent-%COMP%]:hover {\n  transform: translateY(-6px);\n  box-shadow: var(--shadow-lg);\n}\n.type-card[_ngcontent-%COMP%]:hover::before {\n  opacity: 1;\n}\n.card-icon-wrap[_ngcontent-%COMP%] {\n  width: 56px;\n  height: 56px;\n  border-radius: 14px;\n  display: grid;\n  place-items: center;\n  margin-bottom: 20px;\n}\n.dsa[_ngcontent-%COMP%]   .card-icon-wrap[_ngcontent-%COMP%] {\n  background: var(--blue-light);\n}\n.hr[_ngcontent-%COMP%]   .card-icon-wrap[_ngcontent-%COMP%] {\n  background: #ecfdf5;\n}\n.resume[_ngcontent-%COMP%]   .card-icon-wrap[_ngcontent-%COMP%] {\n  background: #fffbeb;\n}\n.card-icon[_ngcontent-%COMP%] {\n  width: 28px;\n  height: 28px;\n}\n.dsa[_ngcontent-%COMP%]   .card-icon[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.hr[_ngcontent-%COMP%]   .card-icon[_ngcontent-%COMP%] {\n  color: var(--green);\n}\n.resume[_ngcontent-%COMP%]   .card-icon[_ngcontent-%COMP%] {\n  color: var(--amber);\n}\n.type-card[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  font-size: 1.15rem;\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.type-card[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n  margin-bottom: 20px;\n}\n.card-link[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  font-weight: 600;\n  text-decoration: none;\n  transition: gap 0.2s;\n}\n.dsa[_ngcontent-%COMP%]   .card-link[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.hr[_ngcontent-%COMP%]   .card-link[_ngcontent-%COMP%] {\n  color: var(--green);\n}\n.resume[_ngcontent-%COMP%]   .card-link[_ngcontent-%COMP%] {\n  color: var(--amber);\n}\n.card-link[_ngcontent-%COMP%]:hover {\n  gap: 10px;\n}\n/*# sourceMappingURL=type-card.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TypeCardComponent, [{
+    type: Component,
+    args: [{ selector: "app-type-card", standalone: true, imports: [CommonModule, IconComponent], template: `<div class="type-card" [class]="type.type">
+  <div class="card-icon-wrap">
+    <app-icon
+      [name]="type.icon"
+      [size]="28"
+      [stroke]="'currentColor'"
+      [strokeWidth]="2"
+      class="card-icon"
+    ></app-icon>
+  </div>
+  <h3>{{ type.title }}</h3>
+  <p>{{ type.description }}</p>
+  <a href="#" class="card-link">
+    Learn More
+    <app-icon
+      name="arrow-right"
+      [size]="14"
+      [stroke]="'currentColor'"
+      [strokeWidth]="2"
+    ></app-icon>
+  </a>
+</div>
+`, styles: ['/* apps/interview-ready-web/src/app/home/components/type-card/type-card.scss */\n.type-card {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  padding: 32px;\n  box-shadow: var(--shadow);\n  border: 1px solid var(--border);\n  transition: all 0.3s;\n  cursor: default;\n  position: relative;\n  overflow: hidden;\n}\n.type-card::before {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 3px;\n  border-radius: 3px 3px 0 0;\n  opacity: 0;\n  transition: opacity 0.3s;\n}\n.type-card.dsa::before {\n  background: var(--blue);\n}\n.type-card.hr::before {\n  background: var(--green);\n}\n.type-card.resume::before {\n  background: var(--amber);\n}\n.type-card:hover {\n  transform: translateY(-6px);\n  box-shadow: var(--shadow-lg);\n}\n.type-card:hover::before {\n  opacity: 1;\n}\n.card-icon-wrap {\n  width: 56px;\n  height: 56px;\n  border-radius: 14px;\n  display: grid;\n  place-items: center;\n  margin-bottom: 20px;\n}\n.dsa .card-icon-wrap {\n  background: var(--blue-light);\n}\n.hr .card-icon-wrap {\n  background: #ecfdf5;\n}\n.resume .card-icon-wrap {\n  background: #fffbeb;\n}\n.card-icon {\n  width: 28px;\n  height: 28px;\n}\n.dsa .card-icon {\n  color: var(--blue);\n}\n.hr .card-icon {\n  color: var(--green);\n}\n.resume .card-icon {\n  color: var(--amber);\n}\n.type-card h3 {\n  font-size: 1.15rem;\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.type-card p {\n  font-size: 0.88rem;\n  color: var(--text-soft);\n  line-height: 1.6;\n  margin-bottom: 20px;\n}\n.card-link {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  font-size: 0.85rem;\n  font-weight: 600;\n  text-decoration: none;\n  transition: gap 0.2s;\n}\n.dsa .card-link {\n  color: var(--blue);\n}\n.hr .card-link {\n  color: var(--green);\n}\n.resume .card-link {\n  color: var(--amber);\n}\n.card-link:hover {\n  gap: 10px;\n}\n/*# sourceMappingURL=type-card.css.map */\n'] }]
+  }], null, { type: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TypeCardComponent, { className: "TypeCardComponent", filePath: "apps/interview-ready-web/src/app/home/components/type-card/type-card.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/interview-types/interview-types.ts
+var _forTrack02 = ($index, $item) => $item.type;
+function InterviewTypesComponent_For_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "app-type-card", 6);
+  }
+  if (rf & 2) {
+    const type_r1 = ctx.$implicit;
+    \u0275\u0275property("type", type_r1);
+  }
+}
+var InterviewTypesComponent = class _InterviewTypesComponent {
+  data;
+  static \u0275fac = function InterviewTypesComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _InterviewTypesComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InterviewTypesComponent, selectors: [["app-interview-types"]], inputs: { data: "data" }, decls: 11, vars: 3, consts: [["id", "types", 1, "types"], [1, "section-inner"], [1, "section-tag"], [1, "section-title"], [1, "section-sub"], [1, "cards-grid"], [3, "type"]], template: function InterviewTypesComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "section", 0)(1, "div", 1)(2, "div", 2);
+      \u0275\u0275text(3);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(4, "h2", 3);
+      \u0275\u0275text(5);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "p", 4);
+      \u0275\u0275text(7);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(8, "div", 5);
+      \u0275\u0275repeaterCreate(9, InterviewTypesComponent_For_10_Template, 1, 1, "app-type-card", 6, _forTrack02);
+      \u0275\u0275elementEnd()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(3);
+      \u0275\u0275textInterpolate(ctx.data.tag);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.subtitle);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.data.types);
+    }
+  }, dependencies: [CommonModule, TypeCardComponent], styles: ["\n.types[_ngcontent-%COMP%] {\n  background: var(--bg-soft);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner[_ngcontent-%COMP%] {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title[_ngcontent-%COMP%] {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.cards-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n}\n@media (max-width: 1024px) {\n  .cards-grid[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}\n@media (max-width: 768px) {\n  .types[_ngcontent-%COMP%] {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .cards-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n  .section-sub[_ngcontent-%COMP%] {\n    max-width: 100%;\n  }\n}\n/*# sourceMappingURL=interview-types.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(InterviewTypesComponent, [{
+    type: Component,
+    args: [{ selector: "app-interview-types", standalone: true, imports: [CommonModule, TypeCardComponent], template: '<section class="types" id="types">\n  <div class="section-inner">\n    <div class="section-tag">{{ data.tag }}</div>\n    <h2 class="section-title">{{ data.title }}</h2>\n    <p class="section-sub">{{ data.subtitle }}</p>\n\n    <div class="cards-grid">\n      @for (type of data.types; track type.type) {\n      <app-type-card [type]="type"></app-type-card>\n      }\n    </div>\n  </div>\n</section>\n', styles: ["/* apps/interview-ready-web/src/app/home/components/interview-types/interview-types.scss */\n.types {\n  background: var(--bg-soft);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.cards-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n}\n@media (max-width: 1024px) {\n  .cards-grid {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}\n@media (max-width: 768px) {\n  .types {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .cards-grid {\n    grid-template-columns: 1fr;\n  }\n  .section-sub {\n    max-width: 100%;\n  }\n}\n/*# sourceMappingURL=interview-types.css.map */\n"] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InterviewTypesComponent, { className: "InterviewTypesComponent", filePath: "apps/interview-ready-web/src/app/home/components/interview-types/interview-types.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/feedback-card/feedback-card.ts
+var _forTrack03 = ($index, $item) => $item.name;
+function FeedbackCardComponent_For_8_For_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275domElementStart(0, "span", 14);
+    \u0275\u0275text(1, "\u2605");
+    \u0275\u0275domElementEnd();
+  }
+  if (rf & 2) {
+    const filled_r1 = ctx.$implicit;
+    \u0275\u0275classProp("filled", filled_r1)("empty", !filled_r1);
+  }
+}
+function FeedbackCardComponent_For_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275domElementStart(0, "div", 5)(1, "span", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275domElementEnd();
+    \u0275\u0275domElementStart(3, "div", 11);
+    \u0275\u0275repeaterCreate(4, FeedbackCardComponent_For_8_For_5_Template, 2, 4, "span", 12, \u0275\u0275repeaterTrackByIndex);
+    \u0275\u0275domElementEnd();
+    \u0275\u0275domElementStart(6, "span", 13);
+    \u0275\u0275text(7);
+    \u0275\u0275domElementEnd()();
+  }
+  if (rf & 2) {
+    const score_r2 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(score_r2.name);
+    \u0275\u0275advance(2);
+    \u0275\u0275repeater(ctx_r2.getStars(score_r2.rating, score_r2.maxRating));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2("", score_r2.rating, " / ", score_r2.maxRating);
+  }
+}
+var FeedbackCardComponent = class _FeedbackCardComponent {
+  feedback;
+  getStars(rating, maxRating) {
+    return Array(maxRating).fill(false).map((_, i) => i < rating);
+  }
+  static \u0275fac = function FeedbackCardComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FeedbackCardComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FeedbackCardComponent, selectors: [["app-feedback-card"]], inputs: { feedback: "feedback" }, decls: 16, vars: 4, consts: [[1, "feedback-card"], [1, "fc-header"], [1, "fc-title"], [1, "fc-date"], [1, "fc-scores"], [1, "fc-score"], [1, "fc-verdict"], [1, "verdict-label"], [1, "verdict-val"], [1, "fc-comment"], [1, "fc-score-name"], [1, "stars"], [1, "star", 3, "filled", "empty"], [1, "fc-score-val"], [1, "star"]], template: function FeedbackCardComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275domElementStart(0, "div", 0)(1, "div", 1)(2, "div", 2);
+      \u0275\u0275text(3);
+      \u0275\u0275domElementEnd();
+      \u0275\u0275domElementStart(4, "div", 3);
+      \u0275\u0275text(5);
+      \u0275\u0275domElementEnd()();
+      \u0275\u0275domElementStart(6, "div", 4);
+      \u0275\u0275repeaterCreate(7, FeedbackCardComponent_For_8_Template, 8, 3, "div", 5, _forTrack03);
+      \u0275\u0275domElementEnd();
+      \u0275\u0275domElementStart(9, "div", 6)(10, "span", 7);
+      \u0275\u0275text(11, "Final Verdict");
+      \u0275\u0275domElementEnd();
+      \u0275\u0275domElementStart(12, "span", 8);
+      \u0275\u0275text(13);
+      \u0275\u0275domElementEnd()();
+      \u0275\u0275domElementStart(14, "div", 9);
+      \u0275\u0275text(15);
+      \u0275\u0275domElementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(3);
+      \u0275\u0275textInterpolate(ctx.feedback.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.feedback.date);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.feedback.scores);
+      \u0275\u0275advance(6);
+      \u0275\u0275textInterpolate(ctx.feedback.verdict);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate1('"', ctx.feedback.comment, '"');
+    }
+  }, dependencies: [CommonModule], styles: ['\n.feedback-card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  padding: 28px;\n  border: 1px solid var(--border);\n  position: relative;\n  overflow: hidden;\n}\n.feedback-card[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 4px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n}\n.fc-header[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n}\n.fc-title[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 0.95rem;\n  font-weight: 700;\n  color: var(--text);\n}\n.fc-date[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n}\n.fc-scores[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  margin-bottom: 20px;\n}\n.fc-score[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.fc-score-name[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  min-width: 130px;\n}\n.stars[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 3px;\n}\n.star[_ngcontent-%COMP%] {\n  font-size: 0.85rem;\n}\n.star.filled[_ngcontent-%COMP%] {\n  color: #fbbf24;\n}\n.star.empty[_ngcontent-%COMP%] {\n  color: var(--border);\n}\n.fc-score-val[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n  margin-left: 6px;\n}\n.fc-verdict[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 14px 16px;\n  background: #fef2f2;\n  border-radius: var(--radius-sm);\n  border: 1px solid #fecaca;\n  margin-bottom: 14px;\n}\n.verdict-label[_ngcontent-%COMP%] {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n  font-weight: 500;\n}\n.verdict-val[_ngcontent-%COMP%] {\n  font-weight: 700;\n  font-size: 0.88rem;\n  color: var(--red);\n}\n.fc-comment[_ngcontent-%COMP%] {\n  background: var(--bg-soft);\n  border-radius: var(--radius-sm);\n  padding: 12px 16px;\n  border-left: 3px solid var(--blue);\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  font-style: italic;\n  line-height: 1.5;\n}\n/*# sourceMappingURL=feedback-card.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FeedbackCardComponent, [{
+    type: Component,
+    args: [{ selector: "app-feedback-card", standalone: true, imports: [CommonModule], template: '<div class="feedback-card">\n  <div class="fc-header">\n    <div class="fc-title">{{ feedback.title }}</div>\n    <div class="fc-date">{{ feedback.date }}</div>\n  </div>\n  <div class="fc-scores">\n    @for (score of feedback.scores; track score.name) {\n    <div class="fc-score">\n      <span class="fc-score-name">{{ score.name }}</span>\n      <div class="stars">\n        @for (filled of getStars(score.rating, score.maxRating); track $index) {\n        <span class="star" [class.filled]="filled" [class.empty]="!filled"\n          >\u2605</span\n        >\n        }\n      </div>\n      <span class="fc-score-val"\n        >{{ score.rating }} / {{ score.maxRating }}</span\n      >\n    </div>\n    }\n  </div>\n  <div class="fc-verdict">\n    <span class="verdict-label">Final Verdict</span>\n    <span class="verdict-val">{{ feedback.verdict }}</span>\n  </div>\n  <div class="fc-comment">"{{ feedback.comment }}"</div>\n</div>\n', styles: ['/* apps/interview-ready-web/src/app/home/components/feedback-card/feedback-card.scss */\n.feedback-card {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  padding: 28px;\n  border: 1px solid var(--border);\n  position: relative;\n  overflow: hidden;\n}\n.feedback-card::before {\n  content: "";\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 4px;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n}\n.fc-header {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n}\n.fc-title {\n  font-family: "Sora", sans-serif;\n  font-size: 0.95rem;\n  font-weight: 700;\n  color: var(--text);\n}\n.fc-date {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n}\n.fc-scores {\n  display: flex;\n  flex-direction: column;\n  gap: 14px;\n  margin-bottom: 20px;\n}\n.fc-score {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.fc-score-name {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  min-width: 130px;\n}\n.stars {\n  display: flex;\n  gap: 3px;\n}\n.star {\n  font-size: 0.85rem;\n}\n.star.filled {\n  color: #fbbf24;\n}\n.star.empty {\n  color: var(--border);\n}\n.fc-score-val {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n  margin-left: 6px;\n}\n.fc-verdict {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 14px 16px;\n  background: #fef2f2;\n  border-radius: var(--radius-sm);\n  border: 1px solid #fecaca;\n  margin-bottom: 14px;\n}\n.verdict-label {\n  font-size: 0.78rem;\n  color: var(--text-muted);\n  font-weight: 500;\n}\n.verdict-val {\n  font-weight: 700;\n  font-size: 0.88rem;\n  color: var(--red);\n}\n.fc-comment {\n  background: var(--bg-soft);\n  border-radius: var(--radius-sm);\n  padding: 12px 16px;\n  border-left: 3px solid var(--blue);\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  font-style: italic;\n  line-height: 1.5;\n}\n/*# sourceMappingURL=feedback-card.css.map */\n'] }]
+  }], null, { feedback: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FeedbackCardComponent, { className: "FeedbackCardComponent", filePath: "apps/interview-ready-web/src/app/home/components/feedback-card/feedback-card.ts", lineNumber: 12 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/feedback/feedback.ts
+function FeedbackComponent_For_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 7);
+    \u0275\u0275element(1, "app-icon", 9);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const tag_r1 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("size", 14)("stroke", "currentColor")("strokeWidth", 2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", tag_r1, " ");
+  }
+}
+var FeedbackComponent = class _FeedbackComponent {
+  data;
+  static \u0275fac = function FeedbackComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FeedbackComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FeedbackComponent, selectors: [["app-feedback"]], inputs: { data: "data" }, decls: 13, vars: 4, consts: [["id", "feedback", 1, "feedback"], [1, "section-inner", "feedback-inner"], [1, "feedback-left"], [1, "section-tag"], [1, "section-title"], [1, "section-sub"], [1, "trust-tags"], [1, "trust-tag"], [3, "feedback"], ["name", "check-circle", 3, "size", "stroke", "strokeWidth"]], template: function FeedbackComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "section", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
+      \u0275\u0275text(4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(5, "h2", 4);
+      \u0275\u0275text(6);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "p", 5);
+      \u0275\u0275text(8);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(9, "div", 6);
+      \u0275\u0275repeaterCreate(10, FeedbackComponent_For_11_Template, 3, 4, "div", 7, \u0275\u0275repeaterTrackByIdentity);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275element(12, "app-feedback-card", 8);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate(ctx.data.tag);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.subtitle);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.data.trustTags);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("feedback", ctx.data.feedback);
+    }
+  }, dependencies: [CommonModule, IconComponent, FeedbackCardComponent], styles: ["\n.feedback[_ngcontent-%COMP%] {\n  background: var(--bg);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner[_ngcontent-%COMP%] {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title[_ngcontent-%COMP%] {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.feedback-inner[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 64px;\n  align-items: center;\n}\n.feedback-left[_ngcontent-%COMP%]   .section-sub[_ngcontent-%COMP%] {\n  margin-bottom: 24px;\n}\n.trust-tags[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 10px;\n  flex-wrap: wrap;\n  margin-top: 24px;\n}\n.trust-tag[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--bg-soft);\n  border: 1px solid var(--border);\n  border-radius: 100px;\n  padding: 6px 14px;\n  font-size: 0.82rem;\n  font-weight: 500;\n  color: var(--text-soft);\n}\n.trust-tag[_ngcontent-%COMP%]     app-icon {\n  color: var(--green);\n}\n@media (max-width: 768px) {\n  .feedback[_ngcontent-%COMP%] {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .feedback-inner[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n    gap: 40px;\n  }\n  .section-sub[_ngcontent-%COMP%] {\n    max-width: 100%;\n  }\n}\n/*# sourceMappingURL=feedback.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FeedbackComponent, [{
+    type: Component,
+    args: [{ selector: "app-feedback", standalone: true, imports: [CommonModule, IconComponent, FeedbackCardComponent], template: `<section class="feedback" id="feedback">
+  <div class="section-inner feedback-inner">
+    <div class="feedback-left">
+      <div class="section-tag">{{ data.tag }}</div>
+      <h2 class="section-title">{{ data.title }}</h2>
+      <p class="section-sub">{{ data.subtitle }}</p>
+      <div class="trust-tags">
+        @for (tag of data.trustTags; track tag) {
+        <div class="trust-tag">
+          <app-icon
+            name="check-circle"
+            [size]="14"
+            [stroke]="'currentColor'"
+            [strokeWidth]="2"
+          ></app-icon>
+          {{ tag }}
+        </div>
+        }
+      </div>
+    </div>
+
+    <app-feedback-card [feedback]="data.feedback"></app-feedback-card>
+  </div>
+</section>
+`, styles: ["/* apps/interview-ready-web/src/app/home/components/feedback/feedback.scss */\n.feedback {\n  background: var(--bg);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.feedback-inner {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 64px;\n  align-items: center;\n}\n.feedback-left .section-sub {\n  margin-bottom: 24px;\n}\n.trust-tags {\n  display: flex;\n  gap: 10px;\n  flex-wrap: wrap;\n  margin-top: 24px;\n}\n.trust-tag {\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--bg-soft);\n  border: 1px solid var(--border);\n  border-radius: 100px;\n  padding: 6px 14px;\n  font-size: 0.82rem;\n  font-weight: 500;\n  color: var(--text-soft);\n}\n.trust-tag ::ng-deep app-icon {\n  color: var(--green);\n}\n@media (max-width: 768px) {\n  .feedback {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .feedback-inner {\n    grid-template-columns: 1fr;\n    gap: 40px;\n  }\n  .section-sub {\n    max-width: 100%;\n  }\n}\n/*# sourceMappingURL=feedback.css.map */\n"] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FeedbackComponent, { className: "FeedbackComponent", filePath: "apps/interview-ready-web/src/app/home/components/feedback/feedback.ts", lineNumber: 14 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/price-card/price-card.ts
+var _forTrack04 = ($index, $item) => $item.text;
+function PriceCardComponent_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 1);
+    \u0275\u0275text(1, "\u26A1 Most Popular");
+    \u0275\u0275elementEnd();
+  }
+}
+function PriceCardComponent_For_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li");
+    \u0275\u0275element(1, "app-icon", 7);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const feature_r1 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("size", 16)("stroke", "currentColor")("strokeWidth", 2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", feature_r1.text, " ");
+  }
+}
+var PriceCardComponent = class _PriceCardComponent {
+  plan;
+  static \u0275fac = function PriceCardComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PriceCardComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PriceCardComponent, selectors: [["app-price-card"]], inputs: { plan: "plan" }, decls: 15, vars: 9, consts: [[1, "price-card"], [1, "popular-badge"], [1, "price-plan"], [1, "price-amount"], [1, "price-desc"], [1, "price-features"], [1, "btn-price"], ["name", "check-circle", 3, "size", "stroke", "strokeWidth"]], template: function PriceCardComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "div", 0);
+      \u0275\u0275conditionalCreate(1, PriceCardComponent_Conditional_1_Template, 2, 0, "div", 1);
+      \u0275\u0275elementStart(2, "div", 2);
+      \u0275\u0275text(3);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(4, "div", 3)(5, "span");
+      \u0275\u0275text(6, "\u20B9");
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(7);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(8, "div", 4);
+      \u0275\u0275text(9);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(10, "ul", 5);
+      \u0275\u0275repeaterCreate(11, PriceCardComponent_For_12_Template, 3, 4, "li", null, _forTrack04);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(13, "button", 6);
+      \u0275\u0275text(14);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275classProp("popular", ctx.plan.isPopular);
+      \u0275\u0275advance();
+      \u0275\u0275conditional(ctx.plan.isPopular ? 1 : -1);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.plan.name);
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate(ctx.plan.price);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.plan.description);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.plan.features);
+      \u0275\u0275advance(2);
+      \u0275\u0275classMap(ctx.plan.buttonType === "filled" ? "btn-price-filled" : "btn-price-outline");
+      \u0275\u0275advance();
+      \u0275\u0275textInterpolate1(" ", ctx.plan.buttonText, " ");
+    }
+  }, dependencies: [CommonModule, IconComponent], styles: ['\n.price-card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  padding: 32px;\n  box-shadow: var(--shadow);\n  border: 1.5px solid var(--border);\n  transition: all 0.3s;\n  position: relative;\n}\n.price-card[_ngcontent-%COMP%]:hover {\n  transform: translateY(-4px);\n  box-shadow: var(--shadow-lg);\n}\n.price-card.popular[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  box-shadow: var(--shadow-lg), 0 0 0 1px var(--blue);\n  transform: scale(1.04);\n}\n.price-card.popular[_ngcontent-%COMP%]:hover {\n  transform: scale(1.04) translateY(-4px);\n}\n.popular-badge[_ngcontent-%COMP%] {\n  position: absolute;\n  top: -12px;\n  left: 50%;\n  transform: translateX(-50%);\n  background: var(--blue);\n  color: white;\n  font-size: 0.72rem;\n  font-weight: 700;\n  padding: 4px 14px;\n  border-radius: 100px;\n  white-space: nowrap;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n.price-plan[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  font-weight: 700;\n  color: var(--text-muted);\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 10px;\n}\n.price-amount[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 2.4rem;\n  font-weight: 800;\n  color: var(--text);\n  line-height: 1;\n  margin-bottom: 4px;\n}\n.price-amount[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-size: 1.2rem;\n  font-weight: 500;\n}\n.price-desc[_ngcontent-%COMP%] {\n  font-size: 0.84rem;\n  color: var(--text-soft);\n  margin-bottom: 24px;\n  margin-top: 6px;\n}\n.price-features[_ngcontent-%COMP%] {\n  list-style: none;\n  margin-bottom: 28px;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.price-features[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.88rem;\n  color: var(--text-soft);\n}\n.price-features[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]     app-icon {\n  color: var(--green);\n  flex-shrink: 0;\n}\n.btn-price[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 12px;\n  border-radius: var(--radius-sm);\n  font-size: 0.95rem;\n  font-weight: 600;\n  cursor: pointer;\n  border: none;\n  font-family: "DM Sans", sans-serif;\n  transition: all 0.2s;\n}\n.btn-price-outline[_ngcontent-%COMP%] {\n  background: white;\n  color: var(--blue);\n  border: 1.5px solid var(--blue);\n}\n.btn-price-outline[_ngcontent-%COMP%]:hover {\n  background: var(--blue-light);\n}\n.btn-price-filled[_ngcontent-%COMP%] {\n  background: var(--blue);\n  color: white;\n  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);\n}\n.btn-price-filled[_ngcontent-%COMP%]:hover {\n  background: var(--blue-dark);\n}\n/*# sourceMappingURL=price-card.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PriceCardComponent, [{
+    type: Component,
+    args: [{ selector: "app-price-card", standalone: true, imports: [CommonModule, IconComponent], template: `<div class="price-card" [class.popular]="plan.isPopular">
+  @if (plan.isPopular) {
+  <div class="popular-badge">\u26A1 Most Popular</div>
+  }
+  <div class="price-plan">{{ plan.name }}</div>
+  <div class="price-amount"><span>\u20B9</span>{{ plan.price }}</div>
+  <div class="price-desc">{{ plan.description }}</div>
+  <ul class="price-features">
+    @for (feature of plan.features; track feature.text) {
+    <li>
+      <app-icon
+        name="check-circle"
+        [size]="16"
+        [stroke]="'currentColor'"
+        [strokeWidth]="2"
+      ></app-icon>
+      {{ feature.text }}
+    </li>
+    }
+  </ul>
+  <button
+    class="btn-price"
+    [class]="plan.buttonType === 'filled' ? 'btn-price-filled' : 'btn-price-outline'"
+  >
+    {{ plan.buttonText }}
+  </button>
+</div>
+`, styles: ['/* apps/interview-ready-web/src/app/home/components/price-card/price-card.scss */\n.price-card {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  padding: 32px;\n  box-shadow: var(--shadow);\n  border: 1.5px solid var(--border);\n  transition: all 0.3s;\n  position: relative;\n}\n.price-card:hover {\n  transform: translateY(-4px);\n  box-shadow: var(--shadow-lg);\n}\n.price-card.popular {\n  border-color: var(--blue);\n  box-shadow: var(--shadow-lg), 0 0 0 1px var(--blue);\n  transform: scale(1.04);\n}\n.price-card.popular:hover {\n  transform: scale(1.04) translateY(-4px);\n}\n.popular-badge {\n  position: absolute;\n  top: -12px;\n  left: 50%;\n  transform: translateX(-50%);\n  background: var(--blue);\n  color: white;\n  font-size: 0.72rem;\n  font-weight: 700;\n  padding: 4px 14px;\n  border-radius: 100px;\n  white-space: nowrap;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n.price-plan {\n  font-size: 0.82rem;\n  font-weight: 700;\n  color: var(--text-muted);\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 10px;\n}\n.price-amount {\n  font-family: "Sora", sans-serif;\n  font-size: 2.4rem;\n  font-weight: 800;\n  color: var(--text);\n  line-height: 1;\n  margin-bottom: 4px;\n}\n.price-amount span {\n  font-size: 1.2rem;\n  font-weight: 500;\n}\n.price-desc {\n  font-size: 0.84rem;\n  color: var(--text-soft);\n  margin-bottom: 24px;\n  margin-top: 6px;\n}\n.price-features {\n  list-style: none;\n  margin-bottom: 28px;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.price-features li {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.88rem;\n  color: var(--text-soft);\n}\n.price-features li ::ng-deep app-icon {\n  color: var(--green);\n  flex-shrink: 0;\n}\n.btn-price {\n  width: 100%;\n  padding: 12px;\n  border-radius: var(--radius-sm);\n  font-size: 0.95rem;\n  font-weight: 600;\n  cursor: pointer;\n  border: none;\n  font-family: "DM Sans", sans-serif;\n  transition: all 0.2s;\n}\n.btn-price-outline {\n  background: white;\n  color: var(--blue);\n  border: 1.5px solid var(--blue);\n}\n.btn-price-outline:hover {\n  background: var(--blue-light);\n}\n.btn-price-filled {\n  background: var(--blue);\n  color: white;\n  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);\n}\n.btn-price-filled:hover {\n  background: var(--blue-dark);\n}\n/*# sourceMappingURL=price-card.css.map */\n'] }]
+  }], null, { plan: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PriceCardComponent, { className: "PriceCardComponent", filePath: "apps/interview-ready-web/src/app/home/components/price-card/price-card.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/pricing/pricing.ts
+var _forTrack05 = ($index, $item) => $item.name;
+function PricingComponent_For_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "app-price-card", 7);
+  }
+  if (rf & 2) {
+    const plan_r1 = ctx.$implicit;
+    \u0275\u0275property("plan", plan_r1);
+  }
+}
+var PricingComponent = class _PricingComponent {
+  data;
+  static \u0275fac = function PricingComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PricingComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PricingComponent, selectors: [["app-pricing"]], inputs: { data: "data" }, decls: 12, vars: 3, consts: [["id", "pricing", 1, "pricing"], [1, "section-inner"], [2, "text-align", "center"], [1, "section-tag", 2, "justify-content", "center"], [1, "section-title"], [1, "section-sub", 2, "margin", "0 auto"], [1, "pricing-grid"], [3, "plan"]], template: function PricingComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "section", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
+      \u0275\u0275text(4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(5, "h2", 4);
+      \u0275\u0275text(6);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "p", 5);
+      \u0275\u0275text(8);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(9, "div", 6);
+      \u0275\u0275repeaterCreate(10, PricingComponent_For_11_Template, 1, 1, "app-price-card", 7, _forTrack05);
+      \u0275\u0275elementEnd()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate1(" ", ctx.data.tag, " ");
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.subtitle);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.data.plans);
+    }
+  }, dependencies: [CommonModule, PriceCardComponent], styles: ["\n.pricing[_ngcontent-%COMP%] {\n  background: var(--bg-soft);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner[_ngcontent-%COMP%] {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title[_ngcontent-%COMP%] {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.pricing-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n  align-items: start;\n}\n@media (max-width: 1024px) {\n  .pricing-grid[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n@media (max-width: 768px) {\n  .pricing[_ngcontent-%COMP%] {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .pricing-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n    max-width: 400px;\n    margin-inline: auto;\n  }\n  [_nghost-%COMP%]     .price-card.popular {\n    transform: scale(1);\n  }\n}\n/*# sourceMappingURL=pricing.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PricingComponent, [{
+    type: Component,
+    args: [{ selector: "app-pricing", standalone: true, imports: [CommonModule, PriceCardComponent], template: '<section class="pricing" id="pricing">\n  <div class="section-inner">\n    <div style="text-align: center">\n      <div class="section-tag" style="justify-content: center">\n        {{ data.tag }}\n      </div>\n      <h2 class="section-title">{{ data.title }}</h2>\n      <p class="section-sub" style="margin: 0 auto">{{ data.subtitle }}</p>\n    </div>\n\n    <div class="pricing-grid">\n      @for (plan of data.plans; track plan.name) {\n      <app-price-card [plan]="plan"></app-price-card>\n      }\n    </div>\n  </div>\n</section>\n', styles: ["/* apps/interview-ready-web/src/app/home/components/pricing/pricing.scss */\n.pricing {\n  background: var(--bg-soft);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.pricing-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n  align-items: start;\n}\n@media (max-width: 1024px) {\n  .pricing-grid {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n@media (max-width: 768px) {\n  .pricing {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .pricing-grid {\n    grid-template-columns: 1fr;\n    max-width: 400px;\n    margin-inline: auto;\n  }\n  :host ::ng-deep .price-card.popular {\n    transform: scale(1);\n  }\n}\n/*# sourceMappingURL=pricing.css.map */\n"] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PricingComponent, { className: "PricingComponent", filePath: "apps/interview-ready-web/src/app/home/components/pricing/pricing.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/why-card/why-card.ts
+var WhyCardComponent = class _WhyCardComponent {
+  card;
+  static \u0275fac = function WhyCardComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _WhyCardComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WhyCardComponent, selectors: [["app-why-card"]], inputs: { card: "card" }, decls: 7, vars: 6, consts: [[1, "why-card"], [1, "why-icon"], [3, "name", "size", "stroke", "strokeWidth"]], template: function WhyCardComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+      \u0275\u0275element(2, "app-icon", 2);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(3, "h3");
+      \u0275\u0275text(4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(5, "p");
+      \u0275\u0275text(6);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275property("name", ctx.card.icon)("size", 26)("stroke", "currentColor")("strokeWidth", 2);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.card.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.card.description);
+    }
+  }, dependencies: [CommonModule, IconComponent], styles: ["\n.why-card[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 28px 20px;\n  border-radius: var(--radius);\n  border: 1.5px solid var(--border);\n  background: var(--bg);\n  transition: all 0.3s;\n}\n.why-card[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue-mid);\n  background: var(--blue-light);\n  transform: translateY(-4px);\n  box-shadow: var(--shadow);\n}\n.why-card[_ngcontent-%COMP%]:hover   .why-icon[_ngcontent-%COMP%] {\n  background: var(--blue);\n}\n.why-card[_ngcontent-%COMP%]:hover   .why-icon[_ngcontent-%COMP%]     app-icon {\n  color: white;\n}\n.why-icon[_ngcontent-%COMP%] {\n  width: 56px;\n  height: 56px;\n  background: var(--blue-light);\n  border-radius: 14px;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 16px;\n  transition: all 0.3s;\n}\n.why-icon[_ngcontent-%COMP%]     app-icon {\n  color: var(--blue);\n  transition: all 0.3s;\n}\n.why-card[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  font-size: 0.95rem;\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.why-card[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: var(--text-soft);\n  line-height: 1.5;\n}\n/*# sourceMappingURL=why-card.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(WhyCardComponent, [{
+    type: Component,
+    args: [{ selector: "app-why-card", standalone: true, imports: [CommonModule, IconComponent], template: `<div class="why-card">
+  <div class="why-icon">
+    <app-icon
+      [name]="card.icon"
+      [size]="26"
+      [stroke]="'currentColor'"
+      [strokeWidth]="2"
+    ></app-icon>
+  </div>
+  <h3>{{ card.title }}</h3>
+  <p>{{ card.description }}</p>
+</div>
+`, styles: ["/* apps/interview-ready-web/src/app/home/components/why-card/why-card.scss */\n.why-card {\n  text-align: center;\n  padding: 28px 20px;\n  border-radius: var(--radius);\n  border: 1.5px solid var(--border);\n  background: var(--bg);\n  transition: all 0.3s;\n}\n.why-card:hover {\n  border-color: var(--blue-mid);\n  background: var(--blue-light);\n  transform: translateY(-4px);\n  box-shadow: var(--shadow);\n}\n.why-card:hover .why-icon {\n  background: var(--blue);\n}\n.why-card:hover .why-icon ::ng-deep app-icon {\n  color: white;\n}\n.why-icon {\n  width: 56px;\n  height: 56px;\n  background: var(--blue-light);\n  border-radius: 14px;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 16px;\n  transition: all 0.3s;\n}\n.why-icon ::ng-deep app-icon {\n  color: var(--blue);\n  transition: all 0.3s;\n}\n.why-card h3 {\n  font-size: 0.95rem;\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 8px;\n}\n.why-card p {\n  font-size: 0.82rem;\n  color: var(--text-soft);\n  line-height: 1.5;\n}\n/*# sourceMappingURL=why-card.css.map */\n"] }]
+  }], null, { card: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WhyCardComponent, { className: "WhyCardComponent", filePath: "apps/interview-ready-web/src/app/home/components/why-card/why-card.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/why-us/why-us.ts
+var _forTrack06 = ($index, $item) => $item.title;
+function WhyUsComponent_For_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "app-why-card", 7);
+  }
+  if (rf & 2) {
+    const card_r1 = ctx.$implicit;
+    \u0275\u0275property("card", card_r1);
+  }
+}
+var WhyUsComponent = class _WhyUsComponent {
+  data;
+  static \u0275fac = function WhyUsComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _WhyUsComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WhyUsComponent, selectors: [["app-why-us"]], inputs: { data: "data" }, decls: 12, vars: 3, consts: [[1, "why"], [1, "section-inner"], [2, "text-align", "center"], [1, "section-tag", 2, "justify-content", "center"], [1, "section-title"], [1, "section-sub", 2, "margin", "0 auto"], [1, "why-grid"], [3, "card"]], template: function WhyUsComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "section", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
+      \u0275\u0275text(4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(5, "h2", 4);
+      \u0275\u0275text(6);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "p", 5);
+      \u0275\u0275text(8);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(9, "div", 6);
+      \u0275\u0275repeaterCreate(10, WhyUsComponent_For_11_Template, 1, 1, "app-why-card", 7, _forTrack06);
+      \u0275\u0275elementEnd()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate1(" ", ctx.data.tag, " ");
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.subtitle);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.data.cards);
+    }
+  }, dependencies: [CommonModule, WhyCardComponent], styles: ["\n.why[_ngcontent-%COMP%] {\n  background: var(--bg);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner[_ngcontent-%COMP%] {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title[_ngcontent-%COMP%] {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.why-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n}\n@media (max-width: 1024px) {\n  .why-grid[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}\n@media (max-width: 768px) {\n  .why[_ngcontent-%COMP%] {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .why-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr 1fr;\n  }\n  .section-sub[_ngcontent-%COMP%] {\n    max-width: 100%;\n  }\n}\n@media (max-width: 480px) {\n  .why-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n}\n/*# sourceMappingURL=why-us.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(WhyUsComponent, [{
+    type: Component,
+    args: [{ selector: "app-why-us", standalone: true, imports: [CommonModule, WhyCardComponent], template: '<section class="why">\n  <div class="section-inner">\n    <div style="text-align: center">\n      <div class="section-tag" style="justify-content: center">\n        {{ data.tag }}\n      </div>\n      <h2 class="section-title">{{ data.title }}</h2>\n      <p class="section-sub" style="margin: 0 auto">{{ data.subtitle }}</p>\n    </div>\n\n    <div class="why-grid">\n      @for (card of data.cards; track card.title) {\n      <app-why-card [card]="card"></app-why-card>\n      }\n    </div>\n  </div>\n</section>\n', styles: ["/* apps/interview-ready-web/src/app/home/components/why-us/why-us.scss */\n.why {\n  background: var(--bg);\n  padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 80px);\n}\n.section-inner {\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.section-tag {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 0.78rem;\n  font-weight: 700;\n  padding: 5px 12px;\n  border-radius: 100px;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin-bottom: 14px;\n}\n.section-title {\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  font-weight: 800;\n  color: var(--text);\n  margin-bottom: 12px;\n}\n.section-sub {\n  font-size: 1rem;\n  color: var(--text-soft);\n  max-width: 480px;\n  line-height: 1.7;\n}\n.why-grid {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 24px;\n  margin-top: 48px;\n}\n@media (max-width: 1024px) {\n  .why-grid {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}\n@media (max-width: 768px) {\n  .why {\n    padding: clamp(48px, 6vw, 64px) clamp(16px, 4vw, 40px);\n  }\n  .why-grid {\n    grid-template-columns: 1fr 1fr;\n  }\n  .section-sub {\n    max-width: 100%;\n  }\n}\n@media (max-width: 480px) {\n  .why-grid {\n    grid-template-columns: 1fr;\n  }\n}\n/*# sourceMappingURL=why-us.css.map */\n"] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WhyUsComponent, { className: "WhyUsComponent", filePath: "apps/interview-ready-web/src/app/home/components/why-us/why-us.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/home/components/cta/cta.ts
+var CtaComponent = class _CtaComponent {
+  data;
+  static \u0275fac = function CtaComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _CtaComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CtaComponent, selectors: [["app-cta"]], inputs: { data: "data" }, decls: 8, vars: 6, consts: [[1, "cta-section"], ["href", "#pricing", 1, "btn-white"], ["name", "arrow-right", 3, "size", "stroke", "strokeWidth"]], template: function CtaComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "section", 0)(1, "h2");
+      \u0275\u0275text(2);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(3, "p");
+      \u0275\u0275text(4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(5, "a", 1);
+      \u0275\u0275text(6);
+      \u0275\u0275element(7, "app-icon", 2);
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.title);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.subtitle);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate1(" ", ctx.data.buttonText, " ");
+      \u0275\u0275advance();
+      \u0275\u0275property("size", 18)("stroke", "currentColor")("strokeWidth", 2);
+    }
+  }, dependencies: [CommonModule, IconComponent], styles: ['\n.cta-section[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      135deg,\n      #1e40af 0%,\n      #1d4ed8 50%,\n      #0ea5e9 100%);\n  padding: clamp(64px, 8vw, 96px) clamp(20px, 5vw, 80px);\n  text-align: center;\n  position: relative;\n  overflow: hidden;\n}\n.cta-section[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: -100px;\n  left: -100px;\n  width: 400px;\n  height: 400px;\n  background: rgba(255, 255, 255, 0.04);\n  border-radius: 50%;\n}\n.cta-section[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  bottom: -80px;\n  right: -80px;\n  width: 350px;\n  height: 350px;\n  background: rgba(255, 255, 255, 0.04);\n  border-radius: 50%;\n}\n.cta-section[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-size: clamp(1.8rem, 3.5vw, 2.8rem);\n  font-weight: 800;\n  color: white;\n  margin-bottom: 14px;\n  position: relative;\n  z-index: 1;\n}\n.cta-section[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  color: rgba(255, 255, 255, 0.75);\n  font-size: 1.05rem;\n  margin-bottom: 36px;\n  position: relative;\n  z-index: 1;\n}\n.btn-white[_ngcontent-%COMP%] {\n  background: white;\n  color: var(--blue);\n  padding: 16px 40px;\n  border-radius: 12px;\n  font-size: 1.05rem;\n  font-weight: 700;\n  text-decoration: none;\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  transition: all 0.2s;\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);\n  position: relative;\n  z-index: 1;\n}\n.btn-white[_ngcontent-%COMP%]:hover {\n  transform: translateY(-3px);\n  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);\n}\n/*# sourceMappingURL=cta.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CtaComponent, [{
+    type: Component,
+    args: [{ selector: "app-cta", standalone: true, imports: [CommonModule, IconComponent], template: `<section class="cta-section">
+  <h2>{{ data.title }}</h2>
+  <p>{{ data.subtitle }}</p>
+  <a href="#pricing" class="btn-white">
+    {{ data.buttonText }}
+    <app-icon
+      name="arrow-right"
+      [size]="18"
+      [stroke]="'currentColor'"
+      [strokeWidth]="2"
+    ></app-icon>
+  </a>
+</section>
+`, styles: ['/* apps/interview-ready-web/src/app/home/components/cta/cta.scss */\n.cta-section {\n  background:\n    linear-gradient(\n      135deg,\n      #1e40af 0%,\n      #1d4ed8 50%,\n      #0ea5e9 100%);\n  padding: clamp(64px, 8vw, 96px) clamp(20px, 5vw, 80px);\n  text-align: center;\n  position: relative;\n  overflow: hidden;\n}\n.cta-section::before {\n  content: "";\n  position: absolute;\n  top: -100px;\n  left: -100px;\n  width: 400px;\n  height: 400px;\n  background: rgba(255, 255, 255, 0.04);\n  border-radius: 50%;\n}\n.cta-section::after {\n  content: "";\n  position: absolute;\n  bottom: -80px;\n  right: -80px;\n  width: 350px;\n  height: 350px;\n  background: rgba(255, 255, 255, 0.04);\n  border-radius: 50%;\n}\n.cta-section h2 {\n  font-size: clamp(1.8rem, 3.5vw, 2.8rem);\n  font-weight: 800;\n  color: white;\n  margin-bottom: 14px;\n  position: relative;\n  z-index: 1;\n}\n.cta-section p {\n  color: rgba(255, 255, 255, 0.75);\n  font-size: 1.05rem;\n  margin-bottom: 36px;\n  position: relative;\n  z-index: 1;\n}\n.btn-white {\n  background: white;\n  color: var(--blue);\n  padding: 16px 40px;\n  border-radius: 12px;\n  font-size: 1.05rem;\n  font-weight: 700;\n  text-decoration: none;\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  transition: all 0.2s;\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);\n  position: relative;\n  z-index: 1;\n}\n.btn-white:hover {\n  transform: translateY(-3px);\n  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);\n}\n/*# sourceMappingURL=cta.css.map */\n'] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CtaComponent, { className: "CtaComponent", filePath: "apps/interview-ready-web/src/app/home/components/cta/cta.ts", lineNumber: 13 });
+})();
+
+// apps/interview-ready-web/src/app/common/enum.ts
+var HERO_DATA = {
+  badgeText: "Trusted by 3,000+ freshers",
+  title: "Practice Real Interviews.",
+  titleHighlight: "Get Job Ready.",
+  subtitle: "Mock interviews with real engineers at affordable pricing. Reduce anxiety, get feedback, and land your dream job.",
+  buttons: [
+    {
+      text: "Book Interview",
+      href: "#pricing",
+      variant: "primary",
+      icon: "calendar"
+    },
+    { text: "Learn More", href: "#how", variant: "ghost", icon: "arrow-right" }
+  ],
+  stats: [
+    { value: "3K+", label: "Students helped" },
+    { value: "500+", label: "Expert interviewers" },
+    { value: "4.8\u2605", label: "Avg rating" }
+  ]
+};
+var FOOTER_DATA = {
+  logoText: "InterviewReady",
+  tagline: "Helping freshers and early professionals land their dream job through honest, structured mock interviews.",
+  columns: [
+    {
+      title: "Product",
+      links: [
+        { label: "How It Works", href: "#how" },
+        { label: "Interview Types", href: "#types" },
+        { label: "Pricing", href: "#pricing" },
+        { label: "Sample Feedback", href: "#feedback" }
+      ]
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About Us", href: "#" },
+        { label: "Blog", href: "#" },
+        { label: "Become Interviewer", href: "#" },
+        { label: "Careers", href: "#" }
+      ]
+    },
+    {
+      title: "Contact",
+      links: [
+        {
+          label: "hello@interviewready.in",
+          href: "mailto:hello@interviewready.in"
+        },
+        { label: "+91 98765 43210", href: "#" },
+        { label: "Help Center", href: "#" },
+        { label: "Privacy Policy", href: "#" }
+      ]
+    }
+  ],
+  bottomText: "\xA9 2025 InterviewReady. All rights reserved.",
+  bottomSubtext: "Made with \u2665 for freshers across India"
+};
+var CTA_SECTION = {
+  title: "Start your first mock interview today",
+  subtitle: "Join thousands of freshers who've turned anxiety into confidence \u2728",
+  buttonText: "Book Now"
+};
+var WHY_US_SECTION = {
+  tag: "\u2726 Why Us",
+  title: "Why Students Love Us",
+  subtitle: "We built this for freshers, by people who've been in your shoes.",
+  cards: [
+    {
+      title: "Real Interviewers",
+      description: "Interview with verified engineers from top companies \u2014 not chatbots or actors.",
+      icon: "user"
+    },
+    {
+      title: "Affordable Pricing",
+      description: "Starting at just \u20B999. No EMIs, no subscriptions \u2014 pay only when you book.",
+      icon: "rupee"
+    },
+    {
+      title: "Structured Feedback",
+      description: "Get a clear scorecard \u2014 not vague comments. Know exactly what to improve next.",
+      icon: "check-circle"
+    },
+    {
+      title: "Confidence Building",
+      description: "A supportive environment that helps you grow \u2014 never judges you for not knowing.",
+      icon: "heart"
+    }
+  ]
+};
+var PRICING_SECTION = {
+  tag: "\u2726 Pricing",
+  title: "Simple, Affordable Pricing",
+  subtitle: "No hidden fees. Just one session away from clarity.",
+  plans: [
+    {
+      name: "Basic",
+      price: "\u20B999",
+      description: "Perfect for your first try",
+      features: [
+        { text: "30-min mock interview" },
+        { text: "Basic feedback report" },
+        { text: "1 interview type" }
+      ],
+      buttonText: "Get Started",
+      buttonType: "outline"
+    },
+    {
+      name: "Standard",
+      price: "\u20B9199",
+      description: "Best value for job seekers",
+      features: [
+        { text: "45-min mock interview" },
+        { text: "Detailed scorecard report" },
+        { text: "2 interview types" },
+        { text: "Chat follow-up (24 hrs)" }
+      ],
+      isPopular: true,
+      buttonText: "Book Now",
+      buttonType: "filled"
+    },
+    {
+      name: "Advanced",
+      price: "\u20B9299",
+      description: "Serious about getting placed",
+      features: [
+        { text: "60-min mock interview" },
+        { text: "Full report + recording" },
+        { text: "All interview types" },
+        { text: "Resume review included" },
+        { text: "Priority support" }
+      ],
+      buttonText: "Get Started",
+      buttonType: "outline"
+    }
+  ]
+};
+var FEEDBACK_SECTION = {
+  tag: "\u2726 Sample Feedback",
+  title: "See What Real Feedback Looks Like",
+  subtitle: "Every session ends with a structured, honest scorecard \u2014 so you know exactly what to work on.",
+  trustTags: ["No sugar-coating", "Actionable tips", "Track improvement"],
+  feedback: {
+    title: "Interview Feedback Report",
+    date: "March 28, 2025",
+    scores: [
+      { name: "Communication", rating: 4, maxRating: 5 },
+      { name: "Technical Depth", rating: 3, maxRating: 5 },
+      { name: "Problem Solving", rating: 4, maxRating: 5 }
+    ],
+    verdict: "\u2691 No Hire (yet!)",
+    comment: "Good logical thinking and a decent grasp of fundamentals. Needs better clarity when explaining approach \u2014 try thinking out loud more. Work on edge cases."
+  }
+};
+var INTERVIEW_TYPES = {
+  tag: "\u2726 Interview Types",
+  title: "Choose Your Interview Type",
+  subtitle: "Practice in the areas that matter most to your career journey.",
+  types: [
+    {
+      type: "dsa",
+      title: "DSA Interview",
+      description: "Practice coding problems with live hints, guidance, and a detailed code review from engineers at top tech companies.",
+      icon: "code"
+    },
+    {
+      type: "hr",
+      title: "HR Interview",
+      description: "Improve your communication, storytelling, and behavioral answers. Learn how to present yourself with confidence.",
+      icon: "users"
+    },
+    {
+      type: "resume",
+      title: "Resume Review",
+      description: "Get actionable feedback from hiring managers on how to make your resume stand out and get past ATS filters.",
+      icon: "document"
+    }
+  ]
+};
+var HOW_IT_WORKS = {
+  tag: "\u2726 Process",
+  title: "How It Works",
+  subtitle: "Four simple steps to get interview-ready and confident in no time.",
+  steps: [
+    {
+      title: "1. Book a Slot",
+      description: "Pick a time that works for you from available slots",
+      icon: "calendar"
+    },
+    {
+      title: "2. Attend Interview",
+      description: "Join a live session with a real industry professional",
+      icon: "video"
+    },
+    {
+      title: "3. Get Feedback",
+      description: "Receive detailed written feedback within 24 hours",
+      icon: "feedback"
+    },
+    {
+      title: "4. Improve",
+      description: "Track your progress and rebook to keep growing",
+      icon: "chart"
+    }
+  ]
+};
+
+// apps/interview-ready-web/src/app/home/home.ts
+var HomeComponent = class _HomeComponent {
+  heroData = HERO_DATA;
+  howItWorksData = HOW_IT_WORKS;
+  interviewTypesData = INTERVIEW_TYPES;
+  feedbackData = FEEDBACK_SECTION;
+  pricingData = PRICING_SECTION;
+  whyUsData = WHY_US_SECTION;
+  ctaData = CTA_SECTION;
+  static \u0275fac = function HomeComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _HomeComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HomeComponent, selectors: [["app-home"]], decls: 7, vars: 7, consts: [[3, "data"]], template: function HomeComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275element(0, "app-hero", 0)(1, "app-how-it-works", 0)(2, "app-interview-types", 0)(3, "app-feedback", 0)(4, "app-pricing", 0)(5, "app-why-us", 0)(6, "app-cta", 0);
+    }
+    if (rf & 2) {
+      \u0275\u0275property("data", ctx.heroData);
+      \u0275\u0275advance();
+      \u0275\u0275property("data", ctx.howItWorksData);
+      \u0275\u0275advance();
+      \u0275\u0275property("data", ctx.interviewTypesData);
+      \u0275\u0275advance();
+      \u0275\u0275property("data", ctx.feedbackData);
+      \u0275\u0275advance();
+      \u0275\u0275property("data", ctx.pricingData);
+      \u0275\u0275advance();
+      \u0275\u0275property("data", ctx.whyUsData);
+      \u0275\u0275advance();
+      \u0275\u0275property("data", ctx.ctaData);
+    }
+  }, dependencies: [
+    CommonModule,
+    HeroComponent,
+    HowItWorksComponent,
+    InterviewTypesComponent,
+    FeedbackComponent,
+    PricingComponent,
+    WhyUsComponent,
+    CtaComponent
+  ], styles: ["\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=home.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HomeComponent, [{
+    type: Component,
+    args: [{ selector: "app-home", standalone: true, imports: [
+      CommonModule,
+      HeroComponent,
+      HowItWorksComponent,
+      InterviewTypesComponent,
+      FeedbackComponent,
+      PricingComponent,
+      WhyUsComponent,
+      CtaComponent
+    ], template: '<app-hero [data]="heroData"></app-hero>\n<app-how-it-works [data]="howItWorksData"></app-how-it-works>\n<app-interview-types [data]="interviewTypesData"></app-interview-types>\n<app-feedback [data]="feedbackData"></app-feedback>\n<app-pricing [data]="pricingData"></app-pricing>\n<app-why-us [data]="whyUsData"></app-why-us>\n<app-cta [data]="ctaData"></app-cta>\n', styles: ["/* apps/interview-ready-web/src/app/home/home.scss */\n:host {\n  display: block;\n}\n/*# sourceMappingURL=home.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HomeComponent, { className: "HomeComponent", filePath: "apps/interview-ready-web/src/app/home/home.ts", lineNumber: 43 });
 })();
 
 // apps/interview-ready-web/src/app/app.routes.ts
 var appRoutes = [
   {
+    path: "",
+    component: HomeComponent,
+    data: { showNavbar: true }
+  },
+  {
     path: "login",
-    component: AuthComponent
+    component: AuthComponent,
+    data: { showNavbar: false }
+  },
+  {
+    path: "**",
+    redirectTo: ""
   }
 ];
 
@@ -41559,29 +43397,181 @@ var Navbar = class _Navbar {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Navbar, { className: "Navbar", filePath: "apps/interview-ready-web/src/app/navbar/index.ts", lineNumber: 11 });
 })();
 
+// apps/interview-ready-web/src/app/footer/footer.ts
+var _forTrack07 = ($index, $item) => $item.title;
+var _forTrack12 = ($index, $item) => $item.label;
+function FooterComponent_For_11_For_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li")(1, "a", 7);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const link_r1 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("href", link_r1.href, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(link_r1.label);
+  }
+}
+function FooterComponent_For_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 5)(1, "h4");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "ul");
+    \u0275\u0275repeaterCreate(4, FooterComponent_For_11_For_5_Template, 3, 2, "li", null, _forTrack12);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const column_r2 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(column_r2.title);
+    \u0275\u0275advance(2);
+    \u0275\u0275repeater(column_r2.links);
+  }
+}
+var FooterComponent = class _FooterComponent {
+  data;
+  static \u0275fac = function FooterComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _FooterComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FooterComponent, selectors: [["app-footer"]], inputs: { data: "data" }, decls: 17, vars: 6, consts: [[1, "footer-grid"], ["href", "#", 1, "footer-logo"], [1, "footer-logo-icon"], ["width", "18", "height", "18", "name", "pencil", 3, "stroke", "strokeWidth"], [1, "footer-tagline"], [1, "footer-col"], [1, "footer-bottom"], [3, "href"]], template: function FooterComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "footer")(1, "div", 0)(2, "div")(3, "a", 1)(4, "div", 2);
+      \u0275\u0275element(5, "app-icon", 3);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "span");
+      \u0275\u0275text(7);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(8, "p", 4);
+      \u0275\u0275text(9);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275repeaterCreate(10, FooterComponent_For_11_Template, 6, 1, "div", 5, _forTrack07);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(12, "div", 6)(13, "span");
+      \u0275\u0275text(14);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(15, "span");
+      \u0275\u0275text(16);
+      \u0275\u0275elementEnd()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(5);
+      \u0275\u0275property("stroke", "white")("strokeWidth", 2.5);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.logoText);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.tagline);
+      \u0275\u0275advance();
+      \u0275\u0275repeater(ctx.data.columns);
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate(ctx.data.bottomText);
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.data.bottomSubtext);
+    }
+  }, dependencies: [CommonModule, IconComponent], styles: ['\nfooter[_ngcontent-%COMP%] {\n  background: #0f172a;\n  padding: clamp(48px, 6vw, 72px) clamp(20px, 5vw, 80px) 32px;\n  color: #94a3b8;\n}\n.footer-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1.5fr 1fr 1fr 1fr;\n  gap: 40px;\n  max-width: 1200px;\n  margin: 0 auto 48px;\n}\n.footer-logo[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  margin-bottom: 14px;\n  text-decoration: none;\n}\n.footer-logo-icon[_ngcontent-%COMP%] {\n  width: 36px;\n  height: 36px;\n  background: var(--blue);\n  border-radius: 10px;\n  display: grid;\n  place-items: center;\n}\n.footer-logo[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1rem;\n  color: white;\n}\n.footer-tagline[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  line-height: 1.6;\n  max-width: 240px;\n}\n.footer-col[_ngcontent-%COMP%]   h4[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 0.88rem;\n  font-weight: 700;\n  color: white;\n  margin-bottom: 16px;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n}\n.footer-col[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%] {\n  list-style: none;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.footer-col[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: #94a3b8;\n  text-decoration: none;\n  font-size: 0.88rem;\n  transition: color 0.2s;\n}\n.footer-col[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  color: white;\n}\n.footer-bottom[_ngcontent-%COMP%] {\n  border-top: 1px solid #1e293b;\n  padding-top: 24px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  max-width: 1200px;\n  margin: 0 auto;\n  font-size: 0.82rem;\n  flex-wrap: wrap;\n  gap: 12px;\n}\n@media (max-width: 1024px) {\n  .footer-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n@media (max-width: 768px) {\n  .footer-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n@media (max-width: 480px) {\n  .footer-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n}\n/*# sourceMappingURL=footer.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FooterComponent, [{
+    type: Component,
+    args: [{ selector: "app-footer", standalone: true, imports: [CommonModule, IconComponent], template: `<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="footer-logo">
+        <div class="footer-logo-icon">
+          <app-icon
+            width="18"
+            height="18"
+            [stroke]="'white'"
+            [strokeWidth]="2.5"
+            name="pencil"
+          ></app-icon>
+        </div>
+        <span>{{ data.logoText }}</span>
+      </a>
+      <p class="footer-tagline">{{ data.tagline }}</p>
+    </div>
+
+    @for (column of data.columns; track column.title) {
+    <div class="footer-col">
+      <h4>{{ column.title }}</h4>
+      <ul>
+        @for (link of column.links; track link.label) {
+        <li>
+          <a [href]="link.href">{{ link.label }}</a>
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+
+  <div class="footer-bottom">
+    <span>{{ data.bottomText }}</span>
+    <span>{{ data.bottomSubtext }}</span>
+  </div>
+</footer>
+`, styles: ['/* apps/interview-ready-web/src/app/footer/footer.scss */\nfooter {\n  background: #0f172a;\n  padding: clamp(48px, 6vw, 72px) clamp(20px, 5vw, 80px) 32px;\n  color: #94a3b8;\n}\n.footer-grid {\n  display: grid;\n  grid-template-columns: 1.5fr 1fr 1fr 1fr;\n  gap: 40px;\n  max-width: 1200px;\n  margin: 0 auto 48px;\n}\n.footer-logo {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  margin-bottom: 14px;\n  text-decoration: none;\n}\n.footer-logo-icon {\n  width: 36px;\n  height: 36px;\n  background: var(--blue);\n  border-radius: 10px;\n  display: grid;\n  place-items: center;\n}\n.footer-logo span {\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1rem;\n  color: white;\n}\n.footer-tagline {\n  font-size: 0.88rem;\n  line-height: 1.6;\n  max-width: 240px;\n}\n.footer-col h4 {\n  font-family: "Sora", sans-serif;\n  font-size: 0.88rem;\n  font-weight: 700;\n  color: white;\n  margin-bottom: 16px;\n  text-transform: uppercase;\n  letter-spacing: 0.04em;\n}\n.footer-col ul {\n  list-style: none;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.footer-col a {\n  color: #94a3b8;\n  text-decoration: none;\n  font-size: 0.88rem;\n  transition: color 0.2s;\n}\n.footer-col a:hover {\n  color: white;\n}\n.footer-bottom {\n  border-top: 1px solid #1e293b;\n  padding-top: 24px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  max-width: 1200px;\n  margin: 0 auto;\n  font-size: 0.82rem;\n  flex-wrap: wrap;\n  gap: 12px;\n}\n@media (max-width: 1024px) {\n  .footer-grid {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n@media (max-width: 768px) {\n  .footer-grid {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n@media (max-width: 480px) {\n  .footer-grid {\n    grid-template-columns: 1fr;\n  }\n}\n/*# sourceMappingURL=footer.css.map */\n'] }]
+  }], null, { data: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FooterComponent, { className: "FooterComponent", filePath: "apps/interview-ready-web/src/app/footer/footer.ts", lineNumber: 13 });
+})();
+
 // apps/interview-ready-web/src/app/app.ts
+function App_app_navbar_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "app-navbar");
+  }
+}
+function App_app_footer_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "app-footer", 3);
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("data", ctx_r0.footerData);
+  }
+}
 var App = class _App {
-  title = "interview-ready-web";
+  router = inject2(Router);
+  showNavbar = true;
+  footerData = FOOTER_DATA;
+  ngOnInit() {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
+      const currentRoute = this.router.routerState.snapshot.root.firstChild;
+      this.showNavbar = currentRoute?.data["showNavbar"] ?? true;
+    });
+  }
   static \u0275fac = function App_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _App)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _App, selectors: [["app-root"]], decls: 3, vars: 0, consts: [["id", "main-content"]], template: function App_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _App, selectors: [["app-root"]], decls: 4, vars: 2, consts: [[4, "ngIf"], ["id", "main-content"], [3, "data", 4, "ngIf"], [3, "data"]], template: function App_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275element(0, "app-navbar");
-      \u0275\u0275elementStart(1, "main", 0);
+      \u0275\u0275template(0, App_app_navbar_0_Template, 1, 0, "app-navbar", 0);
+      \u0275\u0275elementStart(1, "main", 1);
       \u0275\u0275element(2, "router-outlet");
       \u0275\u0275elementEnd();
+      \u0275\u0275template(3, App_app_footer_3_Template, 1, 1, "app-footer", 2);
     }
-  }, dependencies: [Navbar, RouterModule, RouterOutlet], encapsulation: 2 });
+    if (rf & 2) {
+      \u0275\u0275property("ngIf", ctx.showNavbar);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("ngIf", ctx.showNavbar);
+    }
+  }, dependencies: [Navbar, RouterModule, RouterOutlet, CommonModule, NgIf, FooterComponent], encapsulation: 2 });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(App, [{
     type: Component,
-    args: [{ imports: [Navbar, RouterModule], selector: "app-root", template: '<app-navbar></app-navbar>\n<main id="main-content">\n  <router-outlet></router-outlet>\n</main>\n' }]
+    args: [{ imports: [Navbar, RouterModule, CommonModule, FooterComponent], selector: "app-root", template: '<app-navbar *ngIf="showNavbar"></app-navbar>\n<main id="main-content">\n  <router-outlet></router-outlet>\n</main>\n<app-footer *ngIf="showNavbar" [data]="footerData"></app-footer>\n' }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(App, { className: "App", filePath: "apps/interview-ready-web/src/app/app.ts", lineNumber: 11 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(App, { className: "App", filePath: "apps/interview-ready-web/src/app/app.ts", lineNumber: 15 });
 })();
 
 // apps/interview-ready-web/src/main.ts
