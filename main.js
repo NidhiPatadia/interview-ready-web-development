@@ -39434,6 +39434,7 @@ var IconComponent = class _IconComponent {
   stroke = "currentColor";
   strokeWidth = 2;
   class = "";
+  strokeLinecap = "butt";
   iconPaths = {
     pencil: "M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z",
     video: "M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z",
@@ -39460,7 +39461,11 @@ var IconComponent = class _IconComponent {
     document: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
     rupee: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
     heart: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
-    clock: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+    clock: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+    briefcase: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    upload: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12",
+    link: "M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1",
+    building: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
   };
   get paths() {
     return this.iconPaths[this.name] || "";
@@ -39468,7 +39473,7 @@ var IconComponent = class _IconComponent {
   static \u0275fac = function IconComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _IconComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["app-icon"]], inputs: { name: "name", size: "size", viewBox: "viewBox", fill: "fill", stroke: "stroke", strokeWidth: "strokeWidth", class: "class" }, decls: 2, vars: 11, template: function IconComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["app-icon"]], inputs: { name: "name", size: "size", viewBox: "viewBox", fill: "fill", stroke: "stroke", strokeWidth: "strokeWidth", class: "class", strokeLinecap: "strokeLinecap" }, decls: 2, vars: 12, template: function IconComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275namespaceSVG();
       \u0275\u0275domElementStart(0, "svg");
@@ -39478,7 +39483,7 @@ var IconComponent = class _IconComponent {
     if (rf & 2) {
       \u0275\u0275classMap(ctx.class);
       \u0275\u0275styleProp("width", ctx.size, "px")("height", ctx.size, "px");
-      \u0275\u0275attribute("viewBox", ctx.viewBox)("fill", ctx.fill)("stroke", ctx.stroke)("stroke-width", ctx.strokeWidth);
+      \u0275\u0275attribute("viewBox", ctx.viewBox)("fill", ctx.fill)("stroke", ctx.stroke)("stroke-width", ctx.strokeWidth)("stroke-linecap", ctx.strokeLinecap);
       \u0275\u0275advance();
       \u0275\u0275attribute("d", ctx.paths);
     }
@@ -39493,6 +39498,7 @@ var IconComponent = class _IconComponent {
       [attr.fill]="fill"
       [attr.stroke]="stroke"
       [attr.stroke-width]="strokeWidth"
+      [attr.stroke-linecap]="strokeLinecap"
       [class]="class"
       [style.width.px]="size"
       [style.height.px]="size"
@@ -39514,10 +39520,12 @@ var IconComponent = class _IconComponent {
     type: Input
   }], class: [{
     type: Input
+  }], strokeLinecap: [{
+    type: Input
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "apps/interview-ready-web/src/app/shared/icons/icon.ts", lineNumber: 31 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "apps/interview-ready-web/src/app/shared/icons/icon.ts", lineNumber: 32 });
 })();
 
 // apps/interview-ready-web/src/app/auth/auth.ts
@@ -40504,7 +40512,7 @@ var AuthComponent = class _AuthComponent {
   static \u0275fac = function AuthComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _AuthComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AuthComponent, selectors: [["app-auth"]], decls: 70, vars: 23, consts: [[1, "progress-bar"], [1, "auth-wrapper"], [1, "left-panel"], ["routerLink", "/", 1, "panel-logo"], [1, "panel-logo-icon"], ["name", "pencil", "stroke", "white", "strokeWidth", "2.5", 3, "size"], [1, "panel-illustration"], ["viewBox", "0 0 360 280", "fill", "none", "xmlns", "http://www.w3.org/2000/svg", 1, "ill-scene"], ["x", "40", "y", "210", "width", "280", "height", "12", "rx", "6", "fill", "rgba(255,255,255,0.15)"], ["x", "90", "y", "155", "width", "180", "height", "58", "rx", "8", "fill", "rgba(255,255,255,0.18)"], ["x", "95", "y", "160", "width", "170", "height", "46", "rx", "5", "fill", "rgba(15,23,42,0.6)"], ["x", "99", "y", "163", "width", "162", "height", "40", "rx", "4", "fill", "rgba(37,99,235,0.3)"], ["x", "108", "y", "170", "width", "60", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.8)"], ["x", "108", "y", "177", "width", "90", "height", "3", "rx", "1.5", "fill", "rgba(52,211,153,0.6)"], ["x", "108", "y", "184", "width", "45", "height", "3", "rx", "1.5", "fill", "rgba(251,191,36,0.6)"], ["x", "108", "y", "191", "width", "80", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.6)"], ["x", "108", "y", "198", "width", "35", "height", "3", "rx", "1.5", "fill", "rgba(248,113,113,0.6)"], ["x", "90", "y", "210", "width", "180", "height", "5", "rx", "2.5", "fill", "rgba(255,255,255,0.1)"], ["cx", "180", "cy", "145", "rx", "24", "ry", "18", "fill", "rgba(255,255,255,0.15)"], ["cx", "180", "cy", "108", "r", "20", "fill", "rgba(255,255,255,0.2)"], ["cx", "174", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["cx", "186", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["d", "M174 114 Q180 118 186 114", "stroke", "rgba(255,255,255,0.6)", "stroke-width", "1.5", "stroke-linecap", "round"], ["d", "M162 100 Q165 88 180 87 Q195 88 198 100", "fill", "rgba(255,255,255,0.3)"], ["d", "M156 145 Q130 165 125 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["d", "M204 145 Q230 165 235 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["cx", "120", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["cx", "240", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["x", "155", "y", "160", "width", "50", "height", "6", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "162", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "192", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["cx", "58", "cy", "60", "r", "3", "fill", "rgba(255,255,255,0.4)"], ["cx", "298", "cy", "80", "r", "2", "fill", "rgba(255,255,255,0.3)"], ["cx", "72", "cy", "180", "r", "2", "fill", "rgba(255,255,255,0.25)"], ["cx", "312", "cy", "160", "r", "3", "fill", "rgba(255,255,255,0.35)"], ["cx", "50", "cy", "240", "r", "25", "stroke", "rgba(255,255,255,0.08)", "stroke-width", "2", "fill", "none"], ["cx", "318", "cy", "50", "r", "30", "stroke", "rgba(255,255,255,0.07)", "stroke-width", "2", "fill", "none"], [1, "float-cards"], [1, "fc", "fc-1"], ["name", "video", 3, "size"], [1, "fc", "fc-2"], ["name", "check-circle", 3, "size"], [1, "fc", "fc-3"], ["name", "chart", 3, "size"], [1, "panel-text"], [3, "innerHTML"], [1, "panel-dots"], [1, "panel-dot"], [1, "right-panel"], [1, "auth-box"], ["class", "auth-tabs", 4, "ngIf"], ["id", "loginState", 4, "ngIf"], ["id", "forgotState", 4, "ngIf"], ["id", "signupState", 4, "ngIf"], ["id", "successState", "class", "success-state", 4, "ngIf"], ["class", "switch-mode", 4, "ngIf"], [1, "toast"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24"], ["d", "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"], [1, "auth-tabs"], [1, "auth-tab", 3, "click"], ["id", "loginState"], [1, "auth-heading"], [1, "social-btns"], [1, "social-btn", "btn-google", 3, "click"], ["viewBox", "0 0 24 24", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z", "fill", "#4285F4"], ["d", "M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z", "fill", "#34A853"], ["d", "M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z", "fill", "#FBBC05"], ["d", "M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z", "fill", "#EA4335"], [1, "divider"], [1, "divider-line"], [1, "divider-text"], ["novalidate", "", 1, "auth-form", 3, "ngSubmit", "formGroup"], [1, "field"], ["for", "loginEmail"], [1, "input-wrap"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24", "aria-hidden", "true"], ["d", "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"], ["type", "email", "id", "loginEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "loginEmail-error", "aria-invalid", "false"], ["id", "loginEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "loginPw"], ["x", "3", "y", "11", "width", "18", "height", "11", "rx", "2", "ry", "2"], ["d", "M7 11V7a5 5 0 0110 0v4"], ["type", "password", "id", "loginPw", "formControlName", "password", "placeholder", "Your password", "autocomplete", "current-password", "aria-describedby", "loginPw-error"], ["type", "button", "aria-label", "Toggle password visibility", 1, "pw-toggle", 3, "click"], ["d", "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"], ["cx", "12", "cy", "12", "r", "3"], ["id", "loginPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "field-row"], [1, "checkbox-label"], ["type", "checkbox", "formControlName", "rememberMe", "aria-describedby", "remember-help"], [1, "checkmark"], ["href", "#", 1, "forgot-link", 3, "click"], ["type", "submit", 1, "btn-submit", 3, "disabled"], [4, "ngIf"], ["class", "loading-text", 4, "ngIf"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24", 4, "ngIf"], ["class", "spinner", "aria-hidden", "true", 4, "ngIf"], ["id", "loginEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "loginPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], [1, "loading-text"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24"], ["d", "M17 8l4 4m0 0l-4 4m4-4H3"], ["aria-hidden", "true", 1, "spinner"], ["id", "forgotState"], [1, "back-link", 3, "click"], ["d", "M19 12H5M12 5l-7 7 7 7"], ["for", "forgotEmail"], ["type", "email", "id", "forgotEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "forgotEmail-error"], ["id", "forgotEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "forgotEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupState"], ["viewBox", "0 0 24 24", "fill", "none"], ["for", "signupName"], ["d", "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"], ["type", "text", "id", "signupName", "formControlName", "name", "placeholder", "Priya Kumar", "autocomplete", "name", "aria-describedby", "signupName-error"], ["id", "signupName-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupEmail"], ["type", "email", "id", "signupEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "signupEmail-error"], ["id", "signupEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupPw"], ["type", "password", "id", "signupPw", "formControlName", "password", "placeholder", "At least 8 characters", "autocomplete", "new-password", "aria-describedby", "signupPw-error pw-requirements", 3, "input"], [1, "pw-strength"], [1, "pw-bar"], ["id", "signupPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "pw-requirements", "class", "pw-requirements", 4, "ngIf"], ["for", "confirmPassword"], ["type", "password", "id", "confirmPassword", "formControlName", "confirmPassword", "placeholder", "Confirm your password", "autocomplete", "new-password", "aria-describedby", "confirmPassword-error"], ["id", "confirmPassword-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "terms-note"], ["href", "#"], ["id", "signupName-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "pw-requirements", 1, "pw-requirements"], [1, "requirement"], [1, "req-icon"], ["id", "confirmPassword-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "successState", 1, "success-state"], [1, "success-icon"], [1, "switch-mode"], [3, "click"]], template: function AuthComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AuthComponent, selectors: [["app-auth"]], decls: 70, vars: 24, consts: [[1, "progress-bar"], [1, "auth-wrapper"], [1, "left-panel"], ["routerLink", "/", 1, "panel-logo"], [1, "panel-logo-icon"], ["name", "pencil", "stroke", "white", 3, "size", "strokeWidth"], [1, "panel-illustration"], ["viewBox", "0 0 360 280", "fill", "none", "xmlns", "http://www.w3.org/2000/svg", 1, "ill-scene"], ["x", "40", "y", "210", "width", "280", "height", "12", "rx", "6", "fill", "rgba(255,255,255,0.15)"], ["x", "90", "y", "155", "width", "180", "height", "58", "rx", "8", "fill", "rgba(255,255,255,0.18)"], ["x", "95", "y", "160", "width", "170", "height", "46", "rx", "5", "fill", "rgba(15,23,42,0.6)"], ["x", "99", "y", "163", "width", "162", "height", "40", "rx", "4", "fill", "rgba(37,99,235,0.3)"], ["x", "108", "y", "170", "width", "60", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.8)"], ["x", "108", "y", "177", "width", "90", "height", "3", "rx", "1.5", "fill", "rgba(52,211,153,0.6)"], ["x", "108", "y", "184", "width", "45", "height", "3", "rx", "1.5", "fill", "rgba(251,191,36,0.6)"], ["x", "108", "y", "191", "width", "80", "height", "3", "rx", "1.5", "fill", "rgba(96,165,250,0.6)"], ["x", "108", "y", "198", "width", "35", "height", "3", "rx", "1.5", "fill", "rgba(248,113,113,0.6)"], ["x", "90", "y", "210", "width", "180", "height", "5", "rx", "2.5", "fill", "rgba(255,255,255,0.1)"], ["cx", "180", "cy", "145", "rx", "24", "ry", "18", "fill", "rgba(255,255,255,0.15)"], ["cx", "180", "cy", "108", "r", "20", "fill", "rgba(255,255,255,0.2)"], ["cx", "174", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["cx", "186", "cy", "106", "r", "2.5", "fill", "rgba(255,255,255,0.6)"], ["d", "M174 114 Q180 118 186 114", "stroke", "rgba(255,255,255,0.6)", "stroke-width", "1.5", "stroke-linecap", "round"], ["d", "M162 100 Q165 88 180 87 Q195 88 198 100", "fill", "rgba(255,255,255,0.3)"], ["d", "M156 145 Q130 165 125 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["d", "M204 145 Q230 165 235 185", "stroke", "rgba(255,255,255,0.2)", "stroke-width", "12", "stroke-linecap", "round"], ["cx", "120", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["cx", "240", "cy", "190", "rx", "18", "ry", "10", "fill", "rgba(255,255,255,0.15)"], ["x", "155", "y", "160", "width", "50", "height", "6", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "162", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["x", "192", "y", "165", "width", "6", "height", "45", "rx", "3", "fill", "rgba(255,255,255,0.1)"], ["cx", "58", "cy", "60", "r", "3", "fill", "rgba(255,255,255,0.4)"], ["cx", "298", "cy", "80", "r", "2", "fill", "rgba(255,255,255,0.3)"], ["cx", "72", "cy", "180", "r", "2", "fill", "rgba(255,255,255,0.25)"], ["cx", "312", "cy", "160", "r", "3", "fill", "rgba(255,255,255,0.35)"], ["cx", "50", "cy", "240", "r", "25", "stroke", "rgba(255,255,255,0.08)", "stroke-width", "2", "fill", "none"], ["cx", "318", "cy", "50", "r", "30", "stroke", "rgba(255,255,255,0.07)", "stroke-width", "2", "fill", "none"], [1, "float-cards"], [1, "fc", "fc-1"], ["name", "video", 3, "size"], [1, "fc", "fc-2"], ["name", "check-circle", 3, "size"], [1, "fc", "fc-3"], ["name", "chart", 3, "size"], [1, "panel-text"], [3, "innerHTML"], [1, "panel-dots"], [1, "panel-dot"], [1, "right-panel"], [1, "auth-box"], ["class", "auth-tabs", 4, "ngIf"], ["id", "loginState", 4, "ngIf"], ["id", "forgotState", 4, "ngIf"], ["id", "signupState", 4, "ngIf"], ["id", "successState", "class", "success-state", 4, "ngIf"], ["class", "switch-mode", 4, "ngIf"], [1, "toast"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24"], ["d", "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"], [1, "auth-tabs"], [1, "auth-tab", 3, "click"], ["id", "loginState"], [1, "auth-heading"], [1, "social-btns"], [1, "social-btn", "btn-google", 3, "click"], ["viewBox", "0 0 24 24", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z", "fill", "#4285F4"], ["d", "M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z", "fill", "#34A853"], ["d", "M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z", "fill", "#FBBC05"], ["d", "M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z", "fill", "#EA4335"], [1, "divider"], [1, "divider-line"], [1, "divider-text"], ["novalidate", "", 1, "auth-form", 3, "ngSubmit", "formGroup"], [1, "field"], ["for", "loginEmail"], [1, "input-wrap"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2", "viewBox", "0 0 24 24", "aria-hidden", "true"], ["d", "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"], ["type", "email", "id", "loginEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "loginEmail-error", "aria-invalid", "false"], ["id", "loginEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "loginPw"], ["x", "3", "y", "11", "width", "18", "height", "11", "rx", "2", "ry", "2"], ["d", "M7 11V7a5 5 0 0110 0v4"], ["type", "password", "id", "loginPw", "formControlName", "password", "placeholder", "Your password", "autocomplete", "current-password", "aria-describedby", "loginPw-error"], ["type", "button", "aria-label", "Toggle password visibility", 1, "pw-toggle", 3, "click"], ["d", "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"], ["cx", "12", "cy", "12", "r", "3"], ["id", "loginPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "field-row"], [1, "checkbox-label"], ["type", "checkbox", "formControlName", "rememberMe", "aria-describedby", "remember-help"], [1, "checkmark"], ["href", "#", 1, "forgot-link", 3, "click"], ["type", "submit", 1, "btn-submit", 3, "disabled"], [4, "ngIf"], ["class", "loading-text", 4, "ngIf"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24", 4, "ngIf"], ["class", "spinner", "aria-hidden", "true", 4, "ngIf"], ["id", "loginEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "loginPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], [1, "loading-text"], ["fill", "none", "stroke", "currentColor", "stroke-width", "2.5", "viewBox", "0 0 24 24"], ["d", "M17 8l4 4m0 0l-4 4m4-4H3"], ["aria-hidden", "true", 1, "spinner"], ["id", "forgotState"], [1, "back-link", 3, "click"], ["d", "M19 12H5M12 5l-7 7 7 7"], ["for", "forgotEmail"], ["type", "email", "id", "forgotEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "forgotEmail-error"], ["id", "forgotEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "forgotEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupState"], ["viewBox", "0 0 24 24", "fill", "none"], ["for", "signupName"], ["d", "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"], ["type", "text", "id", "signupName", "formControlName", "name", "placeholder", "Priya Kumar", "autocomplete", "name", "aria-describedby", "signupName-error"], ["id", "signupName-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupEmail"], ["type", "email", "id", "signupEmail", "formControlName", "email", "placeholder", "you@example.com", "autocomplete", "email", "aria-describedby", "signupEmail-error"], ["id", "signupEmail-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["for", "signupPw"], ["type", "password", "id", "signupPw", "formControlName", "password", "placeholder", "At least 8 characters", "autocomplete", "new-password", "aria-describedby", "signupPw-error pw-requirements", 3, "input"], [1, "pw-strength"], [1, "pw-bar"], ["id", "signupPw-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], ["id", "pw-requirements", "class", "pw-requirements", 4, "ngIf"], ["for", "confirmPassword"], ["type", "password", "id", "confirmPassword", "formControlName", "confirmPassword", "placeholder", "Confirm your password", "autocomplete", "new-password", "aria-describedby", "confirmPassword-error"], ["id", "confirmPassword-error", "class", "error-message", "role", "alert", "aria-live", "polite", 4, "ngIf"], [1, "terms-note"], ["href", "#"], ["id", "signupName-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupEmail-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "signupPw-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "pw-requirements", 1, "pw-requirements"], [1, "requirement"], [1, "req-icon"], ["id", "confirmPassword-error", "role", "alert", "aria-live", "polite", 1, "error-message"], ["id", "successState", 1, "success-state"], [1, "success-icon"], [1, "switch-mode"], [3, "click"]], template: function AuthComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275element(0, "div", 0);
       \u0275\u0275elementStart(1, "div", 1)(2, "div", 2)(3, "a", 3)(4, "div", 4);
@@ -40555,7 +40563,7 @@ var AuthComponent = class _AuthComponent {
     if (rf & 2) {
       \u0275\u0275styleProp("width", ctx.progress(), "%");
       \u0275\u0275advance(5);
-      \u0275\u0275property("size", 20);
+      \u0275\u0275property("size", 20)("strokeWidth", 2.5);
       \u0275\u0275advance(36);
       \u0275\u0275property("size", 14);
       \u0275\u0275advance(3);
@@ -40605,7 +40613,7 @@ var AuthComponent = class _AuthComponent {
           name="pencil"
           [size]="20"
           stroke="white"
-          strokeWidth="2.5"
+          [strokeWidth]="2.5"
         ></app-icon>
       </div>
       <span>InterviewReady</span>
@@ -43311,6 +43319,544 @@ var HomeComponent = class _HomeComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HomeComponent, { className: "HomeComponent", filePath: "apps/interview-ready-web/src/app/home/home.ts", lineNumber: 43 });
 })();
 
+// apps/interview-ready-web/src/app/profile/profile.component.ts
+var _forTrack07 = ($index, $item) => $item.value;
+function ProfileComponent_For_17_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 37);
+    \u0275\u0275listener("click", function ProfileComponent_For_17_Template_div_click_0_listener() {
+      const opt_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.selectStatus(opt_r2.value));
+    });
+    \u0275\u0275element(1, "app-icon", 38);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const opt_r2 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("on", ctx_r2.selectedStatus() === opt_r2.value);
+    \u0275\u0275advance();
+    \u0275\u0275property("size", 13)("strokeWidth", 2)("strokeLinecap", "round");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", opt_r2.label, " ");
+  }
+}
+function ProfileComponent_For_25_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 37);
+    \u0275\u0275listener("click", function ProfileComponent_For_25_Template_div_click_0_listener() {
+      const opt_r5 = \u0275\u0275restoreView(_r4).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.selectExp(opt_r5.value));
+    });
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const opt_r5 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("on", ctx_r2.selectedExp() === opt_r5.value);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", opt_r5.label, " ");
+  }
+}
+function ProfileComponent_For_33_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 37);
+    \u0275\u0275listener("click", function ProfileComponent_For_33_Template_div_click_0_listener() {
+      const opt_r7 = \u0275\u0275restoreView(_r6).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.selectRole(opt_r7.value));
+    });
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const opt_r7 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("on", ctx_r2.selectedRole() === opt_r7.value);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", opt_r7.label, " ");
+  }
+}
+function ProfileComponent_Conditional_62_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 30)(1, "div", 39);
+    \u0275\u0275element(2, "app-icon", 23);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "span", 40);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "button", 41);
+    \u0275\u0275listener("click", function ProfileComponent_Conditional_62_Template_button_click_5_listener() {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.removeFile());
+    });
+    \u0275\u0275element(6, "app-icon", 42);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("size", 15)("strokeWidth", 2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate((tmp_3_0 = ctx_r2.resumeFile()) == null ? null : tmp_3_0.name);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("size", 15)("strokeWidth", 2.5);
+  }
+}
+var ProfileComponent = class _ProfileComponent {
+  statusOptions = [
+    { value: "student", label: "Student", icon: "briefcase" },
+    { value: "working", label: "Working", icon: "briefcase" }
+  ];
+  expOptions = [
+    { value: "0-1", label: "0\u20131 years" },
+    { value: "1-2", label: "1\u20132 years" },
+    { value: "2+", label: "2+ years" }
+  ];
+  roleOptions = [
+    { value: "frontend", label: "Frontend" },
+    { value: "backend", label: "Backend" },
+    { value: "fullstack", label: "Fullstack" },
+    { value: "android", label: "Android" },
+    { value: "devops", label: "DevOps" }
+  ];
+  selectedStatus = signal("", ...ngDevMode ? [{ debugName: "selectedStatus" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  selectedExp = signal("", ...ngDevMode ? [{ debugName: "selectedExp" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  selectedRole = signal("", ...ngDevMode ? [{ debugName: "selectedRole" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  linkedin = signal("", ...ngDevMode ? [{ debugName: "linkedin" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  resumeFile = signal(null, ...ngDevMode ? [{ debugName: "resumeFile" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  isDragging = false;
+  showNudge = signal(false, ...ngDevMode ? [{ debugName: "showNudge" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  statusError = signal(false, ...ngDevMode ? [{ debugName: "statusError" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  expError = signal(false, ...ngDevMode ? [{ debugName: "expError" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  roleError = signal(false, ...ngDevMode ? [{ debugName: "roleError" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  selectStatus(value) {
+    this.selectedStatus.set(value);
+    this.statusError.set(false);
+  }
+  selectExp(value) {
+    this.selectedExp.set(value);
+    this.expError.set(false);
+  }
+  selectRole(value) {
+    this.selectedRole.set(value);
+    this.roleError.set(false);
+  }
+  onFileSelected(event) {
+    const input2 = event.target;
+    if (input2.files?.length) {
+      this.resumeFile.set(input2.files[0]);
+    }
+  }
+  removeFile() {
+    this.resumeFile.set(null);
+  }
+  onDragOver(event) {
+    event.preventDefault();
+    this.isDragging = true;
+  }
+  onDragLeave(event) {
+    event.preventDefault();
+    this.isDragging = false;
+  }
+  onDrop(event) {
+    event.preventDefault();
+    this.isDragging = false;
+    const files = event.dataTransfer?.files;
+    if (files?.length) {
+      this.resumeFile.set(files[0]);
+    }
+  }
+  continue() {
+    let valid = true;
+    if (!this.selectedStatus()) {
+      this.statusError.set(true);
+      valid = false;
+    }
+    if (!this.selectedExp()) {
+      this.expError.set(true);
+      valid = false;
+    }
+    if (!this.selectedRole()) {
+      this.roleError.set(true);
+      valid = false;
+    }
+    if (valid) {
+      console.log("Profile saved:", {
+        status: this.selectedStatus(),
+        experience: this.selectedExp(),
+        role: this.selectedRole(),
+        linkedin: this.linkedin(),
+        resume: this.resumeFile()?.name
+      });
+    }
+  }
+  skip() {
+    console.log("Skipped");
+  }
+  static \u0275fac = function ProfileComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ProfileComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProfileComponent, selectors: [["app-profile"]], decls: 74, vars: 32, consts: [[1, "profile-container"], [1, "wrapper"], [1, "card"], [1, "eyebrow"], ["name", "user", 3, "size", "strokeWidth"], [1, "card-title"], [1, "card-sub"], [1, "field"], [1, "field-label"], ["name", "briefcase", 3, "size", "strokeWidth"], [1, "chip-group-wrap"], [1, "chips"], [1, "chip", 3, "on"], ["name", "clock", 3, "size", "strokeWidth"], ["name", "code", 3, "size", "strokeWidth"], [1, "div"], ["name", "linkedin", 3, "size", "strokeWidth"], [1, "opt-tag"], [1, "input-wrap"], ["name", "link", 1, "ico", 3, "size", "strokeWidth"], ["type", "url", "placeholder", "linkedin.com/in/your-profile", 3, "ngModelChange", "ngModel"], [1, "hint"], [1, "field", 2, "margin-bottom", "0"], ["name", "document", 3, "size", "strokeWidth"], [1, "upload-zone", 3, "dragover", "dragleave", "drop"], ["type", "file", "accept", ".pdf,.doc,.docx", 3, "change"], [1, "up-icon"], ["name", "upload", 3, "size", "strokeWidth", "strokeLinecap"], [1, "up-text"], [1, "up-sub"], [1, "file-chip", "show"], [1, "actions"], [1, "btn-primary", 3, "click"], ["name", "arrow-right", "stroke", "white", 3, "size", "strokeWidth", "strokeLinecap"], [1, "btn-skip", 3, "click"], [1, "footer-note"], ["href", "#"], [1, "chip", 3, "click"], ["name", "briefcase", 3, "size", "strokeWidth", "strokeLinecap"], [1, "file-chip-icon"], [1, "file-chip-name"], [1, "file-remove", 3, "click"], ["name", "close", 3, "size", "strokeWidth"]], template: function ProfileComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
+      \u0275\u0275element(4, "app-icon", 4);
+      \u0275\u0275text(5, " Quick setup \xB7 30 seconds ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "h1", 5);
+      \u0275\u0275text(7, "Tell us about you");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(8, "p", 6);
+      \u0275\u0275text(9, " We'll use this to personalize your interview experience ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(10, "div", 7)(11, "div", 8);
+      \u0275\u0275element(12, "app-icon", 9);
+      \u0275\u0275text(13, " Current status ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(14, "div", 10)(15, "div", 11);
+      \u0275\u0275repeaterCreate(16, ProfileComponent_For_17_Template, 3, 6, "div", 12, _forTrack07);
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(18, "div", 7)(19, "div", 8);
+      \u0275\u0275element(20, "app-icon", 13);
+      \u0275\u0275text(21, " Experience level ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(22, "div", 10)(23, "div", 11);
+      \u0275\u0275repeaterCreate(24, ProfileComponent_For_25_Template, 2, 3, "div", 12, _forTrack07);
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(26, "div", 7)(27, "div", 8);
+      \u0275\u0275element(28, "app-icon", 14);
+      \u0275\u0275text(29, " Target role ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(30, "div", 10)(31, "div", 11);
+      \u0275\u0275repeaterCreate(32, ProfileComponent_For_33_Template, 2, 3, "div", 12, _forTrack07);
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275element(34, "div", 15);
+      \u0275\u0275elementStart(35, "div", 7)(36, "div", 8);
+      \u0275\u0275element(37, "app-icon", 16);
+      \u0275\u0275text(38, " LinkedIn profile ");
+      \u0275\u0275elementStart(39, "span", 17);
+      \u0275\u0275text(40, "optional");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(41, "div", 18);
+      \u0275\u0275element(42, "app-icon", 19);
+      \u0275\u0275elementStart(43, "input", 20);
+      \u0275\u0275listener("ngModelChange", function ProfileComponent_Template_input_ngModelChange_43_listener($event) {
+        return ctx.linkedin.set($event);
+      });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(44, "div", 21);
+      \u0275\u0275text(45, "Optional \u2014 helps us personalize your experience");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(46, "div", 22)(47, "div", 8);
+      \u0275\u0275element(48, "app-icon", 23);
+      \u0275\u0275text(49, " Resume ");
+      \u0275\u0275elementStart(50, "span", 17);
+      \u0275\u0275text(51, "optional");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(52, "div", 24);
+      \u0275\u0275listener("dragover", function ProfileComponent_Template_div_dragover_52_listener($event) {
+        return ctx.onDragOver($event);
+      })("dragleave", function ProfileComponent_Template_div_dragleave_52_listener($event) {
+        return ctx.onDragLeave($event);
+      })("drop", function ProfileComponent_Template_div_drop_52_listener($event) {
+        return ctx.onDrop($event);
+      });
+      \u0275\u0275elementStart(53, "input", 25);
+      \u0275\u0275listener("change", function ProfileComponent_Template_input_change_53_listener($event) {
+        return ctx.onFileSelected($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(54, "div", 26);
+      \u0275\u0275element(55, "app-icon", 27);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(56, "div", 28);
+      \u0275\u0275text(57, "Drag & drop or ");
+      \u0275\u0275elementStart(58, "b");
+      \u0275\u0275text(59, "browse");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(60, "div", 29);
+      \u0275\u0275text(61, "PDF or DOC \xB7 Max 5MB");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275conditionalCreate(62, ProfileComponent_Conditional_62_Template, 7, 5, "div", 30);
+      \u0275\u0275elementEnd();
+      \u0275\u0275element(63, "div", 15);
+      \u0275\u0275elementStart(64, "div", 31)(65, "button", 32);
+      \u0275\u0275listener("click", function ProfileComponent_Template_button_click_65_listener() {
+        return ctx.continue();
+      });
+      \u0275\u0275text(66, " Continue ");
+      \u0275\u0275element(67, "app-icon", 33);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(68, "button", 34);
+      \u0275\u0275listener("click", function ProfileComponent_Template_button_click_68_listener() {
+        return ctx.skip();
+      });
+      \u0275\u0275text(69, "Skip for now");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(70, "p", 35);
+      \u0275\u0275text(71, "Your data is safe. ");
+      \u0275\u0275elementStart(72, "a", 36);
+      \u0275\u0275text(73, "Privacy Policy");
+      \u0275\u0275elementEnd()()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(4);
+      \u0275\u0275property("size", 12)("strokeWidth", 2.5);
+      \u0275\u0275advance(8);
+      \u0275\u0275property("size", 13)("strokeWidth", 2.2);
+      \u0275\u0275advance(2);
+      \u0275\u0275classProp("error", ctx.statusError());
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.statusOptions);
+      \u0275\u0275advance(4);
+      \u0275\u0275property("size", 13)("strokeWidth", 2.2);
+      \u0275\u0275advance(2);
+      \u0275\u0275classProp("error", ctx.expError());
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.expOptions);
+      \u0275\u0275advance(4);
+      \u0275\u0275property("size", 13)("strokeWidth", 2.2);
+      \u0275\u0275advance(2);
+      \u0275\u0275classProp("error", ctx.roleError());
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.roleOptions);
+      \u0275\u0275advance(5);
+      \u0275\u0275property("size", 13)("strokeWidth", 2.2);
+      \u0275\u0275advance(5);
+      \u0275\u0275property("size", 15)("strokeWidth", 2);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngModel", ctx.linkedin());
+      \u0275\u0275advance(5);
+      \u0275\u0275property("size", 13)("strokeWidth", 2.2);
+      \u0275\u0275advance(4);
+      \u0275\u0275styleProp("display", ctx.resumeFile() ? "none" : "block");
+      \u0275\u0275classProp("drag", ctx.isDragging);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("size", 17)("strokeWidth", 2)("strokeLinecap", "round");
+      \u0275\u0275advance(7);
+      \u0275\u0275conditional(ctx.resumeFile() ? 62 : -1);
+      \u0275\u0275advance(5);
+      \u0275\u0275property("size", 17)("strokeWidth", 2.5)("strokeLinecap", "round");
+    }
+  }, dependencies: [CommonModule, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent], styles: ['\n.profile-container[_ngcontent-%COMP%] {\n  min-height: calc(100vh - 68px);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 32px 20px;\n  background: var(--bg-soft);\n}\n.wrapper[_ngcontent-%COMP%] {\n  width: 100%;\n  max-width: 720px;\n}\n.card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  padding: clamp(28px, 5vw, 44px) clamp(24px, 5vw, 48px);\n}\n.progress[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0;\n  margin-bottom: 6px;\n}\n.pdot[_ngcontent-%COMP%] {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: var(--border);\n  flex-shrink: 0;\n  transition: background 0.3s;\n}\n.pdot.done[_ngcontent-%COMP%] {\n  background: var(--green);\n}\n.pdot.active[_ngcontent-%COMP%] {\n  background: var(--blue);\n}\n.pline[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 2px;\n  background: var(--border);\n  transition: background 0.3s;\n}\n.pline.done[_ngcontent-%COMP%] {\n  background: var(--green);\n}\n.progress-text[_ngcontent-%COMP%] {\n  font-size: 12px;\n  color: var(--text-muted);\n  font-weight: 500;\n  margin-bottom: 24px;\n}\n.eyebrow[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 12px;\n  font-weight: 600;\n  padding: 4px 10px;\n  border-radius: 20px;\n  margin-bottom: 10px;\n}\n.eyebrow[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 12px;\n  height: 12px;\n}\n.card-title[_ngcontent-%COMP%] {\n  font-size: clamp(1.35rem, 3vw, 1.7rem);\n  font-weight: 700;\n  margin-bottom: 5px;\n}\n.card-sub[_ngcontent-%COMP%] {\n  font-size: 14px;\n  color: var(--text-soft);\n  margin-bottom: 26px;\n  line-height: 1.6;\n}\n.field[_ngcontent-%COMP%] {\n  margin-bottom: 20px;\n}\n.field-label[_ngcontent-%COMP%] {\n  font-size: 13px;\n  font-weight: 600;\n  color: var(--text);\n  margin-bottom: 9px;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.field-label[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 13px;\n  height: 13px;\n  color: var(--text-soft);\n}\n.opt-tag[_ngcontent-%COMP%] {\n  font-size: 11px;\n  font-weight: 400;\n  color: var(--text-muted);\n  background: var(--bg-alt);\n  padding: 2px 7px;\n  border-radius: 20px;\n}\n.chips[_ngcontent-%COMP%] {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n}\n.chip[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 5px;\n  padding: 7px 15px;\n  border-radius: 100px;\n  border: 1.5px solid var(--border);\n  background: var(--bg);\n  font-size: 13.5px;\n  font-weight: 500;\n  color: var(--text-soft);\n  cursor: pointer;\n  transition: all 0.16s;\n  -webkit-user-select: none;\n  user-select: none;\n  font-family: "DM Sans", sans-serif;\n}\n.chip[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 13px;\n  height: 13px;\n}\n.chip[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue);\n  color: var(--blue);\n  background: var(--blue-light);\n}\n.chip.on[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  color: var(--blue);\n  font-weight: 600;\n}\n.chip-group-wrap.error[_ngcontent-%COMP%]   .chips[_ngcontent-%COMP%] {\n  outline: 2px solid var(--red);\n  border-radius: 10px;\n  padding: 4px;\n  animation: _ngcontent-%COMP%_shake 0.35s ease;\n}\n@keyframes _ngcontent-%COMP%_shake {\n  0%, 100% {\n    transform: translateX(0);\n  }\n  25% {\n    transform: translateX(-4px);\n  }\n  75% {\n    transform: translateX(4px);\n  }\n}\n.div[_ngcontent-%COMP%] {\n  height: 1px;\n  background: var(--border);\n  margin: 22px 0;\n}\n.input-wrap[_ngcontent-%COMP%] {\n  position: relative;\n}\n.input-wrap[_ngcontent-%COMP%]   .ico[_ngcontent-%COMP%] {\n  position: absolute;\n  left: 13px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 15px;\n  height: 15px;\n  color: var(--text-muted);\n  pointer-events: none;\n}\ninput[type=url][_ngcontent-%COMP%] {\n  width: 100%;\n  height: 44px;\n  padding: 0 14px 0 38px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 13.5px;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  outline: none;\n  transition: border-color 0.16s, box-shadow 0.16s;\n}\ninput[type=url][_ngcontent-%COMP%]::placeholder {\n  color: var(--text-muted);\n}\ninput[type=url][_ngcontent-%COMP%]:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.hint[_ngcontent-%COMP%] {\n  font-size: 12px;\n  color: var(--text-muted);\n  margin-top: 5px;\n}\n.upload-zone[_ngcontent-%COMP%] {\n  position: relative;\n  border: 1.5px dashed var(--border);\n  border-radius: var(--radius-sm);\n  padding: 20px 16px;\n  text-align: center;\n  cursor: pointer;\n  background: var(--bg-soft);\n  transition: all 0.16s;\n}\n.upload-zone[_ngcontent-%COMP%]:hover, \n.upload-zone.drag[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  background: var(--blue-light);\n}\n.upload-zone[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  position: absolute;\n  inset: 0;\n  opacity: 0;\n  cursor: pointer;\n  width: 100%;\n  height: 100%;\n}\n.up-icon[_ngcontent-%COMP%] {\n  width: 34px;\n  height: 34px;\n  background: var(--bg);\n  border: 1.5px solid var(--border);\n  border-radius: 9px;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 8px;\n}\n.up-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 17px;\n  height: 17px;\n  color: var(--blue);\n}\n.up-text[_ngcontent-%COMP%] {\n  font-size: 13px;\n  color: var(--text-soft);\n  font-weight: 500;\n}\n.up-text[_ngcontent-%COMP%]   b[_ngcontent-%COMP%] {\n  color: var(--blue);\n  font-weight: 600;\n}\n.up-sub[_ngcontent-%COMP%] {\n  font-size: 12px;\n  color: var(--text-muted);\n  margin-top: 3px;\n}\n.file-chip[_ngcontent-%COMP%] {\n  display: none;\n  align-items: center;\n  gap: 10px;\n  background: var(--blue-light);\n  border: 1.5px solid var(--blue-mid);\n  border-radius: var(--radius-sm);\n  padding: 9px 13px;\n  margin-top: 8px;\n}\n.file-chip.show[_ngcontent-%COMP%] {\n  display: flex;\n}\n.file-chip-icon[_ngcontent-%COMP%] {\n  width: 30px;\n  height: 30px;\n  background: var(--blue);\n  border-radius: 7px;\n  display: grid;\n  place-items: center;\n  flex-shrink: 0;\n}\n.file-chip-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 15px;\n  height: 15px;\n  color: var(--bg);\n}\n.file-chip-name[_ngcontent-%COMP%] {\n  font-size: 13px;\n  font-weight: 600;\n  color: var(--text);\n  flex: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.file-remove[_ngcontent-%COMP%] {\n  background: none;\n  border: none;\n  cursor: pointer;\n  color: var(--text-muted);\n  display: grid;\n  place-items: center;\n  border-radius: 5px;\n  padding: 2px;\n  transition: color 0.15s;\n}\n.file-remove[_ngcontent-%COMP%]:hover {\n  color: var(--red);\n}\n.file-remove[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 15px;\n  height: 15px;\n}\n.actions[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}\n.btn-primary[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 48px;\n  background: var(--blue);\n  color: var(--bg);\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 15px;\n  font-weight: 600;\n  font-family: "Sora", sans-serif;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  transition: background 0.16s, transform 0.1s;\n}\n.btn-primary[_ngcontent-%COMP%]:hover {\n  background: var(--blue-dark);\n}\n.btn-primary[_ngcontent-%COMP%]:active {\n  transform: scale(0.99);\n}\n.btn-primary[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 17px;\n  height: 17px;\n}\n.btn-skip[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 42px;\n  background: none;\n  border: none;\n  color: var(--text-muted);\n  font-size: 13.5px;\n  font-weight: 500;\n  font-family: "DM Sans", sans-serif;\n  cursor: pointer;\n  border-radius: var(--radius-sm);\n  transition: color 0.16s, background 0.16s;\n}\n.btn-skip[_ngcontent-%COMP%]:hover {\n  color: var(--text-soft);\n  background: var(--bg-alt);\n}\n.footer-note[_ngcontent-%COMP%] {\n  text-align: center;\n  font-size: 12px;\n  color: var(--text-muted);\n  margin-top: 18px;\n}\n.footer-note[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  text-decoration: none;\n}\n@media (max-width: 480px) {\n  .card[_ngcontent-%COMP%] {\n    padding: 24px 20px;\n  }\n}\n/*# sourceMappingURL=profile.component.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ProfileComponent, [{
+    type: Component,
+    args: [{ selector: "app-profile", standalone: true, imports: [CommonModule, FormsModule, IconComponent], template: `<div class="profile-container">
+  <div class="wrapper">
+    <div class="card">
+      <div class="eyebrow">
+        <app-icon name="user" [size]="12" [strokeWidth]="2.5"></app-icon>
+        Quick setup \xB7 30 seconds
+      </div>
+      <h1 class="card-title">Tell us about you</h1>
+      <p class="card-sub">
+        We'll use this to personalize your interview experience
+      </p>
+
+      <div class="field">
+        <div class="field-label">
+          <app-icon name="briefcase" [size]="13" [strokeWidth]="2.2"></app-icon>
+          Current status
+        </div>
+        <div class="chip-group-wrap" [class.error]="statusError()">
+          <div class="chips">
+            @for (opt of statusOptions; track opt.value) {
+              <div
+                class="chip"
+                [class.on]="selectedStatus() === opt.value"
+                (click)="selectStatus(opt.value)"
+              >
+                <app-icon
+                  name="briefcase"
+                  [size]="13"
+                  [strokeWidth]="2"
+                  [strokeLinecap]="'round'"
+                ></app-icon>
+                {{ opt.label }}
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <app-icon name="clock" [size]="13" [strokeWidth]="2.2"></app-icon>
+          Experience level
+        </div>
+        <div class="chip-group-wrap" [class.error]="expError()">
+          <div class="chips">
+            @for (opt of expOptions; track opt.value) {
+              <div
+                class="chip"
+                [class.on]="selectedExp() === opt.value"
+                (click)="selectExp(opt.value)"
+              >
+                {{ opt.label }}
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <app-icon name="code" [size]="13" [strokeWidth]="2.2"></app-icon>
+          Target role
+        </div>
+        <div class="chip-group-wrap" [class.error]="roleError()">
+          <div class="chips">
+            @for (opt of roleOptions; track opt.value) {
+              <div
+                class="chip"
+                [class.on]="selectedRole() === opt.value"
+                (click)="selectRole(opt.value)"
+              >
+                {{ opt.label }}
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="div"></div>
+
+      <div class="field">
+        <div class="field-label">
+          <app-icon name="linkedin" [size]="13" [strokeWidth]="2.2"></app-icon>
+          LinkedIn profile
+          <span class="opt-tag">optional</span>
+        </div>
+        <div class="input-wrap">
+          <app-icon
+            name="link"
+            class="ico"
+            [size]="15"
+            [strokeWidth]="2"
+          ></app-icon>
+          <input
+            type="url"
+            placeholder="linkedin.com/in/your-profile"
+            [ngModel]="linkedin()"
+            (ngModelChange)="linkedin.set($event)"
+          />
+        </div>
+        <div class="hint">Optional \u2014 helps us personalize your experience</div>
+      </div>
+
+      <div class="field" style="margin-bottom: 0">
+        <div class="field-label">
+          <app-icon name="document" [size]="13" [strokeWidth]="2.2"></app-icon>
+          Resume
+          <span class="opt-tag">optional</span>
+        </div>
+        <div
+          class="upload-zone"
+          [class.drag]="isDragging"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+          [style.display]="resumeFile() ? 'none' : 'block'"
+        >
+          <input
+            type="file"
+            accept=".pdf,.doc,.docx"
+            (change)="onFileSelected($event)"
+          />
+          <div class="up-icon">
+            <app-icon
+              name="upload"
+              [size]="17"
+              [strokeWidth]="2"
+              [strokeLinecap]="'round'"
+            ></app-icon>
+          </div>
+          <div class="up-text">Drag & drop or <b>browse</b></div>
+          <div class="up-sub">PDF or DOC \xB7 Max 5MB</div>
+        </div>
+        @if (resumeFile()) {
+          <div class="file-chip show">
+            <div class="file-chip-icon">
+              <app-icon
+                name="document"
+                [size]="15"
+                [strokeWidth]="2"
+              ></app-icon>
+            </div>
+            <span class="file-chip-name">{{ resumeFile()?.name }}</span>
+            <button class="file-remove" (click)="removeFile()">
+              <app-icon name="close" [size]="15" [strokeWidth]="2.5"></app-icon>
+            </button>
+          </div>
+        }
+      </div>
+
+      <div class="div"></div>
+
+      <div class="actions">
+        <button class="btn-primary" (click)="continue()">
+          Continue
+          <app-icon
+            name="arrow-right"
+            [size]="17"
+            [strokeWidth]="2.5"
+            [strokeLinecap]="'round'"
+            stroke="white"
+          ></app-icon>
+        </button>
+        <button class="btn-skip" (click)="skip()">Skip for now</button>
+      </div>
+    </div>
+
+    <p class="footer-note">Your data is safe. <a href="#">Privacy Policy</a></p>
+  </div>
+</div>
+`, styles: ['/* apps/interview-ready-web/src/app/profile/profile.component.scss */\n.profile-container {\n  min-height: calc(100vh - 68px);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 32px 20px;\n  background: var(--bg-soft);\n}\n.wrapper {\n  width: 100%;\n  max-width: 720px;\n}\n.card {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  padding: clamp(28px, 5vw, 44px) clamp(24px, 5vw, 48px);\n}\n.progress {\n  display: flex;\n  align-items: center;\n  gap: 0;\n  margin-bottom: 6px;\n}\n.pdot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: var(--border);\n  flex-shrink: 0;\n  transition: background 0.3s;\n}\n.pdot.done {\n  background: var(--green);\n}\n.pdot.active {\n  background: var(--blue);\n}\n.pline {\n  flex: 1;\n  height: 2px;\n  background: var(--border);\n  transition: background 0.3s;\n}\n.pline.done {\n  background: var(--green);\n}\n.progress-text {\n  font-size: 12px;\n  color: var(--text-muted);\n  font-weight: 500;\n  margin-bottom: 24px;\n}\n.eyebrow {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--blue-light);\n  color: var(--blue);\n  font-size: 12px;\n  font-weight: 600;\n  padding: 4px 10px;\n  border-radius: 20px;\n  margin-bottom: 10px;\n}\n.eyebrow svg {\n  width: 12px;\n  height: 12px;\n}\n.card-title {\n  font-size: clamp(1.35rem, 3vw, 1.7rem);\n  font-weight: 700;\n  margin-bottom: 5px;\n}\n.card-sub {\n  font-size: 14px;\n  color: var(--text-soft);\n  margin-bottom: 26px;\n  line-height: 1.6;\n}\n.field {\n  margin-bottom: 20px;\n}\n.field-label {\n  font-size: 13px;\n  font-weight: 600;\n  color: var(--text);\n  margin-bottom: 9px;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.field-label svg {\n  width: 13px;\n  height: 13px;\n  color: var(--text-soft);\n}\n.opt-tag {\n  font-size: 11px;\n  font-weight: 400;\n  color: var(--text-muted);\n  background: var(--bg-alt);\n  padding: 2px 7px;\n  border-radius: 20px;\n}\n.chips {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n}\n.chip {\n  display: inline-flex;\n  align-items: center;\n  gap: 5px;\n  padding: 7px 15px;\n  border-radius: 100px;\n  border: 1.5px solid var(--border);\n  background: var(--bg);\n  font-size: 13.5px;\n  font-weight: 500;\n  color: var(--text-soft);\n  cursor: pointer;\n  transition: all 0.16s;\n  -webkit-user-select: none;\n  user-select: none;\n  font-family: "DM Sans", sans-serif;\n}\n.chip svg {\n  width: 13px;\n  height: 13px;\n}\n.chip:hover {\n  border-color: var(--blue);\n  color: var(--blue);\n  background: var(--blue-light);\n}\n.chip.on {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  color: var(--blue);\n  font-weight: 600;\n}\n.chip-group-wrap.error .chips {\n  outline: 2px solid var(--red);\n  border-radius: 10px;\n  padding: 4px;\n  animation: shake 0.35s ease;\n}\n@keyframes shake {\n  0%, 100% {\n    transform: translateX(0);\n  }\n  25% {\n    transform: translateX(-4px);\n  }\n  75% {\n    transform: translateX(4px);\n  }\n}\n.div {\n  height: 1px;\n  background: var(--border);\n  margin: 22px 0;\n}\n.input-wrap {\n  position: relative;\n}\n.input-wrap .ico {\n  position: absolute;\n  left: 13px;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 15px;\n  height: 15px;\n  color: var(--text-muted);\n  pointer-events: none;\n}\ninput[type=url] {\n  width: 100%;\n  height: 44px;\n  padding: 0 14px 0 38px;\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius-sm);\n  font-size: 13.5px;\n  font-family: "DM Sans", sans-serif;\n  color: var(--text);\n  background: var(--bg);\n  outline: none;\n  transition: border-color 0.16s, box-shadow 0.16s;\n}\ninput[type=url]::placeholder {\n  color: var(--text-muted);\n}\ninput[type=url]:focus {\n  border-color: var(--blue);\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n}\n.hint {\n  font-size: 12px;\n  color: var(--text-muted);\n  margin-top: 5px;\n}\n.upload-zone {\n  position: relative;\n  border: 1.5px dashed var(--border);\n  border-radius: var(--radius-sm);\n  padding: 20px 16px;\n  text-align: center;\n  cursor: pointer;\n  background: var(--bg-soft);\n  transition: all 0.16s;\n}\n.upload-zone:hover,\n.upload-zone.drag {\n  border-color: var(--blue);\n  background: var(--blue-light);\n}\n.upload-zone input {\n  position: absolute;\n  inset: 0;\n  opacity: 0;\n  cursor: pointer;\n  width: 100%;\n  height: 100%;\n}\n.up-icon {\n  width: 34px;\n  height: 34px;\n  background: var(--bg);\n  border: 1.5px solid var(--border);\n  border-radius: 9px;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 8px;\n}\n.up-icon svg {\n  width: 17px;\n  height: 17px;\n  color: var(--blue);\n}\n.up-text {\n  font-size: 13px;\n  color: var(--text-soft);\n  font-weight: 500;\n}\n.up-text b {\n  color: var(--blue);\n  font-weight: 600;\n}\n.up-sub {\n  font-size: 12px;\n  color: var(--text-muted);\n  margin-top: 3px;\n}\n.file-chip {\n  display: none;\n  align-items: center;\n  gap: 10px;\n  background: var(--blue-light);\n  border: 1.5px solid var(--blue-mid);\n  border-radius: var(--radius-sm);\n  padding: 9px 13px;\n  margin-top: 8px;\n}\n.file-chip.show {\n  display: flex;\n}\n.file-chip-icon {\n  width: 30px;\n  height: 30px;\n  background: var(--blue);\n  border-radius: 7px;\n  display: grid;\n  place-items: center;\n  flex-shrink: 0;\n}\n.file-chip-icon svg {\n  width: 15px;\n  height: 15px;\n  color: var(--bg);\n}\n.file-chip-name {\n  font-size: 13px;\n  font-weight: 600;\n  color: var(--text);\n  flex: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.file-remove {\n  background: none;\n  border: none;\n  cursor: pointer;\n  color: var(--text-muted);\n  display: grid;\n  place-items: center;\n  border-radius: 5px;\n  padding: 2px;\n  transition: color 0.15s;\n}\n.file-remove:hover {\n  color: var(--red);\n}\n.file-remove svg {\n  width: 15px;\n  height: 15px;\n}\n.actions {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}\n.btn-primary {\n  width: 100%;\n  height: 48px;\n  background: var(--blue);\n  color: var(--bg);\n  border: none;\n  border-radius: var(--radius-sm);\n  font-size: 15px;\n  font-weight: 600;\n  font-family: "Sora", sans-serif;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  transition: background 0.16s, transform 0.1s;\n}\n.btn-primary:hover {\n  background: var(--blue-dark);\n}\n.btn-primary:active {\n  transform: scale(0.99);\n}\n.btn-primary svg {\n  width: 17px;\n  height: 17px;\n}\n.btn-skip {\n  width: 100%;\n  height: 42px;\n  background: none;\n  border: none;\n  color: var(--text-muted);\n  font-size: 13.5px;\n  font-weight: 500;\n  font-family: "DM Sans", sans-serif;\n  cursor: pointer;\n  border-radius: var(--radius-sm);\n  transition: color 0.16s, background 0.16s;\n}\n.btn-skip:hover {\n  color: var(--text-soft);\n  background: var(--bg-alt);\n}\n.footer-note {\n  text-align: center;\n  font-size: 12px;\n  color: var(--text-muted);\n  margin-top: 18px;\n}\n.footer-note a {\n  color: var(--blue);\n  text-decoration: none;\n}\n@media (max-width: 480px) {\n  .card {\n    padding: 24px 20px;\n  }\n}\n/*# sourceMappingURL=profile.component.css.map */\n'] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProfileComponent, { className: "ProfileComponent", filePath: "apps/interview-ready-web/src/app/profile/profile.component.ts", lineNumber: 19 });
+})();
+
 // apps/interview-ready-web/src/app/app.routes.ts
 var appRoutes = [
   {
@@ -43322,6 +43868,11 @@ var appRoutes = [
     path: "login",
     component: AuthComponent,
     data: { showNavbar: false }
+  },
+  {
+    path: "profile",
+    component: ProfileComponent,
+    data: { showNavbar: true }
   },
   {
     path: "**",
@@ -43398,7 +43949,7 @@ var Navbar = class _Navbar {
 })();
 
 // apps/interview-ready-web/src/app/footer/footer.ts
-var _forTrack07 = ($index, $item) => $item.title;
+var _forTrack08 = ($index, $item) => $item.title;
 var _forTrack12 = ($index, $item) => $item.label;
 function FooterComponent_For_11_For_5_Template(rf, ctx) {
   if (rf & 1) {
@@ -43447,7 +43998,7 @@ var FooterComponent = class _FooterComponent {
       \u0275\u0275elementStart(8, "p", 4);
       \u0275\u0275text(9);
       \u0275\u0275elementEnd()();
-      \u0275\u0275repeaterCreate(10, FooterComponent_For_11_Template, 6, 1, "div", 5, _forTrack07);
+      \u0275\u0275repeaterCreate(10, FooterComponent_For_11_Template, 6, 1, "div", 5, _forTrack08);
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(12, "div", 6)(13, "span");
       \u0275\u0275text(14);
