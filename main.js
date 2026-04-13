@@ -44073,6 +44073,1320 @@ var DashboardComponent = class _DashboardComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DashboardComponent, { className: "DashboardComponent", filePath: "apps/interview-ready-web/src/app/dashboard/dashboard.component.ts", lineNumber: 13 });
 })();
 
+// apps/interview-ready-web/src/app/booking/booking.data.ts
+var INTERVIEW_TYPES2 = [
+  {
+    id: "dsa",
+    name: "DSA Interview",
+    description: "Practice coding problems with a real engineer",
+    icon: "\u{1F4BB}",
+    price: 299
+  },
+  {
+    id: "hr",
+    name: "HR Interview",
+    description: "Improve communication and behavioural skills",
+    icon: "\u{1F3A4}",
+    price: 199
+  },
+  {
+    id: "resume",
+    name: "Resume Review",
+    description: "Get expert feedback on your resume",
+    icon: "\u{1F4C4}",
+    price: 149
+  }
+];
+var DIFFICULTY_LEVELS = [
+  { id: "beginner", name: "Beginner", color: "green", icon: "\u{1F7E2}" },
+  {
+    id: "intermediate",
+    name: "Intermediate",
+    color: "amber",
+    icon: "\u{1F7E1}"
+  },
+  { id: "advanced", name: "Advanced", color: "red", icon: "\u{1F534}" }
+];
+var getNextDates = (days) => {
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  const result = [];
+  const today = /* @__PURE__ */ new Date();
+  for (let i = 0; i < days; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    result.push({
+      dayName: dayNames[d.getDay()],
+      dayNum: d.getDate(),
+      month: months[d.getMonth()],
+      isToday: i === 0,
+      index: i
+    });
+  }
+  return result;
+};
+var PAYMENT_METHODS = [
+  { id: "upi", name: "UPI", icon: "\u{1F4F1}" },
+  { id: "card", name: "Card", icon: "\u{1F4B3}" },
+  { id: "netbanking", name: "Net Banking", icon: "\u{1F3E6}" },
+  { id: "wallet", name: "Wallet", icon: "\u{1F4B0}" }
+];
+var getTimeSlotsForDate = (dateIndex) => {
+  const allSlots = [
+    { time: "9:00 AM", available: true },
+    { time: "10:00 AM", available: true },
+    { time: "11:00 AM", available: true },
+    { time: "12:00 PM", available: true },
+    { time: "1:00 PM", available: dateIndex !== 0 && dateIndex !== 2 },
+    { time: "2:00 PM", available: true },
+    { time: "3:00 PM", available: dateIndex !== 1 },
+    { time: "4:00 PM", available: true },
+    { time: "5:00 PM", available: false },
+    { time: "6:00 PM", available: true },
+    { time: "7:00 PM", available: dateIndex < 5 }
+  ];
+  return allSlots;
+};
+var BOOKING_STEPS = [
+  "Type",
+  "Difficulty",
+  "Date & Time",
+  "Details",
+  "Review",
+  "Payment",
+  "Confirmation"
+];
+
+// apps/interview-ready-web/src/app/booking/booking.component.ts
+var _forTrack08 = ($index, $item) => $item.id;
+var _forTrack12 = ($index, $item) => $item.index;
+var _forTrack2 = ($index, $item) => $item.time;
+function BookingComponent_For_11_Conditional_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 10);
+  }
+  if (rf & 2) {
+    const \u0275$index_17_r1 = \u0275\u0275nextContext().$index;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("done", \u0275$index_17_r1 + 1 < ctx_r1.currentStep());
+  }
+}
+function BookingComponent_For_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 7)(1, "span", 8);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275conditionalCreate(3, BookingComponent_For_11_Conditional_3_Template, 1, 2, "div", 9);
+  }
+  if (rf & 2) {
+    const \u0275$index_17_r1 = ctx.$index;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("done", \u0275$index_17_r1 + 1 < ctx_r1.currentStep())("active", \u0275$index_17_r1 + 1 === ctx_r1.currentStep());
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275$index_17_r1 + 1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(\u0275$index_17_r1 < ctx_r1.totalSteps - 1 ? 3 : -1);
+  }
+}
+function BookingComponent_Case_14_For_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 17);
+    \u0275\u0275listener("click", function BookingComponent_Case_14_For_8_Template_div_click_0_listener() {
+      const type_r5 = \u0275\u0275restoreView(_r4).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.selectType(type_r5));
+    });
+    \u0275\u0275elementStart(1, "div", 18);
+    \u0275\u0275element(2, "app-icon", 19);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 20);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "h3");
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "p");
+    \u0275\u0275text(8);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_11_0;
+    const type_r5 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("selected", ((tmp_11_0 = ctx_r1.selectedType()) == null ? null : tmp_11_0.id) === type_r5.id);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("size", 12)("strokeWidth", 3);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(type_r5.icon);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(type_r5.name);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(type_r5.description);
+  }
+}
+function BookingComponent_Case_14_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 11)(2, "h2");
+    \u0275\u0275text(3, "What type of interview?");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "Choose the session that fits your current goal.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 12);
+    \u0275\u0275repeaterCreate(7, BookingComponent_Case_14_For_8_Template, 9, 7, "div", 13, _forTrack08);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "div", 14)(10, "button", 15);
+    \u0275\u0275listener("click", function BookingComponent_Case_14_Template_button_click_10_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.nextStep());
+    });
+    \u0275\u0275text(11, " Continue ");
+    \u0275\u0275element(12, "app-icon", 16);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(7);
+    \u0275\u0275repeater(ctx_r1.interviewTypes);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("disabled", !ctx_r1.selectedType());
+    \u0275\u0275advance(2);
+    \u0275\u0275property("size", 16)("strokeWidth", 2.5);
+  }
+}
+function BookingComponent_Case_15_For_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 27);
+    \u0275\u0275listener("click", function BookingComponent_Case_15_For_8_Template_div_click_0_listener() {
+      const level_r8 = \u0275\u0275restoreView(_r7).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.selectDifficulty(level_r8));
+    });
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_12_0;
+    const level_r8 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classMap(level_r8.id);
+    \u0275\u0275classProp("selected", ((tmp_12_0 = ctx_r1.selectedDifficulty()) == null ? null : tmp_12_0.id) === level_r8.id);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate2(" ", level_r8.icon, " ", level_r8.name, " ");
+  }
+}
+function BookingComponent_Case_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 11)(2, "h2");
+    \u0275\u0275text(3, "Select difficulty");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "We'll match you with an interviewer at the right level.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 21);
+    \u0275\u0275repeaterCreate(7, BookingComponent_Case_15_For_8_Template, 2, 6, "div", 22, _forTrack08);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "div", 23);
+    \u0275\u0275text(10, " Not sure? ");
+    \u0275\u0275elementStart(11, "a", 24);
+    \u0275\u0275listener("click", function BookingComponent_Case_15_Template_a_click_11_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.skipDifficulty());
+    });
+    \u0275\u0275text(12, "Skip this step \u2192");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(13, "div", 14)(14, "button", 25);
+    \u0275\u0275listener("click", function BookingComponent_Case_15_Template_button_click_14_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.prevStep());
+    });
+    \u0275\u0275element(15, "app-icon", 26);
+    \u0275\u0275text(16, " Back ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(17, "button", 15);
+    \u0275\u0275listener("click", function BookingComponent_Case_15_Template_button_click_17_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.nextStep());
+    });
+    \u0275\u0275text(18, " Continue ");
+    \u0275\u0275element(19, "app-icon", 16);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(7);
+    \u0275\u0275repeater(ctx_r1.difficultyLevels);
+    \u0275\u0275advance(8);
+    \u0275\u0275property("size", 15)("strokeWidth", 2.5);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("disabled", !ctx_r1.selectedDifficulty());
+    \u0275\u0275advance(2);
+    \u0275\u0275property("size", 16)("strokeWidth", 2.5);
+  }
+}
+function BookingComponent_Case_16_For_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 33);
+    \u0275\u0275listener("click", function BookingComponent_Case_16_For_8_Template_div_click_0_listener() {
+      const date_r11 = \u0275\u0275restoreView(_r10).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.selectDate(date_r11));
+    });
+    \u0275\u0275elementStart(1, "div", 34);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 35);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_12_0;
+    const date_r11 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("today", date_r11.isToday)("selected", ((tmp_12_0 = ctx_r1.selectedDate()) == null ? null : tmp_12_0.index) === date_r11.index);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(date_r11.dayName);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(date_r11.dayNum);
+  }
+}
+function BookingComponent_Case_16_For_13_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r12 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 36);
+    \u0275\u0275listener("click", function BookingComponent_Case_16_For_13_Template_div_click_0_listener() {
+      const slot_r13 = \u0275\u0275restoreView(_r12).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.selectSlot(slot_r13));
+    });
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_11_0;
+    const slot_r13 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("selected", ((tmp_11_0 = ctx_r1.selectedSlot()) == null ? null : tmp_11_0.time) === slot_r13.time)("unavailable", !slot_r13.available);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", slot_r13.time, " ");
+  }
+}
+function BookingComponent_Case_16_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 11)(2, "h2");
+    \u0275\u0275text(3, "Pick a date & time");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "Choose a slot that works best for you.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 28);
+    \u0275\u0275repeaterCreate(7, BookingComponent_Case_16_For_8_Template, 5, 6, "div", 29, _forTrack12);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "div", 30);
+    \u0275\u0275text(10, "Available time slots");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(11, "div", 31);
+    \u0275\u0275repeaterCreate(12, BookingComponent_Case_16_For_13_Template, 2, 5, "div", 32, _forTrack2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "div", 14)(15, "button", 25);
+    \u0275\u0275listener("click", function BookingComponent_Case_16_Template_button_click_15_listener() {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.prevStep());
+    });
+    \u0275\u0275element(16, "app-icon", 26);
+    \u0275\u0275text(17, " Back ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(18, "button", 15);
+    \u0275\u0275listener("click", function BookingComponent_Case_16_Template_button_click_18_listener() {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.nextStep());
+    });
+    \u0275\u0275text(19, " Continue ");
+    \u0275\u0275element(20, "app-icon", 16);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(7);
+    \u0275\u0275repeater(ctx_r1.dateOptions);
+    \u0275\u0275advance(5);
+    \u0275\u0275repeater(ctx_r1.timeSlots());
+    \u0275\u0275advance(4);
+    \u0275\u0275property("size", 15)("strokeWidth", 2.5);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("disabled", !ctx_r1.selectedDate() || !ctx_r1.selectedSlot());
+    \u0275\u0275advance(2);
+    \u0275\u0275property("size", 16)("strokeWidth", 2.5);
+  }
+}
+function BookingComponent_Case_17_Conditional_6_Conditional_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r16 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 45)(1, "span", 46);
+    \u0275\u0275text(2, "\u{1F4C4}");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "span", 47);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "button", 48);
+    \u0275\u0275listener("click", function BookingComponent_Case_17_Conditional_6_Conditional_8_Template_button_click_5_listener() {
+      \u0275\u0275restoreView(_r16);
+      const ctx_r1 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r1.removeFile());
+    });
+    \u0275\u0275text(6, "\u2715");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate((tmp_3_0 = ctx_r1.resumeFile()) == null ? null : tmp_3_0.name);
+  }
+}
+function BookingComponent_Case_17_Conditional_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r15 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 41);
+    \u0275\u0275listener("dragover", function BookingComponent_Case_17_Conditional_6_Template_div_dragover_0_listener() {
+      \u0275\u0275restoreView(_r15);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.isDragging.set(true));
+    })("dragleave", function BookingComponent_Case_17_Conditional_6_Template_div_dragleave_0_listener() {
+      \u0275\u0275restoreView(_r15);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.isDragging.set(false));
+    })("drop", function BookingComponent_Case_17_Conditional_6_Template_div_drop_0_listener() {
+      \u0275\u0275restoreView(_r15);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.isDragging.set(false));
+    });
+    \u0275\u0275elementStart(1, "input", 42);
+    \u0275\u0275listener("change", function BookingComponent_Case_17_Conditional_6_Template_input_change_1_listener($event) {
+      \u0275\u0275restoreView(_r15);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.onFileSelected($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "div", 43);
+    \u0275\u0275element(3, "app-icon", 44);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "h4");
+    \u0275\u0275text(5, "Upload your resume");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "p");
+    \u0275\u0275text(7, "PDF, DOC, or DOCX \xB7 Max 5MB");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275conditionalCreate(8, BookingComponent_Case_17_Conditional_6_Conditional_8_Template, 7, 1, "div", 45);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275styleProp("display", ctx_r1.resumeFile() ? "none" : "block");
+    \u0275\u0275classProp("drag", ctx_r1.isDragging());
+    \u0275\u0275advance(3);
+    \u0275\u0275property("size", 24)("strokeWidth", 2);
+    \u0275\u0275advance(5);
+    \u0275\u0275conditional(ctx_r1.resumeFile() ? 8 : -1);
+  }
+}
+function BookingComponent_Case_17_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r14 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 11)(2, "h2");
+    \u0275\u0275text(3, "A little more info");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "Help us make your session more relevant.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275conditionalCreate(6, BookingComponent_Case_17_Conditional_6_Template, 9, 7);
+    \u0275\u0275elementStart(7, "div", 37);
+    \u0275\u0275text(8, " Anything specific you want help with? ");
+    \u0275\u0275elementStart(9, "span", 38);
+    \u0275\u0275text(10, "Optional");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(11, "textarea", 39);
+    \u0275\u0275listener("ngModelChange", function BookingComponent_Case_17_Template_textarea_ngModelChange_11_listener($event) {
+      \u0275\u0275restoreView(_r14);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.notes.set($event));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "div", 14)(13, "button", 25);
+    \u0275\u0275listener("click", function BookingComponent_Case_17_Template_button_click_13_listener() {
+      \u0275\u0275restoreView(_r14);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.prevStep());
+    });
+    \u0275\u0275element(14, "app-icon", 26);
+    \u0275\u0275text(15, " Back ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(16, "button", 40);
+    \u0275\u0275listener("click", function BookingComponent_Case_17_Template_button_click_16_listener() {
+      \u0275\u0275restoreView(_r14);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.nextStep());
+    });
+    \u0275\u0275text(17, " Review Booking ");
+    \u0275\u0275element(18, "app-icon", 16);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275conditional(ctx_r1.showResumeUpload() ? 6 : -1);
+    \u0275\u0275advance(5);
+    \u0275\u0275property("ngModel", ctx_r1.notes());
+    \u0275\u0275advance(3);
+    \u0275\u0275property("size", 15)("strokeWidth", 2.5);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("size", 16)("strokeWidth", 2.5);
+  }
+}
+function BookingComponent_Case_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r17 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 11)(2, "h2");
+    \u0275\u0275text(3, "Review your booking");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "Everything look good? Proceed to payment.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 49)(7, "div", 50)(8, "span", 51);
+    \u0275\u0275text(9, "Interview");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "span", 52);
+    \u0275\u0275text(11);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(12, "div", 50)(13, "span", 51);
+    \u0275\u0275text(14, "Difficulty");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(15, "span", 52);
+    \u0275\u0275text(16);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(17, "div", 50)(18, "span", 51);
+    \u0275\u0275text(19, "Date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "span", 52);
+    \u0275\u0275text(21);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(22, "div", 50)(23, "span", 51);
+    \u0275\u0275text(24, "Time");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(25, "span", 52);
+    \u0275\u0275text(26);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(27, "div", 50)(28, "span", 51);
+    \u0275\u0275text(29, "Price");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(30, "span", 53);
+    \u0275\u0275text(31);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(32, "div", 14)(33, "button", 25);
+    \u0275\u0275listener("click", function BookingComponent_Case_18_Template_button_click_33_listener() {
+      \u0275\u0275restoreView(_r17);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.prevStep());
+    });
+    \u0275\u0275element(34, "app-icon", 26);
+    \u0275\u0275text(35, " Back ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(36, "button", 40);
+    \u0275\u0275listener("click", function BookingComponent_Case_18_Template_button_click_36_listener() {
+      \u0275\u0275restoreView(_r17);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.nextStep());
+    });
+    \u0275\u0275text(37, " Proceed to Payment ");
+    \u0275\u0275element(38, "app-icon", 16);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    let tmp_1_0;
+    let tmp_2_0;
+    let tmp_3_0;
+    let tmp_4_0;
+    let tmp_5_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(11);
+    \u0275\u0275textInterpolate((tmp_1_0 = ctx_r1.selectedType()) == null ? null : tmp_1_0.name);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(((tmp_2_0 = ctx_r1.selectedDifficulty()) == null ? null : tmp_2_0.name) || "Not specified");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate3("", (tmp_3_0 = ctx_r1.selectedDate()) == null ? null : tmp_3_0.dayName, " ", (tmp_3_0 = ctx_r1.selectedDate()) == null ? null : tmp_3_0.dayNum, " ", (tmp_3_0 = ctx_r1.selectedDate()) == null ? null : tmp_3_0.month);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate((tmp_4_0 = ctx_r1.selectedSlot()) == null ? null : tmp_4_0.time);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1("\u20B9", (tmp_5_0 = ctx_r1.selectedType()) == null ? null : tmp_5_0.price);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("size", 15)("strokeWidth", 2.5);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("size", 16)("strokeWidth", 2.5);
+  }
+}
+function BookingComponent_Case_19_For_17_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r19 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 64);
+    \u0275\u0275listener("click", function BookingComponent_Case_19_For_17_Template_div_click_0_listener() {
+      const method_r20 = \u0275\u0275restoreView(_r19).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.selectPaymentMethod(method_r20.id));
+    });
+    \u0275\u0275elementStart(1, "div", 65);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 66);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const method_r20 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("selected", ctx_r1.selectedPaymentMethod() === method_r20.id);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(method_r20.icon);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(method_r20.name);
+  }
+}
+function BookingComponent_Case_19_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r18 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 11)(2, "h2");
+    \u0275\u0275text(3, "Complete payment");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "p");
+    \u0275\u0275text(5, "Secure, instant confirmation after payment.");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 54)(7, "div", 55);
+    \u0275\u0275text(8, "Total amount");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "div", 56);
+    \u0275\u0275text(10);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(11, "div", 57);
+    \u0275\u0275text(12);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(13, "div", 30);
+    \u0275\u0275text(14, "Choose payment method");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(15, "div", 58);
+    \u0275\u0275repeaterCreate(16, BookingComponent_Case_19_For_17_Template, 5, 4, "div", 59, _forTrack08);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(18, "button", 60);
+    \u0275\u0275listener("click", function BookingComponent_Case_19_Template_button_click_18_listener() {
+      \u0275\u0275restoreView(_r18);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.nextStep());
+    });
+    \u0275\u0275element(19, "app-icon", 61);
+    \u0275\u0275text(20, " Pay & Confirm ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(21, "div", 62);
+    \u0275\u0275element(22, "app-icon", 63);
+    \u0275\u0275text(23, " Secured with 256-bit SSL encryption ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(24, "div", 14)(25, "button", 25);
+    \u0275\u0275listener("click", function BookingComponent_Case_19_Template_button_click_25_listener() {
+      \u0275\u0275restoreView(_r18);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.prevStep());
+    });
+    \u0275\u0275element(26, "app-icon", 26);
+    \u0275\u0275text(27, " Back ");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    let tmp_1_0;
+    let tmp_2_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(10);
+    \u0275\u0275textInterpolate1("\u20B9", (tmp_1_0 = ctx_r1.selectedType()) == null ? null : tmp_1_0.price);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", (tmp_2_0 = ctx_r1.selectedType()) == null ? null : tmp_2_0.name, " \xB7 ", ((tmp_2_0 = ctx_r1.selectedDifficulty()) == null ? null : tmp_2_0.name) || "General", " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275repeater(ctx_r1.paymentMethods);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("disabled", !ctx_r1.selectedPaymentMethod());
+    \u0275\u0275advance();
+    \u0275\u0275property("size", 18)("strokeWidth", 2.5);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("size", 14)("strokeWidth", 2);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("size", 15)("strokeWidth", 2.5);
+  }
+}
+function BookingComponent_Case_20_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 67)(2, "div", 68);
+    \u0275\u0275element(3, "app-icon", 69);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "h2");
+    \u0275\u0275text(5, "Interview Booked! \u{1F389}");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "p", 70);
+    \u0275\u0275text(7, " You're all set. Your session is confirmed and waiting for you. ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 71)(9, "div", 72)(10, "span", 73);
+    \u0275\u0275text(11);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "div")(13, "div", 74);
+    \u0275\u0275text(14);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(15, "div", 75);
+    \u0275\u0275text(16, "Interview type");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(17, "div", 72)(18, "span", 73);
+    \u0275\u0275text(19, "\u{1F4C5}");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "div")(21, "div", 74);
+    \u0275\u0275text(22);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(23, "div", 75);
+    \u0275\u0275text(24, "Scheduled date");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(25, "div", 72)(26, "span", 73);
+    \u0275\u0275text(27, "\u{1F550}");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(28, "div")(29, "div", 74);
+    \u0275\u0275text(30);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(31, "div", 75);
+    \u0275\u0275text(32, "Session time");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(33, "div", 72)(34, "span", 73);
+    \u0275\u0275text(35, "\u2705");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(36, "div")(37, "div", 76);
+    \u0275\u0275text(38, " Payment Confirmed ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(39, "div", 75);
+    \u0275\u0275text(40);
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(41, "div", 77);
+    \u0275\u0275text(42, " \u{1F4E7} A confirmation email has been sent. The ");
+    \u0275\u0275elementStart(43, "strong");
+    \u0275\u0275text(44, "interview link");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(45, " will be shared ");
+    \u0275\u0275elementStart(46, "strong");
+    \u0275\u0275text(47, "30 minutes before");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(48, " your session starts. Check your inbox! ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(49, "a", 78);
+    \u0275\u0275text(50, " Go to Dashboard ");
+    \u0275\u0275element(51, "app-icon", 79);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    let tmp_4_0;
+    let tmp_5_0;
+    let tmp_6_0;
+    let tmp_7_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("size", 40)("strokeWidth", 2.5);
+    \u0275\u0275advance(8);
+    \u0275\u0275textInterpolate((tmp_3_0 = ctx_r1.selectedType()) == null ? null : tmp_3_0.icon);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate((tmp_4_0 = ctx_r1.selectedType()) == null ? null : tmp_4_0.name);
+    \u0275\u0275advance(8);
+    \u0275\u0275textInterpolate3(" ", (tmp_5_0 = ctx_r1.selectedDate()) == null ? null : tmp_5_0.dayName, " ", (tmp_5_0 = ctx_r1.selectedDate()) == null ? null : tmp_5_0.dayNum, " ", (tmp_5_0 = ctx_r1.selectedDate()) == null ? null : tmp_5_0.month, " ");
+    \u0275\u0275advance(8);
+    \u0275\u0275textInterpolate((tmp_6_0 = ctx_r1.selectedSlot()) == null ? null : tmp_6_0.time);
+    \u0275\u0275advance(10);
+    \u0275\u0275textInterpolate1("\u20B9", (tmp_7_0 = ctx_r1.selectedType()) == null ? null : tmp_7_0.price, " paid");
+    \u0275\u0275advance(11);
+    \u0275\u0275property("size", 16)("strokeWidth", 2.5);
+  }
+}
+var BookingComponent = class _BookingComponent {
+  currentStep = signal(1, ...ngDevMode ? [{ debugName: "currentStep" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  totalSteps = BOOKING_STEPS.length;
+  steps = BOOKING_STEPS;
+  interviewTypes = INTERVIEW_TYPES2;
+  difficultyLevels = DIFFICULTY_LEVELS;
+  dateOptions = getNextDates(8);
+  selectedType = signal(null, ...ngDevMode ? [{ debugName: "selectedType" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  selectedDifficulty = signal(null, ...ngDevMode ? [{ debugName: "selectedDifficulty" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  selectedDate = signal(null, ...ngDevMode ? [{ debugName: "selectedDate" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  selectedSlot = signal(null, ...ngDevMode ? [{ debugName: "selectedSlot" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  resumeFile = signal(null, ...ngDevMode ? [{ debugName: "resumeFile" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  notes = signal("", ...ngDevMode ? [{ debugName: "notes" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  selectedPaymentMethod = signal(null, ...ngDevMode ? [{ debugName: "selectedPaymentMethod" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  timeSlots = computed(() => {
+    const date = this.selectedDate();
+    return date ? getTimeSlotsForDate(date.index) : getTimeSlotsForDate(0);
+  }, ...ngDevMode ? [{ debugName: "timeSlots" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  showResumeUpload = computed(() => {
+    return this.selectedType()?.id === "resume";
+  }, ...ngDevMode ? [{ debugName: "showResumeUpload" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  onFileSelected(event) {
+    const input2 = event.target;
+    if (input2.files?.length) {
+      this.resumeFile.set(input2.files[0]);
+    }
+  }
+  removeFile() {
+    this.resumeFile.set(null);
+  }
+  isDragging = signal(false, ...ngDevMode ? [{ debugName: "isDragging" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  paymentMethods = PAYMENT_METHODS;
+  selectType(type) {
+    this.selectedType.set(type);
+  }
+  selectDifficulty(level) {
+    this.selectedDifficulty.set(level);
+  }
+  skipDifficulty() {
+    this.selectedDifficulty.set(null);
+    this.nextStep();
+  }
+  selectDate(date) {
+    this.selectedDate.set(date);
+    this.selectedSlot.set(null);
+  }
+  selectSlot(slot) {
+    if (slot.available) {
+      this.selectedSlot.set(slot);
+    }
+  }
+  selectPaymentMethod(methodId) {
+    this.selectedPaymentMethod.set(methodId);
+  }
+  nextStep() {
+    if (this.currentStep() < this.totalSteps) {
+      this.currentStep.update((s) => s + 1);
+    }
+  }
+  prevStep() {
+    if (this.currentStep() > 1) {
+      this.currentStep.update((s) => s - 1);
+    }
+  }
+  get progressPercentage() {
+    return (this.currentStep() - 1) / (this.totalSteps - 1) * 100;
+  }
+  static \u0275fac = function BookingComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _BookingComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingComponent, selectors: [["app-booking"]], decls: 21, vars: 5, consts: [[1, "page-wrap"], [1, "stepper-wrap"], [1, "step-label"], [1, "stepper"], [1, "progress-bar-wrap"], [1, "progress-bar"], [1, "step-card"], [1, "step-dot"], [1, "dot-num"], [1, "step-line", 3, "done"], [1, "step-line"], [1, "step-card-header"], [1, "type-grid"], [1, "type-card", 3, "selected"], [1, "step-nav"], [1, "btn-next", 3, "click", "disabled"], ["name", "arrow-right", 3, "size", "strokeWidth"], [1, "type-card", 3, "click"], [1, "check-badge"], ["name", "check-circle", 3, "size", "strokeWidth"], [1, "type-icon"], [1, "chips-wrap"], [1, "chip", 3, "selected", "class"], [1, "skip-hint"], [3, "click"], [1, "btn-back", 3, "click"], ["name", "arrow-left", 3, "size", "strokeWidth"], [1, "chip", 3, "click"], [1, "date-scroller"], [1, "date-btn", 3, "today", "selected"], [1, "slots-label"], [1, "slots-grid"], [1, "slot-btn", 3, "selected", "unavailable"], [1, "date-btn", 3, "click"], [1, "day-name"], [1, "day-num"], [1, "slot-btn", 3, "click"], [1, "optional-label"], [1, "badge-opt"], ["placeholder", "e.g. I struggle with dynamic programming, or want to practice STAR method answers...", 3, "ngModelChange", "ngModel"], [1, "btn-next", 3, "click"], [1, "upload-zone", 3, "dragover", "dragleave", "drop"], ["type", "file", "accept", ".pdf,.doc,.docx", 3, "change"], [1, "upload-icon"], ["name", "upload", 3, "size", "strokeWidth"], [1, "uploaded-file"], [1, "file-icon"], [1, "file-name"], [1, "remove-file", 3, "click"], [1, "review-summary"], [1, "review-row"], [1, "row-label"], [1, "row-value"], [1, "row-value", "price-highlight"], [1, "payment-amount-box"], [1, "pay-label"], [1, "pay-amount"], [1, "pay-desc"], [1, "payment-methods"], [1, "pay-method", 3, "selected"], [1, "btn-pay", 3, "click", "disabled"], ["name", "lock", "stroke", "white", 3, "size", "strokeWidth"], [1, "secure-note"], ["name", "lock", 3, "size", "strokeWidth"], [1, "pay-method", 3, "click"], [1, "pay-icon"], [1, "pay-name"], [1, "confirm-screen"], [1, "confirm-icon"], ["name", "check-circle", "stroke", "white", 3, "size", "strokeWidth"], [1, "confirm-sub"], [1, "confirm-detail-card"], [1, "detail-row"], [1, "detail-icon"], [1, "detail-text"], [1, "detail-sub"], [1, "detail-text", 2, "color", "var(--green)"], [1, "join-note"], ["routerLink", "/dashboard", 1, "btn-dashboard"], ["name", "arrow-right", "stroke", "white", 3, "size", "strokeWidth"]], template: function BookingComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2);
+      \u0275\u0275text(3, " Step ");
+      \u0275\u0275elementStart(4, "span");
+      \u0275\u0275text(5);
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(6, " of ");
+      \u0275\u0275elementStart(7, "span");
+      \u0275\u0275text(8);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(9, "div", 3);
+      \u0275\u0275repeaterCreate(10, BookingComponent_For_11_Template, 4, 6, null, null, \u0275\u0275repeaterTrackByIdentity);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(12, "div", 4);
+      \u0275\u0275element(13, "div", 5);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275conditionalCreate(14, BookingComponent_Case_14_Template, 13, 3, "div", 6)(15, BookingComponent_Case_15_Template, 20, 5, "div", 6)(16, BookingComponent_Case_16_Template, 21, 5, "div", 6)(17, BookingComponent_Case_17_Template, 19, 6, "div", 6)(18, BookingComponent_Case_18_Template, 39, 11, "div", 6)(19, BookingComponent_Case_19_Template, 28, 10, "div", 6)(20, BookingComponent_Case_20_Template, 52, 11, "div", 6);
+      \u0275\u0275elementEnd();
+    }
+    if (rf & 2) {
+      let tmp_4_0;
+      \u0275\u0275advance(5);
+      \u0275\u0275textInterpolate(ctx.currentStep());
+      \u0275\u0275advance(3);
+      \u0275\u0275textInterpolate(ctx.totalSteps);
+      \u0275\u0275advance(2);
+      \u0275\u0275repeater(ctx.steps);
+      \u0275\u0275advance(3);
+      \u0275\u0275styleProp("width", ctx.progressPercentage, "%");
+      \u0275\u0275advance();
+      \u0275\u0275conditional((tmp_4_0 = ctx.currentStep()) === 1 ? 14 : tmp_4_0 === 2 ? 15 : tmp_4_0 === 3 ? 16 : tmp_4_0 === 4 ? 17 : tmp_4_0 === 5 ? 18 : tmp_4_0 === 6 ? 19 : tmp_4_0 === 7 ? 20 : -1);
+    }
+  }, dependencies: [CommonModule, IconComponent, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, RouterLink], styles: ['\n.page-wrap[_ngcontent-%COMP%] {\n  max-width: 720px;\n  margin: 0 auto;\n  padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 24px) 80px;\n}\n.stepper-wrap[_ngcontent-%COMP%] {\n  margin-bottom: 36px;\n}\n.step-label[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n  margin-bottom: 12px;\n}\n.step-label[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.stepper[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0;\n}\n.step-dot[_ngcontent-%COMP%] {\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  font-size: 0.78rem;\n  font-weight: 700;\n  font-family: "Sora", sans-serif;\n  flex-shrink: 0;\n  transition: all 0.3s;\n  border: 2px solid var(--border);\n  background: var(--bg);\n  color: var(--text-muted);\n}\n.step-dot.active[_ngcontent-%COMP%] {\n  background: var(--blue);\n  border-color: var(--blue);\n  color: var(--bg);\n  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);\n}\n.step-dot.done[_ngcontent-%COMP%] {\n  background: var(--green);\n  border-color: var(--green);\n  color: var(--bg);\n}\n.step-line[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 2px;\n  background: var(--border);\n  transition: background 0.4s;\n}\n.step-line.done[_ngcontent-%COMP%] {\n  background: var(--green);\n}\n.progress-bar-wrap[_ngcontent-%COMP%] {\n  margin-top: 10px;\n  height: 4px;\n  background: var(--border);\n  border-radius: 99px;\n  overflow: hidden;\n}\n.progress-bar[_ngcontent-%COMP%] {\n  height: 100%;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 99px;\n  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);\n}\n.step-card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  border: 1px solid var(--border);\n  padding: clamp(24px, 4vw, 44px);\n  animation: _ngcontent-%COMP%_slideUp 0.38s cubic-bezier(0.4, 0, 0.2, 1) both;\n}\n@keyframes _ngcontent-%COMP%_slideUp {\n  from {\n    opacity: 0;\n    transform: translateY(18px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.step-card-header[_ngcontent-%COMP%] {\n  margin-bottom: 28px;\n}\n.step-card-header[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-size: clamp(1.3rem, 3vw, 1.7rem);\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 6px;\n}\n.step-card-header[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.95rem;\n  color: var(--text-soft);\n}\n.type-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));\n  gap: 14px;\n}\n.type-card[_ngcontent-%COMP%] {\n  border: 2px solid var(--border);\n  border-radius: var(--radius);\n  padding: 22px 18px;\n  cursor: pointer;\n  transition: all 0.22s;\n  background: var(--bg);\n  text-align: left;\n  position: relative;\n  overflow: hidden;\n}\n.type-card[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue-mid);\n  box-shadow: var(--shadow);\n  transform: translateY(-2px);\n}\n.type-card.selected[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  box-shadow: 0 0 0 1px var(--blue), var(--shadow);\n}\n.type-icon[_ngcontent-%COMP%] {\n  width: 44px;\n  height: 44px;\n  border-radius: 12px;\n  display: grid;\n  place-items: center;\n  margin-bottom: 14px;\n  font-size: 1.3rem;\n  background: var(--bg-alt);\n  transition: background 0.22s;\n}\n.type-card.selected[_ngcontent-%COMP%]   .type-icon[_ngcontent-%COMP%] {\n  background: rgba(37, 99, 235, 0.12);\n}\n.type-card[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  font-weight: 700;\n  margin-bottom: 4px;\n  color: var(--text);\n}\n.type-card[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: var(--text-soft);\n  line-height: 1.4;\n}\n.check-badge[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 12px;\n  right: 12px;\n  width: 22px;\n  height: 22px;\n  background: var(--blue);\n  border-radius: 50%;\n  display: none;\n  place-items: center;\n}\n.type-card.selected[_ngcontent-%COMP%]   .check-badge[_ngcontent-%COMP%] {\n  display: grid;\n}\n.chips-wrap[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 10px;\n  flex-wrap: wrap;\n}\n.chip[_ngcontent-%COMP%] {\n  padding: 10px 20px;\n  border-radius: 100px;\n  border: 2px solid var(--border);\n  background: var(--bg);\n  font-size: 0.92rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  cursor: pointer;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.chip[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue-mid);\n  color: var(--blue);\n}\n.chip.selected[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  color: var(--blue);\n}\n.chip.beginner.selected[_ngcontent-%COMP%] {\n  border-color: var(--green);\n  background: #f0fdf4;\n  color: var(--green);\n}\n.chip.intermediate.selected[_ngcontent-%COMP%] {\n  border-color: var(--amber);\n  background: #fffbeb;\n  color: #b45309;\n}\n.chip.advanced.selected[_ngcontent-%COMP%] {\n  border-color: var(--red);\n  background: #fef2f2;\n  color: var(--red);\n}\n.skip-hint[_ngcontent-%COMP%] {\n  margin-top: 14px;\n  font-size: 0.85rem;\n  color: var(--text-muted);\n}\n.skip-hint[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--blue);\n  text-decoration: none;\n  font-weight: 500;\n  cursor: pointer;\n}\n.skip-hint[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  text-decoration: underline;\n}\n.step-nav[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 12px;\n  margin-top: 28px;\n  justify-content: flex-end;\n  align-items: center;\n}\n.btn-back[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  padding: 12px 20px;\n  border-radius: 10px;\n  border: 1.5px solid var(--border);\n  background: var(--bg);\n  color: var(--text-soft);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.btn-back[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue);\n  color: var(--blue);\n  background: var(--blue-light);\n}\n.btn-next[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 13px 28px;\n  border-radius: 10px;\n  background: var(--blue);\n  color: var(--bg);\n  font-size: 0.95rem;\n  font-weight: 700;\n  cursor: pointer;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);\n}\n.btn-next[_ngcontent-%COMP%]:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-1px);\n  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);\n}\n.btn-next[_ngcontent-%COMP%]:disabled {\n  background: var(--text-muted);\n  cursor: not-allowed;\n  transform: none;\n  box-shadow: none;\n}\n.date-scroller[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 10px;\n  overflow-x: auto;\n  padding-bottom: 6px;\n  scrollbar-width: none;\n  -ms-overflow-style: none;\n  margin-bottom: 28px;\n}\n.date-scroller[_ngcontent-%COMP%]::-webkit-scrollbar {\n  display: none;\n}\n.date-btn[_ngcontent-%COMP%] {\n  flex-shrink: 0;\n  width: 64px;\n  padding: 12px 0;\n  border-radius: var(--radius-sm);\n  border: 2px solid var(--border);\n  background: var(--bg);\n  cursor: pointer;\n  text-align: center;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.date-btn[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue-mid);\n}\n.date-btn.selected[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  background: var(--blue);\n  color: var(--bg);\n}\n.date-btn.today[_ngcontent-%COMP%]:not(.selected) {\n  border-color: var(--blue-mid);\n}\n.date-btn[_ngcontent-%COMP%]   .day-name[_ngcontent-%COMP%] {\n  font-size: 0.72rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.06em;\n  color: var(--text-muted);\n  margin-bottom: 4px;\n}\n.date-btn.selected[_ngcontent-%COMP%]   .day-name[_ngcontent-%COMP%] {\n  color: rgba(255, 255, 255, 0.75);\n}\n.date-btn[_ngcontent-%COMP%]   .day-num[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n  font-weight: 700;\n  font-family: "Sora", sans-serif;\n  color: var(--text);\n}\n.date-btn.selected[_ngcontent-%COMP%]   .day-num[_ngcontent-%COMP%] {\n  color: var(--bg);\n}\n.date-btn.today[_ngcontent-%COMP%]   .day-name[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.slots-label[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  margin-bottom: 12px;\n  text-transform: uppercase;\n  letter-spacing: 0.06em;\n}\n.slots-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));\n  gap: 10px;\n}\n.slot-btn[_ngcontent-%COMP%] {\n  padding: 11px 0;\n  border-radius: var(--radius-sm);\n  border: 2px solid var(--border);\n  background: var(--bg);\n  font-size: 0.9rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  cursor: pointer;\n  text-align: center;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.slot-btn[_ngcontent-%COMP%]:hover:not(.unavailable) {\n  border-color: var(--blue-mid);\n  color: var(--blue);\n}\n.slot-btn.selected[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  color: var(--blue);\n}\n.slot-btn.unavailable[_ngcontent-%COMP%] {\n  color: var(--text-muted);\n  background: var(--bg-alt);\n  cursor: not-allowed;\n  text-decoration: line-through;\n  opacity: 0.6;\n}\n.upload-zone[_ngcontent-%COMP%] {\n  border: 2px dashed var(--border);\n  border-radius: var(--radius);\n  padding: 32px 20px;\n  text-align: center;\n  cursor: pointer;\n  transition: all 0.22s;\n  background: var(--bg-alt);\n  position: relative;\n}\n.upload-zone[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue);\n  background: var(--blue-light);\n}\n.upload-zone[_ngcontent-%COMP%]   input[type=file][_ngcontent-%COMP%] {\n  position: absolute;\n  inset: 0;\n  opacity: 0;\n  cursor: pointer;\n  width: 100%;\n  height: 100%;\n}\n.upload-zone[_ngcontent-%COMP%]   h4[_ngcontent-%COMP%] {\n  font-size: 0.95rem;\n  font-weight: 600;\n  margin-bottom: 4px;\n}\n.upload-zone[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: var(--text-muted);\n}\n.upload-icon[_ngcontent-%COMP%] {\n  width: 48px;\n  height: 48px;\n  background: var(--blue-light);\n  border-radius: 12px;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 12px;\n}\n.upload-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 24px;\n  height: 24px;\n  stroke: var(--blue);\n  stroke-width: 2;\n}\n.uploaded-file[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  padding: 12px 16px;\n  background: #f0fdf4;\n  border: 1.5px solid #86efac;\n  border-radius: var(--radius-sm);\n  margin-top: 12px;\n}\n.uploaded-file[_ngcontent-%COMP%]   .file-icon[_ngcontent-%COMP%] {\n  font-size: 1.3rem;\n}\n.uploaded-file[_ngcontent-%COMP%]   .file-name[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: #166534;\n  flex: 1;\n}\n.uploaded-file[_ngcontent-%COMP%]   .remove-file[_ngcontent-%COMP%] {\n  background: none;\n  border: none;\n  color: var(--text-muted);\n  cursor: pointer;\n  font-size: 1rem;\n}\n.uploaded-file[_ngcontent-%COMP%]   .remove-file[_ngcontent-%COMP%]:hover {\n  color: var(--red);\n}\n.optional-label[_ngcontent-%COMP%] {\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  margin: 22px 0 8px;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.optional-label[_ngcontent-%COMP%]   .badge-opt[_ngcontent-%COMP%] {\n  font-size: 0.72rem;\n  background: var(--bg-alt);\n  color: var(--text-muted);\n  padding: 2px 8px;\n  border-radius: 100px;\n  font-weight: 500;\n}\ntextarea[_ngcontent-%COMP%] {\n  width: 100%;\n  border: 2px solid var(--border);\n  border-radius: var(--radius-sm);\n  padding: 14px 16px;\n  font-family: "DM Sans", sans-serif;\n  font-size: 0.92rem;\n  color: var(--text);\n  resize: vertical;\n  min-height: 100px;\n  transition: border-color 0.2s;\n  outline: none;\n  background: var(--bg);\n}\ntextarea[_ngcontent-%COMP%]:focus {\n  border-color: var(--blue);\n}\ntextarea[_ngcontent-%COMP%]::placeholder {\n  color: var(--text-muted);\n}\n.review-summary[_ngcontent-%COMP%] {\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  border: 1.5px solid var(--border);\n  overflow: hidden;\n  margin-bottom: 0;\n}\n.review-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 16px 20px;\n  border-bottom: 1px solid var(--border);\n  gap: 16px;\n}\n.review-row[_ngcontent-%COMP%]:last-child {\n  border-bottom: none;\n}\n.review-row[_ngcontent-%COMP%]   .row-label[_ngcontent-%COMP%] {\n  font-size: 0.85rem;\n  color: var(--text-muted);\n  font-weight: 500;\n  flex-shrink: 0;\n  min-width: 90px;\n}\n.review-row[_ngcontent-%COMP%]   .row-value[_ngcontent-%COMP%] {\n  font-size: 0.92rem;\n  font-weight: 600;\n  color: var(--text);\n  text-align: right;\n}\n.review-row[_ngcontent-%COMP%]   .price-highlight[_ngcontent-%COMP%] {\n  color: var(--blue);\n  font-size: 1.1rem;\n  font-family: "Sora", sans-serif;\n}\n.payment-amount-box[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      135deg,\n      var(--blue-light),\n      #f0f9ff);\n  border: 1.5px solid var(--blue-mid);\n  border-radius: var(--radius);\n  padding: 24px;\n  text-align: center;\n  margin-bottom: 24px;\n}\n.payment-amount-box[_ngcontent-%COMP%]   .pay-label[_ngcontent-%COMP%] {\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  margin-bottom: 6px;\n}\n.payment-amount-box[_ngcontent-%COMP%]   .pay-amount[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 2.2rem;\n  font-weight: 800;\n  color: var(--blue);\n}\n.payment-amount-box[_ngcontent-%COMP%]   .pay-desc[_ngcontent-%COMP%] {\n  font-size: 0.82rem;\n  color: var(--text-muted);\n  margin-top: 4px;\n}\n.payment-methods[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 10px;\n  margin-bottom: 20px;\n}\n.pay-method[_ngcontent-%COMP%] {\n  border: 2px solid var(--border);\n  border-radius: var(--radius-sm);\n  padding: 14px;\n  cursor: pointer;\n  text-align: center;\n  transition: all 0.2s;\n  background: var(--bg);\n  font-family: "DM Sans", sans-serif;\n}\n.pay-method[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue-mid);\n}\n.pay-method.selected[_ngcontent-%COMP%] {\n  border-color: var(--blue);\n  background: var(--blue-light);\n}\n.pay-method[_ngcontent-%COMP%]   .pay-icon[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n  margin-bottom: 6px;\n}\n.pay-method[_ngcontent-%COMP%]   .pay-name[_ngcontent-%COMP%] {\n  font-size: 0.85rem;\n  font-weight: 600;\n  color: var(--text-soft);\n}\n.pay-method.selected[_ngcontent-%COMP%]   .pay-name[_ngcontent-%COMP%] {\n  color: var(--blue);\n}\n.btn-pay[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 16px;\n  border-radius: 12px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--blue),\n      var(--blue-dark));\n  color: var(--bg);\n  font-size: 1.05rem;\n  font-weight: 700;\n  cursor: pointer;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n}\n.btn-pay[_ngcontent-%COMP%]:hover:not(:disabled) {\n  transform: translateY(-1px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-pay[_ngcontent-%COMP%]:disabled {\n  background: var(--text-muted);\n  cursor: not-allowed;\n  transform: none;\n  box-shadow: none;\n}\n.secure-note[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.82rem;\n  color: var(--text-muted);\n  justify-content: center;\n  margin-top: 12px;\n}\n.confirm-screen[_ngcontent-%COMP%] {\n  text-align: center;\n  padding: 10px 0;\n}\n.confirm-icon[_ngcontent-%COMP%] {\n  width: 80px;\n  height: 80px;\n  background: #f0fdf4;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n}\n.confirm-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 40px;\n  height: 40px;\n  stroke: var(--green);\n  stroke-width: 2.5;\n}\n.confirm-screen[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-size: 1.8rem;\n  font-weight: 800;\n  margin-bottom: 8px;\n}\n.confirm-screen[_ngcontent-%COMP%]   .confirm-sub[_ngcontent-%COMP%] {\n  font-size: 0.95rem;\n  color: var(--text-soft);\n  margin-bottom: 28px;\n}\n.confirm-detail-card[_ngcontent-%COMP%] {\n  background: var(--bg-soft);\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius);\n  padding: 20px 24px;\n  text-align: left;\n  margin-bottom: 24px;\n}\n.confirm-detail-card[_ngcontent-%COMP%]   .detail-row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  padding: 10px 0;\n  border-bottom: 1px solid var(--border);\n}\n.confirm-detail-card[_ngcontent-%COMP%]   .detail-row[_ngcontent-%COMP%]:last-child {\n  border-bottom: none;\n}\n.confirm-detail-card[_ngcontent-%COMP%]   .detail-row[_ngcontent-%COMP%]   .detail-icon[_ngcontent-%COMP%] {\n  font-size: 1.1rem;\n  flex-shrink: 0;\n}\n.confirm-detail-card[_ngcontent-%COMP%]   .detail-row[_ngcontent-%COMP%]   .detail-text[_ngcontent-%COMP%] {\n  font-size: 0.92rem;\n  font-weight: 600;\n  color: var(--text);\n}\n.confirm-detail-card[_ngcontent-%COMP%]   .detail-row[_ngcontent-%COMP%]   .detail-sub[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n  color: var(--text-muted);\n}\n.join-note[_ngcontent-%COMP%] {\n  background: #fff7ed;\n  border: 1.5px solid #fed7aa;\n  border-radius: var(--radius-sm);\n  padding: 14px 18px;\n  font-size: 0.88rem;\n  color: #92400e;\n  text-align: left;\n  line-height: 1.5;\n}\n.btn-dashboard[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 14px 32px;\n  border-radius: 10px;\n  background: var(--blue);\n  color: var(--bg);\n  font-size: 0.95rem;\n  font-weight: 700;\n  cursor: pointer;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  text-decoration: none;\n  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);\n  margin-top: 24px;\n}\n.btn-dashboard[_ngcontent-%COMP%]:hover {\n  background: var(--blue-dark);\n  transform: translateY(-1px);\n}\n@media (max-width: 520px) {\n  .type-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n  .step-nav[_ngcontent-%COMP%] {\n    flex-wrap: wrap;\n  }\n  .btn-next[_ngcontent-%COMP%] {\n    width: 100%;\n    justify-content: center;\n  }\n}\n/*# sourceMappingURL=booking.component.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BookingComponent, [{
+    type: Component,
+    args: [{ selector: "app-booking", standalone: true, imports: [CommonModule, IconComponent, FormsModule, RouterLink], template: `<div class="page-wrap">
+  <div class="stepper-wrap">
+    <div class="step-label">
+      Step <span>{{ currentStep() }}</span> of <span>{{ totalSteps }}</span>
+    </div>
+    <div class="stepper">
+      @for (step of steps; track step; let i = $index) {
+        <div
+          class="step-dot"
+          [class.done]="i + 1 < currentStep()"
+          [class.active]="i + 1 === currentStep()"
+        >
+          <span class="dot-num">{{ i + 1 }}</span>
+        </div>
+        @if (i < totalSteps - 1) {
+          <div class="step-line" [class.done]="i + 1 < currentStep()"></div>
+        }
+      }
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+    </div>
+  </div>
+
+  @switch (currentStep()) {
+    @case (1) {
+      <div class="step-card">
+        <div class="step-card-header">
+          <h2>What type of interview?</h2>
+          <p>Choose the session that fits your current goal.</p>
+        </div>
+        <div class="type-grid">
+          @for (type of interviewTypes; track type.id) {
+            <div
+              class="type-card"
+              [class.selected]="selectedType()?.id === type.id"
+              (click)="selectType(type)"
+            >
+              <div class="check-badge">
+                <app-icon
+                  name="check-circle"
+                  [size]="12"
+                  [strokeWidth]="3"
+                ></app-icon>
+              </div>
+              <div class="type-icon">{{ type.icon }}</div>
+              <h3>{{ type.name }}</h3>
+              <p>{{ type.description }}</p>
+            </div>
+          }
+        </div>
+        <div class="step-nav">
+          <button
+            class="btn-next"
+            [disabled]="!selectedType()"
+            (click)="nextStep()"
+          >
+            Continue
+            <app-icon
+              name="arrow-right"
+              [size]="16"
+              [strokeWidth]="2.5"
+            ></app-icon>
+          </button>
+        </div>
+      </div>
+    }
+    @case (2) {
+      <div class="step-card">
+        <div class="step-card-header">
+          <h2>Select difficulty</h2>
+          <p>We'll match you with an interviewer at the right level.</p>
+        </div>
+        <div class="chips-wrap">
+          @for (level of difficultyLevels; track level.id) {
+            <div
+              class="chip"
+              [class.selected]="selectedDifficulty()?.id === level.id"
+              [class]="level.id"
+              (click)="selectDifficulty(level)"
+            >
+              {{ level.icon }} {{ level.name }}
+            </div>
+          }
+        </div>
+        <div class="skip-hint">
+          Not sure? <a (click)="skipDifficulty()">Skip this step \u2192</a>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" (click)="prevStep()">
+            <app-icon
+              name="arrow-left"
+              [size]="15"
+              [strokeWidth]="2.5"
+            ></app-icon>
+            Back
+          </button>
+          <button
+            class="btn-next"
+            [disabled]="!selectedDifficulty()"
+            (click)="nextStep()"
+          >
+            Continue
+            <app-icon
+              name="arrow-right"
+              [size]="16"
+              [strokeWidth]="2.5"
+            ></app-icon>
+          </button>
+        </div>
+      </div>
+    }
+    @case (3) {
+      <div class="step-card">
+        <div class="step-card-header">
+          <h2>Pick a date & time</h2>
+          <p>Choose a slot that works best for you.</p>
+        </div>
+        <div class="date-scroller">
+          @for (date of dateOptions; track date.index) {
+            <div
+              class="date-btn"
+              [class.today]="date.isToday"
+              [class.selected]="selectedDate()?.index === date.index"
+              (click)="selectDate(date)"
+            >
+              <div class="day-name">{{ date.dayName }}</div>
+              <div class="day-num">{{ date.dayNum }}</div>
+            </div>
+          }
+        </div>
+        <div class="slots-label">Available time slots</div>
+        <div class="slots-grid">
+          @for (slot of timeSlots(); track slot.time) {
+            <div
+              class="slot-btn"
+              [class.selected]="selectedSlot()?.time === slot.time"
+              [class.unavailable]="!slot.available"
+              (click)="selectSlot(slot)"
+            >
+              {{ slot.time }}
+            </div>
+          }
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" (click)="prevStep()">
+            <app-icon
+              name="arrow-left"
+              [size]="15"
+              [strokeWidth]="2.5"
+            ></app-icon>
+            Back
+          </button>
+          <button
+            class="btn-next"
+            [disabled]="!selectedDate() || !selectedSlot()"
+            (click)="nextStep()"
+          >
+            Continue
+            <app-icon
+              name="arrow-right"
+              [size]="16"
+              [strokeWidth]="2.5"
+            ></app-icon>
+          </button>
+        </div>
+      </div>
+    }
+    @case (4) {
+      <div class="step-card">
+        <div class="step-card-header">
+          <h2>A little more info</h2>
+          <p>Help us make your session more relevant.</p>
+        </div>
+        @if (showResumeUpload()) {
+          <div
+            class="upload-zone"
+            [class.drag]="isDragging()"
+            (dragover)="isDragging.set(true)"
+            (dragleave)="isDragging.set(false)"
+            (drop)="isDragging.set(false)"
+            [style.display]="resumeFile() ? 'none' : 'block'"
+          >
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx"
+              (change)="onFileSelected($event)"
+            />
+            <div class="upload-icon">
+              <app-icon name="upload" [size]="24" [strokeWidth]="2"></app-icon>
+            </div>
+            <h4>Upload your resume</h4>
+            <p>PDF, DOC, or DOCX \xB7 Max 5MB</p>
+          </div>
+          @if (resumeFile()) {
+            <div class="uploaded-file">
+              <span class="file-icon">\u{1F4C4}</span>
+              <span class="file-name">{{ resumeFile()?.name }}</span>
+              <button class="remove-file" (click)="removeFile()">\u2715</button>
+            </div>
+          }
+        }
+        <div class="optional-label">
+          Anything specific you want help with?
+          <span class="badge-opt">Optional</span>
+        </div>
+        <textarea
+          placeholder="e.g. I struggle with dynamic programming, or want to practice STAR method answers..."
+          [ngModel]="notes()"
+          (ngModelChange)="notes.set($event)"
+        ></textarea>
+        <div class="step-nav">
+          <button class="btn-back" (click)="prevStep()">
+            <app-icon
+              name="arrow-left"
+              [size]="15"
+              [strokeWidth]="2.5"
+            ></app-icon>
+            Back
+          </button>
+          <button class="btn-next" (click)="nextStep()">
+            Review Booking
+            <app-icon
+              name="arrow-right"
+              [size]="16"
+              [strokeWidth]="2.5"
+            ></app-icon>
+          </button>
+        </div>
+      </div>
+    }
+    @case (5) {
+      <div class="step-card">
+        <div class="step-card-header">
+          <h2>Review your booking</h2>
+          <p>Everything look good? Proceed to payment.</p>
+        </div>
+        <div class="review-summary">
+          <div class="review-row">
+            <span class="row-label">Interview</span>
+            <span class="row-value">{{ selectedType()?.name }}</span>
+          </div>
+          <div class="review-row">
+            <span class="row-label">Difficulty</span>
+            <span class="row-value">{{
+              selectedDifficulty()?.name || 'Not specified'
+            }}</span>
+          </div>
+          <div class="review-row">
+            <span class="row-label">Date</span>
+            <span class="row-value"
+              >{{ selectedDate()?.dayName }} {{ selectedDate()?.dayNum }}
+              {{ selectedDate()?.month }}</span
+            >
+          </div>
+          <div class="review-row">
+            <span class="row-label">Time</span>
+            <span class="row-value">{{ selectedSlot()?.time }}</span>
+          </div>
+          <div class="review-row">
+            <span class="row-label">Price</span>
+            <span class="row-value price-highlight"
+              >\u20B9{{ selectedType()?.price }}</span
+            >
+          </div>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" (click)="prevStep()">
+            <app-icon
+              name="arrow-left"
+              [size]="15"
+              [strokeWidth]="2.5"
+            ></app-icon>
+            Back
+          </button>
+          <button class="btn-next" (click)="nextStep()">
+            Proceed to Payment
+            <app-icon
+              name="arrow-right"
+              [size]="16"
+              [strokeWidth]="2.5"
+            ></app-icon>
+          </button>
+        </div>
+      </div>
+    }
+    @case (6) {
+      <div class="step-card">
+        <div class="step-card-header">
+          <h2>Complete payment</h2>
+          <p>Secure, instant confirmation after payment.</p>
+        </div>
+        <div class="payment-amount-box">
+          <div class="pay-label">Total amount</div>
+          <div class="pay-amount">\u20B9{{ selectedType()?.price }}</div>
+          <div class="pay-desc">
+            {{ selectedType()?.name }} \xB7
+            {{ selectedDifficulty()?.name || 'General' }}
+          </div>
+        </div>
+        <div class="slots-label">Choose payment method</div>
+        <div class="payment-methods">
+          @for (method of paymentMethods; track method.id) {
+            <div
+              class="pay-method"
+              [class.selected]="selectedPaymentMethod() === method.id"
+              (click)="selectPaymentMethod(method.id)"
+            >
+              <div class="pay-icon">{{ method.icon }}</div>
+              <div class="pay-name">{{ method.name }}</div>
+            </div>
+          }
+        </div>
+        <button
+          class="btn-pay"
+          [disabled]="!selectedPaymentMethod()"
+          (click)="nextStep()"
+        >
+          <app-icon
+            name="lock"
+            [size]="18"
+            [strokeWidth]="2.5"
+            stroke="white"
+          ></app-icon>
+          Pay & Confirm
+        </button>
+        <div class="secure-note">
+          <app-icon name="lock" [size]="14" [strokeWidth]="2"></app-icon>
+          Secured with 256-bit SSL encryption
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" (click)="prevStep()">
+            <app-icon
+              name="arrow-left"
+              [size]="15"
+              [strokeWidth]="2.5"
+            ></app-icon>
+            Back
+          </button>
+        </div>
+      </div>
+    }
+    @case (7) {
+      <div class="step-card">
+        <div class="confirm-screen">
+          <div class="confirm-icon">
+            <app-icon
+              name="check-circle"
+              [size]="40"
+              [strokeWidth]="2.5"
+              stroke="white"
+            ></app-icon>
+          </div>
+          <h2>Interview Booked! \u{1F389}</h2>
+          <p class="confirm-sub">
+            You're all set. Your session is confirmed and waiting for you.
+          </p>
+          <div class="confirm-detail-card">
+            <div class="detail-row">
+              <span class="detail-icon">{{ selectedType()?.icon }}</span>
+              <div>
+                <div class="detail-text">{{ selectedType()?.name }}</div>
+                <div class="detail-sub">Interview type</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">\u{1F4C5}</span>
+              <div>
+                <div class="detail-text">
+                  {{ selectedDate()?.dayName }} {{ selectedDate()?.dayNum }}
+                  {{ selectedDate()?.month }}
+                </div>
+                <div class="detail-sub">Scheduled date</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">\u{1F550}</span>
+              <div>
+                <div class="detail-text">{{ selectedSlot()?.time }}</div>
+                <div class="detail-sub">Session time</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">\u2705</span>
+              <div>
+                <div class="detail-text" style="color: var(--green)">
+                  Payment Confirmed
+                </div>
+                <div class="detail-sub">\u20B9{{ selectedType()?.price }} paid</div>
+              </div>
+            </div>
+          </div>
+          <div class="join-note">
+            \u{1F4E7} A confirmation email has been sent. The
+            <strong>interview link</strong> will be shared
+            <strong>30 minutes before</strong> your session starts. Check your
+            inbox!
+          </div>
+          <a routerLink="/dashboard" class="btn-dashboard">
+            Go to Dashboard
+            <app-icon
+              name="arrow-right"
+              [size]="16"
+              [strokeWidth]="2.5"
+              stroke="white"
+            ></app-icon>
+          </a>
+        </div>
+      </div>
+    }
+  }
+</div>
+`, styles: ['/* apps/interview-ready-web/src/app/booking/booking.component.scss */\n.page-wrap {\n  max-width: 720px;\n  margin: 0 auto;\n  padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 24px) 80px;\n}\n.stepper-wrap {\n  margin-bottom: 36px;\n}\n.step-label {\n  font-size: 0.82rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n  margin-bottom: 12px;\n}\n.step-label span {\n  color: var(--blue);\n}\n.stepper {\n  display: flex;\n  align-items: center;\n  gap: 0;\n}\n.step-dot {\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  font-size: 0.78rem;\n  font-weight: 700;\n  font-family: "Sora", sans-serif;\n  flex-shrink: 0;\n  transition: all 0.3s;\n  border: 2px solid var(--border);\n  background: var(--bg);\n  color: var(--text-muted);\n}\n.step-dot.active {\n  background: var(--blue);\n  border-color: var(--blue);\n  color: var(--bg);\n  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);\n}\n.step-dot.done {\n  background: var(--green);\n  border-color: var(--green);\n  color: var(--bg);\n}\n.step-line {\n  flex: 1;\n  height: 2px;\n  background: var(--border);\n  transition: background 0.4s;\n}\n.step-line.done {\n  background: var(--green);\n}\n.progress-bar-wrap {\n  margin-top: 10px;\n  height: 4px;\n  background: var(--border);\n  border-radius: 99px;\n  overflow: hidden;\n}\n.progress-bar {\n  height: 100%;\n  background:\n    linear-gradient(\n      90deg,\n      var(--blue),\n      var(--teal));\n  border-radius: 99px;\n  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);\n}\n.step-card {\n  background: var(--bg);\n  border-radius: var(--radius-lg);\n  box-shadow: var(--shadow-lg);\n  border: 1px solid var(--border);\n  padding: clamp(24px, 4vw, 44px);\n  animation: slideUp 0.38s cubic-bezier(0.4, 0, 0.2, 1) both;\n}\n@keyframes slideUp {\n  from {\n    opacity: 0;\n    transform: translateY(18px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.step-card-header {\n  margin-bottom: 28px;\n}\n.step-card-header h2 {\n  font-size: clamp(1.3rem, 3vw, 1.7rem);\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 6px;\n}\n.step-card-header p {\n  font-size: 0.95rem;\n  color: var(--text-soft);\n}\n.type-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));\n  gap: 14px;\n}\n.type-card {\n  border: 2px solid var(--border);\n  border-radius: var(--radius);\n  padding: 22px 18px;\n  cursor: pointer;\n  transition: all 0.22s;\n  background: var(--bg);\n  text-align: left;\n  position: relative;\n  overflow: hidden;\n}\n.type-card:hover {\n  border-color: var(--blue-mid);\n  box-shadow: var(--shadow);\n  transform: translateY(-2px);\n}\n.type-card.selected {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  box-shadow: 0 0 0 1px var(--blue), var(--shadow);\n}\n.type-icon {\n  width: 44px;\n  height: 44px;\n  border-radius: 12px;\n  display: grid;\n  place-items: center;\n  margin-bottom: 14px;\n  font-size: 1.3rem;\n  background: var(--bg-alt);\n  transition: background 0.22s;\n}\n.type-card.selected .type-icon {\n  background: rgba(37, 99, 235, 0.12);\n}\n.type-card h3 {\n  font-size: 1rem;\n  font-weight: 700;\n  margin-bottom: 4px;\n  color: var(--text);\n}\n.type-card p {\n  font-size: 0.82rem;\n  color: var(--text-soft);\n  line-height: 1.4;\n}\n.check-badge {\n  position: absolute;\n  top: 12px;\n  right: 12px;\n  width: 22px;\n  height: 22px;\n  background: var(--blue);\n  border-radius: 50%;\n  display: none;\n  place-items: center;\n}\n.type-card.selected .check-badge {\n  display: grid;\n}\n.chips-wrap {\n  display: flex;\n  gap: 10px;\n  flex-wrap: wrap;\n}\n.chip {\n  padding: 10px 20px;\n  border-radius: 100px;\n  border: 2px solid var(--border);\n  background: var(--bg);\n  font-size: 0.92rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  cursor: pointer;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.chip:hover {\n  border-color: var(--blue-mid);\n  color: var(--blue);\n}\n.chip.selected {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  color: var(--blue);\n}\n.chip.beginner.selected {\n  border-color: var(--green);\n  background: #f0fdf4;\n  color: var(--green);\n}\n.chip.intermediate.selected {\n  border-color: var(--amber);\n  background: #fffbeb;\n  color: #b45309;\n}\n.chip.advanced.selected {\n  border-color: var(--red);\n  background: #fef2f2;\n  color: var(--red);\n}\n.skip-hint {\n  margin-top: 14px;\n  font-size: 0.85rem;\n  color: var(--text-muted);\n}\n.skip-hint a {\n  color: var(--blue);\n  text-decoration: none;\n  font-weight: 500;\n  cursor: pointer;\n}\n.skip-hint a:hover {\n  text-decoration: underline;\n}\n.step-nav {\n  display: flex;\n  gap: 12px;\n  margin-top: 28px;\n  justify-content: flex-end;\n  align-items: center;\n}\n.btn-back {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  padding: 12px 20px;\n  border-radius: 10px;\n  border: 1.5px solid var(--border);\n  background: var(--bg);\n  color: var(--text-soft);\n  font-size: 0.92rem;\n  font-weight: 600;\n  cursor: pointer;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.btn-back:hover {\n  border-color: var(--blue);\n  color: var(--blue);\n  background: var(--blue-light);\n}\n.btn-next {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 13px 28px;\n  border-radius: 10px;\n  background: var(--blue);\n  color: var(--bg);\n  font-size: 0.95rem;\n  font-weight: 700;\n  cursor: pointer;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);\n}\n.btn-next:hover:not(:disabled) {\n  background: var(--blue-dark);\n  transform: translateY(-1px);\n  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);\n}\n.btn-next:disabled {\n  background: var(--text-muted);\n  cursor: not-allowed;\n  transform: none;\n  box-shadow: none;\n}\n.date-scroller {\n  display: flex;\n  gap: 10px;\n  overflow-x: auto;\n  padding-bottom: 6px;\n  scrollbar-width: none;\n  -ms-overflow-style: none;\n  margin-bottom: 28px;\n}\n.date-scroller::-webkit-scrollbar {\n  display: none;\n}\n.date-btn {\n  flex-shrink: 0;\n  width: 64px;\n  padding: 12px 0;\n  border-radius: var(--radius-sm);\n  border: 2px solid var(--border);\n  background: var(--bg);\n  cursor: pointer;\n  text-align: center;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.date-btn:hover {\n  border-color: var(--blue-mid);\n}\n.date-btn.selected {\n  border-color: var(--blue);\n  background: var(--blue);\n  color: var(--bg);\n}\n.date-btn.today:not(.selected) {\n  border-color: var(--blue-mid);\n}\n.date-btn .day-name {\n  font-size: 0.72rem;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.06em;\n  color: var(--text-muted);\n  margin-bottom: 4px;\n}\n.date-btn.selected .day-name {\n  color: rgba(255, 255, 255, 0.75);\n}\n.date-btn .day-num {\n  font-size: 1.1rem;\n  font-weight: 700;\n  font-family: "Sora", sans-serif;\n  color: var(--text);\n}\n.date-btn.selected .day-num {\n  color: var(--bg);\n}\n.date-btn.today .day-name {\n  color: var(--blue);\n}\n.slots-label {\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  margin-bottom: 12px;\n  text-transform: uppercase;\n  letter-spacing: 0.06em;\n}\n.slots-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));\n  gap: 10px;\n}\n.slot-btn {\n  padding: 11px 0;\n  border-radius: var(--radius-sm);\n  border: 2px solid var(--border);\n  background: var(--bg);\n  font-size: 0.9rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  cursor: pointer;\n  text-align: center;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n}\n.slot-btn:hover:not(.unavailable) {\n  border-color: var(--blue-mid);\n  color: var(--blue);\n}\n.slot-btn.selected {\n  border-color: var(--blue);\n  background: var(--blue-light);\n  color: var(--blue);\n}\n.slot-btn.unavailable {\n  color: var(--text-muted);\n  background: var(--bg-alt);\n  cursor: not-allowed;\n  text-decoration: line-through;\n  opacity: 0.6;\n}\n.upload-zone {\n  border: 2px dashed var(--border);\n  border-radius: var(--radius);\n  padding: 32px 20px;\n  text-align: center;\n  cursor: pointer;\n  transition: all 0.22s;\n  background: var(--bg-alt);\n  position: relative;\n}\n.upload-zone:hover {\n  border-color: var(--blue);\n  background: var(--blue-light);\n}\n.upload-zone input[type=file] {\n  position: absolute;\n  inset: 0;\n  opacity: 0;\n  cursor: pointer;\n  width: 100%;\n  height: 100%;\n}\n.upload-zone h4 {\n  font-size: 0.95rem;\n  font-weight: 600;\n  margin-bottom: 4px;\n}\n.upload-zone p {\n  font-size: 0.82rem;\n  color: var(--text-muted);\n}\n.upload-icon {\n  width: 48px;\n  height: 48px;\n  background: var(--blue-light);\n  border-radius: 12px;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 12px;\n}\n.upload-icon svg {\n  width: 24px;\n  height: 24px;\n  stroke: var(--blue);\n  stroke-width: 2;\n}\n.uploaded-file {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  padding: 12px 16px;\n  background: #f0fdf4;\n  border: 1.5px solid #86efac;\n  border-radius: var(--radius-sm);\n  margin-top: 12px;\n}\n.uploaded-file .file-icon {\n  font-size: 1.3rem;\n}\n.uploaded-file .file-name {\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: #166534;\n  flex: 1;\n}\n.uploaded-file .remove-file {\n  background: none;\n  border: none;\n  color: var(--text-muted);\n  cursor: pointer;\n  font-size: 1rem;\n}\n.uploaded-file .remove-file:hover {\n  color: var(--red);\n}\n.optional-label {\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: var(--text-soft);\n  margin: 22px 0 8px;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.optional-label .badge-opt {\n  font-size: 0.72rem;\n  background: var(--bg-alt);\n  color: var(--text-muted);\n  padding: 2px 8px;\n  border-radius: 100px;\n  font-weight: 500;\n}\ntextarea {\n  width: 100%;\n  border: 2px solid var(--border);\n  border-radius: var(--radius-sm);\n  padding: 14px 16px;\n  font-family: "DM Sans", sans-serif;\n  font-size: 0.92rem;\n  color: var(--text);\n  resize: vertical;\n  min-height: 100px;\n  transition: border-color 0.2s;\n  outline: none;\n  background: var(--bg);\n}\ntextarea:focus {\n  border-color: var(--blue);\n}\ntextarea::placeholder {\n  color: var(--text-muted);\n}\n.review-summary {\n  background: var(--bg-soft);\n  border-radius: var(--radius);\n  border: 1.5px solid var(--border);\n  overflow: hidden;\n  margin-bottom: 0;\n}\n.review-row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 16px 20px;\n  border-bottom: 1px solid var(--border);\n  gap: 16px;\n}\n.review-row:last-child {\n  border-bottom: none;\n}\n.review-row .row-label {\n  font-size: 0.85rem;\n  color: var(--text-muted);\n  font-weight: 500;\n  flex-shrink: 0;\n  min-width: 90px;\n}\n.review-row .row-value {\n  font-size: 0.92rem;\n  font-weight: 600;\n  color: var(--text);\n  text-align: right;\n}\n.review-row .price-highlight {\n  color: var(--blue);\n  font-size: 1.1rem;\n  font-family: "Sora", sans-serif;\n}\n.payment-amount-box {\n  background:\n    linear-gradient(\n      135deg,\n      var(--blue-light),\n      #f0f9ff);\n  border: 1.5px solid var(--blue-mid);\n  border-radius: var(--radius);\n  padding: 24px;\n  text-align: center;\n  margin-bottom: 24px;\n}\n.payment-amount-box .pay-label {\n  font-size: 0.85rem;\n  color: var(--text-soft);\n  margin-bottom: 6px;\n}\n.payment-amount-box .pay-amount {\n  font-family: "Sora", sans-serif;\n  font-size: 2.2rem;\n  font-weight: 800;\n  color: var(--blue);\n}\n.payment-amount-box .pay-desc {\n  font-size: 0.82rem;\n  color: var(--text-muted);\n  margin-top: 4px;\n}\n.payment-methods {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 10px;\n  margin-bottom: 20px;\n}\n.pay-method {\n  border: 2px solid var(--border);\n  border-radius: var(--radius-sm);\n  padding: 14px;\n  cursor: pointer;\n  text-align: center;\n  transition: all 0.2s;\n  background: var(--bg);\n  font-family: "DM Sans", sans-serif;\n}\n.pay-method:hover {\n  border-color: var(--blue-mid);\n}\n.pay-method.selected {\n  border-color: var(--blue);\n  background: var(--blue-light);\n}\n.pay-method .pay-icon {\n  font-size: 1.5rem;\n  margin-bottom: 6px;\n}\n.pay-method .pay-name {\n  font-size: 0.85rem;\n  font-weight: 600;\n  color: var(--text-soft);\n}\n.pay-method.selected .pay-name {\n  color: var(--blue);\n}\n.btn-pay {\n  width: 100%;\n  padding: 16px;\n  border-radius: 12px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--blue),\n      var(--blue-dark));\n  color: var(--bg);\n  font-size: 1.05rem;\n  font-weight: 700;\n  cursor: pointer;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n}\n.btn-pay:hover:not(:disabled) {\n  transform: translateY(-1px);\n  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);\n}\n.btn-pay:disabled {\n  background: var(--text-muted);\n  cursor: not-allowed;\n  transform: none;\n  box-shadow: none;\n}\n.secure-note {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 0.82rem;\n  color: var(--text-muted);\n  justify-content: center;\n  margin-top: 12px;\n}\n.confirm-screen {\n  text-align: center;\n  padding: 10px 0;\n}\n.confirm-icon {\n  width: 80px;\n  height: 80px;\n  background: #f0fdf4;\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  margin: 0 auto 20px;\n}\n.confirm-icon svg {\n  width: 40px;\n  height: 40px;\n  stroke: var(--green);\n  stroke-width: 2.5;\n}\n.confirm-screen h2 {\n  font-size: 1.8rem;\n  font-weight: 800;\n  margin-bottom: 8px;\n}\n.confirm-screen .confirm-sub {\n  font-size: 0.95rem;\n  color: var(--text-soft);\n  margin-bottom: 28px;\n}\n.confirm-detail-card {\n  background: var(--bg-soft);\n  border: 1.5px solid var(--border);\n  border-radius: var(--radius);\n  padding: 20px 24px;\n  text-align: left;\n  margin-bottom: 24px;\n}\n.confirm-detail-card .detail-row {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  padding: 10px 0;\n  border-bottom: 1px solid var(--border);\n}\n.confirm-detail-card .detail-row:last-child {\n  border-bottom: none;\n}\n.confirm-detail-card .detail-row .detail-icon {\n  font-size: 1.1rem;\n  flex-shrink: 0;\n}\n.confirm-detail-card .detail-row .detail-text {\n  font-size: 0.92rem;\n  font-weight: 600;\n  color: var(--text);\n}\n.confirm-detail-card .detail-row .detail-sub {\n  font-size: 0.8rem;\n  color: var(--text-muted);\n}\n.join-note {\n  background: #fff7ed;\n  border: 1.5px solid #fed7aa;\n  border-radius: var(--radius-sm);\n  padding: 14px 18px;\n  font-size: 0.88rem;\n  color: #92400e;\n  text-align: left;\n  line-height: 1.5;\n}\n.btn-dashboard {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 14px 32px;\n  border-radius: 10px;\n  background: var(--blue);\n  color: var(--bg);\n  font-size: 0.95rem;\n  font-weight: 700;\n  cursor: pointer;\n  border: none;\n  transition: all 0.2s;\n  font-family: "DM Sans", sans-serif;\n  text-decoration: none;\n  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);\n  margin-top: 24px;\n}\n.btn-dashboard:hover {\n  background: var(--blue-dark);\n  transform: translateY(-1px);\n}\n@media (max-width: 520px) {\n  .type-grid {\n    grid-template-columns: 1fr;\n  }\n  .step-nav {\n    flex-wrap: wrap;\n  }\n  .btn-next {\n    width: 100%;\n    justify-content: center;\n  }\n}\n/*# sourceMappingURL=booking.component.css.map */\n'] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingComponent, { className: "BookingComponent", filePath: "apps/interview-ready-web/src/app/booking/booking.component.ts", lineNumber: 28 });
+})();
+
 // apps/interview-ready-web/src/app/app.routes.ts
 var appRoutes = [
   {
@@ -44093,6 +45407,10 @@ var appRoutes = [
   {
     path: "dashboard",
     component: DashboardComponent
+  },
+  {
+    path: "book",
+    component: BookingComponent
   },
   {
     path: "**",
@@ -44169,8 +45487,8 @@ var Navbar = class _Navbar {
 })();
 
 // apps/interview-ready-web/src/app/footer/footer.ts
-var _forTrack08 = ($index, $item) => $item.title;
-var _forTrack12 = ($index, $item) => $item.label;
+var _forTrack09 = ($index, $item) => $item.title;
+var _forTrack13 = ($index, $item) => $item.label;
 function FooterComponent_For_11_For_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "li")(1, "a", 7);
@@ -44191,7 +45509,7 @@ function FooterComponent_For_11_Template(rf, ctx) {
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "ul");
-    \u0275\u0275repeaterCreate(4, FooterComponent_For_11_For_5_Template, 3, 2, "li", null, _forTrack12);
+    \u0275\u0275repeaterCreate(4, FooterComponent_For_11_For_5_Template, 3, 2, "li", null, _forTrack13);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -44218,7 +45536,7 @@ var FooterComponent = class _FooterComponent {
       \u0275\u0275elementStart(8, "p", 4);
       \u0275\u0275text(9);
       \u0275\u0275elementEnd()();
-      \u0275\u0275repeaterCreate(10, FooterComponent_For_11_Template, 6, 1, "div", 5, _forTrack08);
+      \u0275\u0275repeaterCreate(10, FooterComponent_For_11_Template, 6, 1, "div", 5, _forTrack09);
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(12, "div", 6)(13, "span");
       \u0275\u0275text(14);
