@@ -43857,6 +43857,222 @@ var ProfileComponent = class _ProfileComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProfileComponent, { className: "ProfileComponent", filePath: "apps/interview-ready-web/src/app/profile/profile.component.ts", lineNumber: 19 });
 })();
 
+// apps/interview-ready-web/src/app/dashboard/dashboard.component.ts
+function DashboardComponent_Conditional_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 4)(1, "div", 41);
+    \u0275\u0275element(2, "app-icon", 42);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 43)(4, "p")(5, "strong");
+    \u0275\u0275text(6, "Your profile is 60% complete.");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(7, " Add your resume and target role for a better interview experience. ");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(8, "a", 44);
+    \u0275\u0275element(9, "app-icon", 45);
+    \u0275\u0275text(10, " Complete Profile ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275property("size", 18)("strokeWidth", 2);
+    \u0275\u0275advance(7);
+    \u0275\u0275property("size", 13)("strokeWidth", 2.5);
+  }
+}
+var DashboardComponent = class _DashboardComponent {
+  userName = signal("Riya", ...ngDevMode ? [{ debugName: "userName" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  streakDays = signal(3, ...ngDevMode ? [{ debugName: "streakDays" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  profileComplete = signal(false, ...ngDevMode ? [{ debugName: "profileComplete" }] : (
+    /* istanbul ignore next */
+    []
+  ));
+  static \u0275fac = function DashboardComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _DashboardComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DashboardComponent, selectors: [["app-dashboard"]], decls: 126, vars: 19, consts: [[1, "page"], [1, "welcome"], [1, "welcome-text"], [1, "streak-badge"], [1, "profile-card"], [1, "cta-card"], [1, "cta-text"], [1, "btn-book"], ["name", "calendar", 3, "size", "strokeWidth"], [1, "section-head"], [1, "section-title"], [1, "dot"], [1, "section-count"], ["href", "#", 1, "see-all"], [1, "upcoming-list"], [1, "interview-card"], [1, "interview-type-icon", "today"], [1, "interview-info"], [1, "interview-type"], [1, "interview-meta"], ["name", "clock", 3, "size", "strokeWidth"], [1, "status-pill", "today"], [1, "interview-type-icon", "hr"], [1, "status-pill", "upcoming"], [1, "dot", 2, "background", "var(--text-muted)"], [1, "section-count", 2, "background", "var(--bg-alt)", "color", "var(--text-soft)"], [1, "past-list"], [1, "past-card"], [1, "interview-type-icon", "dsa"], [1, "score-bar-wrap"], [1, "score-bar"], [1, "score-fill", 2, "width", "82%"], [1, "score-label"], [1, "interview-meta", 2, "margin-top", "4px"], [1, "verdict-pill", "hire"], [1, "btn-feedback"], ["name", "feedback", 3, "size", "strokeWidth"], [1, "interview-type-icon", "resume"], [1, "score-fill", "mid", 2, "width", "60%"], [1, "verdict-pill", "nohire"], [1, "score-fill", 2, "width", "90%"], [1, "profile-card-icon"], ["name", "user", 3, "size", "strokeWidth"], [1, "profile-card-body"], ["routerLink", "/profile", 1, "btn-profile"], ["name", "arrow-right", 3, "size", "strokeWidth"]], template: function DashboardComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275elementStart(0, "main", 0)(1, "div", 1)(2, "div", 2)(3, "h1");
+      \u0275\u0275text(4);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(5, "p");
+      \u0275\u0275text(6, "Ready to practice today? Your next interview is just a click away.");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(7, "div", 3);
+      \u0275\u0275text(8);
+      \u0275\u0275elementEnd()();
+      \u0275\u0275conditionalCreate(9, DashboardComponent_Conditional_9_Template, 11, 4, "div", 4);
+      \u0275\u0275elementStart(10, "div", 5)(11, "div", 6)(12, "h2");
+      \u0275\u0275text(13, "Book a Mock Interview");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(14, "p");
+      \u0275\u0275text(15, " Practice DSA, HR, or resume rounds with expert interviewers. Get real feedback, get interview-ready. ");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(16, "button", 7);
+      \u0275\u0275element(17, "app-icon", 8);
+      \u0275\u0275text(18, " Book Mock Interview ");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(19, "div")(20, "div", 9)(21, "div", 10);
+      \u0275\u0275element(22, "span", 11);
+      \u0275\u0275text(23, " Upcoming Interviews ");
+      \u0275\u0275elementStart(24, "span", 12);
+      \u0275\u0275text(25, "2");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(26, "a", 13);
+      \u0275\u0275text(27, "See all");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(28, "div", 14)(29, "div", 15)(30, "div", 16);
+      \u0275\u0275text(31, "\u{1F4C5}");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(32, "div", 17)(33, "div", 18);
+      \u0275\u0275text(34, "DSA Round");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(35, "div", 19)(36, "span");
+      \u0275\u0275element(37, "app-icon", 8);
+      \u0275\u0275text(38, " Today, 13 Apr ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(39, "span");
+      \u0275\u0275element(40, "app-icon", 20);
+      \u0275\u0275text(41, " 4:00 PM \u2013 5:00 PM ");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(42, "span", 21);
+      \u0275\u0275text(43, "Today");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(44, "div", 15)(45, "div", 22);
+      \u0275\u0275text(46, "\u{1F9D1}\u200D\u{1F4BC}");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(47, "div", 17)(48, "div", 18);
+      \u0275\u0275text(49, "HR Round");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(50, "div", 19)(51, "span");
+      \u0275\u0275element(52, "app-icon", 8);
+      \u0275\u0275text(53, " Sat, 16 Apr ");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(54, "span");
+      \u0275\u0275element(55, "app-icon", 20);
+      \u0275\u0275text(56, " 11:00 AM \u2013 11:45 AM ");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(57, "span", 23);
+      \u0275\u0275text(58, "Upcoming");
+      \u0275\u0275elementEnd()()()();
+      \u0275\u0275elementStart(59, "div")(60, "div", 9)(61, "div", 10);
+      \u0275\u0275element(62, "span", 24);
+      \u0275\u0275text(63, " Past Interviews ");
+      \u0275\u0275elementStart(64, "span", 25);
+      \u0275\u0275text(65, "3");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(66, "a", 13);
+      \u0275\u0275text(67, "See all");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(68, "div", 26)(69, "div", 27)(70, "div", 28);
+      \u0275\u0275text(71, "\u{1F4BB}");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(72, "div", 17)(73, "div", 18);
+      \u0275\u0275text(74, "DSA Round");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(75, "div", 29)(76, "div", 30);
+      \u0275\u0275element(77, "div", 31);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(78, "span", 32);
+      \u0275\u0275text(79, "82 / 100");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(80, "div", 33)(81, "span");
+      \u0275\u0275text(82, "Sat, 5 Apr");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(83, "span", 34);
+      \u0275\u0275text(84, "Hire");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(85, "button", 35);
+      \u0275\u0275element(86, "app-icon", 36);
+      \u0275\u0275text(87, " View Feedback ");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(88, "div", 27)(89, "div", 37);
+      \u0275\u0275text(90, "\u{1F4C4}");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(91, "div", 17)(92, "div", 18);
+      \u0275\u0275text(93, "Resume Review");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(94, "div", 29)(95, "div", 30);
+      \u0275\u0275element(96, "div", 38);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(97, "span", 32);
+      \u0275\u0275text(98, "60 / 100");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(99, "div", 33)(100, "span");
+      \u0275\u0275text(101, "Wed, 2 Apr");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(102, "span", 39);
+      \u0275\u0275text(103, "No Hire");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(104, "button", 35);
+      \u0275\u0275element(105, "app-icon", 36);
+      \u0275\u0275text(106, " View Feedback ");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(107, "div", 27)(108, "div", 22);
+      \u0275\u0275text(109, "\u{1F9D1}\u200D\u{1F4BC}");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(110, "div", 17)(111, "div", 18);
+      \u0275\u0275text(112, "HR Round");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(113, "div", 29)(114, "div", 30);
+      \u0275\u0275element(115, "div", 40);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(116, "span", 32);
+      \u0275\u0275text(117, "90 / 100");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(118, "div", 33)(119, "span");
+      \u0275\u0275text(120, "Sun, 30 Mar");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(121, "span", 34);
+      \u0275\u0275text(122, "Hire");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(123, "button", 35);
+      \u0275\u0275element(124, "app-icon", 36);
+      \u0275\u0275text(125, " View Feedback ");
+      \u0275\u0275elementEnd()()()()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate1("Hi ", ctx.userName(), " \u{1F44B}");
+      \u0275\u0275advance(4);
+      \u0275\u0275textInterpolate1(" \u{1F525} ", ctx.streakDays(), "-day streak \u2014 keep it up! ");
+      \u0275\u0275advance();
+      \u0275\u0275conditional(!ctx.profileComplete() ? 9 : -1);
+      \u0275\u0275advance(8);
+      \u0275\u0275property("size", 16)("strokeWidth", 2.5);
+      \u0275\u0275advance(20);
+      \u0275\u0275property("size", 12)("strokeWidth", 2);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("size", 12)("strokeWidth", 2);
+      \u0275\u0275advance(12);
+      \u0275\u0275property("size", 12)("strokeWidth", 2);
+      \u0275\u0275advance(3);
+      \u0275\u0275property("size", 12)("strokeWidth", 2);
+      \u0275\u0275advance(31);
+      \u0275\u0275property("size", 12)("strokeWidth", 2.5);
+      \u0275\u0275advance(19);
+      \u0275\u0275property("size", 12)("strokeWidth", 2.5);
+      \u0275\u0275advance(19);
+      \u0275\u0275property("size", 12)("strokeWidth", 2.5);
+    }
+  }, dependencies: [CommonModule, RouterLink, IconComponent], styles: ['\n.topbar[_ngcontent-%COMP%] {\n  height: 64px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 clamp(20px, 5vw, 60px);\n  background: var(--bg);\n  border-bottom: 1px solid var(--border);\n  position: sticky;\n  top: 0;\n  z-index: 100;\n}\n.logo[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.05rem;\n  color: var(--text);\n  text-decoration: none;\n}\n.logo-icon[_ngcontent-%COMP%] {\n  width: 34px;\n  height: 34px;\n  background: var(--blue);\n  border-radius: 9px;\n  display: grid;\n  place-items: center;\n}\n.topbar-right[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 14px;\n}\n.topbar-name[_ngcontent-%COMP%] {\n  font-size: 13.5px;\n  color: var(--text-soft);\n  font-weight: 500;\n}\n.avatar[_ngcontent-%COMP%] {\n  width: 36px;\n  height: 36px;\n  background: var(--blue-light);\n  border: 1.5px solid var(--blue-mid);\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  font-size: 13px;\n  font-weight: 700;\n  color: var(--blue);\n  font-family: "Sora", sans-serif;\n  cursor: pointer;\n}\n.page[_ngcontent-%COMP%] {\n  max-width: 860px;\n  margin: 0 auto;\n  padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) 64px;\n  display: flex;\n  flex-direction: column;\n  gap: 28px;\n}\n.welcome[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 16px;\n  flex-wrap: wrap;\n}\n.welcome-text[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: clamp(1.4rem, 3.5vw, 2rem);\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 4px;\n}\n.welcome-text[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 15px;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.streak-badge[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 7px;\n  background: var(--amber-light);\n  border: 1.5px solid #fde68a;\n  border-radius: 100px;\n  padding: 7px 14px;\n  font-size: 13px;\n  font-weight: 600;\n  color: #92400e;\n  white-space: nowrap;\n  flex-shrink: 0;\n}\n.cta-card[_ngcontent-%COMP%] {\n  background: var(--blue);\n  border-radius: var(--radius-lg);\n  padding: clamp(24px, 4vw, 36px) clamp(24px, 4vw, 40px);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 24px;\n  flex-wrap: wrap;\n  box-shadow: var(--shadow-blue);\n  position: relative;\n  overflow: hidden;\n}\n.cta-card[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  top: -40px;\n  right: -40px;\n  width: 180px;\n  height: 180px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.07);\n  pointer-events: none;\n}\n.cta-card[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  bottom: -60px;\n  right: 100px;\n  width: 240px;\n  height: 240px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.04);\n  pointer-events: none;\n}\n.cta-text[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-size: clamp(1.15rem, 3vw, 1.5rem);\n  font-weight: 700;\n  color: var(--bg);\n  margin-bottom: 6px;\n}\n.cta-text[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 14px;\n  color: rgba(255, 255, 255, 0.75);\n  line-height: 1.6;\n  max-width: 380px;\n}\n.btn-book[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 9px;\n  background: var(--bg);\n  color: var(--blue);\n  font-family: "Sora", sans-serif;\n  font-size: 14.5px;\n  font-weight: 700;\n  padding: 13px 26px;\n  border-radius: 12px;\n  border: none;\n  cursor: pointer;\n  white-space: nowrap;\n  flex-shrink: 0;\n  transition:\n    background 0.15s,\n    transform 0.1s,\n    box-shadow 0.15s;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);\n  z-index: 1;\n  position: relative;\n}\n.btn-book[_ngcontent-%COMP%]:hover {\n  background: #f0f6ff;\n  transform: translateY(-1px);\n  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);\n}\n.btn-book[_ngcontent-%COMP%]:active {\n  transform: scale(0.98);\n}\n.btn-book[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 16px;\n  height: 16px;\n}\n.profile-card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius);\n  border: 1.5px solid #fde68a;\n  padding: 16px 20px;\n  display: flex;\n  align-items: center;\n  gap: 14px;\n  box-shadow: var(--shadow);\n}\n.profile-card-icon[_ngcontent-%COMP%] {\n  width: 40px;\n  height: 40px;\n  background: var(--amber-light);\n  border-radius: 10px;\n  display: grid;\n  place-items: center;\n  flex-shrink: 0;\n}\n.profile-card-icon[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 18px;\n  height: 18px;\n  color: var(--amber);\n}\n.profile-card-body[_ngcontent-%COMP%] {\n  flex: 1;\n}\n.profile-card-body[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-size: 13.5px;\n  color: var(--text-soft);\n  line-height: 1.5;\n}\n.profile-card-body[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]   strong[_ngcontent-%COMP%] {\n  color: var(--text);\n  font-weight: 600;\n}\n.btn-profile[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--amber-light);\n  color: #92400e;\n  border: 1.5px solid #fde68a;\n  font-family: "DM Sans", sans-serif;\n  font-size: 13px;\n  font-weight: 600;\n  padding: 8px 16px;\n  border-radius: 8px;\n  cursor: pointer;\n  white-space: nowrap;\n  flex-shrink: 0;\n  transition: background 0.15s;\n  text-decoration: none;\n}\n.btn-profile[_ngcontent-%COMP%]:hover {\n  background: #fef3c7;\n}\n.btn-profile[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 13px;\n  height: 13px;\n}\n.section-head[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 14px;\n}\n.section-title[_ngcontent-%COMP%] {\n  font-size: 15px;\n  font-weight: 700;\n  color: var(--text);\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.section-title[_ngcontent-%COMP%]   .dot[_ngcontent-%COMP%] {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: var(--blue);\n  flex-shrink: 0;\n}\n.section-count[_ngcontent-%COMP%] {\n  font-size: 12px;\n  font-weight: 600;\n  color: var(--blue);\n  background: var(--blue-light);\n  padding: 3px 9px;\n  border-radius: 100px;\n}\n.see-all[_ngcontent-%COMP%] {\n  font-size: 13px;\n  font-weight: 600;\n  color: var(--blue);\n  cursor: pointer;\n  background: none;\n  border: none;\n  font-family: "DM Sans", sans-serif;\n  transition: opacity 0.15s;\n  text-decoration: none;\n}\n.see-all[_ngcontent-%COMP%]:hover {\n  opacity: 0.7;\n}\n.upcoming-list[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.interview-card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius);\n  border: 1px solid var(--border);\n  padding: 16px 20px;\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  box-shadow: var(--shadow);\n  transition: border-color 0.2s, transform 0.15s;\n}\n.interview-card[_ngcontent-%COMP%]:hover {\n  border-color: var(--blue-mid);\n  transform: translateY(-1px);\n}\n.interview-type-icon[_ngcontent-%COMP%] {\n  width: 44px;\n  height: 44px;\n  border-radius: 12px;\n  display: grid;\n  place-items: center;\n  flex-shrink: 0;\n  font-size: 18px;\n}\n.interview-type-icon.dsa[_ngcontent-%COMP%] {\n  background: var(--blue-light);\n}\n.interview-type-icon.hr[_ngcontent-%COMP%] {\n  background: var(--green-light);\n}\n.interview-type-icon.resume[_ngcontent-%COMP%] {\n  background: var(--purple-light);\n}\n.interview-info[_ngcontent-%COMP%] {\n  flex: 1;\n  min-width: 0;\n}\n.interview-type[_ngcontent-%COMP%] {\n  font-family: "Sora", sans-serif;\n  font-size: 14px;\n  font-weight: 600;\n  color: var(--text);\n  margin-bottom: 3px;\n}\n.interview-meta[_ngcontent-%COMP%] {\n  font-size: 13px;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  flex-wrap: wrap;\n}\n.interview-meta[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.interview-meta[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 12px;\n  height: 12px;\n}\n.status-pill[_ngcontent-%COMP%] {\n  font-size: 11.5px;\n  font-weight: 600;\n  padding: 4px 10px;\n  border-radius: 100px;\n  white-space: nowrap;\n  flex-shrink: 0;\n}\n.status-pill.upcoming[_ngcontent-%COMP%] {\n  background: var(--blue-light);\n  color: var(--blue);\n}\n.status-pill.today[_ngcontent-%COMP%] {\n  background: #fef3c7;\n  color: #92400e;\n}\n.past-list[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.past-card[_ngcontent-%COMP%] {\n  background: var(--bg);\n  border-radius: var(--radius);\n  border: 1px solid var(--border);\n  padding: 16px 20px;\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  box-shadow: var(--shadow);\n  transition: border-color 0.2s;\n}\n.past-card[_ngcontent-%COMP%]:hover {\n  border-color: var(--border);\n}\n.verdict-pill[_ngcontent-%COMP%] {\n  font-size: 11.5px;\n  font-weight: 700;\n  padding: 4px 11px;\n  border-radius: 100px;\n  white-space: nowrap;\n  flex-shrink: 0;\n}\n.verdict-pill.hire[_ngcontent-%COMP%] {\n  background: var(--green-light);\n  color: #065f46;\n}\n.verdict-pill.nohire[_ngcontent-%COMP%] {\n  background: var(--red-light);\n  color: #991b1b;\n}\n.score-bar-wrap[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  margin-top: 5px;\n}\n.score-bar[_ngcontent-%COMP%] {\n  flex: 1;\n  height: 4px;\n  background: var(--bg-alt);\n  border-radius: 100px;\n  overflow: hidden;\n  max-width: 100px;\n}\n.score-fill[_ngcontent-%COMP%] {\n  height: 100%;\n  border-radius: 100px;\n  background: var(--green);\n  transition: width 0.6s ease;\n}\n.score-fill.mid[_ngcontent-%COMP%] {\n  background: var(--amber);\n}\n.score-fill.low[_ngcontent-%COMP%] {\n  background: var(--red);\n}\n.score-label[_ngcontent-%COMP%] {\n  font-size: 12px;\n  font-weight: 600;\n  color: var(--text-soft);\n}\n.btn-feedback[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 5px;\n  background: var(--bg-alt);\n  border: 1px solid var(--border);\n  color: var(--text-soft);\n  font-family: "DM Sans", sans-serif;\n  font-size: 12.5px;\n  font-weight: 600;\n  padding: 7px 13px;\n  border-radius: 8px;\n  cursor: pointer;\n  white-space: nowrap;\n  flex-shrink: 0;\n  transition:\n    background 0.15s,\n    color 0.15s,\n    border-color 0.15s;\n}\n.btn-feedback[_ngcontent-%COMP%]:hover {\n  background: var(--blue-light);\n  color: var(--blue);\n  border-color: var(--blue-mid);\n}\n.btn-feedback[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  width: 12px;\n  height: 12px;\n}\n@media (max-width: 600px) {\n  .welcome[_ngcontent-%COMP%] {\n    flex-direction: column;\n    align-items: flex-start;\n  }\n  .cta-card[_ngcontent-%COMP%] {\n    flex-direction: column;\n    align-items: flex-start;\n  }\n  .btn-book[_ngcontent-%COMP%] {\n    width: 100%;\n    justify-content: center;\n  }\n  .topbar-name[_ngcontent-%COMP%] {\n    display: none;\n  }\n  .profile-card[_ngcontent-%COMP%] {\n    flex-wrap: wrap;\n  }\n  .btn-profile[_ngcontent-%COMP%] {\n    width: 100%;\n    justify-content: center;\n  }\n  .interview-card[_ngcontent-%COMP%], \n   .past-card[_ngcontent-%COMP%] {\n    flex-wrap: wrap;\n    gap: 12px;\n  }\n  .btn-feedback[_ngcontent-%COMP%] {\n    width: 100%;\n    justify-content: center;\n  }\n  .status-pill[_ngcontent-%COMP%] {\n    margin-left: auto;\n  }\n}\n/*# sourceMappingURL=dashboard.component.css.map */'] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DashboardComponent, [{
+    type: Component,
+    args: [{ selector: "app-dashboard", standalone: true, imports: [CommonModule, RouterLink, IconComponent], template: '<main class="page">\n  <div class="welcome">\n    <div class="welcome-text">\n      <h1>Hi {{ userName() }} \u{1F44B}</h1>\n      <p>Ready to practice today? Your next interview is just a click away.</p>\n    </div>\n    <div class="streak-badge">\n      \u{1F525} {{ streakDays() }}-day streak \u2014 keep it up!\n    </div>\n  </div>\n\n  @if (!profileComplete()) {\n    <div class="profile-card">\n      <div class="profile-card-icon">\n        <app-icon name="user" [size]="18" [strokeWidth]="2"></app-icon>\n      </div>\n      <div class="profile-card-body">\n        <p>\n          <strong>Your profile is 60% complete.</strong> Add your resume and\n          target role for a better interview experience.\n        </p>\n      </div>\n      <a routerLink="/profile" class="btn-profile">\n        <app-icon name="arrow-right" [size]="13" [strokeWidth]="2.5"></app-icon>\n        Complete Profile\n      </a>\n    </div>\n  }\n\n  <div class="cta-card">\n    <div class="cta-text">\n      <h2>Book a Mock Interview</h2>\n      <p>\n        Practice DSA, HR, or resume rounds with expert interviewers. Get real\n        feedback, get interview-ready.\n      </p>\n    </div>\n    <button class="btn-book">\n      <app-icon name="calendar" [size]="16" [strokeWidth]="2.5"></app-icon>\n      Book Mock Interview\n    </button>\n  </div>\n\n  <div>\n    <div class="section-head">\n      <div class="section-title">\n        <span class="dot"></span>\n        Upcoming Interviews\n        <span class="section-count">2</span>\n      </div>\n      <a class="see-all" href="#">See all</a>\n    </div>\n\n    <div class="upcoming-list">\n      <div class="interview-card">\n        <div class="interview-type-icon today">\u{1F4C5}</div>\n        <div class="interview-info">\n          <div class="interview-type">DSA Round</div>\n          <div class="interview-meta">\n            <span>\n              <app-icon\n                name="calendar"\n                [size]="12"\n                [strokeWidth]="2"\n              ></app-icon>\n              Today, 13 Apr\n            </span>\n            <span>\n              <app-icon name="clock" [size]="12" [strokeWidth]="2"></app-icon>\n              4:00 PM \u2013 5:00 PM\n            </span>\n          </div>\n        </div>\n        <span class="status-pill today">Today</span>\n      </div>\n\n      <div class="interview-card">\n        <div class="interview-type-icon hr">\u{1F9D1}\u200D\u{1F4BC}</div>\n        <div class="interview-info">\n          <div class="interview-type">HR Round</div>\n          <div class="interview-meta">\n            <span>\n              <app-icon\n                name="calendar"\n                [size]="12"\n                [strokeWidth]="2"\n              ></app-icon>\n              Sat, 16 Apr\n            </span>\n            <span>\n              <app-icon name="clock" [size]="12" [strokeWidth]="2"></app-icon>\n              11:00 AM \u2013 11:45 AM\n            </span>\n          </div>\n        </div>\n        <span class="status-pill upcoming">Upcoming</span>\n      </div>\n    </div>\n  </div>\n\n  <div>\n    <div class="section-head">\n      <div class="section-title">\n        <span class="dot" style="background: var(--text-muted)"></span>\n        Past Interviews\n        <span\n          class="section-count"\n          style="background: var(--bg-alt); color: var(--text-soft)"\n          >3</span\n        >\n      </div>\n      <a class="see-all" href="#">See all</a>\n    </div>\n\n    <div class="past-list">\n      <div class="past-card">\n        <div class="interview-type-icon dsa">\u{1F4BB}</div>\n        <div class="interview-info">\n          <div class="interview-type">DSA Round</div>\n          <div class="score-bar-wrap">\n            <div class="score-bar">\n              <div class="score-fill" style="width: 82%"></div>\n            </div>\n            <span class="score-label">82 / 100</span>\n          </div>\n          <div class="interview-meta" style="margin-top: 4px">\n            <span>Sat, 5 Apr</span>\n          </div>\n        </div>\n        <span class="verdict-pill hire">Hire</span>\n        <button class="btn-feedback">\n          <app-icon name="feedback" [size]="12" [strokeWidth]="2.5"></app-icon>\n          View Feedback\n        </button>\n      </div>\n\n      <div class="past-card">\n        <div class="interview-type-icon resume">\u{1F4C4}</div>\n        <div class="interview-info">\n          <div class="interview-type">Resume Review</div>\n          <div class="score-bar-wrap">\n            <div class="score-bar">\n              <div class="score-fill mid" style="width: 60%"></div>\n            </div>\n            <span class="score-label">60 / 100</span>\n          </div>\n          <div class="interview-meta" style="margin-top: 4px">\n            <span>Wed, 2 Apr</span>\n          </div>\n        </div>\n        <span class="verdict-pill nohire">No Hire</span>\n        <button class="btn-feedback">\n          <app-icon name="feedback" [size]="12" [strokeWidth]="2.5"></app-icon>\n          View Feedback\n        </button>\n      </div>\n\n      <div class="past-card">\n        <div class="interview-type-icon hr">\u{1F9D1}\u200D\u{1F4BC}</div>\n        <div class="interview-info">\n          <div class="interview-type">HR Round</div>\n          <div class="score-bar-wrap">\n            <div class="score-bar">\n              <div class="score-fill" style="width: 90%"></div>\n            </div>\n            <span class="score-label">90 / 100</span>\n          </div>\n          <div class="interview-meta" style="margin-top: 4px">\n            <span>Sun, 30 Mar</span>\n          </div>\n        </div>\n        <span class="verdict-pill hire">Hire</span>\n        <button class="btn-feedback">\n          <app-icon name="feedback" [size]="12" [strokeWidth]="2.5"></app-icon>\n          View Feedback\n        </button>\n      </div>\n    </div>\n  </div>\n</main>\n', styles: ['/* apps/interview-ready-web/src/app/dashboard/dashboard.component.scss */\n.topbar {\n  height: 64px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 clamp(20px, 5vw, 60px);\n  background: var(--bg);\n  border-bottom: 1px solid var(--border);\n  position: sticky;\n  top: 0;\n  z-index: 100;\n}\n.logo {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  font-family: "Sora", sans-serif;\n  font-weight: 700;\n  font-size: 1.05rem;\n  color: var(--text);\n  text-decoration: none;\n}\n.logo-icon {\n  width: 34px;\n  height: 34px;\n  background: var(--blue);\n  border-radius: 9px;\n  display: grid;\n  place-items: center;\n}\n.topbar-right {\n  display: flex;\n  align-items: center;\n  gap: 14px;\n}\n.topbar-name {\n  font-size: 13.5px;\n  color: var(--text-soft);\n  font-weight: 500;\n}\n.avatar {\n  width: 36px;\n  height: 36px;\n  background: var(--blue-light);\n  border: 1.5px solid var(--blue-mid);\n  border-radius: 50%;\n  display: grid;\n  place-items: center;\n  font-size: 13px;\n  font-weight: 700;\n  color: var(--blue);\n  font-family: "Sora", sans-serif;\n  cursor: pointer;\n}\n.page {\n  max-width: 860px;\n  margin: 0 auto;\n  padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) 64px;\n  display: flex;\n  flex-direction: column;\n  gap: 28px;\n}\n.welcome {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 16px;\n  flex-wrap: wrap;\n}\n.welcome-text h1 {\n  font-size: clamp(1.4rem, 3.5vw, 2rem);\n  font-weight: 700;\n  color: var(--text);\n  margin-bottom: 4px;\n}\n.welcome-text p {\n  font-size: 15px;\n  color: var(--text-soft);\n  line-height: 1.6;\n}\n.streak-badge {\n  display: flex;\n  align-items: center;\n  gap: 7px;\n  background: var(--amber-light);\n  border: 1.5px solid #fde68a;\n  border-radius: 100px;\n  padding: 7px 14px;\n  font-size: 13px;\n  font-weight: 600;\n  color: #92400e;\n  white-space: nowrap;\n  flex-shrink: 0;\n}\n.cta-card {\n  background: var(--blue);\n  border-radius: var(--radius-lg);\n  padding: clamp(24px, 4vw, 36px) clamp(24px, 4vw, 40px);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 24px;\n  flex-wrap: wrap;\n  box-shadow: var(--shadow-blue);\n  position: relative;\n  overflow: hidden;\n}\n.cta-card::before {\n  content: "";\n  position: absolute;\n  top: -40px;\n  right: -40px;\n  width: 180px;\n  height: 180px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.07);\n  pointer-events: none;\n}\n.cta-card::after {\n  content: "";\n  position: absolute;\n  bottom: -60px;\n  right: 100px;\n  width: 240px;\n  height: 240px;\n  border-radius: 50%;\n  background: rgba(255, 255, 255, 0.04);\n  pointer-events: none;\n}\n.cta-text h2 {\n  font-size: clamp(1.15rem, 3vw, 1.5rem);\n  font-weight: 700;\n  color: var(--bg);\n  margin-bottom: 6px;\n}\n.cta-text p {\n  font-size: 14px;\n  color: rgba(255, 255, 255, 0.75);\n  line-height: 1.6;\n  max-width: 380px;\n}\n.btn-book {\n  display: inline-flex;\n  align-items: center;\n  gap: 9px;\n  background: var(--bg);\n  color: var(--blue);\n  font-family: "Sora", sans-serif;\n  font-size: 14.5px;\n  font-weight: 700;\n  padding: 13px 26px;\n  border-radius: 12px;\n  border: none;\n  cursor: pointer;\n  white-space: nowrap;\n  flex-shrink: 0;\n  transition:\n    background 0.15s,\n    transform 0.1s,\n    box-shadow 0.15s;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);\n  z-index: 1;\n  position: relative;\n}\n.btn-book:hover {\n  background: #f0f6ff;\n  transform: translateY(-1px);\n  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);\n}\n.btn-book:active {\n  transform: scale(0.98);\n}\n.btn-book svg {\n  width: 16px;\n  height: 16px;\n}\n.profile-card {\n  background: var(--bg);\n  border-radius: var(--radius);\n  border: 1.5px solid #fde68a;\n  padding: 16px 20px;\n  display: flex;\n  align-items: center;\n  gap: 14px;\n  box-shadow: var(--shadow);\n}\n.profile-card-icon {\n  width: 40px;\n  height: 40px;\n  background: var(--amber-light);\n  border-radius: 10px;\n  display: grid;\n  place-items: center;\n  flex-shrink: 0;\n}\n.profile-card-icon svg {\n  width: 18px;\n  height: 18px;\n  color: var(--amber);\n}\n.profile-card-body {\n  flex: 1;\n}\n.profile-card-body p {\n  font-size: 13.5px;\n  color: var(--text-soft);\n  line-height: 1.5;\n}\n.profile-card-body p strong {\n  color: var(--text);\n  font-weight: 600;\n}\n.btn-profile {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  background: var(--amber-light);\n  color: #92400e;\n  border: 1.5px solid #fde68a;\n  font-family: "DM Sans", sans-serif;\n  font-size: 13px;\n  font-weight: 600;\n  padding: 8px 16px;\n  border-radius: 8px;\n  cursor: pointer;\n  white-space: nowrap;\n  flex-shrink: 0;\n  transition: background 0.15s;\n  text-decoration: none;\n}\n.btn-profile:hover {\n  background: #fef3c7;\n}\n.btn-profile svg {\n  width: 13px;\n  height: 13px;\n}\n.section-head {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 14px;\n}\n.section-title {\n  font-size: 15px;\n  font-weight: 700;\n  color: var(--text);\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.section-title .dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: var(--blue);\n  flex-shrink: 0;\n}\n.section-count {\n  font-size: 12px;\n  font-weight: 600;\n  color: var(--blue);\n  background: var(--blue-light);\n  padding: 3px 9px;\n  border-radius: 100px;\n}\n.see-all {\n  font-size: 13px;\n  font-weight: 600;\n  color: var(--blue);\n  cursor: pointer;\n  background: none;\n  border: none;\n  font-family: "DM Sans", sans-serif;\n  transition: opacity 0.15s;\n  text-decoration: none;\n}\n.see-all:hover {\n  opacity: 0.7;\n}\n.upcoming-list {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.interview-card {\n  background: var(--bg);\n  border-radius: var(--radius);\n  border: 1px solid var(--border);\n  padding: 16px 20px;\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  box-shadow: var(--shadow);\n  transition: border-color 0.2s, transform 0.15s;\n}\n.interview-card:hover {\n  border-color: var(--blue-mid);\n  transform: translateY(-1px);\n}\n.interview-type-icon {\n  width: 44px;\n  height: 44px;\n  border-radius: 12px;\n  display: grid;\n  place-items: center;\n  flex-shrink: 0;\n  font-size: 18px;\n}\n.interview-type-icon.dsa {\n  background: var(--blue-light);\n}\n.interview-type-icon.hr {\n  background: var(--green-light);\n}\n.interview-type-icon.resume {\n  background: var(--purple-light);\n}\n.interview-info {\n  flex: 1;\n  min-width: 0;\n}\n.interview-type {\n  font-family: "Sora", sans-serif;\n  font-size: 14px;\n  font-weight: 600;\n  color: var(--text);\n  margin-bottom: 3px;\n}\n.interview-meta {\n  font-size: 13px;\n  color: var(--text-muted);\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  flex-wrap: wrap;\n}\n.interview-meta span {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n}\n.interview-meta svg {\n  width: 12px;\n  height: 12px;\n}\n.status-pill {\n  font-size: 11.5px;\n  font-weight: 600;\n  padding: 4px 10px;\n  border-radius: 100px;\n  white-space: nowrap;\n  flex-shrink: 0;\n}\n.status-pill.upcoming {\n  background: var(--blue-light);\n  color: var(--blue);\n}\n.status-pill.today {\n  background: #fef3c7;\n  color: #92400e;\n}\n.past-list {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.past-card {\n  background: var(--bg);\n  border-radius: var(--radius);\n  border: 1px solid var(--border);\n  padding: 16px 20px;\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  box-shadow: var(--shadow);\n  transition: border-color 0.2s;\n}\n.past-card:hover {\n  border-color: var(--border);\n}\n.verdict-pill {\n  font-size: 11.5px;\n  font-weight: 700;\n  padding: 4px 11px;\n  border-radius: 100px;\n  white-space: nowrap;\n  flex-shrink: 0;\n}\n.verdict-pill.hire {\n  background: var(--green-light);\n  color: #065f46;\n}\n.verdict-pill.nohire {\n  background: var(--red-light);\n  color: #991b1b;\n}\n.score-bar-wrap {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  margin-top: 5px;\n}\n.score-bar {\n  flex: 1;\n  height: 4px;\n  background: var(--bg-alt);\n  border-radius: 100px;\n  overflow: hidden;\n  max-width: 100px;\n}\n.score-fill {\n  height: 100%;\n  border-radius: 100px;\n  background: var(--green);\n  transition: width 0.6s ease;\n}\n.score-fill.mid {\n  background: var(--amber);\n}\n.score-fill.low {\n  background: var(--red);\n}\n.score-label {\n  font-size: 12px;\n  font-weight: 600;\n  color: var(--text-soft);\n}\n.btn-feedback {\n  display: inline-flex;\n  align-items: center;\n  gap: 5px;\n  background: var(--bg-alt);\n  border: 1px solid var(--border);\n  color: var(--text-soft);\n  font-family: "DM Sans", sans-serif;\n  font-size: 12.5px;\n  font-weight: 600;\n  padding: 7px 13px;\n  border-radius: 8px;\n  cursor: pointer;\n  white-space: nowrap;\n  flex-shrink: 0;\n  transition:\n    background 0.15s,\n    color 0.15s,\n    border-color 0.15s;\n}\n.btn-feedback:hover {\n  background: var(--blue-light);\n  color: var(--blue);\n  border-color: var(--blue-mid);\n}\n.btn-feedback svg {\n  width: 12px;\n  height: 12px;\n}\n@media (max-width: 600px) {\n  .welcome {\n    flex-direction: column;\n    align-items: flex-start;\n  }\n  .cta-card {\n    flex-direction: column;\n    align-items: flex-start;\n  }\n  .btn-book {\n    width: 100%;\n    justify-content: center;\n  }\n  .topbar-name {\n    display: none;\n  }\n  .profile-card {\n    flex-wrap: wrap;\n  }\n  .btn-profile {\n    width: 100%;\n    justify-content: center;\n  }\n  .interview-card,\n  .past-card {\n    flex-wrap: wrap;\n    gap: 12px;\n  }\n  .btn-feedback {\n    width: 100%;\n    justify-content: center;\n  }\n  .status-pill {\n    margin-left: auto;\n  }\n}\n/*# sourceMappingURL=dashboard.component.css.map */\n'] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DashboardComponent, { className: "DashboardComponent", filePath: "apps/interview-ready-web/src/app/dashboard/dashboard.component.ts", lineNumber: 13 });
+})();
+
 // apps/interview-ready-web/src/app/app.routes.ts
 var appRoutes = [
   {
@@ -43873,6 +44089,10 @@ var appRoutes = [
     path: "profile",
     component: ProfileComponent,
     data: { showNavbar: true }
+  },
+  {
+    path: "dashboard",
+    component: DashboardComponent
   },
   {
     path: "**",
